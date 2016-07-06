@@ -6,7 +6,25 @@
     <description>Recent content on blog.alogolab.jp</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
+    <lastBuildDate>Mon, 04 Jul 2016 15:50:49 +0900</lastBuildDate>
     <atom:link href="http://blog.algolab.jp/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>このブログについて</title>
+      <link>http://blog.algolab.jp/about/</link>
+      <pubDate>Mon, 04 Jul 2016 15:50:49 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/about/</guid>
+      <description>
+
+&lt;h2 id=&#34;運営者情報&#34;&gt;運営者情報&lt;/h2&gt;
+
+&lt;p&gt;株式会社アルゴラボ&lt;br /&gt;
+〒101-0051 東京都千代田区神田神保町1-19 すずらん通りT&amp;amp;Aビル 4F&lt;br /&gt;
+&lt;a href=&#34;http://www.algolab.jp/&#34;&gt;http://www.algolab.jp/&lt;/a&gt;&lt;br /&gt;
+info@algolab.jp&lt;/p&gt;
+</description>
+    </item>
     
   </channel>
 </rss>
