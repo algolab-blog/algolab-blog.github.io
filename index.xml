@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>ALGOGEEKS</title>
+    <title>ALGO GEEKS</title>
     <link>http://blog.algolab.jp/</link>
-    <description>Recent content on ALGOGEEKS</description>
+    <description>Recent content on ALGO GEEKS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <lastBuildDate>Mon, 04 Jul 2016 15:50:49 +0900</lastBuildDate>
@@ -23,6 +23,11 @@
 〒101-0051 東京都千代田区神田神保町1-19 すずらん通りT&amp;amp;Aビル 4F&lt;br /&gt;
 &lt;a href=&#34;http://www.algolab.jp/&#34;&gt;http://www.algolab.jp/&lt;/a&gt;&lt;br /&gt;
 info@algolab.jp&lt;/p&gt;
+
+&lt;h2 id=&#34;お問い合わせ&#34;&gt;お問い合わせ&lt;/h2&gt;
+
+&lt;iframe style=&#34;max-width:100%;&#34; src=&#34;https://docs.google.com/forms/d/e/1FAIpQLSc2q0MC1un-3ZGvI-8JIBQ05RfBJk_s-gvu4m07lg7jgfsXSQ/viewform?embedded=true&#34; width=&#34;760&#34; height=&#34;1200&#34; frameborder=&#34;0&#34; marginheight=&#34;0&#34; marginwidth=&#34;0&#34;&gt;読み込んでいます...&lt;/iframe&gt;
+
 </description>
     </item>
     
