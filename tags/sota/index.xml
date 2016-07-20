@@ -62,7 +62,7 @@ SDK は &lt;a href=&#34;https://robohon.com/&#34;&gt;公式ページ&lt;/a&gt; �
 上記の図は、 R-env から RoBoHon に処理を依頼する例ですが、RoBoHoN 側からイベント（持ち上げられた、など）を R-env へ通知することができます。&lt;br /&gt;
 そして、R-env には幾つもの機器を登録することができるので、例えば RoBoHoN に「エアコンつけて！」と頼むとエアコンが起動する、といったことも実現することが可能です。&lt;/p&gt;
 
-&lt;h2 id=&#34;いよいよ開発&#34;&gt;いよいよ開発&lt;/h2&gt;
+&lt;h2 id=&#34;ハンズオン&#34;&gt;ハンズオン&lt;/h2&gt;
 
 &lt;p&gt;今回のハンズオンでは、R-env および RoBoHoN の紹介の後、30 分程度の自由な開発時間がありました。&lt;br /&gt;
 Sota も動かしても良い、とのことだったので、RoBoHon と Sota に簡単な会話をさせてみることにしました。&lt;/p&gt;
@@ -110,7 +110,7 @@ Sota も動かしても良い、とのことだったので、RoBoHon と Sota �
 &lt;p&gt;最終的に上記のようなシナリオが完成しました！&lt;br /&gt;
 リアルにモノが動くので、感動もひとしおです！！&lt;/p&gt;
 
-&lt;p&gt;ハンズオンは定期的に開催しているようなので、みなさまも体験してみてはいかがでしょうか？&lt;br /&gt;
+&lt;p&gt;ハンズオンは定期的に開催しているようなので、みなさんも体験してみてはいかがでしょうか？&lt;br /&gt;
 &lt;a href=&#34;https://r-env.doorkeeper.jp/&#34;&gt;R-env:連舞® Innovation Hub&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
