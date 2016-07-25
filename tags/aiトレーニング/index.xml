@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Aiトレーニング on ALGO GEEKS</title>
+    <link>http://blog.algolab.jp/tags/ai%E3%83%88%E3%83%AC%E3%83%BC%E3%83%8B%E3%83%B3%E3%82%B0/</link>
+    <description>Recent content in Aiトレーニング on ALGO GEEKS</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Mon, 25 Jul 2016 16:35:26 +0900</lastBuildDate>
+    <atom:link href="http://blog.algolab.jp/tags/ai%E3%83%88%E3%83%AC%E3%83%BC%E3%83%8B%E3%83%B3%E3%82%B0/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>AIトレーニングはじめました</title>
+      <link>http://blog.algolab.jp/post/2016/07/25/ai-training/</link>
+      <pubDate>Mon, 25 Jul 2016 16:35:26 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/07/25/ai-training/</guid>
+      <description>
+
+&lt;p&gt;弊社では、ITエンジニア向けに機械学習スキルの習得をサポートする試み（AIトレーニング）をはじめました。&lt;br /&gt;
+ここでは、1人目の受講者であるWさんの許可を頂き、実況中継という形で、その内容を随時公開していきたいと思います。&lt;/p&gt;
+
+&lt;h2 id=&#34;なぜやるのか&#34;&gt;なぜやるのか&lt;/h2&gt;
+
+&lt;p&gt;一言で言えば、技術習得までの最短経路が人によって異なるため、です。&lt;/p&gt;
+
+&lt;p&gt;機械学習がカバーする領域はとても広範囲に渡るため、どのようなことを身につけたいか (ゴール)、および、現状のスキルによって、習得経路が一本道ではないことはご理解いただけると思います。&lt;/p&gt;
+
+&lt;p&gt;一方で、書籍などの教材は、体系的・網羅的に記述されているものの、個々に最適化されてはいません。&lt;/p&gt;
+
+&lt;p&gt;そのため、機械学習スキルを身につけようとした際、何から手をつけて良いかわからない、入門書から始めてみたがゴールにどう繋がるか見えず挫折してしまった、というようなケースがよく見られます。&lt;/p&gt;
+
+&lt;p&gt;そこで、個々に最適化した道筋を提示することで上記の問題が解決できるのではないか、と考え、AIトレーニングを開始することにしました。&lt;/p&gt;
+
+&lt;h2 id=&#34;どうやってやるのか&#34;&gt;どうやってやるのか&lt;/h2&gt;
+
+&lt;p&gt;基本的には、弊社は道筋を示す役割に徹し、独習という形で進めさせていただいています。&lt;/p&gt;
+
+&lt;p&gt;具体的には、週1回程度オフラインでお打ち合わせをさせていただきながら、現時点での習得状況を踏まえ、道筋を柔軟に提示させていただきます。&lt;/p&gt;
+
+&lt;p&gt;また、理解の助けになると判断した場合には、その場で講習という形を取る場合もあります。&lt;br /&gt;
+そして、随時出てくる疑問点においては、オンラインでの質問を受け付けています。&lt;/p&gt;
+
+&lt;p&gt;内容にもよりますが、2ヶ月程度での習得を目指しています。&lt;/p&gt;
+
+&lt;h2 id=&#34;次回&#34;&gt;次回&lt;/h2&gt;
+
+&lt;p&gt;次回はWさんのキックオフの内容についてお届けします。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
