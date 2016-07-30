@@ -6,8 +6,135 @@
     <description>Recent content in Posts on ALGO GEEKS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Fri, 29 Jul 2016 11:47:41 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 30 Jul 2016 15:50:23 +0900</lastBuildDate>
     <atom:link href="http://blog.algolab.jp/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Seq2Seqモデルを用いたチャットボット作成 〜英会話のサンプルを動かす〜</title>
+      <link>http://blog.algolab.jp/post/2016/07/30/seq2seq-chatbot/</link>
+      <pubDate>Sat, 30 Jul 2016 15:50:23 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/07/30/seq2seq-chatbot/</guid>
+      <description>
+
+&lt;p&gt;最近、チャットボットが盛り上がっていますが、自然な会話を成り立たせること、は大きな課題の一つです。&lt;br /&gt;
+本記事では、Deep Learningの一種である、Seq2Seq モデルを用いたアプローチをご紹介します。&lt;br /&gt;
+ゴールとして、Seq2Seqモデルを用いて、英会話を学習させ、動作させることを目指します。&lt;/p&gt;
+
+&lt;h2 id=&#34;seq2seq-sequence-to-sequence-モデルとは&#34;&gt;Seq2Seq (Sequence to Sequence) モデルとは&lt;/h2&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/07/30/seq2seq-chatbot//seq2seq.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;平たく言うと、「文字列」から「文字列」を予測するモデルのことです。&lt;br /&gt;
+上記の図では、「ABC」を入力として、「WXYZ」を出力しています。&lt;/p&gt;
+
+&lt;p&gt;2015年、Googleは、Seq2Seqモデルを対話タスクへ応用した論文を発表しました。&lt;/p&gt;
+
+&lt;p&gt;A Neural Conversational Model&lt;br /&gt;
+&lt;a href=&#34;http://arxiv.org/abs/1506.05869&#34;&gt;http://arxiv.org/abs/1506.05869&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;論文内において、これまでの対話モデルは、状況を絞り (飛行機を予約する状況など) 、手でルールを記載する必要があったが、Seq2Seqモデルを用いて対話データを学習させることで、自然な応答ができるようになった、と述べています。&lt;/p&gt;
+
+&lt;h2 id=&#34;実装例&#34;&gt;実装例&lt;/h2&gt;
+
+&lt;p&gt;Seq2Seqモデルを用いたチャットボットの実装は、色々な人が試みていますが、以下に良くまとめられています。&lt;br /&gt;
+&lt;a href=&#34;https://github.com/nicolas-ivanov/seq2seq_chatbot_links&#34;&gt;https://github.com/nicolas-ivanov/seq2seq_chatbot_links&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;今回は、実装例の中で、最も良い結果が出たとされている、以下のリポジトリのコードを動作させてみます。
+&lt;a href=&#34;https://github.com/macournoyer/neuralconvo&#34;&gt;https://github.com/macournoyer/neuralconvo&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;環境構築&#34;&gt;環境構築&lt;/h2&gt;
+
+&lt;h3 id=&#34;ソースコードのダウンロード&#34;&gt;ソースコードのダウンロード&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;git clone https://github.com/macournoyer/neuralconvo.git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;torchのインストール&#34;&gt;Torchのインストール&lt;/h3&gt;
+
+&lt;p&gt;Torchで実装されているので、公式に従って、インストールします。&lt;br /&gt;
+&lt;a href=&#34;http://torch.ch/docs/getting-started.html&#34;&gt;http://torch.ch/docs/getting-started.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git clone https://github.com/torch/distro.git ~/torch --recursive
+cd ~/torch; bash install-deps;
+./install.sh
+source ~/.zshrc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;luaライブラリのインストール&#34;&gt;Luaライブラリのインストール&lt;/h3&gt;
+
+&lt;p&gt;必要なLuaライブラリのインストール&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;luarocks install nn
+luarocks install rnn
+luarocks install penlight
+luarocks install nn
+luarocks install rnn
+luarocks install penlight
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;データセットの準備&#34;&gt;データセットの準備&lt;/h3&gt;
+
+&lt;p&gt;データセットは、下記で公開されている映画台詞のコーパスを用います。
+&lt;a href=&#34;http://www.mpi-sws.org/~cristian/Cornell_Movie-Dialogs_Corpus.html&#34;&gt;http://www.mpi-sws.org/~cristian/Cornell_Movie-Dialogs_Corpus.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd neuralconvo/data
+wget http://www.mpi-sws.org/~cristian/data/cornell_movie_dialogs_corpus.zip
+unzip cornell_movie_dialogs_corpus.zip
+mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;学習&#34;&gt;学習&lt;/h2&gt;
+
+&lt;p&gt;準備が整ったら学習をしてみます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;th train.lua --cuda --dataset 50000 --hiddenSize 1000
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;学習には AWSのg2.2xlargeインスタンスを用い、学習時間は4日弱でした。&lt;br /&gt;
+なお、エラー率の推移は下記となりました。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/07/30/seq2seq-chatbot//error.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;h2 id=&#34;テスト&#34;&gt;テスト&lt;/h2&gt;
+
+&lt;p&gt;最後に会話をしてみましょう。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;th eval.lua
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;you&amp;gt;&lt;/strong&gt; Hello?&lt;br /&gt;
+&lt;strong&gt;neuralconvo&amp;gt;&lt;/strong&gt; Hello, darling.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;you&amp;gt;&lt;/strong&gt; How are you?&lt;br /&gt;
+&lt;strong&gt;neuralconvo&amp;gt;&lt;/strong&gt; I&amp;rsquo;m fine.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;you&amp;gt;&lt;/strong&gt; Are you a machine?&lt;br /&gt;
+&lt;strong&gt;neuralconvo&amp;gt;&lt;/strong&gt; No, i don&amp;rsquo;t.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;you&amp;gt;&lt;/strong&gt; Are you intelligent?&lt;br /&gt;
+&lt;strong&gt;neuralconvo&amp;gt;&lt;/strong&gt; No.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;それっぽい会話は成り立つようです。最後に、哲学的な質問をしてみました。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;you&amp;gt;&lt;/strong&gt; What is the purpose of living?&lt;br /&gt;
+&lt;strong&gt;neuralconvo&amp;gt;&lt;/strong&gt; I&amp;rsquo;ve been watching over the phone thing&amp;hellip;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;うーん。深い&amp;hellip;。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>音声は新しいパラダイムシフトになる 〜2016年度版メアリー・ミーカー氏レポート</title>
