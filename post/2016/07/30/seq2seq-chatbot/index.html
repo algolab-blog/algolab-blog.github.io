@@ -87,9 +87,9 @@
     <article>
       
 
-<p>最近、チャットボットが盛り上がっていますが、自然な会話を成り立たせること、は大きな課題の一つです。<br />
-本記事では、Deep Learningの一種である、Seq2Seq モデルを用いたアプローチをご紹介します。<br />
-ゴールとして、Seq2Seqモデルを用いて、英会話を学習させ、動作させることを目指します。</p>
+<p>最近、チャットボットが話題となっていますが、自然な会話を成り立たせること、は大きな課題の一つです。<br />
+ここでは、Deep Learningの一種である、Seq2Seqモデルを用いて、チャットボットを動作させてみます。<br />
+ゴールとして、英語を学習させ、実際に会話を行ってみることを目指します。</p>
 
 <h2 id="seq2seq-sequence-to-sequence-モデルとは">Seq2Seq (Sequence to Sequence) モデルとは</h2>
 
@@ -99,25 +99,28 @@
 </figure>
 
 
-<p>平たく言うと、「文字列」から「文字列」を予測するモデルのことです。<br />
-上記の図では、「ABC」を入力として、「WXYZ」を出力しています。</p>
+<p>平たく言うと、ある文字列から、次の文字列を予測するモデルのことです。<br />
+上記の図では、「ABC」を入力として、「WXYZ」を出力 (予測) しています。</p>
 
-<p>2015年、Googleは、Seq2Seqモデルを対話タスクへ応用した論文を発表しました。</p>
+<p>Seq2Seqモデルの対話タスクへの応用を試みたのがGoogleで、2015年に下記の論文を発表しています。</p>
 
 <p>A Neural Conversational Model<br />
 <a href="http://arxiv.org/abs/1506.05869">http://arxiv.org/abs/1506.05869</a></p>
 
-<p>論文内において、これまでの対話モデルは、状況を絞り (飛行機を予約する状況など) 、手でルールを記載する必要があったが、Seq2Seqモデルを用いて対話データを学習させることで、自然な応答ができるようになった、と述べています。</p>
+<p>これまでの対話モデルは、ドメインを絞り (飛行機を予約するなど) 、手でルールを記載する必要があったが、Seq2Seqモデルを用いて対話データを学習させることで、自然な応答ができるようになった、と論文内で述べています。</p>
 
 <h2 id="実装例">実装例</h2>
 
-<p>Seq2Seqモデルを用いたチャットボットの実装は、色々な人が試みていますが、以下に良くまとめられています。<br />
+<p>Seq2Seqモデルを用いたチャットボットの実装は、色々な人が公開しています。<br />
 <a href="https://github.com/nicolas-ivanov/seq2seq_chatbot_links">https://github.com/nicolas-ivanov/seq2seq_chatbot_links</a></p>
 
 <p>今回は、実装例の中で、最も良い結果が出たとされている、以下のリポジトリのコードを動作させてみます。
 <a href="https://github.com/macournoyer/neuralconvo">https://github.com/macournoyer/neuralconvo</a></p>
 
 <h2 id="環境構築">環境構築</h2>
+
+<p>基本的には下記の手順で進めます。<br />
+<a href="https://github.com/macournoyer/neuralconvo#installing">https://github.com/macournoyer/neuralconvo#installing</a></p>
 
 <h3 id="ソースコードのダウンロード">ソースコードのダウンロード</h3>
 
@@ -126,8 +129,11 @@
 
 <h3 id="torchのインストール">Torchのインストール</h3>
 
-<p>Torchで実装されているので、公式に従って、インストールします。<br />
+<p>公式に従って、インストールします。<br />
 <a href="http://torch.ch/docs/getting-started.html">http://torch.ch/docs/getting-started.html</a></p>
+
+<p>環境によって叩くコマンドが違うため、詳細は上記リンクをご参照ください。<br />
+下記は、Ubuntu + zshでの例です。</p>
 
 <pre><code>git clone https://github.com/torch/distro.git ~/torch --recursive
 cd ~/torch; bash install-deps;
@@ -137,19 +143,20 @@ source ~/.zshrc
 
 <h3 id="luaライブラリのインストール">Luaライブラリのインストール</h3>
 
-<p>必要なLuaライブラリのインストール</p>
-
 <pre><code>luarocks install nn
-luarocks install rnn
-luarocks install penlight
-luarocks install nn
 luarocks install rnn
 luarocks install penlight
 </code></pre>
 
+<p>GPUを用いて学習を行うので、下記もインストールします。</p>
+
+<pre><code>luarocks install cutorch
+luarocks install cunn
+</code></pre>
+
 <h3 id="データセットの準備">データセットの準備</h3>
 
-<p>データセットは、下記で公開されている映画台詞のコーパスを用います。
+<p>データセットは、下記で公開されている映画の台詞コーパスを用います。<br />
 <a href="http://www.mpi-sws.org/~cristian/Cornell_Movie-Dialogs_Corpus.html">http://www.mpi-sws.org/~cristian/Cornell_Movie-Dialogs_Corpus.html</a></p>
 
 <pre><code>cd neuralconvo/data
@@ -176,7 +183,7 @@ mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
 
 <h2 id="テスト">テスト</h2>
 
-<p>学習したモデルを用いて会話をしてみましょう。</p>
+<p>学習したモデルを用いて実際に会話をしてみました。</p>
 
 <pre><code>th eval.lua
 </code></pre>
@@ -195,14 +202,14 @@ mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
 <strong>neuralconvo&gt;</strong> No.</p>
 </blockquote>
 
-<p>それっぽい会話は成り立つようです。最後に、哲学的な質問をしてみました。</p>
+<p>それっぽい会話は成り立つようです。哲学的な質問をしてみます。</p>
 
 <blockquote>
 <p><strong>you&gt;</strong> What is the purpose of living?<br />
 <strong>neuralconvo&gt;</strong> I&rsquo;ve been watching over the phone thing&hellip;</p>
 </blockquote>
 
-<p>うーん。深い&hellip;。</p>
+<p>うーん。深い&hellip;!?</p>
 
 <h2 id="評価">評価</h2>
 
@@ -213,7 +220,7 @@ mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
 <strong>neuralconvo&gt;</strong> The other plate is currently in new york, in some kind of a tree in a decent, don</p>
 </blockquote>
 
-<p>会話の精度は、データセットによりそうで、また、文脈の理解には乏しい、という印象でした。</p>
+<p>知識が足りないのはデータセットの不足で、文章として成立していないのは学習不足、といったところでしょうか。</p>
 
       
   <div id="share-this" class="col span_10">
@@ -254,6 +261,8 @@ mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
     
       <span class="previous">&larr; <a href="http://blog.algolab.jp/post/2016/07/29/mary-meeker-2016/" rel="prev">音声は新しいパラダイムシフトになる 〜2016年度版メアリー・ミーカー氏レポートまとめ〜</a></span>
     
+    
+      <span class="next"><a href="http://blog.algolab.jp/post/2016/08/01/ai-training-kick-off/" rel="next">AIトレーニングキックオフ 〜ハムケツを認識したい〜</a> &rarr;</span>
     
   </nav>
   

@@ -6,8 +6,77 @@
     <description>Recent content in Posts on ALGO GEEKS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 30 Jul 2016 15:50:23 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 01 Aug 2016 12:11:45 +0900</lastBuildDate>
     <atom:link href="http://blog.algolab.jp/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>AIトレーニングキックオフ 〜ハムケツを認識したい〜</title>
+      <link>http://blog.algolab.jp/post/2016/08/01/ai-training-kick-off/</link>
+      <pubDate>Mon, 01 Aug 2016 12:11:45 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/08/01/ai-training-kick-off/</guid>
+      <description>
+
+&lt;p&gt;弊社で実施している &lt;a href=&#34;http://blog.algolab.jp/post/2016/07/25/ai-training/&#34;&gt;AIトレーニング&lt;/a&gt; の実況中継シリーズとなります。&lt;br /&gt;
+今回は、Wさんのキックオフの内容についてお届けします。&lt;/p&gt;
+
+&lt;h2 id=&#34;ハムケツ&#34;&gt;ハムケツ&lt;/h2&gt;
+
+&lt;p&gt;「あの・・ですね。その・・・。ハムケツを認識したいんです。」&lt;/p&gt;
+
+&lt;p&gt;トレーニングの最初にゴールを設定するのですが、その際、Wさんから出た一言目がこれでした。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/01/ai-training-kick-off//hamuketu.jpg&#34;/&gt;
+  
+  &lt;figcaption&gt;&lt;p&gt;http://hamuketu.blog.jp/archives/51191945.html&lt;/p&gt;&lt;/figcaption&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;ハムケツとは最近ネットや書籍で話題になったハムスターのおしりのことで、
+独特の可愛さで評判となったので目にされた方もいらっしゃるのではないでしょうか。&lt;/p&gt;
+
+&lt;p&gt;Wさんの話を詳しくうかがってみると、妻がハムケツの得も言われぬ可愛さに身もだえていた時に「ハムケツ画像が自動的に送られてくるアプリがあったらな」と思ったとのことです。&lt;/p&gt;
+
+&lt;p&gt;素晴らしい！ではハムケツでいきましょう、と速攻でテーマが決まり、その後は大の男二人で「ハムケツの特徴」や「こっちがハムケツ、こっちはハムケツじゃない」などと熱い議論を交わしつつ成果物のイメージをより具体的に話し合いました。&lt;/p&gt;
+
+&lt;p&gt;実際にアプリを作るとなると様々な工程がありますが、ハムケツ画像を集める段階で人工知能がハムケツを認識してくれれば、ハムケツであるかどうかの判定を人間が行わなくてよくなります。&lt;/p&gt;
+
+&lt;p&gt;この認識して判定するフェーズを今回のトレーニングで取り扱い、出来上がったモデルを誰にでも触ってもらえる形にしようということで、&lt;/p&gt;
+
+&lt;p&gt;「ハムケツ画像を入力すると認識結果のテキストを出力で得られるWebアプリを作る」&lt;/p&gt;
+
+&lt;p&gt;をゴールとすることになりました。&lt;/p&gt;
+
+&lt;h2 id=&#34;現状を把握する&#34;&gt;現状を把握する&lt;/h2&gt;
+
+&lt;p&gt;ゴールが決まったところで、Wさんの現状のスキルをヒアリングしていきます。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;システム開発
+
+&lt;ul&gt;
+&lt;li&gt;webサービスや業務システムの設計、開発、運用を10年&lt;/li&gt;
+&lt;li&gt;開発言語はJava、Ruby、Python、PHP&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;機械学習
+
+&lt;ul&gt;
+&lt;li&gt;AIにより解決できる課題と理論が概念レベルでわかる。分類や予測ができるとか、教師あり学習・教師なし学習の違いが分かる。&lt;/li&gt;
+&lt;li&gt;統計や自然言語処理をかじったことがある&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;受講者のトレーニング開始時ベンチマークとしてご参考にしていただければと思います。&lt;/p&gt;
+
+&lt;h2 id=&#34;次回予告&#34;&gt;次回予告&lt;/h2&gt;
+
+&lt;p&gt;だいぶ基礎がありそうなので、畳みこみニューラルネットワークのイメージを掴んでいただいた上で、成果物完成までのステップを提示し、それをこなしてもらう、というスタイルでトレーニングを開始することにしました。&lt;/p&gt;
+
+&lt;p&gt;次回は、畳みこみニューラルネットワークのイメージを掴んでもらう時に行った講習の内容についてお届けします。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Seq2Seqモデルを用いたチャットボット作成 〜英会話のサンプルを動かす〜</title>
@@ -17,9 +86,9 @@
       <guid>http://blog.algolab.jp/post/2016/07/30/seq2seq-chatbot/</guid>
       <description>
 
-&lt;p&gt;最近、チャットボットが盛り上がっていますが、自然な会話を成り立たせること、は大きな課題の一つです。&lt;br /&gt;
-本記事では、Deep Learningの一種である、Seq2Seq モデルを用いたアプローチをご紹介します。&lt;br /&gt;
-ゴールとして、Seq2Seqモデルを用いて、英会話を学習させ、動作させることを目指します。&lt;/p&gt;
+&lt;p&gt;最近、チャットボットが話題となっていますが、自然な会話を成り立たせること、は大きな課題の一つです。&lt;br /&gt;
+ここでは、Deep Learningの一種である、Seq2Seqモデルを用いて、チャットボットを動作させてみます。&lt;br /&gt;
+ゴールとして、英語を学習させ、実際に会話を行ってみることを目指します。&lt;/p&gt;
 
 &lt;h2 id=&#34;seq2seq-sequence-to-sequence-モデルとは&#34;&gt;Seq2Seq (Sequence to Sequence) モデルとは&lt;/h2&gt;
 
@@ -29,25 +98,28 @@
 &lt;/figure&gt;
 
 
-&lt;p&gt;平たく言うと、「文字列」から「文字列」を予測するモデルのことです。&lt;br /&gt;
-上記の図では、「ABC」を入力として、「WXYZ」を出力しています。&lt;/p&gt;
+&lt;p&gt;平たく言うと、ある文字列から、次の文字列を予測するモデルのことです。&lt;br /&gt;
+上記の図では、「ABC」を入力として、「WXYZ」を出力 (予測) しています。&lt;/p&gt;
 
-&lt;p&gt;2015年、Googleは、Seq2Seqモデルを対話タスクへ応用した論文を発表しました。&lt;/p&gt;
+&lt;p&gt;Seq2Seqモデルの対話タスクへの応用を試みたのがGoogleで、2015年に下記の論文を発表しています。&lt;/p&gt;
 
 &lt;p&gt;A Neural Conversational Model&lt;br /&gt;
 &lt;a href=&#34;http://arxiv.org/abs/1506.05869&#34;&gt;http://arxiv.org/abs/1506.05869&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;論文内において、これまでの対話モデルは、状況を絞り (飛行機を予約する状況など) 、手でルールを記載する必要があったが、Seq2Seqモデルを用いて対話データを学習させることで、自然な応答ができるようになった、と述べています。&lt;/p&gt;
+&lt;p&gt;これまでの対話モデルは、ドメインを絞り (飛行機を予約するなど) 、手でルールを記載する必要があったが、Seq2Seqモデルを用いて対話データを学習させることで、自然な応答ができるようになった、と論文内で述べています。&lt;/p&gt;
 
 &lt;h2 id=&#34;実装例&#34;&gt;実装例&lt;/h2&gt;
 
-&lt;p&gt;Seq2Seqモデルを用いたチャットボットの実装は、色々な人が試みていますが、以下に良くまとめられています。&lt;br /&gt;
+&lt;p&gt;Seq2Seqモデルを用いたチャットボットの実装は、色々な人が公開しています。&lt;br /&gt;
 &lt;a href=&#34;https://github.com/nicolas-ivanov/seq2seq_chatbot_links&#34;&gt;https://github.com/nicolas-ivanov/seq2seq_chatbot_links&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;今回は、実装例の中で、最も良い結果が出たとされている、以下のリポジトリのコードを動作させてみます。
 &lt;a href=&#34;https://github.com/macournoyer/neuralconvo&#34;&gt;https://github.com/macournoyer/neuralconvo&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;環境構築&#34;&gt;環境構築&lt;/h2&gt;
+
+&lt;p&gt;基本的には下記の手順で進めます。&lt;br /&gt;
+&lt;a href=&#34;https://github.com/macournoyer/neuralconvo#installing&#34;&gt;https://github.com/macournoyer/neuralconvo#installing&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;ソースコードのダウンロード&#34;&gt;ソースコードのダウンロード&lt;/h3&gt;
 
@@ -56,8 +128,11 @@
 
 &lt;h3 id=&#34;torchのインストール&#34;&gt;Torchのインストール&lt;/h3&gt;
 
-&lt;p&gt;Torchで実装されているので、公式に従って、インストールします。&lt;br /&gt;
+&lt;p&gt;公式に従って、インストールします。&lt;br /&gt;
 &lt;a href=&#34;http://torch.ch/docs/getting-started.html&#34;&gt;http://torch.ch/docs/getting-started.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;環境によって叩くコマンドが違うため、詳細は上記リンクをご参照ください。&lt;br /&gt;
+下記は、Ubuntu + zshでの例です。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;git clone https://github.com/torch/distro.git ~/torch --recursive
 cd ~/torch; bash install-deps;
@@ -67,19 +142,20 @@ source ~/.zshrc
 
 &lt;h3 id=&#34;luaライブラリのインストール&#34;&gt;Luaライブラリのインストール&lt;/h3&gt;
 
-&lt;p&gt;必要なLuaライブラリのインストール&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;luarocks install nn
-luarocks install rnn
-luarocks install penlight
-luarocks install nn
 luarocks install rnn
 luarocks install penlight
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;p&gt;GPUを用いて学習を行うので、下記もインストールします。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;luarocks install cutorch
+luarocks install cunn
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;h3 id=&#34;データセットの準備&#34;&gt;データセットの準備&lt;/h3&gt;
 
-&lt;p&gt;データセットは、下記で公開されている映画台詞のコーパスを用います。
+&lt;p&gt;データセットは、下記で公開されている映画の台詞コーパスを用います。&lt;br /&gt;
 &lt;a href=&#34;http://www.mpi-sws.org/~cristian/Cornell_Movie-Dialogs_Corpus.html&#34;&gt;http://www.mpi-sws.org/~cristian/Cornell_Movie-Dialogs_Corpus.html&lt;/a&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;cd neuralconvo/data
@@ -106,7 +182,7 @@ mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
 
 &lt;h2 id=&#34;テスト&#34;&gt;テスト&lt;/h2&gt;
 
-&lt;p&gt;学習したモデルを用いて会話をしてみましょう。&lt;/p&gt;
+&lt;p&gt;学習したモデルを用いて実際に会話をしてみました。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;th eval.lua
 &lt;/code&gt;&lt;/pre&gt;
@@ -125,14 +201,14 @@ mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
 &lt;strong&gt;neuralconvo&amp;gt;&lt;/strong&gt; No.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;それっぽい会話は成り立つようです。最後に、哲学的な質問をしてみました。&lt;/p&gt;
+&lt;p&gt;それっぽい会話は成り立つようです。哲学的な質問をしてみます。&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;you&amp;gt;&lt;/strong&gt; What is the purpose of living?&lt;br /&gt;
 &lt;strong&gt;neuralconvo&amp;gt;&lt;/strong&gt; I&amp;rsquo;ve been watching over the phone thing&amp;hellip;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;うーん。深い&amp;hellip;。&lt;/p&gt;
+&lt;p&gt;うーん。深い&amp;hellip;!?&lt;/p&gt;
 
 &lt;h2 id=&#34;評価&#34;&gt;評価&lt;/h2&gt;
 
@@ -143,7 +219,7 @@ mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
 &lt;strong&gt;neuralconvo&amp;gt;&lt;/strong&gt; The other plate is currently in new york, in some kind of a tree in a decent, don&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;会話の精度は、データセットによりそうで、また、文脈の理解には乏しい、という印象でした。&lt;/p&gt;
+&lt;p&gt;知識が足りないのはデータセットの不足で、文章として成立していないのは学習不足、といったところでしょうか。&lt;/p&gt;
 </description>
     </item>
     
@@ -161,7 +237,7 @@ mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
 &lt;p&gt;&lt;strong&gt;「音声インターフェースは新しいパラダイムシフトになる」&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;伝説のアナリスト、メアリー・ミーカー氏は、 &lt;a href=&#34;http://www.kpcb.com/internet-trends&#34;&gt;インターネット・トレンド&lt;/a&gt; 2016年度版の中で述べています。&lt;br /&gt;
-ここでは、レポートの中から、音声に関するスライドをまとめていきます。&lt;/p&gt;
+ここでは、レポートの中から、音声に関するものをまとめていきます。&lt;/p&gt;
 
 &lt;h2 id=&#34;インターフェースの技術革新は10年毎に起きる&#34;&gt;インターフェースの技術革新は10年毎に起きる&lt;/h2&gt;
 
@@ -172,7 +248,7 @@ mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
 
 
 &lt;p&gt;ヒューマンインターフェースの歴史を振り返ってみると、ここ半世紀においては10年単位で技術革新が起きていることが分かります。&lt;br /&gt;
-スマートフォンによる、タッチ + カメラインターフェースが登場したのが 2007年。&lt;br /&gt;
+iPhoneによる、タッチ + カメラインターフェースが登場したのが 2007年。&lt;br /&gt;
 次の10年では、Siri や Amazon Echo に代表される音声インターフェースが技術革新を起こすだろう、と予測しています。&lt;/p&gt;
 
 &lt;h2 id=&#34;音声は最も効率の良い入力方法である&#34;&gt;音声は最も効率の良い入力方法である&lt;/h2&gt;
@@ -195,9 +271,9 @@ mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
 &lt;/figure&gt;
 
 
-&lt;p&gt;Googleの成果によると、語彙数、精度ともに年々向上しています。&lt;/p&gt;
+&lt;p&gt;Googleの研究成果によると、語彙数、認識精度ともに年々向上しています。&lt;/p&gt;
 
-&lt;h2 id=&#34;特に-精度はここ数年で急激に向上&#34;&gt;特に、精度はここ数年で急激に向上&lt;/h2&gt;
+&lt;h2 id=&#34;特に-認識精度はここ数年で急激に向上&#34;&gt;特に、認識精度はここ数年で急激に向上&lt;/h2&gt;
 
 &lt;figure&gt;
   &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/07/29/mary-meeker-2016//119.jpg&#34;/&gt;
@@ -205,7 +281,7 @@ mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
 &lt;/figure&gt;
 
 
-&lt;p&gt;数年前までは良くて80%程度だったものが、最近は90%を優に超えてきているのが見て取れます。&lt;br /&gt;
+&lt;p&gt;数年前までは良くて80%程度だったものが、最近は90%を優に超えてきているのが分かります。&lt;br /&gt;
 人工知能研究の権威である、Baidu の Andrew Ng 氏は、精度が 99% を超えるとゲームチェンジャーになる (= 世界が変わる) と述べています。&lt;br /&gt;
 技術進歩の鍵となるのはディープラーニングで、音声認識分野においては、Baidu が一歩リードしている印象です。&lt;br /&gt;
 Baidu の論文については、下記の記事内でも取り上げていますのでご参照ください。&lt;br /&gt;
@@ -241,7 +317,7 @@ Baidu の論文については、下記の記事内でも取り上げていま�
 
 
 &lt;p&gt;Baiduの利用状況を見ると、音声入力、音声読み上げともに伸びています。&lt;br /&gt;
-スマートフォンにおけるタイピングのしやすさ、も音声入力への利用へ影響を与えそうです。&lt;/p&gt;
+スマートフォンにおける言語のタイピングのしやすさ、も音声入力への利用へ影響を与えそうです。&lt;/p&gt;
 
 &lt;h2 id=&#34;1日に6-8回音声検索する&#34;&gt;1日に6-8回音声検索する&lt;/h2&gt;
 
@@ -284,8 +360,8 @@ Adrew Ng氏は、2020年には検索の半分以上が音声か画像になる�
 &lt;/figure&gt;
 
 
-&lt;p&gt;前のスライドで述べた「家」「車」「移動中」において、Amazon Alexaは様々なOEMを提供しています。
-また、Alexaを拡張できるAlexa Skills Kitの開発者も増加中です。&lt;/p&gt;
+&lt;p&gt;前のスライドで述べた「家」「車」「移動中」において、Amazon Alexaは様々なOEMを提供しています。&lt;br /&gt;
+また、Alexaを拡張できるAlexa Skills Kitの開発も盛んになっています。&lt;/p&gt;
 
 &lt;h2 id=&#34;ショッピングも迅速に&#34;&gt;ショッピングも迅速に&lt;/h2&gt;
 
@@ -295,7 +371,7 @@ Adrew Ng氏は、2020年には検索の半分以上が音声か画像になる�
 &lt;/figure&gt;
 
 
-&lt;p&gt;モバイルアプリに比べ、音声入力を用いたショッピングは3倍速くなるとのことで、Amazonは音声入力へ置き換えることを目指しています。&lt;/p&gt;
+&lt;p&gt;Amazonは、ショッピングをモバイルアプリから音声入力へ置き換えることを目指しています。&lt;/p&gt;
 
 &lt;h2 id=&#34;amazon-echoの所有率は5&#34;&gt;Amazon Echoの所有率は5%&lt;/h2&gt;
 
@@ -342,7 +418,7 @@ Adrew Ng氏は、2020年には検索の半分以上が音声か画像になる�
 
 &lt;p&gt;一言で言えば、技術習得までの最短経路が人によって異なるため、です。&lt;/p&gt;
 
-&lt;p&gt;機械学習がカバーする領域はとても広範囲に渡るため、どのようなことを身につけたいか (ゴール)、および、現状のスキルによって、習得経路が一本道ではないことはご理解いただけると思います。&lt;/p&gt;
+&lt;p&gt;機械学習がカバーする領域はとても広範囲に渡るため、どのようなことを身につけたいか (ゴール)、および、現状のスキルによって、習得経路が一本道ではありません。&lt;/p&gt;
 
 &lt;p&gt;一方で、書籍などの教材は、体系的・網羅的に記述されているものの、個々に最適化されてはいません。&lt;/p&gt;
 
@@ -359,11 +435,12 @@ Adrew Ng氏は、2020年には検索の半分以上が音声か画像になる�
 &lt;p&gt;また、理解の助けになると判断した場合には、その場で講習という形を取る場合もあります。&lt;br /&gt;
 そして、随時出てくる疑問点においては、オンラインでの質問を受け付けています。&lt;/p&gt;
 
-&lt;p&gt;内容にもよりますが、2ヶ月程度での習得を目指しています。&lt;/p&gt;
+&lt;p&gt;期間としては、内容にもよりますが、2ヶ月程度での習得を目指しています。&lt;/p&gt;
 
-&lt;h2 id=&#34;次回&#34;&gt;次回&lt;/h2&gt;
+&lt;h2 id=&#34;次回予告&#34;&gt;次回予告&lt;/h2&gt;
 
-&lt;p&gt;次回はWさんのキックオフの内容についてお届けします。&lt;/p&gt;
+&lt;p&gt;次回はWさんのキックオフの内容についてお届けします。&lt;br /&gt;
+(2016/8/1 公開しました &amp;rarr; &lt;a href=&#34;http://blog.algolab.jp/post/2016/08/01/ai-training-kick-off/&#34;&gt;AIトレーニングキックオフ 〜ハムケツを認識したい〜&lt;/a&gt;)&lt;/p&gt;
 </description>
     </item>
     
@@ -598,7 +675,7 @@ Adrew Ng氏は、2020年には検索の半分以上が音声か画像になる�
 &lt;/figure&gt;
 
 
-&lt;p&gt;様々なロボットやデバイスと連携し、 ビジュアルプログラミング環境を用いて誰でも簡単に開発を行うことのできるプラットフォームです。NTTが研究・開発を行っています。&lt;/p&gt;
+&lt;p&gt;NTTが開発を行っている、様々なロボットやデバイスと連携し、 ビジュアルプログラミング環境を用いて誰でも簡単に開発を行うことのできるプラットフォームです。&lt;/p&gt;
 
 &lt;h2 id=&#34;robohon-とは&#34;&gt;RoBoHoN とは&lt;/h2&gt;
 
@@ -622,12 +699,12 @@ SDKは &lt;a href=&#34;https://robohon.com/&#34;&gt;公式ページ&lt;/a&gt; �
 
 &lt;p&gt;R-envとRoBoHoNなどの機器の間でWebSocketによる通信を行うことでインタラクションを実現しています。&lt;br /&gt;
 上記の図は、R-envからRoBoHonに処理を依頼する例ですが、RoBoHoN側からイベント (持ち上げられた、など) をR-envへ通知することができます。&lt;br /&gt;
-そして、R-envには幾つもの機器を登録することができるので、例えばRoBoHoNに「エアコンつけて！」と頼むとエアコンが起動する、といったことも実現することが可能です。&lt;/p&gt;
+また、R-envには幾つもの機器を登録することができるので、例えばRoBoHoNに「エアコンつけて！」と頼むとエアコンが起動する、といったことも実現することが可能です。&lt;/p&gt;
 
 &lt;h2 id=&#34;ハンズオン&#34;&gt;ハンズオン&lt;/h2&gt;
 
 &lt;p&gt;今回のハンズオンでは、R-envおよびRoBoHoNの紹介の後、30分程度の自由な開発時間がありました。&lt;br /&gt;
-Sota も動かしても良い、とのことだったので、RoBoHonとSotaに簡単な会話をさせてみることにしました。&lt;/p&gt;
+Sotaも動かしても良い、とのことだったので、RoBoHonとSotaに簡単な会話をさせてみることにしました。&lt;/p&gt;
 
 &lt;h2 id=&#34;シナリオを作成する&#34;&gt;シナリオを作成する&lt;/h2&gt;
 
@@ -649,7 +726,7 @@ Sota も動かしても良い、とのことだったので、RoBoHonとSotaに�
 &lt;p&gt;イベントの詳細を定義する画面です。&lt;br /&gt;
 ここでは、RoBoHonのプロジェクタを起動するイベントを定義しています。&lt;/p&gt;
 
-&lt;h2 id=&#34;完成&#34;&gt;完成！&lt;/h2&gt;
+&lt;h2 id=&#34;動いた&#34;&gt;動いた！&lt;/h2&gt;
 
 
 &lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
@@ -664,8 +741,7 @@ Sota も動かしても良い、とのことだったので、RoBoHonとSotaに�
 &lt;strong&gt;Sota:&lt;/strong&gt; ありがとう！僕からは音楽を流すね！（音楽を流す）&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;最終的に上記のようなシナリオが完成しました！&lt;br /&gt;
-リアルにモノが動くので、感動もひとしおです！！&lt;/p&gt;
+&lt;p&gt;最終的に上記のようなシナリオが完成しました！リアルにモノが動くので、感動もひとしおです！！&lt;/p&gt;
 
 &lt;p&gt;ハンズオンは定期的に開催しているようなので、みなさんも体験してみてはいかがでしょうか？&lt;br /&gt;
 &lt;a href=&#34;https://r-env.doorkeeper.jp/&#34;&gt;R-env:連舞® Innovation Hub&lt;/a&gt;&lt;/p&gt;

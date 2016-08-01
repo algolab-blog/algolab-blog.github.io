@@ -6,8 +6,77 @@
     <description>Recent content in Aiトレーニング on ALGO GEEKS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 25 Jul 2016 16:35:26 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 01 Aug 2016 12:11:45 +0900</lastBuildDate>
     <atom:link href="http://blog.algolab.jp/tags/ai%E3%83%88%E3%83%AC%E3%83%BC%E3%83%8B%E3%83%B3%E3%82%B0/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>AIトレーニングキックオフ 〜ハムケツを認識したい〜</title>
+      <link>http://blog.algolab.jp/post/2016/08/01/ai-training-kick-off/</link>
+      <pubDate>Mon, 01 Aug 2016 12:11:45 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/08/01/ai-training-kick-off/</guid>
+      <description>
+
+&lt;p&gt;弊社で実施している &lt;a href=&#34;http://blog.algolab.jp/post/2016/07/25/ai-training/&#34;&gt;AIトレーニング&lt;/a&gt; の実況中継シリーズとなります。&lt;br /&gt;
+今回は、Wさんのキックオフの内容についてお届けします。&lt;/p&gt;
+
+&lt;h2 id=&#34;ハムケツ&#34;&gt;ハムケツ&lt;/h2&gt;
+
+&lt;p&gt;「あの・・ですね。その・・・。ハムケツを認識したいんです。」&lt;/p&gt;
+
+&lt;p&gt;トレーニングの最初にゴールを設定するのですが、その際、Wさんから出た一言目がこれでした。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/01/ai-training-kick-off//hamuketu.jpg&#34;/&gt;
+  
+  &lt;figcaption&gt;&lt;p&gt;http://hamuketu.blog.jp/archives/51191945.html&lt;/p&gt;&lt;/figcaption&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;ハムケツとは最近ネットや書籍で話題になったハムスターのおしりのことで、
+独特の可愛さで評判となったので目にされた方もいらっしゃるのではないでしょうか。&lt;/p&gt;
+
+&lt;p&gt;Wさんの話を詳しくうかがってみると、妻がハムケツの得も言われぬ可愛さに身もだえていた時に「ハムケツ画像が自動的に送られてくるアプリがあったらな」と思ったとのことです。&lt;/p&gt;
+
+&lt;p&gt;素晴らしい！ではハムケツでいきましょう、と速攻でテーマが決まり、その後は大の男二人で「ハムケツの特徴」や「こっちがハムケツ、こっちはハムケツじゃない」などと熱い議論を交わしつつ成果物のイメージをより具体的に話し合いました。&lt;/p&gt;
+
+&lt;p&gt;実際にアプリを作るとなると様々な工程がありますが、ハムケツ画像を集める段階で人工知能がハムケツを認識してくれれば、ハムケツであるかどうかの判定を人間が行わなくてよくなります。&lt;/p&gt;
+
+&lt;p&gt;この認識して判定するフェーズを今回のトレーニングで取り扱い、出来上がったモデルを誰にでも触ってもらえる形にしようということで、&lt;/p&gt;
+
+&lt;p&gt;「ハムケツ画像を入力すると認識結果のテキストを出力で得られるWebアプリを作る」&lt;/p&gt;
+
+&lt;p&gt;をゴールとすることになりました。&lt;/p&gt;
+
+&lt;h2 id=&#34;現状を把握する&#34;&gt;現状を把握する&lt;/h2&gt;
+
+&lt;p&gt;ゴールが決まったところで、Wさんの現状のスキルをヒアリングしていきます。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;システム開発
+
+&lt;ul&gt;
+&lt;li&gt;webサービスや業務システムの設計、開発、運用を10年&lt;/li&gt;
+&lt;li&gt;開発言語はJava、Ruby、Python、PHP&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;機械学習
+
+&lt;ul&gt;
+&lt;li&gt;AIにより解決できる課題と理論が概念レベルでわかる。分類や予測ができるとか、教師あり学習・教師なし学習の違いが分かる。&lt;/li&gt;
+&lt;li&gt;統計や自然言語処理をかじったことがある&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;受講者のトレーニング開始時ベンチマークとしてご参考にしていただければと思います。&lt;/p&gt;
+
+&lt;h2 id=&#34;次回予告&#34;&gt;次回予告&lt;/h2&gt;
+
+&lt;p&gt;だいぶ基礎がありそうなので、畳みこみニューラルネットワークのイメージを掴んでいただいた上で、成果物完成までのステップを提示し、それをこなしてもらう、というスタイルでトレーニングを開始することにしました。&lt;/p&gt;
+
+&lt;p&gt;次回は、畳みこみニューラルネットワークのイメージを掴んでもらう時に行った講習の内容についてお届けします。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>AIトレーニングはじめました</title>
@@ -32,7 +101,7 @@
 
 &lt;p&gt;一言で言えば、技術習得までの最短経路が人によって異なるため、です。&lt;/p&gt;
 
-&lt;p&gt;機械学習がカバーする領域はとても広範囲に渡るため、どのようなことを身につけたいか (ゴール)、および、現状のスキルによって、習得経路が一本道ではないことはご理解いただけると思います。&lt;/p&gt;
+&lt;p&gt;機械学習がカバーする領域はとても広範囲に渡るため、どのようなことを身につけたいか (ゴール)、および、現状のスキルによって、習得経路が一本道ではありません。&lt;/p&gt;
 
 &lt;p&gt;一方で、書籍などの教材は、体系的・網羅的に記述されているものの、個々に最適化されてはいません。&lt;/p&gt;
 
@@ -49,11 +118,12 @@
 &lt;p&gt;また、理解の助けになると判断した場合には、その場で講習という形を取る場合もあります。&lt;br /&gt;
 そして、随時出てくる疑問点においては、オンラインでの質問を受け付けています。&lt;/p&gt;
 
-&lt;p&gt;内容にもよりますが、2ヶ月程度での習得を目指しています。&lt;/p&gt;
+&lt;p&gt;期間としては、内容にもよりますが、2ヶ月程度での習得を目指しています。&lt;/p&gt;
 
-&lt;h2 id=&#34;次回&#34;&gt;次回&lt;/h2&gt;
+&lt;h2 id=&#34;次回予告&#34;&gt;次回予告&lt;/h2&gt;
 
-&lt;p&gt;次回はWさんのキックオフの内容についてお届けします。&lt;/p&gt;
+&lt;p&gt;次回はWさんのキックオフの内容についてお届けします。&lt;br /&gt;
+(2016/8/1 公開しました &amp;rarr; &lt;a href=&#34;http://blog.algolab.jp/post/2016/08/01/ai-training-kick-off/&#34;&gt;AIトレーニングキックオフ 〜ハムケツを認識したい〜&lt;/a&gt;)&lt;/p&gt;
 </description>
     </item>
     

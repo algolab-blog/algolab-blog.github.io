@@ -27,7 +27,7 @@
 &lt;/figure&gt;
 
 
-&lt;p&gt;様々なロボットやデバイスと連携し、 ビジュアルプログラミング環境を用いて誰でも簡単に開発を行うことのできるプラットフォームです。NTTが研究・開発を行っています。&lt;/p&gt;
+&lt;p&gt;NTTが開発を行っている、様々なロボットやデバイスと連携し、 ビジュアルプログラミング環境を用いて誰でも簡単に開発を行うことのできるプラットフォームです。&lt;/p&gt;
 
 &lt;h2 id=&#34;robohon-とは&#34;&gt;RoBoHoN とは&lt;/h2&gt;
 
@@ -51,12 +51,12 @@ SDKは &lt;a href=&#34;https://robohon.com/&#34;&gt;公式ページ&lt;/a&gt; �
 
 &lt;p&gt;R-envとRoBoHoNなどの機器の間でWebSocketによる通信を行うことでインタラクションを実現しています。&lt;br /&gt;
 上記の図は、R-envからRoBoHonに処理を依頼する例ですが、RoBoHoN側からイベント (持ち上げられた、など) をR-envへ通知することができます。&lt;br /&gt;
-そして、R-envには幾つもの機器を登録することができるので、例えばRoBoHoNに「エアコンつけて！」と頼むとエアコンが起動する、といったことも実現することが可能です。&lt;/p&gt;
+また、R-envには幾つもの機器を登録することができるので、例えばRoBoHoNに「エアコンつけて！」と頼むとエアコンが起動する、といったことも実現することが可能です。&lt;/p&gt;
 
 &lt;h2 id=&#34;ハンズオン&#34;&gt;ハンズオン&lt;/h2&gt;
 
 &lt;p&gt;今回のハンズオンでは、R-envおよびRoBoHoNの紹介の後、30分程度の自由な開発時間がありました。&lt;br /&gt;
-Sota も動かしても良い、とのことだったので、RoBoHonとSotaに簡単な会話をさせてみることにしました。&lt;/p&gt;
+Sotaも動かしても良い、とのことだったので、RoBoHonとSotaに簡単な会話をさせてみることにしました。&lt;/p&gt;
 
 &lt;h2 id=&#34;シナリオを作成する&#34;&gt;シナリオを作成する&lt;/h2&gt;
 
@@ -78,7 +78,7 @@ Sota も動かしても良い、とのことだったので、RoBoHonとSotaに�
 &lt;p&gt;イベントの詳細を定義する画面です。&lt;br /&gt;
 ここでは、RoBoHonのプロジェクタを起動するイベントを定義しています。&lt;/p&gt;
 
-&lt;h2 id=&#34;完成&#34;&gt;完成！&lt;/h2&gt;
+&lt;h2 id=&#34;動いた&#34;&gt;動いた！&lt;/h2&gt;
 
 
 &lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
@@ -93,8 +93,7 @@ Sota も動かしても良い、とのことだったので、RoBoHonとSotaに�
 &lt;strong&gt;Sota:&lt;/strong&gt; ありがとう！僕からは音楽を流すね！（音楽を流す）&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;最終的に上記のようなシナリオが完成しました！&lt;br /&gt;
-リアルにモノが動くので、感動もひとしおです！！&lt;/p&gt;
+&lt;p&gt;最終的に上記のようなシナリオが完成しました！リアルにモノが動くので、感動もひとしおです！！&lt;/p&gt;
 
 &lt;p&gt;ハンズオンは定期的に開催しているようなので、みなさんも体験してみてはいかがでしょうか？&lt;br /&gt;
 &lt;a href=&#34;https://r-env.doorkeeper.jp/&#34;&gt;R-env:連舞® Innovation Hub&lt;/a&gt;&lt;/p&gt;
