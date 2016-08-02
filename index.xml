@@ -30,7 +30,8 @@ DQNについては、下記の記事によくまとめられており、実装�
 &lt;p&gt;「学習時間なげえ。。。」&lt;/p&gt;
 
 &lt;p&gt;DQNに限らず、ディープラーニングのモデルを学習させようとすると、平気で数日以上かかります。&lt;br /&gt;
-しかも、学習させたモデルが期待通りの動作をしなかったとしたら目も当てられません。(よくある話です)&lt;/p&gt;
+そして、学習させたモデルが期待通りの動作をしなかったとしたら、もう投げ出したくなってしまいます。&lt;br /&gt;
+(よくある話です)&lt;/p&gt;
 
 &lt;p&gt;なので、私が新しいモデルを実装する際には、なるべく単純なモデル、データから始めるようにしています。&lt;/p&gt;
 
@@ -45,13 +46,22 @@ CPUで3分もあれば学習が終わります！&lt;/p&gt;
 &lt;/figure&gt;
 
 
+&lt;h3 id=&#34;概要&#34;&gt;概要&lt;/h3&gt;
+
 &lt;p&gt;具体的には、上図のように上から落ちてくるボールをキャッチする、というタスクを学習させます。&lt;br /&gt;
 TensorFlowで実装しており、ソースコードは下記に公開しています。&lt;br /&gt;
 &lt;a href=&#34;https://github.com/algolab-inc/tf-dqn-simple&#34;&gt;https://github.com/algolab-inc/tf-dqn-simple&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;動作のためにTensorFlowとMatplotlibが必要なので、インストールします。&lt;/p&gt;
+&lt;h3 id=&#34;環境構築&#34;&gt;環境構築&lt;/h3&gt;
 
-&lt;p&gt;Tensorflowについては下記リンクを参照してください。&lt;br /&gt;
+&lt;p&gt;はじめにソースコードをダウンロードします。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git clone https://github.com/algolab-inc/tf-dqn-simple.git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;次に、動作のためにTensorFlowとMatplotlibが必要なので、インストールします。&lt;/p&gt;
+
+&lt;p&gt;Tensorflowについては下記リンクを参照のうえインストールを行ってください。&lt;br /&gt;
 &lt;a href=&#34;https://www.tensorflow.org/versions/master/get_started/os_setup.html&#34;&gt;https://www.tensorflow.org/versions/master/get_started/os_setup.html&lt;/a&gt;&lt;br /&gt;
 (2016/08/01現在、Python3.5.2 + Tensorflow0.9.0での動作を確認しています)&lt;/p&gt;
 
@@ -60,16 +70,21 @@ TensorFlowで実装しており、ソースコードは下記に公開してい�
 &lt;pre&gt;&lt;code&gt;pip install matplotlib
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;はじめにソースコードをダウンロードします。&lt;/p&gt;
+&lt;h3 id=&#34;学習&#34;&gt;学習&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code&gt;git clone https://github.com/algolab-inc/tf-dqn-simple.git
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;ソースコードのディレクトリに移動して、train.pyを叩くと学習が始まります。&lt;/p&gt;
+&lt;p&gt;環境が整ったら、ソースコードのディレクトリに移動して、train.pyを叩くと学習が始まります。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;cd tf-dqn-simple
 python train.py
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;下記のようなログが出ていれば、正しく学習が行われています。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;EPOCH: 000/999 | WIN: 001 | LOSS: 0.0068 | Q_MAX: 0.0008&lt;br /&gt;
+EPOCH: 001/999 | WIN: 002 | LOSS: 0.0447 | Q_MAX: 0.0013&lt;br /&gt;
+&amp;hellip;&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;数分ほどで学習が終わったかと思います。&lt;br /&gt;
 では学習したモデルでテストしてみましょう。&lt;/p&gt;
@@ -77,7 +92,14 @@ python train.py
 &lt;pre&gt;&lt;code&gt;python test.py
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;どうでしょうか、きちんと動作しましたでしょうか？&lt;br /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;WIN: 001/001 (100.0%)&lt;br /&gt;
+WIN: 002/002 (100.0%)&lt;br /&gt;
+&amp;hellip;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;キャッチボールのアニメーションとともに、上記のようなログが出れば成功です。&lt;br /&gt;
+きちんと動作しましたでしょうか？&lt;br /&gt;
 学習がうまくいっていれば、おそらく100%でキャッチできていると思います。&lt;/p&gt;
 
 &lt;p&gt;次回は、実装編についてお届けします。&lt;/p&gt;
@@ -93,13 +115,13 @@ python train.py
       <description>
 
 &lt;p&gt;弊社で実施している &lt;a href=&#34;http://blog.algolab.jp/post/2016/07/25/ai-training/&#34;&gt;AIトレーニング&lt;/a&gt; の実況中継シリーズとなります。&lt;br /&gt;
-今回は、Wさんのキックオフの内容についてお届けします。&lt;/p&gt;
+今回は、Aさんのキックオフの内容についてお届けします。&lt;/p&gt;
 
 &lt;h2 id=&#34;ハムケツ&#34;&gt;ハムケツ&lt;/h2&gt;
 
 &lt;p&gt;「あの・・ですね。その・・・。ハムケツを認識したいんです。」&lt;/p&gt;
 
-&lt;p&gt;トレーニングの最初にゴールを設定するのですが、その際、Wさんから出たひと言目がこれでした。&lt;/p&gt;
+&lt;p&gt;トレーニングの最初にゴールを設定するのですが、その際、Aさんから出たひと言目がこれでした。&lt;/p&gt;
 
 &lt;figure&gt;
   &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/01/ai-training-kick-off//hamuketu.jpg&#34;/&gt;
@@ -112,7 +134,7 @@ python train.py
 &lt;p&gt;ハムケツとは最近ネットや書籍で話題になったハムスターのおしりのことで、
 独特の可愛さで評判となったので目にされた方もいらっしゃるのではないでしょうか。&lt;/p&gt;
 
-&lt;p&gt;Wさんの話を詳しくうかがってみると、妻がハムケツの得も言われぬ可愛さに身もだえていた時に「ハムケツ画像が自動的に送られてくるアプリがあったらな」と思ったとのことです。&lt;/p&gt;
+&lt;p&gt;Aさんの話を詳しくうかがってみると、妻がハムケツの得も言われぬ可愛さに身もだえていた時に「ハムケツ画像が自動的に送られてくるアプリがあったらな」と思ったとのことです。&lt;/p&gt;
 
 &lt;p&gt;素晴らしい！ではハムケツでいきましょう、と速攻でテーマが決まり、その後は大の男二人で「ハムケツの特徴」や「こっちがハムケツ、こっちはハムケツじゃない」などと熱い議論を交わしつつ成果物のイメージをより具体的に話し合いました。&lt;/p&gt;
 
@@ -126,7 +148,7 @@ python train.py
 
 &lt;h2 id=&#34;現状を把握する&#34;&gt;現状を把握する&lt;/h2&gt;
 
-&lt;p&gt;ゴールが決まったところで、Wさんの現状のスキルをヒアリングしていきます。&lt;/p&gt;
+&lt;p&gt;ゴールが決まったところで、Aさんの現状のスキルをヒアリングしていきます。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;システム開発
@@ -479,7 +501,7 @@ Adrew Ng氏は、2020年には検索の半分以上が音声か画像になる�
       <description>
 
 &lt;p&gt;弊社では、ITエンジニア向けに機械学習スキルの習得をサポートする試み (AIトレーニング) をはじめました。&lt;br /&gt;
-ここでは、1人目の受講者であるWさんの許可を頂き、実況中継という形で、その内容を随時公開していきたいと思います。&lt;/p&gt;
+ここでは、1人目の受講者であるAさんの許可を頂き、実況中継という形で、その内容を随時公開していきたいと思います。&lt;/p&gt;
 
 &lt;figure&gt;
   &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/07/25/ai-training//training.jpg&#34;/&gt;
@@ -514,13 +536,13 @@ Adrew Ng氏は、2020年には検索の半分以上が音声か画像になる�
 
 &lt;h2 id=&#34;次回予告&#34;&gt;次回予告&lt;/h2&gt;
 
-&lt;p&gt;次回はWさんのキックオフの内容についてお届けします。&lt;br /&gt;
+&lt;p&gt;次回はAさんのキックオフの内容についてお届けします。&lt;br /&gt;
 (2016/8/1 公開しました &amp;rarr; &lt;a href=&#34;http://blog.algolab.jp/post/2016/08/01/ai-training-kick-off/&#34;&gt;AIトレーニングキックオフ 〜ハムケツを認識したい〜&lt;/a&gt;)&lt;/p&gt;
 </description>
     </item>
     
     <item>
-      <title>ICML2016読み会 まとめ</title>
+      <title>ICML2016読み会まとめ</title>
       <link>http://blog.algolab.jp/post/2016/07/21/icml-2016-reading/</link>
       <pubDate>Fri, 22 Jul 2016 10:14:41 +0900</pubDate>
       
