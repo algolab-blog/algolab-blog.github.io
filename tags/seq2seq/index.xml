@@ -44,7 +44,7 @@
 &lt;p&gt;Seq2Seqモデルを用いたチャットボットの実装は、色々な人が公開しています。&lt;br /&gt;
 &lt;a href=&#34;https://github.com/nicolas-ivanov/seq2seq_chatbot_links&#34;&gt;https://github.com/nicolas-ivanov/seq2seq_chatbot_links&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;今回は、実装例の中で、最も良い結果が出たとされている、以下のリポジトリのコードを動作させてみます。
+&lt;p&gt;今回は、実装例の中で、最も良い結果が出たとされている、以下のリポジトリのコードを動作させてみます。&lt;br /&gt;
 &lt;a href=&#34;https://github.com/macournoyer/neuralconvo&#34;&gt;https://github.com/macournoyer/neuralconvo&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;環境構築&#34;&gt;環境構築&lt;/h2&gt;
@@ -52,36 +52,12 @@
 &lt;p&gt;基本的には下記の手順で進めます。&lt;br /&gt;
 &lt;a href=&#34;https://github.com/macournoyer/neuralconvo#installing&#34;&gt;https://github.com/macournoyer/neuralconvo#installing&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;ソースコードのダウンロード&#34;&gt;ソースコードのダウンロード&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;git clone https://github.com/macournoyer/neuralconvo.git
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;torchのインストール&#34;&gt;Torchのインストール&lt;/h3&gt;
-
-&lt;p&gt;公式に従って、インストールします。&lt;br /&gt;
-&lt;a href=&#34;http://torch.ch/docs/getting-started.html&#34;&gt;http://torch.ch/docs/getting-started.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;環境によって叩くコマンドが違うため、詳細は上記リンクをご参照ください。&lt;br /&gt;
-下記は、Ubuntu + zshでの例です。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;git clone https://github.com/torch/distro.git ~/torch --recursive
-cd ~/torch; bash install-deps;
-./install.sh
-source ~/.zshrc
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;luaライブラリのインストール&#34;&gt;Luaライブラリのインストール&lt;/h3&gt;
+&lt;p&gt;筆者は下記の環境をベースに、追加で必要なLuaモジュールをインストールしました。&lt;br /&gt;
+&lt;a href=&#34;{{ref &amp;quot;post/2016/08/03/torch-aws-gpu-ubuntu.md&amp;quot;}}&#34;&gt;TorchをAWSのGPUインスタンス (Ubuntu 14.04) で動かす&lt;/a&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;luarocks install nn
 luarocks install rnn
 luarocks install penlight
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;GPUを用いて学習を行うので、下記もインストールします。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;luarocks install cutorch
-luarocks install cunn
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;データセットの準備&#34;&gt;データセットの準備&lt;/h3&gt;
@@ -89,7 +65,8 @@ luarocks install cunn
 &lt;p&gt;データセットは、下記で公開されている映画の台詞コーパスを用います。&lt;br /&gt;
 &lt;a href=&#34;http://www.mpi-sws.org/~cristian/Cornell_Movie-Dialogs_Corpus.html&#34;&gt;http://www.mpi-sws.org/~cristian/Cornell_Movie-Dialogs_Corpus.html&lt;/a&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;cd neuralconvo/data
+&lt;pre&gt;&lt;code&gt;git clone https://github.com/macournoyer/neuralconvo.git
+cd neuralconvo/data
 wget http://www.mpi-sws.org/~cristian/data/cornell_movie_dialogs_corpus.zip
 unzip cornell_movie_dialogs_corpus.zip
 mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
@@ -102,8 +79,7 @@ mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
 &lt;pre&gt;&lt;code&gt;th train.lua --cuda --dataset 50000 --hiddenSize 1000
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;学習には AWSのg2.2xlargeインスタンスを用い、学習時間は4日弱でした。&lt;br /&gt;
-なお、エラー率の推移は下記となりました。&lt;/p&gt;
+&lt;p&gt;学習時間は4日弱で、エラー率の推移は下記となりました。&lt;/p&gt;
 
 &lt;figure&gt;
   &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/07/30/seq2seq-chatbot//error.png&#34;/&gt;

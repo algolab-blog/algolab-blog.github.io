@@ -6,8 +6,147 @@
     <description>Recent content in Posts on ALGO GEEKS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 01 Aug 2016 22:06:25 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 03 Aug 2016 17:12:34 +0900</lastBuildDate>
     <atom:link href="http://blog.algolab.jp/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>TorchをAWSのGPUインスタンス (Ubuntu 14.04) で動かす</title>
+      <link>http://blog.algolab.jp/post/2016/08/03/torch-aws-gpu-ubuntu/</link>
+      <pubDate>Wed, 03 Aug 2016 17:12:34 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/08/03/torch-aws-gpu-ubuntu/</guid>
+      <description>
+
+&lt;p&gt;TorchをAWSのGPUインスタンス (Ubuntu 14.04) で動かす手順をまとめます。&lt;br /&gt;
+環境は以下の通りです。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;OS: Ubuntu Server 14.04 LTS&lt;/li&gt;
+&lt;li&gt;CUDA: 7.5&lt;/li&gt;
+&lt;li&gt;CuDNN: R5&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;インスタンスを起動&#34;&gt;インスタンスを起動&lt;/h2&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/03/torch-aws-gpu-ubuntu//ubuntu.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;Ubuntu Server 14.04 LTS (HVM), SSD Volume Type - ami-2d39803a をベースに構築します。&lt;br /&gt;
+インスタンスタイプはg2.2xlargeを用いました。&lt;br /&gt;
+ストレージ容量はデフォルトの8GBでは不足するので、16GBとします。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/03/torch-aws-gpu-ubuntu//storage.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;h2 id=&#34;パッケージ更新&#34;&gt;パッケージ更新&lt;/h2&gt;
+
+&lt;p&gt;インスタンスが起動したら、SSHでログインのうえ、まずパッケージを更新します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get update
+sudo apt-get upgrade -y
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;cudaインストール&#34;&gt;CUDAインストール&lt;/h2&gt;
+
+&lt;p&gt;CUDAのインストールはハマりどころが多いですが、先人の知恵にならって進めます。&lt;br /&gt;
+&lt;a href=&#34;https://gist.github.com/erikbern/78ba519b97b440e10640&#34;&gt;https://gist.github.com/erikbern/78ba519b97b440e10640&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;既存のドライバ (Noveau) を無効にします。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;echo -e &amp;quot;blacklist nouveau\nblacklist lbm-nouveau\noptions nouveau modeset=0\nalias nouveau off\nalias lbm-nouveau off\n&amp;quot; | sudo tee /etc/modprobe.d/blacklist-nouveau.conf
+echo options nouveau modeset=0 | sudo tee -a /etc/modprobe.d/nouveau-kms.conf
+sudo update-initramfs -u
+sudo reboot
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;必要なカーネルモジュールをインストールします。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install -y linux-image-extra-virtual
+sudo reboot
+sudo apt-get install -y linux-source linux-headers-`uname -r`
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;CUDA7.5をインストールします。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;wget http://developer.download.nvidia.com/compute/cuda/7.5/Prod/local_installers/cuda_7.5.18_linux.run
+chmod +x cuda_7.5.18_linux.run
+./cuda_7.5.18_linux.run -extract=`pwd`/nvidia_installers
+cd nvidia_installers
+sudo ./NVIDIA-Linux-x86_64-352.39.run
+sudo modprobe nvidia
+sudo ./cuda-linux64-rel-7.5.18-19867135.run
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;途中でシンボリックリンクを作成するか聞かれますが、yesを選択します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Would you like to create a symbolic link /usr/local/cuda pointing to /usr/local/cuda-7.5? ((y)es/(n)o/(a)bort) [ default is yes ]: y
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;CUDAのパスを環境変数に追加します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;echo -e &amp;quot;export PATH=/usr/local/cuda/bin:\$PATH\nexport LD_LIBRARY_PATH=/usr/local/cuda/lib64:\$LD_LIBRARY_PATH&amp;quot; | tee -a ~/.bashrc
+source ~/.bashrc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;cudnnインストール&#34;&gt;CUDNNインストール&lt;/h2&gt;
+
+&lt;p&gt;まず、下記のサイトからアカウントを登録します。&lt;br /&gt;
+&lt;a href=&#34;https://developer.nvidia.com/cudnn&#34;&gt;https://developer.nvidia.com/cudnn&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;アカウント登録後、ダウンロードページから、cuDNN v5 Library for Linuxをダウンロードします。
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/03/torch-aws-gpu-ubuntu//cudnn.png&#34;/&gt;
+  
+&lt;/figure&gt;
+&lt;/p&gt;
+
+&lt;p&gt;ダウンロードしたファイルをサーバへ転送後、サーバ上で展開します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;tar -xzf cudnn-7.5-linux-x64-v5.0-ga.tgz
+sudo cp cuda/lib64/libcudnn* /usr/local/cuda-7.5/lib64
+sudo cp cuda/include/cudnn.h /usr/local/cuda/include
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;torchインストール&#34;&gt;Torchインストール&lt;/h2&gt;
+
+&lt;p&gt;公式に従って、インストールします。&lt;br /&gt;
+&lt;a href=&#34;http://torch.ch/docs/getting-started.html&#34;&gt;http://torch.ch/docs/getting-started.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install -y git
+git clone https://github.com/torch/distro.git ~/torch --recursive
+cd ~/torch; bash install-deps;
+./install.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;環境変数を.bashrcに書き込むか聞かれますが、yesを選択します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Do you want to automatically prepend the Torch install location
+to PATH and LD_LIBRARY_PATH in your /home/ubuntu/.bashrc? (yes/no)
+[yes] &amp;gt;&amp;gt;&amp;gt; 
+yes
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;環境変数を反映します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;source ~/.bashrc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最後に、CUDAを使うためのLuaライブラリをインストールします。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;luarocks install cutorch
+luarocks install cunn
+luarocks install cunnx
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;以上で環境構築は完了です。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>超シンプルにDQN (Deep Q Network) を実装してみる 〜導入編〜</title>
@@ -33,10 +172,10 @@ DQNについては、下記の記事によくまとめられており、実装�
 そして、学習させたモデルが期待通りの動作をしなかったとしたら、もう投げ出したくなってしまいます。&lt;br /&gt;
 (よくある話です)&lt;/p&gt;
 
-&lt;p&gt;なので、私が新しいモデルを一から実装する際には、なるべく単純なモデル、データから始めるようにしています。&lt;/p&gt;
+&lt;p&gt;なので、筆者が新しいモデルを一から実装する際には、なるべく単純なモデル、データから始めるようにしています。&lt;/p&gt;
 
 &lt;p&gt;ここでは、超シンプルなDQNを実装し、動作させてみることにします。&lt;br /&gt;
-CPUで3分もあれば学習が終わります！&lt;/p&gt;
+早速いってみましょう。CPUで3分もあれば学習が終わります！&lt;/p&gt;
 
 &lt;h2 id=&#34;まずは動かしてみよう&#34;&gt;まずは動かしてみよう&lt;/h2&gt;
 
@@ -210,7 +349,7 @@ WIN: 002/002 (100.0%)&lt;br /&gt;
 &lt;p&gt;Seq2Seqモデルを用いたチャットボットの実装は、色々な人が公開しています。&lt;br /&gt;
 &lt;a href=&#34;https://github.com/nicolas-ivanov/seq2seq_chatbot_links&#34;&gt;https://github.com/nicolas-ivanov/seq2seq_chatbot_links&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;今回は、実装例の中で、最も良い結果が出たとされている、以下のリポジトリのコードを動作させてみます。
+&lt;p&gt;今回は、実装例の中で、最も良い結果が出たとされている、以下のリポジトリのコードを動作させてみます。&lt;br /&gt;
 &lt;a href=&#34;https://github.com/macournoyer/neuralconvo&#34;&gt;https://github.com/macournoyer/neuralconvo&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;環境構築&#34;&gt;環境構築&lt;/h2&gt;
@@ -218,36 +357,12 @@ WIN: 002/002 (100.0%)&lt;br /&gt;
 &lt;p&gt;基本的には下記の手順で進めます。&lt;br /&gt;
 &lt;a href=&#34;https://github.com/macournoyer/neuralconvo#installing&#34;&gt;https://github.com/macournoyer/neuralconvo#installing&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;ソースコードのダウンロード&#34;&gt;ソースコードのダウンロード&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;git clone https://github.com/macournoyer/neuralconvo.git
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;torchのインストール&#34;&gt;Torchのインストール&lt;/h3&gt;
-
-&lt;p&gt;公式に従って、インストールします。&lt;br /&gt;
-&lt;a href=&#34;http://torch.ch/docs/getting-started.html&#34;&gt;http://torch.ch/docs/getting-started.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;環境によって叩くコマンドが違うため、詳細は上記リンクをご参照ください。&lt;br /&gt;
-下記は、Ubuntu + zshでの例です。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;git clone https://github.com/torch/distro.git ~/torch --recursive
-cd ~/torch; bash install-deps;
-./install.sh
-source ~/.zshrc
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;luaライブラリのインストール&#34;&gt;Luaライブラリのインストール&lt;/h3&gt;
+&lt;p&gt;筆者は下記の環境をベースに、追加で必要なLuaモジュールをインストールしました。&lt;br /&gt;
+&lt;a href=&#34;{{ref &amp;quot;post/2016/08/03/torch-aws-gpu-ubuntu.md&amp;quot;}}&#34;&gt;TorchをAWSのGPUインスタンス (Ubuntu 14.04) で動かす&lt;/a&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;luarocks install nn
 luarocks install rnn
 luarocks install penlight
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;GPUを用いて学習を行うので、下記もインストールします。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;luarocks install cutorch
-luarocks install cunn
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;データセットの準備&#34;&gt;データセットの準備&lt;/h3&gt;
@@ -255,7 +370,8 @@ luarocks install cunn
 &lt;p&gt;データセットは、下記で公開されている映画の台詞コーパスを用います。&lt;br /&gt;
 &lt;a href=&#34;http://www.mpi-sws.org/~cristian/Cornell_Movie-Dialogs_Corpus.html&#34;&gt;http://www.mpi-sws.org/~cristian/Cornell_Movie-Dialogs_Corpus.html&lt;/a&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;cd neuralconvo/data
+&lt;pre&gt;&lt;code&gt;git clone https://github.com/macournoyer/neuralconvo.git
+cd neuralconvo/data
 wget http://www.mpi-sws.org/~cristian/data/cornell_movie_dialogs_corpus.zip
 unzip cornell_movie_dialogs_corpus.zip
 mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
@@ -268,8 +384,7 @@ mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
 &lt;pre&gt;&lt;code&gt;th train.lua --cuda --dataset 50000 --hiddenSize 1000
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;学習には AWSのg2.2xlargeインスタンスを用い、学習時間は4日弱でした。&lt;br /&gt;
-なお、エラー率の推移は下記となりました。&lt;/p&gt;
+&lt;p&gt;学習時間は4日弱で、エラー率の推移は下記となりました。&lt;/p&gt;
 
 &lt;figure&gt;
   &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/07/30/seq2seq-chatbot//error.png&#34;/&gt;
