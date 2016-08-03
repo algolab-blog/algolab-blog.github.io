@@ -33,7 +33,7 @@ DQNについては、下記の記事によくまとめられており、実装�
 そして、学習させたモデルが期待通りの動作をしなかったとしたら、もう投げ出したくなってしまいます。&lt;br /&gt;
 (よくある話です)&lt;/p&gt;
 
-&lt;p&gt;なので、私が新しいモデルを実装する際には、なるべく単純なモデル、データから始めるようにしています。&lt;/p&gt;
+&lt;p&gt;なので、私が新しいモデルを一から実装する際には、なるべく単純なモデル、データから始めるようにしています。&lt;/p&gt;
 
 &lt;p&gt;ここでは、超シンプルなDQNを実装し、動作させてみることにします。&lt;br /&gt;
 CPUで3分もあれば学習が終わります！&lt;/p&gt;
@@ -169,9 +169,9 @@ WIN: 002/002 (100.0%)&lt;br /&gt;
 
 &lt;h2 id=&#34;次回予告&#34;&gt;次回予告&lt;/h2&gt;
 
-&lt;p&gt;だいぶ基礎がありそうなので、畳みこみニューラルネットワークのイメージを掴んでいただいた上で、成果物完成までのステップを提示し、それをこなしてもらう、というスタイルでトレーニングを開始することにしました。&lt;/p&gt;
+&lt;p&gt;Aさんはだいぶ基礎がありそうなので、ディープラーニングのイメージを掴んでいただいた上で、成果物完成までのステップを提示し、それをこなしてもらう、というスタイルでトレーニングを開始することにしました。&lt;/p&gt;
 
-&lt;p&gt;次回は、畳みこみニューラルネットワークのイメージを掴んでもらう際に行った講習の内容についてお届けします。&lt;/p&gt;
+&lt;p&gt;次回は、ディープラーニングのイメージを掴んでもらう際に行った講習の内容についてお届けします。&lt;/p&gt;
 </description>
     </item>
     
@@ -346,7 +346,7 @@ mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
 
 &lt;p&gt;ヒューマンインターフェースの歴史を振り返ってみると、ここ半世紀においては10年単位で技術革新が起きていることが分かります。&lt;br /&gt;
 iPhoneによる、タッチ + カメラインターフェースが登場したのが 2007年。&lt;br /&gt;
-次の10年では、Siri や Amazon Echo に代表される音声インターフェースが技術革新を起こすだろう、と予測しています。&lt;/p&gt;
+次の10年では、SiriやAmazon Echoに代表される音声インターフェースが技術革新を起こすだろう、と予測しています。&lt;/p&gt;
 
 &lt;h2 id=&#34;音声は最も効率の良い入力方法である&#34;&gt;音声は最も効率の良い入力方法である&lt;/h2&gt;
 
@@ -379,8 +379,8 @@ iPhoneによる、タッチ + カメラインターフェースが登場した�
 
 
 &lt;p&gt;数年前までは良くて80%程度だったものが、最近は90%を優に超えてきているのが分かります。&lt;br /&gt;
-人工知能研究の権威である、Baidu の Andrew Ng 氏は、精度が 99% を超えるとゲームチェンジャーになる (= 世界が変わる) と述べています。&lt;br /&gt;
-技術進歩の鍵となるのはディープラーニングで、音声認識分野においては、Baidu が一歩リードしている印象です。&lt;br /&gt;
+人工知能研究の権威である、BaiduのAndrew Ng氏は、精度が 99% を超えるとゲームチェンジャーになる (= 世界が変わる) と述べています。&lt;br /&gt;
+技術進歩の鍵となるのはディープラーニングで、音声認識分野においては、Baiduが一歩リードしている印象です。&lt;br /&gt;
 Baidu の論文については、下記の記事内でも取り上げていますのでご参照ください。&lt;br /&gt;
 &lt;a href=&#34;http://blog.algolab.jp/post/2016/07/21/icml-2016-reading/#deep-speech-2-end-to-end-speech-recognition-in-english-and-mandarin&#34;&gt;ICML2016読み会 まとめ&lt;/a&gt;&lt;/p&gt;
 
@@ -699,9 +699,9 @@ Adrew Ng氏は、2020年には検索の半分以上が音声か画像になる�
 
 &lt;p&gt;&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;ja&#34; dir=&#34;ltr&#34;&gt;Memory Network，なんかピンとこないんだよなあ。これでもかってくらいヒューリスティックを積んで積んで積みまくってくるからかなあ。 &lt;a href=&#34;https://twitter.com/hashtag/icml_yomi?src=hash&#34;&gt;#icml_yomi&lt;/a&gt;&lt;/p&gt;&amp;mdash; Nakatani Shuyo (@shuyo) &lt;a href=&#34;https://twitter.com/shuyo/status/756047518291460096&#34;&gt;July 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
 &lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
-&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;Memory Networks for Language Understanding, ICML Tutorial 2016 &lt;a href=&#34;https://t.co/ssPEmP1Pf9&#34;&gt;https://t.co/ssPEmP1Pf9&lt;/a&gt; &lt;a href=&#34;https://twitter.com/hashtag/icml_yomi?src=hash&#34;&gt;#icml_yomi&lt;/a&gt;&lt;/p&gt;&amp;mdash; 絶対零度θノヴァティック (@penzant) &lt;a href=&#34;https://twitter.com/penzant/status/756050102670598144&#34;&gt;July 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
+&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;Memory Networks for Language Understanding, ICML Tutorial 2016 &lt;a href=&#34;https://t.co/ssPEmP1Pf9&#34;&gt;https://t.co/ssPEmP1Pf9&lt;/a&gt; &lt;a href=&#34;https://twitter.com/hashtag/icml_yomi?src=hash&#34;&gt;#icml_yomi&lt;/a&gt;&lt;/p&gt;&amp;mdash; 多元的実在論（？） (@penzant) &lt;a href=&#34;https://twitter.com/penzant/status/756050102670598144&#34;&gt;July 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
 &lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
-&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;Theano Implementation of Dynamic Memory Networks for Visual and Textual Question Answering &lt;a href=&#34;https://t.co/a8ijZKcnwS&#34;&gt;https://t.co/a8ijZKcnwS&lt;/a&gt; &lt;a href=&#34;https://twitter.com/hashtag/icml_yomi?src=hash&#34;&gt;#icml_yomi&lt;/a&gt;&lt;/p&gt;&amp;mdash; 絶対零度θノヴァティック (@penzant) &lt;a href=&#34;https://twitter.com/penzant/status/756050917686816768&#34;&gt;July 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
+&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;Theano Implementation of Dynamic Memory Networks for Visual and Textual Question Answering &lt;a href=&#34;https://t.co/a8ijZKcnwS&#34;&gt;https://t.co/a8ijZKcnwS&lt;/a&gt; &lt;a href=&#34;https://twitter.com/hashtag/icml_yomi?src=hash&#34;&gt;#icml_yomi&lt;/a&gt;&lt;/p&gt;&amp;mdash; 多元的実在論（？） (@penzant) &lt;a href=&#34;https://twitter.com/penzant/status/756050917686816768&#34;&gt;July 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
 &lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
 &lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;ja&#34; dir=&#34;ltr&#34;&gt;&lt;a href=&#34;https://twitter.com/hashtag/icml_yomi?src=hash&#34;&gt;#icml_yomi&lt;/a&gt; &lt;a href=&#34;https://t.co/EOaOfKLH40&#34;&gt;https://t.co/EOaOfKLH40&lt;/a&gt; 黒魔術はここね🎵&lt;/p&gt;&amp;mdash; prototechno (@prototechno) &lt;a href=&#34;https://twitter.com/prototechno/status/756051774436356096&#34;&gt;July 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
 &lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;
