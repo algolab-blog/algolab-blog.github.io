@@ -21,9 +21,10 @@
 環境は以下の通りです。&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;OS: Ubuntu Server 14.04 LTS&lt;/li&gt;
-&lt;li&gt;CUDA: 7.5&lt;/li&gt;
-&lt;li&gt;CuDNN: R5&lt;/li&gt;
+&lt;li&gt;Ubuntu Server 14.04 LTS&lt;/li&gt;
+&lt;li&gt;CUDA7.5&lt;/li&gt;
+&lt;li&gt;CuDNN v5&lt;/li&gt;
+&lt;li&gt;Torch7&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&#34;インスタンスを起動&#34;&gt;インスタンスを起動&lt;/h2&gt;
@@ -137,11 +138,12 @@ yes
 &lt;pre&gt;&lt;code&gt;source ~/.bashrc
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;最後に、CUDAを使うためのLuaライブラリをインストールします。&lt;/p&gt;
+&lt;p&gt;最後に、CUDAおよびcuDNNを使うためのLuaライブラリをインストールします。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;luarocks install cutorch
 luarocks install cunn
 luarocks install cunnx
+luarocks install https://raw.githubusercontent.com/soumith/cudnn.torch/master/cudnn-scm-1.rockspec
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;以上で環境構築は完了です。&lt;/p&gt;

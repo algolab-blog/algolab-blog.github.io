@@ -84,9 +84,10 @@
 環境は以下の通りです。</p>
 
 <ul>
-<li>OS: Ubuntu Server 14.04 LTS</li>
-<li>CUDA: 7.5</li>
-<li>CuDNN: R5</li>
+<li>Ubuntu Server 14.04 LTS</li>
+<li>CUDA7.5</li>
+<li>CuDNN v5</li>
+<li>Torch7</li>
 </ul>
 
 <h2 id="インスタンスを起動">インスタンスを起動</h2>
@@ -200,11 +201,12 @@ yes
 <pre><code>source ~/.bashrc
 </code></pre>
 
-<p>最後に、CUDAを使うためのLuaライブラリをインストールします。</p>
+<p>最後に、CUDAおよびcuDNNを使うためのLuaライブラリをインストールします。</p>
 
 <pre><code>luarocks install cutorch
 luarocks install cunn
 luarocks install cunnx
+luarocks install https://raw.githubusercontent.com/soumith/cudnn.torch/master/cudnn-scm-1.rockspec
 </code></pre>
 
 <p>以上で環境構築は完了です。</p>
