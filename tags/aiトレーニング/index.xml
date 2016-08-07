@@ -17,7 +17,7 @@
       <guid>http://blog.algolab.jp/post/2016/08/01/ai-training-kick-off/</guid>
       <description>
 
-&lt;p&gt;弊社で実施している &lt;a href=&#34;http://blog.algolab.jp/post/2016/07/25/ai-training/&#34;&gt;AIトレーニング&lt;/a&gt; の実況中継シリーズとなります。&lt;br /&gt;
+&lt;p&gt;弊社で実施している &lt;a href=&#34;http://blog.algolab.jp/post/2016/07/25/ai-training/&#34;&gt;AIトレーニング&lt;/a&gt; の実況中継シリーズです。&lt;br /&gt;
 今回は、Aさんのキックオフの内容についてお届けします。&lt;/p&gt;
 
 &lt;h2 id=&#34;ハムケツ&#34;&gt;ハムケツ&lt;/h2&gt;
@@ -54,27 +54,19 @@
 &lt;p&gt;ゴールが決まったところで、Aさんの現状のスキルをヒアリングしていきます。&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;システム開発
-
-&lt;ul&gt;
-&lt;li&gt;webサービスや業務システムの設計、開発、運用を10年&lt;/li&gt;
+&lt;li&gt;Webサービスや業務システムの設計、開発、運用を10年&lt;/li&gt;
 &lt;li&gt;開発言語はJava、Ruby、Python、PHP&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;機械学習
-
-&lt;ul&gt;
-&lt;li&gt;AIにより解決できる課題と理論が概念レベルでわかる。分類や予測ができるとか、教師あり学習・教師なし学習の違いが分かる。&lt;/li&gt;
-&lt;li&gt;統計や自然言語処理をかじったことがある&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;受講者のトレーニング開始時ベンチマークとしてご参考にしていただければと思います。&lt;/p&gt;
 
 &lt;h2 id=&#34;次回予告&#34;&gt;次回予告&lt;/h2&gt;
 
-&lt;p&gt;Aさんはだいぶ基礎がありそうなので、ディープラーニングのイメージを掴んでいただいた上で、成果物完成までのステップを提示し、それをこなしてもらう、というスタイルでトレーニングを開始することにしました。&lt;/p&gt;
+&lt;p&gt;Aさんはだいぶ基礎がありそうなので、ディープラーニングのイメージを掴んでいただいた上で、成果物完成までのステップを提示し、それをこなしてもらう、というスタイルでトレーニングを開始することにしました。&lt;br /&gt;
+なお、仕組みを理解いただくため、少し遠回りなステップを提示させていただいています。&lt;/p&gt;
 
-&lt;p&gt;次回は、ディープラーニングのイメージを掴んでもらう際に行った講習の内容についてお届けします。&lt;/p&gt;
+&lt;p&gt;次回は、ディープラーニングのイメージを掴んでもらうためにお話した内容についてお届けします。&lt;br /&gt;
+(2016/08/07 公開しました &amp;rarr; &lt;a href=&#34;http://blog.algolab.jp/post/2016/08/07/deep-learning-introduction/&#34;&gt;ディープラーニング徹底入門 〜AIトレーニング第1回〜&lt;/a&gt;)&lt;/p&gt;
 </description>
     </item>
     
