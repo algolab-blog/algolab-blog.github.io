@@ -5,7 +5,7 @@
   
   <meta charset="UTF-8">
   <title>
-    6000円でRaspberry Pi 3からAlexa Voice Servicesを使う | ALGO GEEKS
+    Amazon Echoを6,000円で動かしてみる | ALGO GEEKS
   </title>
 
 
@@ -82,7 +82,7 @@
   
   <main id="single" role="main">
     <div class="article-header">
-      <h1>6000円でRaspberry Pi 3からAlexa Voice Servicesを使う</h1>
+      <h1>Amazon Echoを6,000円で動かしてみる</h1>
       <div class="meta">
   
     <span>2016/08/11</span>
@@ -95,33 +95,38 @@
     <article>
       
 
-<p>今回、Raspberry Pi 3からAlexa Voice Services (AVS) を利用できるようにしました。<br />
+<p><a href="http://blog.algolab.jp/post/2016/07/29/mary-meeker-2016/">音声は新しいパラダイムシフトになる 〜2016年度版メアリー・ミーカー氏レポートまとめ〜</a> でも触れたように、次世代デバイスとしてAmazon Echoは注目するべき存在です。</p>
+
+<p>しかしながら、日本では技適の関係で未だ使用できません。<br />
+ただ、Alexa Voice Services (AVS) というものが公開されており、Amazon Echoを様々なデバイスで動作させることが可能です。</p>
+
+<p>今回は、Raspberry Pi 3からAVSを利用できるようにしました。<br />
 セットアップについては下記にある通りですが、低予算での最低限の手順をまとめてみます。
 <a href="https://github.com/amzn/alexa-avs-raspberry-pi">https://github.com/amzn/alexa-avs-raspberry-pi</a></p>
 
 <h2 id="完成したもの">完成したもの</h2>
 
-<p>いきなり動画ですが、こんな感じで動きます。英語で話かけると、リクエストを解釈して実行してくれたり、音声(英語)で応答してくれて面白いです。
+<p>いきなり動画ですが、こんな感じで動きます。英語で話かけると、リクエストを解釈して実行してくれたり、音声で応答してくれて面白いです。
 
 <div style="position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;">
   <iframe src="//www.youtube.com/embed/fWubPL5_YaU" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" allowfullscreen frameborder="0"></iframe>
  </div>
 </p>
 
-<h2 id="買ったもの-使ったもの">買ったもの・使ったもの</h2>
+<h2 id="用意したもの">用意したもの</h2>
 
-<p>音声入力にUSBマイクロフォンが必要なので、Raspberry Pi 3と併せて購入。他はありあわせで用意しました。<br />
-Raspberry Pi用のディスプレイを用意してもよいですが、今回はVNC server(Linux版リモートデスクトップ)を使います。</p>
+<p>音声入力にUSBマイクロフォンが必要なので、Raspberry Pi 3と併せて購入し、他はありあわせで用意しました。<br />
+Raspberry Pi用のディスプレイを用意してもよいですが、今回はVNC server (Linux版リモートデスクトップ) を使います。</p>
 
 <h3 id="買ったもの">買ったもの</h3>
 
 <ul>
-<li>Raspberry Pi 3 (4800円)
+<li>Raspberry Pi 3 (4,800円)
 
 <ul>
 <li><a href="https://www.amazon.co.jp/gp/product/B01D1FR2WE/">https://www.amazon.co.jp/gp/product/B01D1FR2WE/</a></li>
 </ul></li>
-<li>USBマイクロフォン (1600円)
+<li>USBマイクロフォン (1,600円)
 
 <ul>
 <li><a href="https://www.amazon.co.jp/gp/product/B0027WPY82">https://www.amazon.co.jp/gp/product/B0027WPY82</a></li>
@@ -131,29 +136,36 @@ Raspberry Pi用のディスプレイを用意してもよいですが、今回�
 <h3 id="ありあわせ">ありあわせ</h3>
 
 <ul>
-<li>スピーカー (普通のイヤホンでもOK)</li>
-<li>USBケーブル (電源用)</li>
+<li>Micro SDカード
+
+<ul>
+<li><a href="https://www.amazon.co.jp/dp/B00CDJNOX6/">https://www.amazon.co.jp/dp/B00CDJNOX6/</a></li>
+</ul></li>
+<li>Micro-USB (A-MicroB) ケーブル</li>
+<li>スピーカー</li>
 <li>LANケーブル</li>
 </ul>
 
-<h2 id="まずraspberry-piの起動">まずRaspberry Piの起動</h2>
+<h2 id="raspberry-pi-を起動する">Raspberry Pi を起動する</h2>
 
-<h3 id="手順">手順</h3>
+<h3 id="osイメージの準備">OSイメージの準備</h3>
+
+<p>以下の記事を参考に進めました。<br />
+<a href="http://qiita.com/onlyindreams/items/acc70807b69b43e176bf">Raspberry Pi 3にRaspbianをインストール(Mac OS X を使用)</a></p>
+
+<ul>
+<li>Rasbian Jessie は <code>2016-05-27</code> リリースのものを用いました</li>
+<li>ddコマンドのオプションで、ブロックサイズを大文字 (<code>bs=1M</code>) で指定しないと動作しませんでした</li>
+</ul>
+
+<h3 id="起動手順">起動手順</h3>
 
 <ol>
-<li>MicroSD, LAN, USBマイクロフォン, スピーカーを接続しく</li>
-<li>電源用としてUSBケーブルを挿す。するとBIOSが起動する。今回はOSであるRaspbian Jessieも自動で起動しました。</li>
+<li>MicroSD、LAN、 USBマイクロフォン、スピーカーを接続しておきます。</li>
+<li>電源用としてUSBケーブルを挿すとBIOSが起動します。今回はOSであるRaspbian Jessieも自動で起動しました。</li>
 </ol>
 
-<h3 id="os確認">OS確認</h3>
-
-<p>立ち上がったらOSを確認しておきます。</p>
-
-<pre><code>$ uname -a
-Linux raspberrypi 4.4.13-v7+ #894 SMP Mon Jun 13 13:13:27 BST 2016 armv7l GNU/Linux
-</code></pre>
-
-<h2 id="raspberry-pi-に諸々インストール">Raspberry Pi に諸々インストール</h2>
+<h2 id="必要なライブラリをインストール">必要なライブラリをインストール</h2>
 
 <p>AVSを利用するために必要なものを諸々インストールします。</p>
 
@@ -171,7 +183,9 @@ tightvncserver
 vi /home/pi/.config/tightvnc.desktop
 </code></pre>
 
-<pre><code class="language-sh:tightvnc.desktop">[Desktop Entry]
+<p>tightvnc.desktop</p>
+
+<pre><code class="language-sh">[Desktop Entry]
 Type=Application
 Name=TightVNC
 Exec=vncserver :1
@@ -221,7 +235,7 @@ source ~/.bashrc
 
 <h3 id="証明書生成スクリプトを実行">証明書生成スクリプトを実行</h3>
 
-<p>プロダクトID, シリアル番号, パスワードの3つを入力します。今回はパスワードは空のままで進めます。</p>
+<p>プロダクトID、シリアル番号、パスワードの3つを入力します。今回はパスワードは空のままで進めます。</p>
 
 <pre><code class="language-sh">/home/pi/Desktop/alexa-avs-raspberry-pi-master/samples/javaclient/generate.sh
 &gt; product ID: my_device
@@ -255,7 +269,7 @@ mvn exec:exec
 
 <h2 id="次回予告">次回予告</h2>
 
-<p>次回はAlexa skillを登録して使ってみようと思います。乞うご期待。Don&rsquo;t miss out!</p>
+<p>次回はAlexa Skillsを登録して使ってみようと思います。乞うご期待。Don&rsquo;t miss out!</p>
 
       
   <div id="share-this" class="col span_10">

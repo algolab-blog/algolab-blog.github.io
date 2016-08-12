@@ -10,40 +10,45 @@
     <atom:link href="http://blog.algolab.jp/post/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>6000円でRaspberry Pi 3からAlexa Voice Servicesを使う</title>
+      <title>Amazon Echoを6,000円で動かしてみる</title>
       <link>http://blog.algolab.jp/post/2016/08/11/raspberry-pi-alexa/</link>
       <pubDate>Thu, 11 Aug 2016 19:08:44 +0900</pubDate>
       
       <guid>http://blog.algolab.jp/post/2016/08/11/raspberry-pi-alexa/</guid>
       <description>
 
-&lt;p&gt;今回、Raspberry Pi 3からAlexa Voice Services (AVS) を利用できるようにしました。&lt;br /&gt;
+&lt;p&gt;&lt;a href=&#34;http://blog.algolab.jp/post/2016/07/29/mary-meeker-2016/&#34;&gt;音声は新しいパラダイムシフトになる 〜2016年度版メアリー・ミーカー氏レポートまとめ〜&lt;/a&gt; でも触れたように、次世代デバイスとしてAmazon Echoは注目するべき存在です。&lt;/p&gt;
+
+&lt;p&gt;しかしながら、日本では技適の関係で未だ使用できません。&lt;br /&gt;
+ただ、Alexa Voice Services (AVS) というものが公開されており、Amazon Echoを様々なデバイスで動作させることが可能です。&lt;/p&gt;
+
+&lt;p&gt;今回は、Raspberry Pi 3からAVSを利用できるようにしました。&lt;br /&gt;
 セットアップについては下記にある通りですが、低予算での最低限の手順をまとめてみます。
 &lt;a href=&#34;https://github.com/amzn/alexa-avs-raspberry-pi&#34;&gt;https://github.com/amzn/alexa-avs-raspberry-pi&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;完成したもの&#34;&gt;完成したもの&lt;/h2&gt;
 
-&lt;p&gt;いきなり動画ですが、こんな感じで動きます。英語で話かけると、リクエストを解釈して実行してくれたり、音声(英語)で応答してくれて面白いです。
+&lt;p&gt;いきなり動画ですが、こんな感じで動きます。英語で話かけると、リクエストを解釈して実行してくれたり、音声で応答してくれて面白いです。
 
 &lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
   &lt;iframe src=&#34;//www.youtube.com/embed/fWubPL5_YaU&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; allowfullscreen frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
  &lt;/div&gt;
 &lt;/p&gt;
 
-&lt;h2 id=&#34;買ったもの-使ったもの&#34;&gt;買ったもの・使ったもの&lt;/h2&gt;
+&lt;h2 id=&#34;用意したもの&#34;&gt;用意したもの&lt;/h2&gt;
 
-&lt;p&gt;音声入力にUSBマイクロフォンが必要なので、Raspberry Pi 3と併せて購入。他はありあわせで用意しました。&lt;br /&gt;
-Raspberry Pi用のディスプレイを用意してもよいですが、今回はVNC server(Linux版リモートデスクトップ)を使います。&lt;/p&gt;
+&lt;p&gt;音声入力にUSBマイクロフォンが必要なので、Raspberry Pi 3と併せて購入し、他はありあわせで用意しました。&lt;br /&gt;
+Raspberry Pi用のディスプレイを用意してもよいですが、今回はVNC server (Linux版リモートデスクトップ) を使います。&lt;/p&gt;
 
 &lt;h3 id=&#34;買ったもの&#34;&gt;買ったもの&lt;/h3&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Raspberry Pi 3 (4800円)
+&lt;li&gt;Raspberry Pi 3 (4,800円)
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/gp/product/B01D1FR2WE/&#34;&gt;https://www.amazon.co.jp/gp/product/B01D1FR2WE/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;USBマイクロフォン (1600円)
+&lt;li&gt;USBマイクロフォン (1,600円)
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/gp/product/B0027WPY82&#34;&gt;https://www.amazon.co.jp/gp/product/B0027WPY82&lt;/a&gt;&lt;/li&gt;
@@ -53,29 +58,36 @@ Raspberry Pi用のディスプレイを用意してもよいですが、今回�
 &lt;h3 id=&#34;ありあわせ&#34;&gt;ありあわせ&lt;/h3&gt;
 
 &lt;ul&gt;
-&lt;li&gt;スピーカー (普通のイヤホンでもOK)&lt;/li&gt;
-&lt;li&gt;USBケーブル (電源用)&lt;/li&gt;
+&lt;li&gt;Micro SDカード
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/dp/B00CDJNOX6/&#34;&gt;https://www.amazon.co.jp/dp/B00CDJNOX6/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Micro-USB (A-MicroB) ケーブル&lt;/li&gt;
+&lt;li&gt;スピーカー&lt;/li&gt;
 &lt;li&gt;LANケーブル&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;まずraspberry-piの起動&#34;&gt;まずRaspberry Piの起動&lt;/h2&gt;
+&lt;h2 id=&#34;raspberry-pi-を起動する&#34;&gt;Raspberry Pi を起動する&lt;/h2&gt;
 
-&lt;h3 id=&#34;手順&#34;&gt;手順&lt;/h3&gt;
+&lt;h3 id=&#34;osイメージの準備&#34;&gt;OSイメージの準備&lt;/h3&gt;
+
+&lt;p&gt;以下の記事を参考に進めました。&lt;br /&gt;
+&lt;a href=&#34;http://qiita.com/onlyindreams/items/acc70807b69b43e176bf&#34;&gt;Raspberry Pi 3にRaspbianをインストール(Mac OS X を使用)&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Rasbian Jessie は &lt;code&gt;2016-05-27&lt;/code&gt; リリースのものを用いました&lt;/li&gt;
+&lt;li&gt;ddコマンドのオプションで、ブロックサイズを大文字 (&lt;code&gt;bs=1M&lt;/code&gt;) で指定しないと動作しませんでした&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;起動手順&#34;&gt;起動手順&lt;/h3&gt;
 
 &lt;ol&gt;
-&lt;li&gt;MicroSD, LAN, USBマイクロフォン, スピーカーを接続しく&lt;/li&gt;
-&lt;li&gt;電源用としてUSBケーブルを挿す。するとBIOSが起動する。今回はOSであるRaspbian Jessieも自動で起動しました。&lt;/li&gt;
+&lt;li&gt;MicroSD、LAN、 USBマイクロフォン、スピーカーを接続しておきます。&lt;/li&gt;
+&lt;li&gt;電源用としてUSBケーブルを挿すとBIOSが起動します。今回はOSであるRaspbian Jessieも自動で起動しました。&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h3 id=&#34;os確認&#34;&gt;OS確認&lt;/h3&gt;
-
-&lt;p&gt;立ち上がったらOSを確認しておきます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ uname -a
-Linux raspberrypi 4.4.13-v7+ #894 SMP Mon Jun 13 13:13:27 BST 2016 armv7l GNU/Linux
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;raspberry-pi-に諸々インストール&#34;&gt;Raspberry Pi に諸々インストール&lt;/h2&gt;
+&lt;h2 id=&#34;必要なライブラリをインストール&#34;&gt;必要なライブラリをインストール&lt;/h2&gt;
 
 &lt;p&gt;AVSを利用するために必要なものを諸々インストールします。&lt;/p&gt;
 
@@ -93,7 +105,9 @@ tightvncserver
 vi /home/pi/.config/tightvnc.desktop
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh:tightvnc.desktop&#34;&gt;[Desktop Entry]
+&lt;p&gt;tightvnc.desktop&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;[Desktop Entry]
 Type=Application
 Name=TightVNC
 Exec=vncserver :1
@@ -143,7 +157,7 @@ source ~/.bashrc
 
 &lt;h3 id=&#34;証明書生成スクリプトを実行&#34;&gt;証明書生成スクリプトを実行&lt;/h3&gt;
 
-&lt;p&gt;プロダクトID, シリアル番号, パスワードの3つを入力します。今回はパスワードは空のままで進めます。&lt;/p&gt;
+&lt;p&gt;プロダクトID、シリアル番号、パスワードの3つを入力します。今回はパスワードは空のままで進めます。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;/home/pi/Desktop/alexa-avs-raspberry-pi-master/samples/javaclient/generate.sh
 &amp;gt; product ID: my_device
@@ -177,7 +191,7 @@ mvn exec:exec
 
 &lt;h2 id=&#34;次回予告&#34;&gt;次回予告&lt;/h2&gt;
 
-&lt;p&gt;次回はAlexa skillを登録して使ってみようと思います。乞うご期待。Don&amp;rsquo;t miss out!&lt;/p&gt;
+&lt;p&gt;次回はAlexa Skillsを登録して使ってみようと思います。乞うご期待。Don&amp;rsquo;t miss out!&lt;/p&gt;
 </description>
     </item>
     
