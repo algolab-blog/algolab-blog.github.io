@@ -11,10 +11,10 @@
     
     <item>
       <title>iOSで音声認識 〜Speech Frameworkを試す〜</title>
-      <link>http://blog.algolab.jp/post/2016/08/19/speech-framework/</link>
+      <link>http://blog.algolab.jp/post/2016/08/16/speech-framework/</link>
       <pubDate>Tue, 16 Aug 2016 19:34:57 +0900</pubDate>
       
-      <guid>http://blog.algolab.jp/post/2016/08/19/speech-framework/</guid>
+      <guid>http://blog.algolab.jp/post/2016/08/16/speech-framework/</guid>
       <description>
 
 &lt;p&gt;2016/08/12現在、まだβ版という位置づけですが、Apple謹製の音声認識エンジン (Speech Framework) が公開されています。今回は、下記のサンプルコードを動作させてみます。
@@ -43,7 +43,7 @@
 &lt;a href=&#34;https://developer.apple.com/library/prerelease/content/samplecode/SpeakToMe/Introduction/Intro.html&#34;&gt;https://developer.apple.com/library/prerelease/content/samplecode/SpeakToMe/Introduction/Intro.html&lt;/a&gt;&lt;/p&gt;
 
 &lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/19/speech-framework//speak_to_me.png&#34;/&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/16/speech-framework//speak_to_me.png&#34;/&gt;
   
 &lt;/figure&gt;
 
