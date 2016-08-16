@@ -6,8 +6,95 @@
     <description>Recent content on ALGO GEEKS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Thu, 11 Aug 2016 19:08:44 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 16 Aug 2016 17:34:11 +0900</lastBuildDate>
     <atom:link href="http://blog.algolab.jp/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Googleカレンダー解析ツール作りました 〜時間の使い方チェッカー〜</title>
+      <link>http://blog.algolab.jp/post/2016/08/16/calendar-report/</link>
+      <pubDate>Tue, 16 Aug 2016 17:34:11 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/08/16/calendar-report/</guid>
+      <description>
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/16/calendar-report//demo.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;タイトルの通りですが、時間の使い方チェッカーというツールを作りました (だいぶ前に作っていました)。&lt;br /&gt;
+&lt;a href=&#34;http://tools.algolab.jp/calendar_reports&#34;&gt;http://tools.algolab.jp/calendar_reports&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;ソースコードはGitHubに公開しています。&lt;br /&gt;
+&lt;a href=&#34;https://github.com/algolab-inc/algo-tools/&#34;&gt;https://github.com/algolab-inc/algo-tools/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;時間の使い方チェッカーとは&#34;&gt;時間の使い方チェッカーとは？&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Googleカレンダーを解析して可視化するツールです&lt;/li&gt;
+&lt;li&gt;タイトルを括弧で囲っているイベントのみを解析対象としています
+
+&lt;ul&gt;
+&lt;li&gt;(例) [仕事]&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;括弧を連続することで階層を表現することができます
+
+&lt;ul&gt;
+&lt;li&gt;(例) [仕事][営業]&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;データは一切保存しません (&amp;larr;大事)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;開発のきっかけ&#34;&gt;開発のきっかけ&lt;/h2&gt;
+
+&lt;p&gt;弊社では、仕事を(準)委任契約でいただくことがあり、作業時間ログをGoogleカレンダー上で管理していました。&lt;br /&gt;
+そして、月末に集計を手作業で行っていましたが、それを自動化したい、というのがきっかけです。&lt;/p&gt;
+
+&lt;h2 id=&#34;実際に使ってみて&#34;&gt;実際に使ってみて&lt;/h2&gt;
+
+&lt;p&gt;せっかくなので、全ての作業時間ログをGoogleカレンダー上で管理するということを数ヶ月間行ってみています。&lt;/p&gt;
+
+&lt;p&gt;作業時間ログを都度つける行動は習慣化しているため (常にカレンダーを立ち上げています) 入力作業に負担はなく、後から時間の使い方を振り返ることができるのでなかなか良い感じです。&lt;/p&gt;
+
+&lt;p&gt;具体的には、以下のような階層構造で管理を行っています。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;受託
+
+&lt;ul&gt;
+&lt;li&gt;プロジェクト1&lt;/li&gt;
+&lt;li&gt;プロジェクト2&lt;/li&gt;
+&lt;li&gt;&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;自社
+
+&lt;ul&gt;
+&lt;li&gt;サービスA&lt;/li&gt;
+&lt;li&gt;サービスB&lt;/li&gt;
+&lt;li&gt;&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;経営
+
+&lt;ul&gt;
+&lt;li&gt;経営計画&lt;/li&gt;
+&lt;li&gt;財務&lt;/li&gt;
+&lt;li&gt;&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;弊社は受託事業を行いながら自社サービスを開発しており、また筆者は代表を務めているので、時間の使い方としては、大きく「受託」「自社」「経営」の3つに分かれます。&lt;/p&gt;
+
+&lt;p&gt;その下にも幾つか階層を設けていますが、基本的にはこの3つの時間比率を毎月振り返るようにしています。&lt;/p&gt;
+
+&lt;p&gt;理想的には、経営 &amp;gt; 自社 &amp;gt; 受託 のような形なので、それに向かっているのかを確認し、どうすればより近づけるのか、をKPT形式でまとめていっています。&lt;/p&gt;
+
+&lt;h2 id=&#34;改修要望受付中&#34;&gt;改修要望受付中&lt;/h2&gt;
+
+&lt;p&gt;Googleカレンダーで時間管理をしている人は是非試してみてください！改修要望も随時受け付けています！&lt;br /&gt;
+&lt;a href=&#34;http://tools.algolab.jp/calendar_reports&#34;&gt;http://tools.algolab.jp/calendar_reports&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Amazon Echoを6,000円で自作する 〜Raspberry Pi 3 &#43; Alexa Voice Services (AVS)〜</title>
