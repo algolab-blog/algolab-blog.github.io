@@ -5,7 +5,7 @@
   
   <meta charset="UTF-8">
   <title>
-    Googleカレンダー解析ツール作りました 〜時間の使い方チェッカー〜 | ALGO GEEKS
+    iOSで音声認識 〜Speech Frameworkを試す〜 | ALGO GEEKS
   </title>
 
 
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.algolab.jp/post/2016/08/16/calendar-report/"/>
+  <link rel="canonical" href="http://blog.algolab.jp/post/2016/08/19/speech-framework/"/>
 
   
   <link rel="stylesheet" href="/css/sanitize.css">
@@ -89,7 +89,7 @@
   
   <main id="single" role="main">
     <div class="article-header">
-      <h1>Googleカレンダー解析ツール作りました 〜時間の使い方チェッカー〜</h1>
+      <h1>iOSで音声認識 〜Speech Frameworkを試す〜</h1>
       <div class="meta">
   
     <span>2016/08/16</span>
@@ -102,82 +102,68 @@
     <article>
       
 
+<p>2016/08/12現在、まだβ版という位置づけですが、Apple謹製の音声認識エンジン (Speech Framework) が公開されています。今回は、下記のサンプルコードを動作させてみます。
+<a href="https://developer.apple.com/library/prerelease/content/samplecode/SpeakToMe/Introduction/Intro.html">https://developer.apple.com/library/prerelease/content/samplecode/SpeakToMe/Introduction/Intro.html</a></p>
+
+<p>動作を確認するにはXcode 8.0以降、iOS 10.0 以降が必要なので、環境を整えるところから始めます。</p>
+
+<h2 id="apple-developer-program-へ登録">Apple Developer Program へ登録</h2>
+
+<p>諸々インストールするためには、Developer登録が必須なので、以下より登録を行います。
+<a href="https://developer.apple.com/programs/jp/">https://developer.apple.com/programs/jp/</a></p>
+
+<h2 id="xcode-8-betaをmacにインストール">Xcode 8 betaをMacにインストール</h2>
+
+<p>Macから下記ページへアクセスし、Xcode 8.0 betaをダウンロード、インストールします。<br />
+<a href="https://developer.apple.com/download/">https://developer.apple.com/download/</a></p>
+
+<h2 id="ios-10-betaをiphone-にインストール">iOS 10 betaをiPhone にインストール</h2>
+
+<p>iPhoneか下記ページへアクセスし、iOS 10 betaをダウンロード、インストールします。<br />
+<a href="https://developer.apple.com/download/">https://developer.apple.com/download/</a></p>
+
+<h2 id="サンプルコードをダウンロード">サンプルコードをダウンロード</h2>
+
+<p>下記ページより、サンプルコードをダウンロードします。
+<a href="https://developer.apple.com/library/prerelease/content/samplecode/SpeakToMe/Introduction/Intro.html">https://developer.apple.com/library/prerelease/content/samplecode/SpeakToMe/Introduction/Intro.html</a></p>
+
 <figure>
-  <img src="/images//post/2016/08/16/calendar-report//demo.png"/>
+  <img src="/images//post/2016/08/19/speech-framework//speak_to_me.png"/>
   
 </figure>
 
 
-<p>タイトルの通りですが、時間の使い方チェッカーというツールを作りました (だいぶ前に作っていました)。<br />
-<a href="http://tools.algolab.jp/calendar_reports">http://tools.algolab.jp/calendar_reports</a></p>
+<h2 id="署名の確認">署名の確認</h2>
 
-<p>ソースコードはGitHubに公開しています。<br />
-<a href="https://github.com/algolab-inc/algo-tools/">https://github.com/algolab-inc/algo-tools/</a></p>
+<p>サンプルコードを開き、<code>TARGETS -&gt; General -&gt; Signing</code>にDeveloper登録を行っているTeamが選択されているか確認します。
+(ここが正しく設定されていないと実機でのビルドに失敗します)</p>
 
-<h2 id="時間の使い方チェッカーとは">時間の使い方チェッカーとは？</h2>
+<h2 id="日本語対応">日本語対応</h2>
 
-<ul>
-<li>Googleカレンダーを解析して可視化するツールです</li>
-<li>タイトルを括弧で囲っているイベントのみを解析対象としています
+<p><code>ViewController.swift</code>の15行目、言語指定のコードを<code>en-US</code>から<code>ja-JP</code>に書き換えます。</p>
 
-<ul>
-<li>(例) [仕事]</li>
-</ul></li>
-<li>括弧を連続することで階層を表現することができます
+<pre><code class="language-swift">private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: &quot;ja-JP&quot;))!
+</code></pre>
 
-<ul>
-<li>(例) [仕事][営業]</li>
-</ul></li>
-<li>データは一切保存しません (&larr;大事)</li>
-</ul>
+<h2 id="認識精度を確認">認識精度を確認</h2>
 
-<h2 id="開発のきっかけ">開発のきっかけ</h2>
+<p>実機で動作させ、認識精度を確認してみます。まず、「吾輩は猫である」を認識させてみます。</p>
 
-<p>弊社では、仕事を(準)委任契約でいただくことがあり、作業時間ログをGoogleカレンダー上で管理していました。<br />
-そして、月末に集計を手作業で行っていましたが、それを自動化したい、というのがきっかけです。</p>
+<blockquote>
+<p>吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。</p>
+</blockquote>
 
-<h2 id="実際に使ってみて">実際に使ってみて</h2>
+<p>認識結果がこちら。</p>
 
-<p>せっかくなので、全ての作業時間ログをGoogleカレンダー上で管理するということを数ヶ月間行ってみています。</p>
+<blockquote>
+<p>吾輩は猫である。名前はまだない。どこで生まれたかとんと見当がつかん。何でも薄暗いじめじめした所でニャンニャン泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。</p>
+</blockquote>
 
-<p>作業時間ログを都度つける行動は習慣化しているため (常にカレンダーを立ち上げています) 入力作業に負担はなく、後から時間の使い方を振り返ることができるのでなかなか良い感じです。</p>
+<p>ほぼ正解と言っていい認識精度です、すごい！</p>
 
-<p>具体的には、以下のような階層構造で管理を行っています。</p>
+<h2 id="次回予告">次回予告</h2>
 
-<ul>
-<li>受託
-
-<ul>
-<li>プロジェクト1</li>
-<li>プロジェクト2</li>
-<li>&hellip;</li>
-</ul></li>
-<li>自社
-
-<ul>
-<li>サービスA</li>
-<li>サービスB</li>
-<li>&hellip;</li>
-</ul></li>
-<li>経営
-
-<ul>
-<li>経営計画</li>
-<li>財務</li>
-<li>&hellip;</li>
-</ul></li>
-</ul>
-
-<p>弊社は受託事業を行いながら自社サービスを開発しており、また筆者は代表を務めているので、時間の使い方としては、大きく「受託」「自社」「経営」の3つに分かれます。</p>
-
-<p>その下にも幾つか階層を設けていますが、基本的にはこの3つの時間比率を毎月振り返るようにしています。</p>
-
-<p>理想的には、経営 &gt; 自社 &gt; 受託 のような形なので、それに向かっているのかを確認し、どうすればより近づけるのか、をKPT形式でまとめていっています。</p>
-
-<h2 id="いかがでしたでしょうか">いかがでしたでしょうか</h2>
-
-<p>Googleカレンダーで時間管理をしている人は是非試してみてください！ 改修要望も随時受け付けています。<br />
-<a href="http://tools.algolab.jp/calendar_reports">http://tools.algolab.jp/calendar_reports</a></p>
+<p>次回はサンプルコードの中身を追ってみようと思います。</p>
 
       
   <div id="share-this" class="col span_10">
@@ -216,10 +202,8 @@
   
   <nav class="pagination-single">
     
-      <span class="previous">&larr; <a href="http://blog.algolab.jp/post/2016/08/11/raspberry-pi-alexa/" rel="prev">Amazon Echoを6,000円で自作する 〜Raspberry Pi 3 &#43; Alexa Voice Services (AVS)〜</a></span>
+      <span class="previous">&larr; <a href="http://blog.algolab.jp/post/2016/08/16/calendar-report/" rel="prev">Googleカレンダー解析ツール作りました 〜時間の使い方チェッカー〜</a></span>
     
-    
-      <span class="next"><a href="http://blog.algolab.jp/post/2016/08/19/speech-framework/" rel="next">iOSで音声認識 〜Speech Frameworkを試す〜</a> &rarr;</span>
     
   </nav>
   
