@@ -17,7 +17,7 @@
       <guid>http://blog.algolab.jp/post/2016/08/16/speech-framework/</guid>
       <description>
 
-&lt;p&gt;2016/08/12現在、まだβ版という位置づけですが、Apple謹製の音声認識エンジン (Speech Framework) が公開されています。今回は、下記のサンプルコードを動作させてみます。
+&lt;p&gt;2016/08/16現在、まだβ版という位置づけですが、Apple謹製の音声認識エンジン (Speech Framework) が公開されています。今回は、下記のサンプルコードを動作させてみます。
 &lt;a href=&#34;https://developer.apple.com/library/prerelease/content/samplecode/SpeakToMe/Introduction/Intro.html&#34;&gt;https://developer.apple.com/library/prerelease/content/samplecode/SpeakToMe/Introduction/Intro.html&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;動作を確認するにはXcode 8.0以降、iOS 10.0 以降が必要なので、環境を整えるところから始めます。&lt;/p&gt;
