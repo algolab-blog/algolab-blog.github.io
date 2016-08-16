@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="/css/highlight_monokai.css">
   <link rel="stylesheet" href="/css/theme.css">
   <link rel="stylesheet" href="/css/custom.css">
-  
+
   
   <link href="http://blog.algolab.jp/index.xml" rel="alternate" type="application/rss+xml" title="ALGO GEEKS" />
   <link href="http://blog.algolab.jp/index.xml" rel="feed" type="application/rss+xml" title="ALGO GEEKS" />
@@ -62,11 +62,18 @@
   
   <header role="banner">
     <div class="row gutters">
-      <div id="site-title" class="col span_6">
-        <h1><a href="http://blog.algolab.jp/">ALGO GEEKS</a></h1>
-        <h2>株式会社アルゴラボ BLOG</h2>
+      <div id="site-title" class="col span_8">
+        <h1>
+          <a href="http://blog.algolab.jp/">ALGO GEEKS</a>
+        </h1>
+        
+          <h2>
+            <span>株式会社アルゴラボBLOG。</span>
+            <span id="doraemon-birthday"></span>
+          </h2>
+        
       </div>
-      <div id="social" class="col span_6">
+      <div id="social" class="col span_4">
         <ul>
           <li><a href="/about">ABOUT</a></li>
           
@@ -127,7 +134,7 @@
 
 <p>インスタンスが起動したら、SSHでログインのうえ、まずパッケージを更新します。</p>
 
-<pre><code>sudo apt-get update
+<pre><code class="language-sh">sudo apt-get update
 sudo apt-get upgrade -y
 </code></pre>
 
@@ -138,7 +145,7 @@ sudo apt-get upgrade -y
 
 <p>既存のドライバ (Noveau) を無効にします。</p>
 
-<pre><code>echo -e &quot;blacklist nouveau\nblacklist lbm-nouveau\noptions nouveau modeset=0\nalias nouveau off\nalias lbm-nouveau off\n&quot; | sudo tee /etc/modprobe.d/blacklist-nouveau.conf
+<pre><code class="language-sh">echo -e &quot;blacklist nouveau\nblacklist lbm-nouveau\noptions nouveau modeset=0\nalias nouveau off\nalias lbm-nouveau off\n&quot; | sudo tee /etc/modprobe.d/blacklist-nouveau.conf
 echo options nouveau modeset=0 | sudo tee -a /etc/modprobe.d/nouveau-kms.conf
 sudo update-initramfs -u
 sudo reboot
@@ -146,14 +153,14 @@ sudo reboot
 
 <p>必要なカーネルモジュールをインストールします。</p>
 
-<pre><code>sudo apt-get install -y linux-image-extra-virtual
+<pre><code class="language-sh">sudo apt-get install -y linux-image-extra-virtual
 sudo reboot
 sudo apt-get install -y linux-source linux-headers-`uname -r`
 </code></pre>
 
 <p>CUDA7.5をインストールします。</p>
 
-<pre><code>wget http://developer.download.nvidia.com/compute/cuda/7.5/Prod/local_installers/cuda_7.5.18_linux.run
+<pre><code class="language-sh">wget http://developer.download.nvidia.com/compute/cuda/7.5/Prod/local_installers/cuda_7.5.18_linux.run
 chmod +x cuda_7.5.18_linux.run
 ./cuda_7.5.18_linux.run -extract=`pwd`/nvidia_installers
 cd nvidia_installers
@@ -164,7 +171,7 @@ sudo ./cuda-linux64-rel-7.5.18-19867135.run
 
 <p>途中でシンボリックリンクを作成するか聞かれますが、yesを選択します。</p>
 
-<pre><code>Would you like to create a symbolic link /usr/local/cuda pointing to /usr/local/cuda-7.5? ((y)es/(n)o/(a)bort) [ default is yes ]: y
+<pre><code class="language-sh">Would you like to create a symbolic link /usr/local/cuda pointing to /usr/local/cuda-7.5? ((y)es/(n)o/(a)bort) [ default is yes ]: y
 </code></pre>
 
 <p>CUDAのパスを環境変数に追加します。</p>
@@ -187,7 +194,7 @@ source ~/.bashrc
 
 <p>ダウンロードしたファイルをサーバへ転送後、サーバ上で展開します。</p>
 
-<pre><code>tar -xzf cudnn-7.5-linux-x64-v5.0-ga.tgz
+<pre><code class="language-sh">tar -xzf cudnn-7.5-linux-x64-v5.0-ga.tgz
 sudo cp cuda/lib64/libcudnn* /usr/local/cuda-7.5/lib64
 sudo cp cuda/include/cudnn.h /usr/local/cuda/include
 </code></pre>
@@ -197,7 +204,7 @@ sudo cp cuda/include/cudnn.h /usr/local/cuda/include
 <p>公式に従って、インストールします。<br />
 <a href="http://torch.ch/docs/getting-started.html">http://torch.ch/docs/getting-started.html</a></p>
 
-<pre><code>sudo apt-get install -y git
+<pre><code class="language-sh">sudo apt-get install -y git
 git clone https://github.com/torch/distro.git ~/torch --recursive
 cd ~/torch; bash install-deps;
 ./install.sh
@@ -205,7 +212,7 @@ cd ~/torch; bash install-deps;
 
 <p>環境変数を.bashrcに書き込むか聞かれますが、yesを選択します。</p>
 
-<pre><code>Do you want to automatically prepend the Torch install location
+<pre><code class="language-sh">Do you want to automatically prepend the Torch install location
 to PATH and LD_LIBRARY_PATH in your /home/ubuntu/.bashrc? (yes/no)
 [yes] &gt;&gt;&gt; 
 yes
@@ -213,12 +220,12 @@ yes
 
 <p>環境変数を反映します。</p>
 
-<pre><code>source ~/.bashrc
+<pre><code class="language-sh">source ~/.bashrc
 </code></pre>
 
 <p>最後に、CUDAおよびcuDNNを使うためのLuaライブラリをインストールします。</p>
 
-<pre><code>luarocks install cutorch
+<pre><code class="language-sh">luarocks install cutorch
 luarocks install cunn
 luarocks install cunnx
 luarocks install https://raw.githubusercontent.com/soumith/cudnn.torch/master/cudnn-scm-1.rockspec
@@ -282,6 +289,17 @@ luarocks install https://raw.githubusercontent.com/soumith/cudnn.torch/master/cu
 
 
 </div>
+
+<script src="/js/jquery-3.1.0.min.js"></script>
+<script>
+  var today = new Date();
+  var birthday = new Date('2112-09-03');
+  var diff = Math.ceil((birthday - today) / 86400000).toString();
+  var diff = diff.split(/(?=(?:\d{3})+$)/).join();
+  $("#doraemon-birthday").text("ドラえもん誕生まであと"+diff+"日。");
+console.log(diff);
+</script>
+
 
 <script src="/js/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>

@@ -10,7 +10,7 @@
     <atom:link href="http://blog.algolab.jp/post/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Amazon Echoを6,000円で動かしてみる</title>
+      <title>Amazon Echoを6,000円で自作する 〜Raspberry Pi 3 &#43; Alexa Voice Services (AVS)〜</title>
       <link>http://blog.algolab.jp/post/2016/08/11/raspberry-pi-alexa/</link>
       <pubDate>Thu, 11 Aug 2016 19:08:44 +0900</pubDate>
       
@@ -37,7 +37,7 @@
 
 &lt;h2 id=&#34;用意したもの&#34;&gt;用意したもの&lt;/h2&gt;
 
-&lt;p&gt;音声入力にUSBマイクロフォンが必要なので、Raspberry Pi 3と併せて購入し、他はありあわせで用意しました。&lt;br /&gt;
+&lt;p&gt;音声入力にUSBマイクロフォンが必要なので、Raspberry Pi 3と併せて購入。他はありあわせで用意しました。&lt;br /&gt;
 Raspberry Pi用のディスプレイを用意してもよいですが、今回はVNC server (Linux版リモートデスクトップ) を使います。&lt;/p&gt;
 
 &lt;h3 id=&#34;買ったもの&#34;&gt;買ったもの&lt;/h3&gt;
@@ -76,8 +76,8 @@ Raspberry Pi用のディスプレイを用意してもよいですが、今回�
 &lt;a href=&#34;http://qiita.com/onlyindreams/items/acc70807b69b43e176bf&#34;&gt;Raspberry Pi 3にRaspbianをインストール(Mac OS X を使用)&lt;/a&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Rasbian Jessie は &lt;code&gt;2016-05-27&lt;/code&gt; リリースのものを用いました&lt;/li&gt;
-&lt;li&gt;ddコマンドのオプションで、ブロックサイズを大文字 (&lt;code&gt;bs=1M&lt;/code&gt;) で指定しないと動作しませんでした&lt;/li&gt;
+&lt;li&gt;Rasbian Jessie は &lt;code&gt;2016-05-27&lt;/code&gt; リリースのものを用いました。&lt;/li&gt;
+&lt;li&gt;ddコマンドのオプションで、ブロックサイズを大文字 (&lt;code&gt;bs=1M&lt;/code&gt;) で指定&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&#34;起動手順&#34;&gt;起動手順&lt;/h3&gt;
@@ -90,10 +90,6 @@ Raspberry Pi用のディスプレイを用意してもよいですが、今回�
 &lt;h2 id=&#34;必要なライブラリをインストール&#34;&gt;必要なライブラリをインストール&lt;/h2&gt;
 
 &lt;p&gt;AVSを利用するために必要なものを諸々インストールします。&lt;/p&gt;
-
-&lt;h3 id=&#34;sshとopenssl&#34;&gt;SSHとOpenSSL&lt;/h3&gt;
-
-&lt;p&gt;今回、デフォルトで設定されてたので、設定不要でした。&lt;/p&gt;
 
 &lt;h3 id=&#34;vnc-serverのインストール&#34;&gt;VNC Serverのインストール&lt;/h3&gt;
 
@@ -167,7 +163,7 @@ source ~/.bashrc
 
 &lt;h3 id=&#34;クライアントidとclientsecretを発行&#34;&gt;クライアントIDとClientSecretを発行&lt;/h3&gt;
 
-&lt;p&gt;ここは &lt;a href=&#34;https://github.com/amzn/alexa-avs-raspberry-pi#6---getting-started-with-alexa-voice-service&#34;&gt;公式Doc&lt;/a&gt; の画像のとおり進めればよいです。&lt;/p&gt;
+&lt;p&gt;ここは &lt;a href=&#34;https://github.com/amzn/alexa-avs-raspberry-pi#user-content-6---getting-started-with-alexa-voice-service&#34;&gt;公式Doc&lt;/a&gt; の画像のとおり進めればよいです。&lt;/p&gt;
 
 &lt;h3 id=&#34;サーバとクライアントを起動&#34;&gt;サーバとクライアントを起動&lt;/h3&gt;
 
@@ -187,7 +183,7 @@ export DISPLAY=:1.0
 mvn exec:exec
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;GUIに出てくるURLにアクセスしてデバイスの登録になります。ここも &lt;a href=&#34;https://github.com/amzn/alexa-avs-raspberry-pi#10---obtain-authorization-from-login-with-amazon&#34;&gt;公式Doc&lt;/a&gt; の画像のとおりです。以上が終わると、AVSを利用できます。&lt;/p&gt;
+&lt;p&gt;GUIに出てくるURLにアクセスしてデバイスの登録になります。ここも &lt;a href=&#34;https://github.com/amzn/alexa-avs-raspberry-pi#user-content-10---obtain-authorization-from-login-with-amazon&#34;&gt;公式Doc&lt;/a&gt; の画像のとおりです。以上が終わると、AVSを利用できます。&lt;/p&gt;
 
 &lt;h2 id=&#34;次回予告&#34;&gt;次回予告&lt;/h2&gt;
 
@@ -242,7 +238,7 @@ mvn exec:exec
 &lt;p&gt;これが画像を見分けるメカニズムで、これを機械に代替させようというのが機械学習における画像認識の分野です。&lt;br /&gt;
 そして、機械学習の文脈では、前半を「特徴抽出」、後半を「分類」と呼びます。&lt;/p&gt;
 
-&lt;h2 id=&#34;画像認識の大変さ&#34;&gt;画像認識の大変さ&lt;/h2&gt;
+&lt;h2 id=&#34;画像認識の難しさ&#34;&gt;画像認識の難しさ&lt;/h2&gt;
 
 &lt;p&gt;さて、冒頭に出した問題ですが、以下のようなグループ分けだったらどうでしょう。&lt;/p&gt;
 
@@ -342,7 +338,7 @@ mvn exec:exec
 
 &lt;p&gt;インスタンスが起動したら、SSHでログインのうえ、まずパッケージを更新します。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;sudo apt-get update
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo apt-get update
 sudo apt-get upgrade -y
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -353,7 +349,7 @@ sudo apt-get upgrade -y
 
 &lt;p&gt;既存のドライバ (Noveau) を無効にします。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;echo -e &amp;quot;blacklist nouveau\nblacklist lbm-nouveau\noptions nouveau modeset=0\nalias nouveau off\nalias lbm-nouveau off\n&amp;quot; | sudo tee /etc/modprobe.d/blacklist-nouveau.conf
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;echo -e &amp;quot;blacklist nouveau\nblacklist lbm-nouveau\noptions nouveau modeset=0\nalias nouveau off\nalias lbm-nouveau off\n&amp;quot; | sudo tee /etc/modprobe.d/blacklist-nouveau.conf
 echo options nouveau modeset=0 | sudo tee -a /etc/modprobe.d/nouveau-kms.conf
 sudo update-initramfs -u
 sudo reboot
@@ -361,14 +357,14 @@ sudo reboot
 
 &lt;p&gt;必要なカーネルモジュールをインストールします。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;sudo apt-get install -y linux-image-extra-virtual
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo apt-get install -y linux-image-extra-virtual
 sudo reboot
 sudo apt-get install -y linux-source linux-headers-`uname -r`
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;CUDA7.5をインストールします。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;wget http://developer.download.nvidia.com/compute/cuda/7.5/Prod/local_installers/cuda_7.5.18_linux.run
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;wget http://developer.download.nvidia.com/compute/cuda/7.5/Prod/local_installers/cuda_7.5.18_linux.run
 chmod +x cuda_7.5.18_linux.run
 ./cuda_7.5.18_linux.run -extract=`pwd`/nvidia_installers
 cd nvidia_installers
@@ -379,7 +375,7 @@ sudo ./cuda-linux64-rel-7.5.18-19867135.run
 
 &lt;p&gt;途中でシンボリックリンクを作成するか聞かれますが、yesを選択します。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;Would you like to create a symbolic link /usr/local/cuda pointing to /usr/local/cuda-7.5? ((y)es/(n)o/(a)bort) [ default is yes ]: y
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;Would you like to create a symbolic link /usr/local/cuda pointing to /usr/local/cuda-7.5? ((y)es/(n)o/(a)bort) [ default is yes ]: y
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;CUDAのパスを環境変数に追加します。&lt;/p&gt;
@@ -402,7 +398,7 @@ source ~/.bashrc
 
 &lt;p&gt;ダウンロードしたファイルをサーバへ転送後、サーバ上で展開します。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;tar -xzf cudnn-7.5-linux-x64-v5.0-ga.tgz
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;tar -xzf cudnn-7.5-linux-x64-v5.0-ga.tgz
 sudo cp cuda/lib64/libcudnn* /usr/local/cuda-7.5/lib64
 sudo cp cuda/include/cudnn.h /usr/local/cuda/include
 &lt;/code&gt;&lt;/pre&gt;
@@ -412,7 +408,7 @@ sudo cp cuda/include/cudnn.h /usr/local/cuda/include
 &lt;p&gt;公式に従って、インストールします。&lt;br /&gt;
 &lt;a href=&#34;http://torch.ch/docs/getting-started.html&#34;&gt;http://torch.ch/docs/getting-started.html&lt;/a&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;sudo apt-get install -y git
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo apt-get install -y git
 git clone https://github.com/torch/distro.git ~/torch --recursive
 cd ~/torch; bash install-deps;
 ./install.sh
@@ -420,7 +416,7 @@ cd ~/torch; bash install-deps;
 
 &lt;p&gt;環境変数を.bashrcに書き込むか聞かれますが、yesを選択します。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;Do you want to automatically prepend the Torch install location
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;Do you want to automatically prepend the Torch install location
 to PATH and LD_LIBRARY_PATH in your /home/ubuntu/.bashrc? (yes/no)
 [yes] &amp;gt;&amp;gt;&amp;gt; 
 yes
@@ -428,12 +424,12 @@ yes
 
 &lt;p&gt;環境変数を反映します。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;source ~/.bashrc
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;source ~/.bashrc
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;最後に、CUDAおよびcuDNNを使うためのLuaライブラリをインストールします。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;luarocks install cutorch
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;luarocks install cutorch
 luarocks install cunn
 luarocks install cunnx
 luarocks install https://raw.githubusercontent.com/soumith/cudnn.torch/master/cudnn-scm-1.rockspec
@@ -490,7 +486,7 @@ TensorFlowで実装しており、ソースコードは下記に公開してい�
 
 &lt;p&gt;はじめにソースコードをダウンロードします。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git clone https://github.com/algolab-inc/tf-dqn-simple.git
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;git clone https://github.com/algolab-inc/tf-dqn-simple.git
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;次に、動作のためにTensorFlowとMatplotlibが必要なので、インストールします。&lt;/p&gt;
@@ -501,14 +497,14 @@ TensorFlowで実装しており、ソースコードは下記に公開してい�
 
 &lt;p&gt;Matolotlibはpipでインストールします。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;pip install matplotlib
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;pip install matplotlib
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;学習&#34;&gt;学習&lt;/h3&gt;
 
 &lt;p&gt;環境が整ったら、ソースコードのディレクトリに移動して、train.pyを叩くと学習が始まります。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;cd tf-dqn-simple
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;cd tf-dqn-simple
 python train.py
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -523,7 +519,7 @@ EPOCH: 001/999 | WIN: 002 | LOSS: 0.0447 | Q_MAX: 0.0013&lt;br /&gt;
 &lt;p&gt;数分ほどで学習が終わったかと思います。&lt;br /&gt;
 では学習したモデルでテストしてみましょう。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;python test.py
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;python test.py
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;blockquote&gt;
@@ -647,7 +643,7 @@ WIN: 002/002 (100.0%)&lt;br /&gt;
 &lt;p&gt;筆者は下記の環境をベースに、追加で必要なLuaモジュールをインストール (更新) しました。&lt;br /&gt;
 &lt;a href=&#34;http://blog.algolab.jp/post/2016/08/03/torch-aws-gpu-ubuntu/&#34;&gt;TorchをAWSのGPUインスタンス (Ubuntu 14.04) で動かす&lt;/a&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;luarocks install nn
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;luarocks install nn
 luarocks install rnn
 luarocks install penlight
 &lt;/code&gt;&lt;/pre&gt;
@@ -657,7 +653,7 @@ luarocks install penlight
 &lt;p&gt;データセットは、下記で公開されている映画の台詞コーパスを用います。&lt;br /&gt;
 &lt;a href=&#34;http://www.mpi-sws.org/~cristian/Cornell_Movie-Dialogs_Corpus.html&#34;&gt;http://www.mpi-sws.org/~cristian/Cornell_Movie-Dialogs_Corpus.html&lt;/a&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git clone https://github.com/macournoyer/neuralconvo.git
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;git clone https://github.com/macournoyer/neuralconvo.git
 cd neuralconvo/data
 wget http://www.mpi-sws.org/~cristian/data/cornell_movie_dialogs_corpus.zip
 unzip cornell_movie_dialogs_corpus.zip
@@ -668,7 +664,7 @@ mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
 
 &lt;p&gt;準備が整ったら学習をしてみます。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;th train.lua --cuda --dataset 50000 --hiddenSize 1000
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;th train.lua --cuda --dataset 50000 --hiddenSize 1000
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;学習時間は4日弱で、エラー率の推移は下記となりました。&lt;/p&gt;
@@ -683,7 +679,7 @@ mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
 
 &lt;p&gt;学習したモデルを用いて実際に会話をしてみました。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;th eval.lua
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;th eval.lua
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;blockquote&gt;

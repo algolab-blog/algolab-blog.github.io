@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="/css/highlight_monokai.css">
   <link rel="stylesheet" href="/css/theme.css">
   <link rel="stylesheet" href="/css/custom.css">
-  
+
   
   <link href="http://blog.algolab.jp/index.xml" rel="alternate" type="application/rss+xml" title="ALGO GEEKS" />
   <link href="http://blog.algolab.jp/index.xml" rel="feed" type="application/rss+xml" title="ALGO GEEKS" />
@@ -62,11 +62,18 @@
   
   <header role="banner">
     <div class="row gutters">
-      <div id="site-title" class="col span_6">
-        <h1><a href="http://blog.algolab.jp/">ALGO GEEKS</a></h1>
-        <h2>株式会社アルゴラボ BLOG</h2>
+      <div id="site-title" class="col span_8">
+        <h1>
+          <a href="http://blog.algolab.jp/">ALGO GEEKS</a>
+        </h1>
+        
+          <h2>
+            <span>株式会社アルゴラボBLOG。</span>
+            <span id="doraemon-birthday"></span>
+          </h2>
+        
       </div>
-      <div id="social" class="col span_6">
+      <div id="social" class="col span_4">
         <ul>
           <li><a href="/about">ABOUT</a></li>
           
@@ -87,13 +94,6 @@
   
     <span>2016/07/30</span>
   
-  
-    <span>|</span>
-    
-      <a href="/tags/seq2seq">#seq2seq</a>&nbsp;
-    
-      <a href="/tags/bot">#bot</a>&nbsp;
-    
   
   <span>|&nbsp;Shinpei Kawahito</span>
 </div>
@@ -140,7 +140,7 @@
 <p>筆者は下記の環境をベースに、追加で必要なLuaモジュールをインストール (更新) しました。<br />
 <a href="http://blog.algolab.jp/post/2016/08/03/torch-aws-gpu-ubuntu/">TorchをAWSのGPUインスタンス (Ubuntu 14.04) で動かす</a></p>
 
-<pre><code>luarocks install nn
+<pre><code class="language-sh">luarocks install nn
 luarocks install rnn
 luarocks install penlight
 </code></pre>
@@ -150,7 +150,7 @@ luarocks install penlight
 <p>データセットは、下記で公開されている映画の台詞コーパスを用います。<br />
 <a href="http://www.mpi-sws.org/~cristian/Cornell_Movie-Dialogs_Corpus.html">http://www.mpi-sws.org/~cristian/Cornell_Movie-Dialogs_Corpus.html</a></p>
 
-<pre><code>git clone https://github.com/macournoyer/neuralconvo.git
+<pre><code class="language-sh">git clone https://github.com/macournoyer/neuralconvo.git
 cd neuralconvo/data
 wget http://www.mpi-sws.org/~cristian/data/cornell_movie_dialogs_corpus.zip
 unzip cornell_movie_dialogs_corpus.zip
@@ -161,7 +161,7 @@ mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
 
 <p>準備が整ったら学習をしてみます。</p>
 
-<pre><code>th train.lua --cuda --dataset 50000 --hiddenSize 1000
+<pre><code class="language-sh">th train.lua --cuda --dataset 50000 --hiddenSize 1000
 </code></pre>
 
 <p>学習時間は4日弱で、エラー率の推移は下記となりました。</p>
@@ -176,7 +176,7 @@ mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
 
 <p>学習したモデルを用いて実際に会話をしてみました。</p>
 
-<pre><code>th eval.lua
+<pre><code class="language-sh">th eval.lua
 </code></pre>
 
 <blockquote>
@@ -269,6 +269,17 @@ mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
 
 
 </div>
+
+<script src="/js/jquery-3.1.0.min.js"></script>
+<script>
+  var today = new Date();
+  var birthday = new Date('2112-09-03');
+  var diff = Math.ceil((birthday - today) / 86400000).toString();
+  var diff = diff.split(/(?=(?:\d{3})+$)/).join();
+  $("#doraemon-birthday").text("ドラえもん誕生まであと"+diff+"日。");
+console.log(diff);
+</script>
+
 
 <script src="/js/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
