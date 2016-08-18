@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>機械学習トレーニング on ALGO GEEKS</title>
-    <link>http://blog.algolab.jp/tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92%E3%83%88%E3%83%AC%E3%83%BC%E3%83%8B%E3%83%B3%E3%82%B0/</link>
-    <description>Recent content in 機械学習トレーニング on ALGO GEEKS</description>
+    <title>Ai Training on ALGO GEEKS</title>
+    <link>http://blog.algolab.jp/tags/ai-training/</link>
+    <description>Recent content in Ai Training on ALGO GEEKS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <lastBuildDate>Sun, 07 Aug 2016 15:46:48 +0900</lastBuildDate>
-    <atom:link href="http://blog.algolab.jp/tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92%E3%83%88%E3%83%AC%E3%83%BC%E3%83%8B%E3%83%B3%E3%82%B0/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://blog.algolab.jp/tags/ai-training/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>ディープラーニング徹底入門 〜AIトレーニング第1回〜</title>
