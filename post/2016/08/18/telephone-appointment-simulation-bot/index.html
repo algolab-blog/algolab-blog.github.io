@@ -5,7 +5,7 @@
   
   <meta charset="UTF-8">
   <title>
-    Googleカレンダー解析ツール作りました 〜時間の使い方チェッカー〜 | ALGO GEEKS
+    テレアポ模擬トレーニングBot 〜コミュニケーション教育ツールとしてのチャットボットの活用可能性〜 | ALGO GEEKS
   </title>
 
 
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.algolab.jp/post/2016/08/16/calendar-report/"/>
+  <link rel="canonical" href="http://blog.algolab.jp/post/2016/08/18/telephone-appointment-simulation-bot/"/>
 
   
   <link rel="stylesheet" href="/css/sanitize.css">
@@ -89,10 +89,10 @@
   
   <main id="single" role="main">
     <div class="article-header">
-      <h1>Googleカレンダー解析ツール作りました 〜時間の使い方チェッカー〜</h1>
+      <h1>テレアポ模擬トレーニングBot 〜コミュニケーション教育ツールとしてのチャットボットの活用可能性〜</h1>
       <div class="meta">
   
-    <span>2016/08/16</span>
+    <span>2016/08/18</span>
   
   
   <span>|&nbsp;Shinpei Kawahito</span>
@@ -103,79 +103,82 @@
       
 
 <figure>
-  <img src="/images//post/2016/08/16/calendar-report//demo.png"/>
+  <img src="/images//post/2016/08/18/telephone-appointment-simulation-bot//cover.png"/>
   
 </figure>
 
 
-<p>タイトルの通りですが、時間の使い方チェッカーというツールを作りました (だいぶ前に作っていました)。<br />
-<a href="http://tools.algolab.jp/calendar_reports">http://tools.algolab.jp/calendar_reports</a></p>
+<p>LINEがBOT API、FacebookがMessenger Platformを発表してから数ヶ月たちました。<br />
+これまでに数々のチャットボットがリリースされていますが、まだ活用方法を模索している段階かと思います。</p>
 
-<p>ソースコードはGitHubに公開しています。<br />
-<a href="https://github.com/algolab-inc/algo-tools/">https://github.com/algolab-inc/algo-tools/</a></p>
+<p>その中で、コミュニケーション教育ツールとしての活用可能性があるのではないかと考え、実験的に「テレアポ模擬トレーニングBot」を <a href="http://www.torix-corp.com/">TORiX</a> さんと共同開発させていただきました。</p>
 
-<h2 id="時間の使い方チェッカーとは">時間の使い方チェッカーとは？</h2>
+<p>今回は、このBotの概要と、開発に至った経緯について書きたいと思います。</p>
 
-<ul>
-<li>Googleカレンダーを解析して可視化するツールです</li>
-<li>タイトルを括弧で囲っているイベントのみを解析対象としています
+<h2 id="テレアポ模擬トレーニングbotとは">テレアポ模擬トレーニングBotとは</h2>
 
-<ul>
-<li>(例) [仕事]</li>
-</ul></li>
-<li>括弧を連続することで階層を表現することができます
+<figure>
+  <img src="/images//post/2016/08/18/telephone-appointment-simulation-bot//story.png"/>
+  
+</figure>
 
-<ul>
-<li>(例) [仕事][営業]</li>
-</ul></li>
-<li>データは一切保存しません (&larr;大事)</li>
-</ul>
 
-<h2 id="開発のきっかけ">開発のきっかけ</h2>
+<p>ストーリー形式で、テレアポを擬似体験することのできるコンテンツです。下記ボタンから体験できます。</p>
 
-<p>弊社では、仕事を(準)委任契約でいただくことがあり、作業時間ログをGoogleカレンダー上で管理していました。<br />
-そして、月末に集計を手作業で行っていましたが、それを自動化したい、というのがきっかけです。</p>
+<script>
+window.fbAsyncInit = function() {
+  FB.init({
+    appId: "131078513971096",
+    xfbml: true,
+    version: "v2.6"
+  });
+};
 
-<h2 id="実際に使ってみて">実際に使ってみて</h2>
+(function(d, s, id){
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) { return; }
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ja_JP/sdk.js";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
 
-<p>せっかくなので、全ての作業時間ログをGoogleカレンダー上で管理するということを数ヶ月間行ってみています。</p>
+<div class="fb-messengermessageus"
+  messenger_app_id="131078513971096"
+  page_id="1771482106414711">
+</div>
 
-<p>作業時間ログを都度つける行動は習慣化しているため (常にカレンダーを立ち上げています) 入力作業に負担はなく、後から時間の使い方を振り返ることができるのでなかなか良い感じです。</p>
 
-<p>具体的には、以下のような階層構造で管理を行っています。</p>
+<p>ボタンが動作しない場合は、下記ページからメッセージを送ってみてください。<br />
+<a href="https://www.facebook.com/1771482106414711/">https://www.facebook.com/1771482106414711/</a></p>
 
-<ul>
-<li>受託
+<h2 id="開発の経緯">開発の経緯</h2>
 
-<ul>
-<li>プロジェクト1</li>
-<li>プロジェクト2</li>
-<li>&hellip;</li>
-</ul></li>
-<li>自社
+<p>コミュニケーション領域の教育においては、疑似的にでも経験を積むことが一番スキルが身につく手段であると考えていますが、
+書籍や動画等のコンテンツではそれを体験することが困難です。</p>
 
-<ul>
-<li>サービスA</li>
-<li>サービスB</li>
-<li>&hellip;</li>
-</ul></li>
-<li>経営
+<p>その中で、チャットボットを用いれば容易に実現できるのではないか、と考えたのが開発のきっかけです。</p>
 
-<ul>
-<li>経営計画</li>
-<li>財務</li>
-<li>&hellip;</li>
-</ul></li>
-</ul>
+<p>実際に、テレアポ模擬トレーニングBotは1日もかからず実装することができました。<br />
+(ストーリーを考える時間は別途必要です)</p>
 
-<p>弊社は受託事業を行いながら自社サービスを開発しており、また筆者は代表を務めているので、時間の使い方としては、大きく「受託」「自社」「経営」の3つに分かれます。</p>
+<h2 id="コミュニケーション教育ツールとしての可能性">コミュニケーション教育ツールとしての可能性</h2>
 
-<p>その下にも幾つか階層を設けていますが、基本的にはこの3つの時間比率を毎月振り返るようにしています。</p>
+<p>今回は題材としてテレアポを取り上げましたが、他にも応用可能性はあると考えています。</p>
+
+<p>例えば、<a href="https://the-board.jp/">board</a> を展開する <a href="http://www.velc.co.jp/about/">VELC</a> さんは、カスタマーサポートの教育にBotを用いていると語っています。</p>
+
+<blockquote>
+<p>そこで重要になってくるのが教育です。それに使っているのが、チャットツールである「Slack（スラック）」のbotです。<br />
+Slack上で「ok board」と打ち込むと、FAQからSlackに質問だけがランダムに飛んでくるようになっています。スタッフには空き時間にそれを使って回答文を作成する練習をしてもらい、後で僕がレビューをする。</p>
+</blockquote>
+
+<p>引用元: <a href="https://seleck.cc/article/475">「カスタマーサクセス」を意識したことはない。自然に神対応を実現した、CSの理想形</a></p>
 
 <h2 id="おわりに">おわりに</h2>
 
-<p>時間の使い方を可視化してみると色々な気づきがあります。是非試してみてください！<br />
-<a href="http://tools.algolab.jp/calendar_reports">http://tools.algolab.jp/calendar_reports</a></p>
+<p>今回は、チャットボットを「チャットUIを用いたインタラクティブなアプリを簡単に作れるツール」として捉え、コミュニケーション教育ツールとしての活用可能性についてお届けしました。<br />
+まだまだ可能性を秘めていると思いますので、今後も注目していきたいと思います。</p>
 
       
   <div id="share-this" class="col span_10">
@@ -214,10 +217,8 @@
   
   <nav class="pagination-single">
     
-      <span class="previous">&larr; <a href="http://blog.algolab.jp/post/2016/08/11/raspberry-pi-alexa/" rel="prev">Amazon Echoを6,000円で自作する 〜Raspberry Pi 3 &#43; Alexa Voice Services (AVS)〜</a></span>
+      <span class="previous">&larr; <a href="http://blog.algolab.jp/post/2016/08/16/speech-framework/" rel="prev">iOSで音声認識 〜Speech Frameworkを試す〜</a></span>
     
-    
-      <span class="next"><a href="http://blog.algolab.jp/post/2016/08/16/speech-framework/" rel="next">iOSで音声認識 〜Speech Frameworkを試す〜</a> &rarr;</span>
     
   </nav>
   
