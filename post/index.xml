@@ -687,7 +687,7 @@ luarocks install https://raw.githubusercontent.com/soumith/cudnn.torch/master/cu
     </item>
     
     <item>
-      <title>超シンプルにDQN (Deep Q Network) を実装してみる 〜導入編〜</title>
+      <title>超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜導入編〜</title>
       <link>http://blog.algolab.jp/post/2016/08/01/tf-dqn-simple-1/</link>
       <pubDate>Mon, 01 Aug 2016 22:06:25 +0900</pubDate>
       
@@ -845,7 +845,7 @@ WIN: 002/002 (100.0%)&lt;br /&gt;
     </item>
     
     <item>
-      <title>Seq2Seqモデルを用いたチャットボット作成 〜英会話のサンプルを動かす〜</title>
+      <title>Seq2Seqモデルを用いたチャットボット作成 〜英会話のサンプルをTorchで動かす〜</title>
       <link>http://blog.algolab.jp/post/2016/07/30/seq2seq-chatbot/</link>
       <pubDate>Sat, 30 Jul 2016 15:50:23 +0900</pubDate>
       

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Reinforcement Learning on ALGO GEEKS</title>
-    <link>http://blog.algolab.jp/tags/reinforcement-learning/</link>
-    <description>Recent content in Reinforcement Learning on ALGO GEEKS</description>
+    <title>Tensorflow on ALGO GEEKS</title>
+    <link>http://blog.algolab.jp/tags/tensorflow/</link>
+    <description>Recent content in Tensorflow on ALGO GEEKS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <lastBuildDate>Mon, 01 Aug 2016 22:06:25 +0900</lastBuildDate>
-    <atom:link href="http://blog.algolab.jp/tags/reinforcement-learning/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://blog.algolab.jp/tags/tensorflow/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜導入編〜</title>
