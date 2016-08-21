@@ -150,7 +150,7 @@ TensorFlowで実装しており、ソースコードは下記に公開してい�
 
 <p>はじめにソースコードをダウンロードします。</p>
 
-<pre><code class="language-sh">git clone https://github.com/algolab-inc/tf-dqn-simple.git
+<pre><code class="language-sh">$ git clone https://github.com/algolab-inc/tf-dqn-simple.git
 </code></pre>
 
 <p>次に、動作のためにTensorFlowとMatplotlibが必要なので、インストールします。</p>
@@ -161,15 +161,15 @@ TensorFlowで実装しており、ソースコードは下記に公開してい�
 
 <p>Matolotlibはpipでインストールします。</p>
 
-<pre><code class="language-sh">pip install matplotlib
+<pre><code class="language-sh">$ pip install matplotlib
 </code></pre>
 
 <h3 id="学習">学習</h3>
 
 <p>環境が整ったら、ソースコードのディレクトリに移動して、train.pyを叩くと学習が始まります。</p>
 
-<pre><code class="language-sh">cd tf-dqn-simple
-python train.py
+<pre><code class="language-sh">$ cd tf-dqn-simple
+$ python train.py
 </code></pre>
 
 <p>下記のようなログが出ていれば、正しく学習が行われています。</p>
@@ -183,7 +183,7 @@ EPOCH: 001/999 | WIN: 002 | LOSS: 0.0447 | Q_MAX: 0.0013<br />
 <p>数分ほどで学習が終わったかと思います。<br />
 では学習したモデルでテストしてみましょう。</p>
 
-<pre><code class="language-sh">python test.py
+<pre><code class="language-sh">$ python test.py
 </code></pre>
 
 <blockquote>
@@ -248,6 +248,8 @@ WIN: 002/002 (100.0%)<br />
     <h3>最新記事</h3>
     <ul>
       
+        <li><a href="http://blog.algolab.jp/post/2016/08/21/pyenv-anaconda-ubuntu/">【随時更新】pyenv &#43; Anaconda (Ubuntu 16.04 LTS) で機械学習のPython開発環境をオールインワンで整える </a></li>
+      
         <li><a href="http://blog.algolab.jp/post/2016/08/18/telephone-appointment-simulation-bot/">テレアポ模擬トレーニングBot 〜コミュニケーション教育ツールとしてのチャットボットの活用可能性〜 </a></li>
       
         <li><a href="http://blog.algolab.jp/post/2016/08/16/speech-framework/">iOSで音声認識 〜Speech Frameworkを試す〜 </a></li>
@@ -265,8 +267,6 @@ WIN: 002/002 (100.0%)<br />
         <li><a href="http://blog.algolab.jp/post/2016/08/01/ai-training-kick-off/">AIトレーニングキックオフ 〜ハムケツを認識したい〜 </a></li>
       
         <li><a href="http://blog.algolab.jp/post/2016/07/30/seq2seq-chatbot/">Seq2Seqモデルを用いたチャットボット作成 〜英会話のサンプルをTorchで動かす〜 </a></li>
-      
-        <li><a href="http://blog.algolab.jp/post/2016/07/29/mary-meeker-2016/">音声は新しいパラダイムシフトになる 〜2016年度版メアリー・ミーカー氏レポートまとめ〜 </a></li>
       
     <ul>
   </div>
@@ -344,6 +344,12 @@ WIN: 002/002 (100.0%)<br />
         <li>
           <a href="/tags/tensorflow">
             TensorFlow (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="/tags/%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89">
+            環境構築 (1)
           </a>
         </li>
       

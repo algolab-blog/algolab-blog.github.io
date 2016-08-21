@@ -6,8 +6,205 @@
     <description>Recent content on ALGO GEEKS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Thu, 18 Aug 2016 15:20:16 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 21 Aug 2016 17:22:48 +0900</lastBuildDate>
     <atom:link href="http://blog.algolab.jp/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>【随時更新】pyenv &#43; Anaconda (Ubuntu 16.04 LTS) で機械学習のPython開発環境をオールインワンで整える</title>
+      <link>http://blog.algolab.jp/post/2016/08/21/pyenv-anaconda-ubuntu/</link>
+      <pubDate>Sun, 21 Aug 2016 17:22:48 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/08/21/pyenv-anaconda-ubuntu/</guid>
+      <description>
+
+&lt;p&gt;機械学習系のPython開発環境は、&lt;a href=&#34;https://www.vagrantup.com/&#34;&gt;Vagrant&lt;/a&gt; を用いた &lt;a href=&#34;https://atlas.hashicorp.com/bento/boxes/ubuntu-16.04&#34;&gt;Ubuntu (16.04 LTS)&lt;/a&gt; の仮想環境上に構築しています。&lt;br /&gt;
+ここでは、画像認識、音声認識、自然言語処理などに必要な環境をオールインワンで構築する手順をまとめます。&lt;br /&gt;
+(2016/08/21 初版公開)&lt;/p&gt;
+
+&lt;h2 id=&#34;osバージョン&#34;&gt;OSバージョン&lt;/h2&gt;
+
+&lt;p&gt;OSバージョンは下記の通りです。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cat /etc/lsb-release
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=16.04
+DISTRIB_CODENAME=xenial
+DISTRIB_DESCRIPTION=&amp;quot;Ubuntu 16.04.1 LTS&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ uname -a
+Linux vagrant 4.4.0-31-generic #50-Ubuntu SMP Wed Jul 13 00:07:12 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;パッケージのインストール&#34;&gt;パッケージのインストール&lt;/h2&gt;
+
+&lt;p&gt;まず、汎用的に使うパッケージをインストールします。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo apt-get install -y git swig
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;pyenv-anaconda-の環境を構築&#34;&gt;pyenv + Anaconda の環境を構築&lt;/h2&gt;
+
+&lt;p&gt;Python環境は、pyenv + Anacodaを用いて構築します。&lt;br /&gt;
+pyenvやAnacondaの概要やメリットについては、下記の記事に詳しくまとまっています。&lt;br /&gt;
+&lt;a href=&#34;http://qiita.com/y__sama/items/5b62d31cb7e6ed50f02c&#34;&gt;データサイエンティストを目指す人のpython環境構築 2016&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;必要なパッケージのインストール&#34;&gt;必要なパッケージのインストール&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;pyenvのインストール&#34;&gt;pyenvのインストール&lt;/h3&gt;
+
+&lt;p&gt;pyenvおよびプラグインをインストールし、環境を整えます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ git clone git://github.com/yyuu/pyenv.git ~/.pyenv
+$ git clone https://github.com/yyuu/pyenv-pip-rehash.git ~/.pyenv/plugins/pyenv-pip-rehash
+$ echo &#39;export PYENV_ROOT=&amp;quot;$HOME/.pyenv&amp;quot;&#39; &amp;gt;&amp;gt; ~/.bashrc
+$ echo &#39;export PATH=&amp;quot;$PYENV_ROOT/bin:$PATH&amp;quot;&#39; &amp;gt;&amp;gt; ~/.bashrc
+$ echo &#39;eval &amp;quot;$(pyenv init -)&amp;quot;&#39; &amp;gt;&amp;gt; ~/.bashrc
+$ source ~/.bashrc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;anacondaのインストール&#34;&gt;Anacondaのインストール&lt;/h3&gt;
+
+&lt;p&gt;まず、最新のAnaconda (Python 3系) のバージョンを確認します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pyenv install -l | grep anaconda3
+  anaconda3-2.0.0
+  anaconda3-2.0.1
+  anaconda3-2.1.0
+  anaconda3-2.2.0
+  anaconda3-2.3.0
+  anaconda3-2.4.0
+  anaconda3-2.4.1
+  anaconda3-2.5.0
+  anaconda3-4.0.0
+  anaconda3-4.1.0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最新のAnaconda (ここでは4.1.0) をインストールし、デフォルトとして設定します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pyenv install anaconda3-4.1.0
+$ pyenv global anaconda3-4.1.0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Pythonの環境を確認します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ python --version
+Python 3.5.1 :: Anaconda 4.1.0 (64-bit)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;pythonライブラリのインストール&#34;&gt;Pythonライブラリのインストール&lt;/h2&gt;
+
+&lt;p&gt;以下、用途に応じて必要なPythonライブラリをインストールしていきます。&lt;br /&gt;
+&lt;code&gt;conda&lt;/code&gt;が便利なものは&lt;code&gt;conda&lt;/code&gt;で、それ以外は&lt;code&gt;pip&lt;/code&gt;で行います。&lt;/p&gt;
+
+&lt;p&gt;諸々インストールする前に自身を更新しておきます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;conda update -y conda
+pip install --upgrade pip
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;深層学習ライブラリ&#34;&gt;深層学習ライブラリ&lt;/h3&gt;
+
+&lt;h4 id=&#34;tensorflow&#34;&gt;TensorFlow&lt;/h4&gt;
+
+&lt;p&gt;Googleの深層学習ライブラリ。&lt;code&gt;conda&lt;/code&gt;経由で最新バージョンをインストールします。&lt;br /&gt;
+&lt;a href=&#34;https://www.tensorflow.org/&#34;&gt;https://www.tensorflow.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ conda install -y -c jjhelmus tensorflow
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;chainer&#34;&gt;Chainer&lt;/h4&gt;
+
+&lt;p&gt;PFNの深層学習ライブラリ。&lt;br /&gt;
+&lt;a href=&#34;http://chainer.org/&#34;&gt;http://chainer.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pip install chainer
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;theano&#34;&gt;Theano&lt;/h3&gt;
+
+&lt;p&gt;2008年から開発されている古参のライブラリ。&lt;br /&gt;
+&lt;a href=&#34;http://deeplearning.net/software/theano/&#34;&gt;http://deeplearning.net/software/theano/&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pip install theano
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;keras&#34;&gt;Keras&lt;/h4&gt;
+
+&lt;p&gt;TensorFlowおよびTheanoのラッパー。&lt;br /&gt;
+&lt;a href=&#34;https://keras.io/&#34;&gt;https://keras.io/&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pip install keras
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;画像認識&#34;&gt;画像認識&lt;/h3&gt;
+
+&lt;h4 id=&#34;imagemagick&#34;&gt;ImageMagick&lt;/h4&gt;
+
+&lt;p&gt;画像処理ライブラリ。&lt;br /&gt;
+&lt;a href=&#34;http://imagemagick.org/script/index.php&#34;&gt;http://imagemagick.org/script/index.php&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ conda install -y -c kalefranz imagemagick
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;opencv&#34;&gt;OpenCV&lt;/h4&gt;
+
+&lt;p&gt;コンピュータビジョンライブラリ。&lt;br /&gt;
+&lt;a href=&#34;http://opencv.org/&#34;&gt;http://opencv.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ conda install -y -c menpo opencv3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;dlib&#34;&gt;Dlib&lt;/h4&gt;
+
+&lt;p&gt;画像認識が充実している機械学習ライブラリ。&lt;br /&gt;
+&lt;a href=&#34;http://dlib.net/&#34;&gt;http://dlib.net/&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ conda install -y -c menpo dlib
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;音声認識&#34;&gt;音声認識&lt;/h3&gt;
+
+&lt;p&gt;音声・動画処理ライブラリ。Ubuntu16.04から本体は&lt;code&gt;apt&lt;/code&gt;で入るようになりました。&lt;br /&gt;
+&lt;a href=&#34;https://ffmpeg.org/&#34;&gt;https://ffmpeg.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt install -y ffmpeg
+$ pip install ffmpy
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;自然言語処理&#34;&gt;自然言語処理&lt;/h3&gt;
+
+&lt;h4 id=&#34;mecab&#34;&gt;MeCab&lt;/h4&gt;
+
+&lt;p&gt;形態素解析エンジン。本体は&lt;code&gt;apt-get&lt;/code&gt;でインストールします。&lt;br /&gt;
+&lt;a href=&#34;http://taku910.github.io/mecab/&#34;&gt;http://taku910.github.io/mecab/&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get -y install libmecab-dev mecab mecab-ipadic mecab-ipadic-utf8
+$ pip install mecab-python3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;gensim&#34;&gt;gensim&lt;/h4&gt;
+
+&lt;p&gt;トピックモデルのライブラリ。&lt;br /&gt;
+&lt;a href=&#34;https://radimrehurek.com/gensim/&#34;&gt;https://radimrehurek.com/gensim/&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pip install gensim
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;強化学習&#34;&gt;強化学習&lt;/h3&gt;
+
+&lt;h4 id=&#34;openai-gym&#34;&gt;OpenAI Gym&lt;/h4&gt;
+
+&lt;p&gt;強化学習のトレーニング環境。&lt;br /&gt;
+&lt;a href=&#34;https://gym.openai.com/&#34;&gt;https://gym.openai.com/&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pip install gym
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>テレアポ模擬トレーニングBot 〜コミュニケーション教育ツールとしてのチャットボットの活用可能性〜</title>
@@ -597,8 +794,8 @@ mvn exec:exec
 
 &lt;p&gt;インスタンスが起動したら、SSHでログインのうえ、まずパッケージを更新します。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo apt-get update
-sudo apt-get upgrade -y
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get update
+$ sudo apt-get upgrade -y
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;cudaインストール&#34;&gt;CUDAインストール&lt;/h2&gt;
@@ -608,7 +805,7 @@ sudo apt-get upgrade -y
 
 &lt;p&gt;既存のドライバ (Noveau) を無効にします。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;echo -e &amp;quot;blacklist nouveau\nblacklist lbm-nouveau\noptions nouveau modeset=0\nalias nouveau off\nalias lbm-nouveau off\n&amp;quot; | sudo tee /etc/modprobe.d/blacklist-nouveau.conf
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ echo -e &amp;quot;blacklist nouveau\nblacklist lbm-nouveau\noptions nouveau modeset=0\nalias nouveau off\nalias lbm-nouveau off\n&amp;quot; | sudo tee /etc/modprobe.d/blacklist-nouveau.conf
 echo options nouveau modeset=0 | sudo tee -a /etc/modprobe.d/nouveau-kms.conf
 sudo update-initramfs -u
 sudo reboot
@@ -616,20 +813,20 @@ sudo reboot
 
 &lt;p&gt;必要なカーネルモジュールをインストールします。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo apt-get install -y linux-image-extra-virtual
-sudo reboot
-sudo apt-get install -y linux-source linux-headers-`uname -r`
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install -y linux-image-extra-virtual
+$ sudo reboot
+$ sudo apt-get install -y linux-source linux-headers-`uname -r`
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;CUDA7.5をインストールします。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;wget http://developer.download.nvidia.com/compute/cuda/7.5/Prod/local_installers/cuda_7.5.18_linux.run
-chmod +x cuda_7.5.18_linux.run
-./cuda_7.5.18_linux.run -extract=`pwd`/nvidia_installers
-cd nvidia_installers
-sudo ./NVIDIA-Linux-x86_64-352.39.run
-sudo modprobe nvidia
-sudo ./cuda-linux64-rel-7.5.18-19867135.run
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ wget http://developer.download.nvidia.com/compute/cuda/7.5/Prod/local_installers/cuda_7.5.18_linux.run
+$ chmod +x cuda_7.5.18_linux.run
+$ ./cuda_7.5.18_linux.run -extract=`pwd`/nvidia_installers
+$ cd nvidia_installers
+$ sudo ./NVIDIA-Linux-x86_64-352.39.run
+$ sudo modprobe nvidia
+$ sudo ./cuda-linux64-rel-7.5.18-19867135.run
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;途中でシンボリックリンクを作成するか聞かれますが、yesを選択します。&lt;/p&gt;
@@ -639,8 +836,8 @@ sudo ./cuda-linux64-rel-7.5.18-19867135.run
 
 &lt;p&gt;CUDAのパスを環境変数に追加します。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;echo -e &amp;quot;export PATH=/usr/local/cuda/bin:\$PATH\nexport LD_LIBRARY_PATH=/usr/local/cuda/lib64:\$LD_LIBRARY_PATH&amp;quot; | tee -a ~/.bashrc
-source ~/.bashrc
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ echo -e &amp;quot;export PATH=/usr/local/cuda/bin:\$PATH\nexport LD_LIBRARY_PATH=/usr/local/cuda/lib64:\$LD_LIBRARY_PATH&amp;quot; | tee -a ~/.bashrc
+$ source ~/.bashrc
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;cudnnインストール&#34;&gt;CUDNNインストール&lt;/h2&gt;
@@ -657,9 +854,9 @@ source ~/.bashrc
 
 &lt;p&gt;ダウンロードしたファイルをサーバへ転送後、サーバ上で展開します。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;tar -xzf cudnn-7.5-linux-x64-v5.0-ga.tgz
-sudo cp cuda/lib64/libcudnn* /usr/local/cuda-7.5/lib64
-sudo cp cuda/include/cudnn.h /usr/local/cuda/include
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ tar -xzf cudnn-7.5-linux-x64-v5.0-ga.tgz
+$ sudo cp cuda/lib64/libcudnn* /usr/local/cuda-7.5/lib64
+$ sudo cp cuda/include/cudnn.h /usr/local/cuda/include
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;torchインストール&#34;&gt;Torchインストール&lt;/h2&gt;
@@ -667,10 +864,10 @@ sudo cp cuda/include/cudnn.h /usr/local/cuda/include
 &lt;p&gt;公式に従って、インストールします。&lt;br /&gt;
 &lt;a href=&#34;http://torch.ch/docs/getting-started.html&#34;&gt;http://torch.ch/docs/getting-started.html&lt;/a&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo apt-get install -y git
-git clone https://github.com/torch/distro.git ~/torch --recursive
-cd ~/torch; bash install-deps;
-./install.sh
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install -y git
+$ git clone https://github.com/torch/distro.git ~/torch --recursive
+$ cd ~/torch; bash install-deps;
+$ ./install.sh
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;環境変数を.bashrcに書き込むか聞かれますが、yesを選択します。&lt;/p&gt;
@@ -683,15 +880,15 @@ yes
 
 &lt;p&gt;環境変数を反映します。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;source ~/.bashrc
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ source ~/.bashrc
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;最後に、CUDAおよびcuDNNを使うためのLuaライブラリをインストールします。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;luarocks install cutorch
-luarocks install cunn
-luarocks install cunnx
-luarocks install https://raw.githubusercontent.com/soumith/cudnn.torch/master/cudnn-scm-1.rockspec
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ luarocks install cutorch
+$ luarocks install cunn
+$ luarocks install cunnx
+$ luarocks install https://raw.githubusercontent.com/soumith/cudnn.torch/master/cudnn-scm-1.rockspec
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;以上で環境構築は完了です。&lt;/p&gt;
@@ -745,7 +942,7 @@ TensorFlowで実装しており、ソースコードは下記に公開してい�
 
 &lt;p&gt;はじめにソースコードをダウンロードします。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;git clone https://github.com/algolab-inc/tf-dqn-simple.git
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ git clone https://github.com/algolab-inc/tf-dqn-simple.git
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;次に、動作のためにTensorFlowとMatplotlibが必要なので、インストールします。&lt;/p&gt;
@@ -756,15 +953,15 @@ TensorFlowで実装しており、ソースコードは下記に公開してい�
 
 &lt;p&gt;Matolotlibはpipでインストールします。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;pip install matplotlib
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pip install matplotlib
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;学習&#34;&gt;学習&lt;/h3&gt;
 
 &lt;p&gt;環境が整ったら、ソースコードのディレクトリに移動して、train.pyを叩くと学習が始まります。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;cd tf-dqn-simple
-python train.py
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd tf-dqn-simple
+$ python train.py
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;下記のようなログが出ていれば、正しく学習が行われています。&lt;/p&gt;
@@ -778,7 +975,7 @@ EPOCH: 001/999 | WIN: 002 | LOSS: 0.0447 | Q_MAX: 0.0013&lt;br /&gt;
 &lt;p&gt;数分ほどで学習が終わったかと思います。&lt;br /&gt;
 では学習したモデルでテストしてみましょう。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;python test.py
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ python test.py
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;blockquote&gt;
@@ -902,9 +1099,9 @@ WIN: 002/002 (100.0%)&lt;br /&gt;
 &lt;p&gt;筆者は下記の環境をベースに、追加で必要なLuaモジュールをインストール (更新) しました。&lt;br /&gt;
 &lt;a href=&#34;http://blog.algolab.jp/post/2016/08/03/torch-aws-gpu-ubuntu/&#34;&gt;TorchをAWSのGPUインスタンス (Ubuntu 14.04) で動かす&lt;/a&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;luarocks install nn
-luarocks install rnn
-luarocks install penlight
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ luarocks install nn
+$ luarocks install rnn
+$ luarocks install penlight
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;データセットの準備&#34;&gt;データセットの準備&lt;/h3&gt;
@@ -912,18 +1109,18 @@ luarocks install penlight
 &lt;p&gt;データセットは、下記で公開されている映画の台詞コーパスを用います。&lt;br /&gt;
 &lt;a href=&#34;http://www.mpi-sws.org/~cristian/Cornell_Movie-Dialogs_Corpus.html&#34;&gt;http://www.mpi-sws.org/~cristian/Cornell_Movie-Dialogs_Corpus.html&lt;/a&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;git clone https://github.com/macournoyer/neuralconvo.git
-cd neuralconvo/data
-wget http://www.mpi-sws.org/~cristian/data/cornell_movie_dialogs_corpus.zip
-unzip cornell_movie_dialogs_corpus.zip
-mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ git clone https://github.com/macournoyer/neuralconvo.git
+$ cd neuralconvo/data
+$ wget http://www.mpi-sws.org/~cristian/data/cornell_movie_dialogs_corpus.zip
+$ unzip cornell_movie_dialogs_corpus.zip
+$ mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;学習&#34;&gt;学習&lt;/h2&gt;
 
 &lt;p&gt;準備が整ったら学習をしてみます。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;th train.lua --cuda --dataset 50000 --hiddenSize 1000
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ th train.lua --cuda --dataset 50000 --hiddenSize 1000
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;学習時間は4日弱で、エラー率の推移は下記となりました。&lt;/p&gt;
@@ -938,7 +1135,7 @@ mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
 
 &lt;p&gt;学習したモデルを用いて実際に会話をしてみました。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;th eval.lua
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ th eval.lua
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;blockquote&gt;
@@ -1519,7 +1716,7 @@ Sotaも動かしても良い、とのことだったので、RoBoHonとSotaに�
     </item>
     
     <item>
-      <title>このブログについて</title>
+      <title>About</title>
       <link>http://blog.algolab.jp/about/</link>
       <pubDate>Fri, 01 Jan 2016 00:00:00 +0900</pubDate>
       

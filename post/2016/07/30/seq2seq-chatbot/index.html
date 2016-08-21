@@ -151,9 +151,9 @@
 <p>筆者は下記の環境をベースに、追加で必要なLuaモジュールをインストール (更新) しました。<br />
 <a href="http://blog.algolab.jp/post/2016/08/03/torch-aws-gpu-ubuntu/">TorchをAWSのGPUインスタンス (Ubuntu 14.04) で動かす</a></p>
 
-<pre><code class="language-sh">luarocks install nn
-luarocks install rnn
-luarocks install penlight
+<pre><code class="language-sh">$ luarocks install nn
+$ luarocks install rnn
+$ luarocks install penlight
 </code></pre>
 
 <h3 id="データセットの準備">データセットの準備</h3>
@@ -161,18 +161,18 @@ luarocks install penlight
 <p>データセットは、下記で公開されている映画の台詞コーパスを用います。<br />
 <a href="http://www.mpi-sws.org/~cristian/Cornell_Movie-Dialogs_Corpus.html">http://www.mpi-sws.org/~cristian/Cornell_Movie-Dialogs_Corpus.html</a></p>
 
-<pre><code class="language-sh">git clone https://github.com/macournoyer/neuralconvo.git
-cd neuralconvo/data
-wget http://www.mpi-sws.org/~cristian/data/cornell_movie_dialogs_corpus.zip
-unzip cornell_movie_dialogs_corpus.zip
-mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
+<pre><code class="language-sh">$ git clone https://github.com/macournoyer/neuralconvo.git
+$ cd neuralconvo/data
+$ wget http://www.mpi-sws.org/~cristian/data/cornell_movie_dialogs_corpus.zip
+$ unzip cornell_movie_dialogs_corpus.zip
+$ mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
 </code></pre>
 
 <h2 id="学習">学習</h2>
 
 <p>準備が整ったら学習をしてみます。</p>
 
-<pre><code class="language-sh">th train.lua --cuda --dataset 50000 --hiddenSize 1000
+<pre><code class="language-sh">$ th train.lua --cuda --dataset 50000 --hiddenSize 1000
 </code></pre>
 
 <p>学習時間は4日弱で、エラー率の推移は下記となりました。</p>
@@ -187,7 +187,7 @@ mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
 
 <p>学習したモデルを用いて実際に会話をしてみました。</p>
 
-<pre><code class="language-sh">th eval.lua
+<pre><code class="language-sh">$ th eval.lua
 </code></pre>
 
 <blockquote>
@@ -277,6 +277,8 @@ mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
     <h3>最新記事</h3>
     <ul>
       
+        <li><a href="http://blog.algolab.jp/post/2016/08/21/pyenv-anaconda-ubuntu/">【随時更新】pyenv &#43; Anaconda (Ubuntu 16.04 LTS) で機械学習のPython開発環境をオールインワンで整える </a></li>
+      
         <li><a href="http://blog.algolab.jp/post/2016/08/18/telephone-appointment-simulation-bot/">テレアポ模擬トレーニングBot 〜コミュニケーション教育ツールとしてのチャットボットの活用可能性〜 </a></li>
       
         <li><a href="http://blog.algolab.jp/post/2016/08/16/speech-framework/">iOSで音声認識 〜Speech Frameworkを試す〜 </a></li>
@@ -294,8 +296,6 @@ mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
         <li><a href="http://blog.algolab.jp/post/2016/08/01/ai-training-kick-off/">AIトレーニングキックオフ 〜ハムケツを認識したい〜 </a></li>
       
         <li><a href="http://blog.algolab.jp/post/2016/07/30/seq2seq-chatbot/">Seq2Seqモデルを用いたチャットボット作成 〜英会話のサンプルをTorchで動かす〜 </a></li>
-      
-        <li><a href="http://blog.algolab.jp/post/2016/07/29/mary-meeker-2016/">音声は新しいパラダイムシフトになる 〜2016年度版メアリー・ミーカー氏レポートまとめ〜 </a></li>
       
     <ul>
   </div>
@@ -373,6 +373,12 @@ mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
         <li>
           <a href="/tags/tensorflow">
             TensorFlow (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="/tags/%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89">
+            環境構築 (1)
           </a>
         </li>
       

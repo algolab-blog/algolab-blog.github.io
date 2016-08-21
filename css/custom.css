@@ -40,6 +40,31 @@ a:hover {
   color: #999 !important;
 }
 
+/* heading */
+article h3 {
+  border-left: 4px solid #999;
+  padding-left: 10px;
+}
+
+article h4 {
+  margin: 0;
+}
+
+/* blockquote */
+article blockquote {
+  background: #f0f0f0;
+  border: none;
+  padding: 20px;
+}
+
+article blockquote p {
+  margin-bottom: 0;
+}
+
+article blockquote p:first-child {
+  margin-top: 0;
+}
+
 /* img */
 article img {
   margin: 0;

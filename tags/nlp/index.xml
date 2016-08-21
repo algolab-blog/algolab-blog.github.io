@@ -55,9 +55,9 @@
 &lt;p&gt;筆者は下記の環境をベースに、追加で必要なLuaモジュールをインストール (更新) しました。&lt;br /&gt;
 &lt;a href=&#34;http://blog.algolab.jp/post/2016/08/03/torch-aws-gpu-ubuntu/&#34;&gt;TorchをAWSのGPUインスタンス (Ubuntu 14.04) で動かす&lt;/a&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;luarocks install nn
-luarocks install rnn
-luarocks install penlight
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ luarocks install nn
+$ luarocks install rnn
+$ luarocks install penlight
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;データセットの準備&#34;&gt;データセットの準備&lt;/h3&gt;
@@ -65,18 +65,18 @@ luarocks install penlight
 &lt;p&gt;データセットは、下記で公開されている映画の台詞コーパスを用います。&lt;br /&gt;
 &lt;a href=&#34;http://www.mpi-sws.org/~cristian/Cornell_Movie-Dialogs_Corpus.html&#34;&gt;http://www.mpi-sws.org/~cristian/Cornell_Movie-Dialogs_Corpus.html&lt;/a&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;git clone https://github.com/macournoyer/neuralconvo.git
-cd neuralconvo/data
-wget http://www.mpi-sws.org/~cristian/data/cornell_movie_dialogs_corpus.zip
-unzip cornell_movie_dialogs_corpus.zip
-mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ git clone https://github.com/macournoyer/neuralconvo.git
+$ cd neuralconvo/data
+$ wget http://www.mpi-sws.org/~cristian/data/cornell_movie_dialogs_corpus.zip
+$ unzip cornell_movie_dialogs_corpus.zip
+$ mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;学習&#34;&gt;学習&lt;/h2&gt;
 
 &lt;p&gt;準備が整ったら学習をしてみます。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;th train.lua --cuda --dataset 50000 --hiddenSize 1000
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ th train.lua --cuda --dataset 50000 --hiddenSize 1000
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;学習時間は4日弱で、エラー率の推移は下記となりました。&lt;/p&gt;
@@ -91,7 +91,7 @@ mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
 
 &lt;p&gt;学習したモデルを用いて実際に会話をしてみました。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;th eval.lua
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ th eval.lua
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;blockquote&gt;
