@@ -99,7 +99,7 @@
   
     <span>|</span>
     
-      <a href="/tags/%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89">#環境構築</a>&nbsp;
+      <a href="/tags/development-environment">#環境構築</a>&nbsp;
     
   
   <span>|&nbsp;Shinpei Kawahito</span>
@@ -109,7 +109,7 @@
     <article>
       
 
-<p>機械学習系のPython開発環境は、<a href="https://www.vagrantup.com/">Vagrant</a> を用いた <a href="https://atlas.hashicorp.com/bento/boxes/ubuntu-16.04">Ubuntu (16.04 LTS)</a> の仮想環境上に構築しています。<br />
+<p>筆者の機械学習系のPython開発環境は、<a href="https://www.vagrantup.com/">Vagrant</a> を用いた <a href="https://atlas.hashicorp.com/bento/boxes/ubuntu-16.04">Ubuntu (16.04 LTS)</a> 上に構築しています。<br />
 ここでは、画像認識、音声認識、自然言語処理などに必要な環境をオールインワンで構築する手順をまとめます。<br />
 (2016/08/21 初版公開)</p>
 
@@ -128,22 +128,19 @@ DISTRIB_DESCRIPTION=&quot;Ubuntu 16.04.1 LTS&quot;
 Linux vagrant 4.4.0-31-generic #50-Ubuntu SMP Wed Jul 13 00:07:12 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux
 </code></pre>
 
-<h2 id="パッケージのインストール">パッケージのインストール</h2>
-
-<p>まず、汎用的に使うパッケージをインストールします。</p>
-
-<pre><code class="language-sh">sudo apt-get install -y git swig
-</code></pre>
-
 <h2 id="pyenv-anaconda-の環境を構築">pyenv + Anaconda の環境を構築</h2>
 
 <p>Python環境は、pyenv + Anacodaを用いて構築します。<br />
 pyenvやAnacondaの概要やメリットについては、下記の記事に詳しくまとまっています。<br />
 <a href="http://qiita.com/y__sama/items/5b62d31cb7e6ed50f02c">データサイエンティストを目指す人のpython環境構築 2016</a></p>
 
+<p>上記の記事にあるように、ここでもpyenvはAnacondaのインストーラとしてのみ使用し、Python環境の切り替えはAnacondaで行うこととします。</p>
+
 <h3 id="必要なパッケージのインストール">必要なパッケージのインストール</h3>
 
-<pre><code class="language-sh">$ sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev
+<p>まず、必要なパッケージをインストールします。</p>
+
+<pre><code class="language-sh">$ sudo apt-get install -y git make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev
 </code></pre>
 
 <h3 id="pyenvのインストール">pyenvのインストール</h3>
@@ -179,6 +176,8 @@ $ source ~/.bashrc
 
 <pre><code class="language-sh">$ pyenv install anaconda3-4.1.0
 $ pyenv global anaconda3-4.1.0
+$ echo 'export PATH=&quot;$PYENV_ROOT/versions/anaconda3-4.1.0/bin/:$PATH&quot;' &gt;&gt; ~/.bashrc
+$ source ~/.bashrc
 </code></pre>
 
 <p>Pythonの環境を確認します。</p>
@@ -189,20 +188,20 @@ Python 3.5.1 :: Anaconda 4.1.0 (64-bit)
 
 <h2 id="pythonライブラリのインストール">Pythonライブラリのインストール</h2>
 
-<p>以下、用途に応じて必要なPythonライブラリをインストールしていきます。<br />
-<code>conda</code>が便利なものは<code>conda</code>で、それ以外は<code>pip</code>で行います。</p>
+<p>以下、用途に応じて必要なPythonライブラリ (+ 本体) をインストールしていきます。<br />
+<code>conda</code>経由が便利なものは<code>conda</code>で、それ以外は<code>pip</code>で行います。</p>
 
 <p>諸々インストールする前に自身を更新しておきます。</p>
 
-<pre><code class="language-sh">conda update -y conda
-pip install --upgrade pip
+<pre><code class="language-sh">$ conda update -y conda
+$ pip install --upgrade pip
 </code></pre>
 
 <h3 id="深層学習ライブラリ">深層学習ライブラリ</h3>
 
 <h4 id="tensorflow">TensorFlow</h4>
 
-<p>Googleの深層学習ライブラリ。<code>conda</code>経由で最新バージョンをインストールします。<br />
+<p>Googleの深層学習ライブラリ。<code>conda</code>経由で最新バージョンを一発でインストールします。<br />
 <a href="https://www.tensorflow.org/">https://www.tensorflow.org/</a></p>
 
 <pre><code class="language-sh">$ conda install -y -c jjhelmus tensorflow
@@ -210,23 +209,15 @@ pip install --upgrade pip
 
 <h4 id="chainer">Chainer</h4>
 
-<p>PFNの深層学習ライブラリ。<br />
+<p>PFNの深層学習ライブラリ<br />
 <a href="http://chainer.org/">http://chainer.org/</a></p>
 
 <pre><code class="language-sh">$ pip install chainer
 </code></pre>
 
-<h3 id="theano">Theano</h3>
-
-<p>2008年から開発されている古参のライブラリ。<br />
-<a href="http://deeplearning.net/software/theano/">http://deeplearning.net/software/theano/</a></p>
-
-<pre><code class="language-sh">$ pip install theano
-</code></pre>
-
 <h4 id="keras">Keras</h4>
 
-<p>TensorFlowおよびTheanoのラッパー。<br />
+<p>TensorFlowおよびTheanoのラッパー。同時にTheanoも入ります。<br />
 <a href="https://keras.io/">https://keras.io/</a></p>
 
 <pre><code class="language-sh">$ pip install keras
@@ -236,7 +227,7 @@ pip install --upgrade pip
 
 <h4 id="imagemagick">ImageMagick</h4>
 
-<p>画像処理ライブラリ。<br />
+<p>画像処理ライブラリ。<code>conda</code>経由で本体もまとめてインストールします。<br />
 <a href="http://imagemagick.org/script/index.php">http://imagemagick.org/script/index.php</a></p>
 
 <pre><code class="language-sh">$ conda install -y -c kalefranz imagemagick
@@ -244,7 +235,7 @@ pip install --upgrade pip
 
 <h4 id="opencv">OpenCV</h4>
 
-<p>コンピュータビジョンライブラリ。<br />
+<p>コンピュータビジョンライブラリ<br />
 <a href="http://opencv.org/">http://opencv.org/</a></p>
 
 <pre><code class="language-sh">$ conda install -y -c menpo opencv3
@@ -252,7 +243,7 @@ pip install --upgrade pip
 
 <h4 id="dlib">Dlib</h4>
 
-<p>画像認識が充実している機械学習ライブラリ。<br />
+<p>画像処理系が充実している機械学習ライブラリ<br />
 <a href="http://dlib.net/">http://dlib.net/</a></p>
 
 <pre><code class="language-sh">$ conda install -y -c menpo dlib
@@ -280,7 +271,7 @@ $ pip install mecab-python3
 
 <h4 id="gensim">gensim</h4>
 
-<p>トピックモデルのライブラリ。<br />
+<p>トピックモデルのライブラリ<br />
 <a href="https://radimrehurek.com/gensim/">https://radimrehurek.com/gensim/</a></p>
 
 <pre><code class="language-sh">$ pip install gensim
@@ -290,7 +281,7 @@ $ pip install mecab-python3
 
 <h4 id="openai-gym">OpenAI Gym</h4>
 
-<p>強化学習のトレーニング環境。<br />
+<p>強化学習のトレーニング環境<br />
 <a href="https://gym.openai.com/">https://gym.openai.com/</a></p>
 
 <pre><code class="language-sh">$ pip install gym
@@ -390,6 +381,12 @@ $ pip install mecab-python3
         </li>
       
         <li>
+          <a href="/tags/development-environment">
+            環境構築 (2)
+          </a>
+        </li>
+      
+        <li>
           <a href="/tags/product">
             プロダクト (2)
           </a>
@@ -404,12 +401,6 @@ $ pip install mecab-python3
         <li>
           <a href="/tags/torch">
             Torch (2)
-          </a>
-        </li>
-      
-        <li>
-          <a href="/tags/development-environment">
-            環境構築 (1)
           </a>
         </li>
       
@@ -440,12 +431,6 @@ $ pip install mecab-python3
         <li>
           <a href="/tags/tensorflow">
             TensorFlow (1)
-          </a>
-        </li>
-      
-        <li>
-          <a href="/tags/%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89">
-            環境構築 (1)
           </a>
         </li>
       

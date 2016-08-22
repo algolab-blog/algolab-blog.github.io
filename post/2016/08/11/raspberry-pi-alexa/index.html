@@ -198,11 +198,11 @@ Raspberry Pi用のディスプレイを用意してもよいですが、今回�
 <h3 id="vnc-serverのインストール">VNC Serverのインストール</h3>
 
 <pre><code class="language-sh"># install
-sudo apt-get install tightvncserver
+$ sudo apt-get install tightvncserver
 # run
-tightvncserver
+$ tightvncserver
 # auto run setup
-vi /home/pi/.config/tightvnc.desktop
+$ vi /home/pi/.config/tightvnc.desktop
 </code></pre>
 
 <p>tightvnc.desktop</p>
@@ -219,11 +219,11 @@ StartupNotify=false
 <p>VLC media playerをインストールします。</p>
 
 <pre><code class="language-sh"># install
-sudo apt-get install vlc-nox vlc-data
+$ sudo apt-get install vlc-nox vlc-data
 # add env vars
-echo &quot;export LD_LIBRARY_PATH=/usr/lib/vlc&quot; &gt;&gt; ~/.bashrc
-echo &quot;export VLC_PLUGIN_PATH=/usr/lib/vlc/plugins&quot; &gt;&gt; ~/.bashrc
-soure ~/.bashrc
+$ echo &quot;export LD_LIBRARY_PATH=/usr/lib/vlc&quot; &gt;&gt; ~/.bashrc
+$ echo &quot;export VLC_PLUGIN_PATH=/usr/lib/vlc/plugins&quot; &gt;&gt; ~/.bashrc
+$ soure ~/.bashrc
 </code></pre>
 
 <h3 id="nodeとnpmのインストール">NodeとNPMのインストール</h3>
@@ -231,12 +231,12 @@ soure ~/.bashrc
 <p>後に出てくるサーバーの起動に必要なNodeとNPMをインストールします。</p>
 
 <pre><code class="language-sh"># apt-get update &amp; upgrade. It takes about 15 min.
-sudo apt-get update &amp;&amp; sudo apt-get upgrade
+$ sudo apt-get update &amp;&amp; sudo apt-get upgrade
 # install nodejs
-curl -sL https://deb.nodesource.com/setup | sudo bash -
-sudo apt-get install nodejs
-cd /home/pi/Desktop/alexa-avs-raspberry-pi-master/samples/companionService
-npm install
+$ curl -sL https://deb.nodesource.com/setup | sudo bash -
+$ sudo apt-get install nodejs
+$ cd /home/pi/Desktop/alexa-avs-raspberry-pi-master/samples/companionService
+$ npm install
 </code></pre>
 
 <h3 id="jdkとmavenのインストール">JDKとMavenのインストール</h3>
@@ -244,22 +244,22 @@ npm install
 <p>公式DocはMavenの環境変数は <code>/etc/profile.d/maven.sh</code> に追加する方法ですが、うまくいかなかったので手っ取り早く <code>bashrc</code> に追加して進めました。</p>
 
 <pre><code class="language-sh"># java
-cd /home/pi/Desktop/alexa-avs-raspberry-pi-master/samples/javaclient
-./install-java8.sh
+$ cd /home/pi/Desktop/alexa-avs-raspberry-pi-master/samples/javaclient
+$ ./install-java8.sh
 # maven
-wget http://apache.osuosl.org/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
-sudo tar xvf apache-maven-3.3.9-bin.tar.gz  -C /opt
+$ wget http://apache.osuosl.org/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
+$ sudo tar xvf apache-maven-3.3.9-bin.tar.gz  -C /opt
 # add maven_vars
-echo &quot;export M2_HOME=/opt/apache-maven-3.3.9&quot; &gt;&gt; ~/.bashrc
-echo &quot;export PATH=$PATH:$M2_HOME/bin&quot; &gt;&gt; ~/.bashrc
-source ~/.bashrc
+$ echo &quot;export M2_HOME=/opt/apache-maven-3.3.9&quot; &gt;&gt; ~/.bashrc
+$ echo &quot;export PATH=$PATH:$M2_HOME/bin&quot; &gt;&gt; ~/.bashrc
+$ source ~/.bashrc
 </code></pre>
 
 <h3 id="証明書生成スクリプトを実行">証明書生成スクリプトを実行</h3>
 
 <p>プロダクトID、シリアル番号、パスワードの3つを入力します。今回はパスワードは空のままで進めます。</p>
 
-<pre><code class="language-sh">/home/pi/Desktop/alexa-avs-raspberry-pi-master/samples/javaclient/generate.sh
+<pre><code class="language-sh">$ /home/pi/Desktop/alexa-avs-raspberry-pi-master/samples/javaclient/generate.sh
 &gt; product ID: my_device
 &gt; Serial Number: 123456
 &gt; Password: [blank]
@@ -274,17 +274,17 @@ source ~/.bashrc
 <p>下記のとおりサーバを起動します。 <code>config.js</code> には先ほど発行したクライアントIDとClientSecretを入力しておきます。</p>
 
 <pre><code class="language-sh"># setup clientId and ClientSecret
-vi /home/pi/Desktop/alexa-avs-raspberry-pi-master/samples/companionService/config.js
-cd /home/pi/Desktop/alexa-avs-raspberry-pi-master/samples/companionService
-npm start
+$ vi /home/pi/Desktop/alexa-avs-raspberry-pi-master/samples/companionService/config.js
+$ cd /home/pi/Desktop/alexa-avs-raspberry-pi-master/samples/companionService
+$ npm start
 </code></pre>
 
 <p>続いてクライアントも起動します。起動するとGUIも一緒に立ち上がります。 <code>DISPLAY=:1.0</code> はVNC経由の場合の指定です。外部ディスプレイを使う場合は <code>DISPLAY=:0.0</code> です。</p>
 
-<pre><code class="language-sh">cd /home/pi/Desktop/alexa-avs-raspberry-pi-master/samples/javaclient
-mvn install
-export DISPLAY=:1.0
-mvn exec:exec
+<pre><code class="language-sh">$ cd /home/pi/Desktop/alexa-avs-raspberry-pi-master/samples/javaclient
+$ mvn install
+$ export DISPLAY=:1.0
+$ mvn exec:exec
 </code></pre>
 
 <p>GUIに出てくるURLにアクセスしてデバイスの登録になります。ここも <a href="https://github.com/amzn/alexa-avs-raspberry-pi#user-content-10---obtain-authorization-from-login-with-amazon">公式Doc</a> の画像のとおりです。以上が終わると、AVSを利用できます。</p>
@@ -389,6 +389,12 @@ mvn exec:exec
         </li>
       
         <li>
+          <a href="/tags/development-environment">
+            環境構築 (2)
+          </a>
+        </li>
+      
+        <li>
           <a href="/tags/product">
             プロダクト (2)
           </a>
@@ -403,12 +409,6 @@ mvn exec:exec
         <li>
           <a href="/tags/torch">
             Torch (2)
-          </a>
-        </li>
-      
-        <li>
-          <a href="/tags/development-environment">
-            環境構築 (1)
           </a>
         </li>
       
@@ -439,12 +439,6 @@ mvn exec:exec
         <li>
           <a href="/tags/tensorflow">
             TensorFlow (1)
-          </a>
-        </li>
-      
-        <li>
-          <a href="/tags/%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89">
-            環境構築 (1)
           </a>
         </li>
       
