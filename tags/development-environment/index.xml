@@ -105,9 +105,9 @@ Python 3.5.1 :: Anaconda 4.1.0 (64-bit)
 $ pip install --upgrade pip
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;深層学習ライブラリ&#34;&gt;深層学習ライブラリ&lt;/h3&gt;
+&lt;h2 id=&#34;深層学習ライブラリ&#34;&gt;深層学習ライブラリ&lt;/h2&gt;
 
-&lt;h4 id=&#34;tensorflow&#34;&gt;TensorFlow&lt;/h4&gt;
+&lt;h3 id=&#34;tensorflow&#34;&gt;TensorFlow&lt;/h3&gt;
 
 &lt;p&gt;Googleの深層学習ライブラリ。&lt;code&gt;conda&lt;/code&gt;経由で最新バージョンを一発でインストールします。&lt;br /&gt;
 &lt;a href=&#34;https://www.tensorflow.org/&#34;&gt;https://www.tensorflow.org/&lt;/a&gt;&lt;/p&gt;
@@ -115,7 +115,7 @@ $ pip install --upgrade pip
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ conda install -y -c jjhelmus tensorflow
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;chainer&#34;&gt;Chainer&lt;/h4&gt;
+&lt;h3 id=&#34;chainer&#34;&gt;Chainer&lt;/h3&gt;
 
 &lt;p&gt;PFNの深層学習ライブラリ&lt;br /&gt;
 &lt;a href=&#34;http://chainer.org/&#34;&gt;http://chainer.org/&lt;/a&gt;&lt;/p&gt;
@@ -123,7 +123,7 @@ $ pip install --upgrade pip
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pip install chainer
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;keras&#34;&gt;Keras&lt;/h4&gt;
+&lt;h3 id=&#34;keras&#34;&gt;Keras&lt;/h3&gt;
 
 &lt;p&gt;TensorFlowおよびTheanoのラッパー。同時にTheanoも入ります。&lt;br /&gt;
 &lt;a href=&#34;https://keras.io/&#34;&gt;https://keras.io/&lt;/a&gt;&lt;/p&gt;
@@ -131,9 +131,9 @@ $ pip install --upgrade pip
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pip install keras
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;画像認識&#34;&gt;画像認識&lt;/h3&gt;
+&lt;h2 id=&#34;画像認識&#34;&gt;画像認識&lt;/h2&gt;
 
-&lt;h4 id=&#34;imagemagick&#34;&gt;ImageMagick&lt;/h4&gt;
+&lt;h3 id=&#34;imagemagick&#34;&gt;ImageMagick&lt;/h3&gt;
 
 &lt;p&gt;画像処理ライブラリ。&lt;code&gt;conda&lt;/code&gt;経由で本体もまとめてインストールします。&lt;br /&gt;
 &lt;a href=&#34;http://imagemagick.org/script/index.php&#34;&gt;http://imagemagick.org/script/index.php&lt;/a&gt;&lt;/p&gt;
@@ -141,7 +141,7 @@ $ pip install --upgrade pip
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ conda install -y -c kalefranz imagemagick
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;opencv&#34;&gt;OpenCV&lt;/h4&gt;
+&lt;h3 id=&#34;opencv&#34;&gt;OpenCV&lt;/h3&gt;
 
 &lt;p&gt;コンピュータビジョンライブラリ&lt;br /&gt;
 &lt;a href=&#34;http://opencv.org/&#34;&gt;http://opencv.org/&lt;/a&gt;&lt;/p&gt;
@@ -149,7 +149,7 @@ $ pip install --upgrade pip
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ conda install -y -c menpo opencv3
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;dlib&#34;&gt;Dlib&lt;/h4&gt;
+&lt;h3 id=&#34;dlib&#34;&gt;Dlib&lt;/h3&gt;
 
 &lt;p&gt;画像処理系が充実している機械学習ライブラリ&lt;br /&gt;
 &lt;a href=&#34;http://dlib.net/&#34;&gt;http://dlib.net/&lt;/a&gt;&lt;/p&gt;
@@ -157,18 +157,18 @@ $ pip install --upgrade pip
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ conda install -y -c menpo dlib
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;音声認識&#34;&gt;音声認識&lt;/h3&gt;
+&lt;h2 id=&#34;音声認識&#34;&gt;音声認識&lt;/h2&gt;
 
-&lt;p&gt;音声・動画処理ライブラリ。Ubuntu16.04から本体は&lt;code&gt;apt&lt;/code&gt;で入るようになりました。&lt;br /&gt;
+&lt;p&gt;音声・動画処理ライブラリ。Ubuntu16.04から本体は&lt;code&gt;apt-get&lt;/code&gt;で入るようになりました。&lt;br /&gt;
 &lt;a href=&#34;https://ffmpeg.org/&#34;&gt;https://ffmpeg.org/&lt;/a&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt install -y ffmpeg
 $ pip install ffmpy
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;自然言語処理&#34;&gt;自然言語処理&lt;/h3&gt;
+&lt;h2 id=&#34;自然言語処理&#34;&gt;自然言語処理&lt;/h2&gt;
 
-&lt;h4 id=&#34;mecab&#34;&gt;MeCab&lt;/h4&gt;
+&lt;h3 id=&#34;mecab&#34;&gt;MeCab&lt;/h3&gt;
 
 &lt;p&gt;形態素解析エンジン。本体は&lt;code&gt;apt-get&lt;/code&gt;でインストールします。&lt;br /&gt;
 &lt;a href=&#34;http://taku910.github.io/mecab/&#34;&gt;http://taku910.github.io/mecab/&lt;/a&gt;&lt;/p&gt;
@@ -177,7 +177,7 @@ $ pip install ffmpy
 $ pip install mecab-python3
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;gensim&#34;&gt;gensim&lt;/h4&gt;
+&lt;h3 id=&#34;gensim&#34;&gt;gensim&lt;/h3&gt;
 
 &lt;p&gt;トピックモデルのライブラリ&lt;br /&gt;
 &lt;a href=&#34;https://radimrehurek.com/gensim/&#34;&gt;https://radimrehurek.com/gensim/&lt;/a&gt;&lt;/p&gt;
@@ -185,9 +185,9 @@ $ pip install mecab-python3
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pip install gensim
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;強化学習&#34;&gt;強化学習&lt;/h3&gt;
+&lt;h2 id=&#34;強化学習&#34;&gt;強化学習&lt;/h2&gt;
 
-&lt;h4 id=&#34;openai-gym&#34;&gt;OpenAI Gym&lt;/h4&gt;
+&lt;h3 id=&#34;openai-gym&#34;&gt;OpenAI Gym&lt;/h3&gt;
 
 &lt;p&gt;強化学習のトレーニング環境&lt;br /&gt;
 &lt;a href=&#34;https://gym.openai.com/&#34;&gt;https://gym.openai.com/&lt;/a&gt;&lt;/p&gt;
