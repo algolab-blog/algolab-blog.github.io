@@ -153,7 +153,7 @@ $ sudo systemctl enable vncserver@1.service
     </item>
     
     <item>
-      <title>【随時更新】pyenv &#43; Anaconda (Ubuntu 16.04 LTS) で機械学習のPython開発環境をオールインワンで整える</title>
+      <title>pyenv &#43; Anaconda (Ubuntu 16.04 LTS) で機械学習のPython開発環境をオールインワンで整える【随時更新】</title>
       <link>http://blog.algolab.jp/post/2016/08/21/pyenv-anaconda-ubuntu/</link>
       <pubDate>Sun, 21 Aug 2016 17:22:48 +0900</pubDate>
       
@@ -162,7 +162,7 @@ $ sudo systemctl enable vncserver@1.service
 
 &lt;p&gt;筆者の機械学習系のPython開発環境は、&lt;a href=&#34;https://www.vagrantup.com/&#34;&gt;Vagrant&lt;/a&gt; を用いた &lt;a href=&#34;https://atlas.hashicorp.com/bento/boxes/ubuntu-16.04&#34;&gt;Ubuntu (16.04 LTS)&lt;/a&gt; 上に構築しています。&lt;br /&gt;
 ここでは、画像認識、音声認識、自然言語処理などに必要な環境をオールインワンで構築する手順をまとめます。&lt;br /&gt;
-(2016/08/22 最終更新)&lt;/p&gt;
+(最終更新日: 2016/08/22)&lt;/p&gt;
 
 &lt;h2 id=&#34;osバージョン&#34;&gt;OSバージョン&lt;/h2&gt;
 
@@ -301,10 +301,19 @@ $ pip install --upgrade pip
 
 &lt;h3 id=&#34;dlib&#34;&gt;Dlib&lt;/h3&gt;
 
-&lt;p&gt;画像処理系が充実している機械学習ライブラリ&lt;br /&gt;
+&lt;p&gt;画像処理系が充実している機械学習ライブラリ。&lt;code&gt;cmake&lt;/code&gt;と&lt;code&gt;boost-python&lt;/code&gt;も同時にインストールします。&lt;br /&gt;
 &lt;a href=&#34;http://dlib.net/&#34;&gt;http://dlib.net/&lt;/a&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ conda install -y -c wordsforthewise dlib
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install libboost-python-dev cmake
+$ conda install -y -c wordsforthewise dlib
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;selective-search&#34;&gt;Selective Search&lt;/h3&gt;
+
+&lt;p&gt;Alpacaが提供しているSelectiveSearchに特化したライブラリ&lt;br /&gt;
+&lt;a href=&#34;https://github.com/AlpacaDB/selectivesearch&#34;&gt;https://github.com/AlpacaDB/selectivesearch&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pip install selectivesearch
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;音声認識&#34;&gt;音声認識&lt;/h2&gt;

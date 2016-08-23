@@ -7,7 +7,7 @@
   <title>
     
     
-      【随時更新】pyenv &#43; Anaconda (Ubuntu 16.04 LTS) で機械学習のPython開発環境をオールインワンで整える
+      pyenv &#43; Anaconda (Ubuntu 16.04 LTS) で機械学習のPython開発環境をオールインワンで整える【随時更新】
     
      | ALGO GEEKS
   </title>
@@ -90,7 +90,7 @@
   
   <main id="single" role="main">
     <div class="article-header">
-      <h1>【随時更新】pyenv &#43; Anaconda (Ubuntu 16.04 LTS) で機械学習のPython開発環境をオールインワンで整える</h1>
+      <h1>pyenv &#43; Anaconda (Ubuntu 16.04 LTS) で機械学習のPython開発環境をオールインワンで整える【随時更新】</h1>
       
 <div class="meta">
   
@@ -111,7 +111,7 @@
 
 <p>筆者の機械学習系のPython開発環境は、<a href="https://www.vagrantup.com/">Vagrant</a> を用いた <a href="https://atlas.hashicorp.com/bento/boxes/ubuntu-16.04">Ubuntu (16.04 LTS)</a> 上に構築しています。<br />
 ここでは、画像認識、音声認識、自然言語処理などに必要な環境をオールインワンで構築する手順をまとめます。<br />
-(2016/08/22 最終更新)</p>
+(最終更新日: 2016/08/22)</p>
 
 <h2 id="osバージョン">OSバージョン</h2>
 
@@ -250,10 +250,19 @@ $ pip install --upgrade pip
 
 <h3 id="dlib">Dlib</h3>
 
-<p>画像処理系が充実している機械学習ライブラリ<br />
+<p>画像処理系が充実している機械学習ライブラリ。<code>cmake</code>と<code>boost-python</code>も同時にインストールします。<br />
 <a href="http://dlib.net/">http://dlib.net/</a></p>
 
-<pre><code class="language-sh">$ conda install -y -c wordsforthewise dlib
+<pre><code class="language-sh">$ sudo apt-get install libboost-python-dev cmake
+$ conda install -y -c wordsforthewise dlib
+</code></pre>
+
+<h3 id="selective-search">Selective Search</h3>
+
+<p>Alpacaが提供しているSelectiveSearchに特化したライブラリ<br />
+<a href="https://github.com/AlpacaDB/selectivesearch">https://github.com/AlpacaDB/selectivesearch</a></p>
+
+<pre><code class="language-sh">$ pip install selectivesearch
 </code></pre>
 
 <h2 id="音声認識">音声認識</h2>
@@ -353,23 +362,13 @@ $ pip install mecab-python3
       
         <li><a href="http://blog.algolab.jp/post/2016/08/22/ubuntu-xfce-tightvnc-server/">Ubuntu 16.04 LTSにXcfeとTightVNC Serverでリモートデスクトップ環境を構築する </a></li>
       
-        <li><a href="http://blog.algolab.jp/post/2016/08/21/pyenv-anaconda-ubuntu/">【随時更新】pyenv &#43; Anaconda (Ubuntu 16.04 LTS) で機械学習のPython開発環境をオールインワンで整える </a></li>
+        <li><a href="http://blog.algolab.jp/post/2016/08/21/pyenv-anaconda-ubuntu/">pyenv &#43; Anaconda (Ubuntu 16.04 LTS) で機械学習のPython開発環境をオールインワンで整える【随時更新】 </a></li>
       
         <li><a href="http://blog.algolab.jp/post/2016/08/18/telephone-appointment-simulation-bot/">テレアポ模擬トレーニングBot 〜コミュニケーション教育ツールとしてのチャットボットの活用可能性〜 </a></li>
       
         <li><a href="http://blog.algolab.jp/post/2016/08/16/speech-framework/">iOSで音声認識 〜Speech Frameworkを試す〜 </a></li>
       
         <li><a href="http://blog.algolab.jp/post/2016/08/16/calendar-report/">Googleカレンダー解析ツール作りました 〜時間の使い方チェッカー〜 </a></li>
-      
-        <li><a href="http://blog.algolab.jp/post/2016/08/11/raspberry-pi-alexa/">Amazon Echoを6,000円で自作する 〜Raspberry Pi 3 &#43; Alexa Voice Services (AVS)〜 </a></li>
-      
-        <li><a href="http://blog.algolab.jp/post/2016/08/07/deep-learning-introduction/">ディープラーニング徹底入門 〜AIトレーニング第1回〜 </a></li>
-      
-        <li><a href="http://blog.algolab.jp/post/2016/08/03/torch-aws-gpu-ubuntu/">TorchをAWSのGPUインスタンス (Ubuntu 14.04) で動かす </a></li>
-      
-        <li><a href="http://blog.algolab.jp/post/2016/08/01/tf-dqn-simple-1/">超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜導入編〜 </a></li>
-      
-        <li><a href="http://blog.algolab.jp/post/2016/08/01/ai-training-kick-off/">AIトレーニングキックオフ 〜ハムケツを認識したい〜 </a></li>
       
     <ul>
   </div>

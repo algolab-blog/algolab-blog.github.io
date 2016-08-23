@@ -8,7 +8,6 @@
     
     
       
-      勉強会
     
      | ALGO GEEKS
   </title>
@@ -18,7 +17,7 @@
   <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.algolab.jp/tags/study-session/"/>
+  <link rel="canonical" href="http://blog.algolab.jp/post/memo/"/>
 
   
   <link rel="stylesheet" href="/css/sanitize.css">
@@ -89,51 +88,100 @@
 
 
   
-  <main id="list" class="tag" role="main">
-    
-    <div class="article-header"><h1>#勉強会</h1></div>
-    
-    <div class="summary">
-      <h2><a href="http://blog.algolab.jp/post/2016/07/21/icml-2016-reading/">ICML2016読み会まとめ </a></h2>
-    
+  <main id="single" role="main">
+    <div class="article-header">
+      <h1></h1>
+      
 <div class="meta">
   
-    <span>2016/07/22</span>
+    <span>0001/01/01</span>
   
   
-    <span>|</span>
-    
-      <a href="/tags/study-session">#勉強会</a>&nbsp;
-    
-  
-  <span>|&nbsp;Shinpei Kawahito</span>
+  </span>
 </div>
 
-
     </div>
+    <article>
+      
+
+<h2 id="selective-search">Selective Search</h2>
+
+<p>DeepLearning界隈では、物体検出</p>
+
+<h2 id="dlibのインストール">dlibのインストール</h2>
+
+<p>Pythonライブラリが公開されているので、必要なパッケージとともにインストールします。<br />
+筆者はPython環境にAnacondaを用いているので、<code>conda</code>経由でインストールを行いました。</p>
+
+<pre><code class="language-sh">$ sudo apt-get install -y libboost-python-dev cmake
+$ conda install -c wordsforthewise dlib
+</code></pre>
+
+<p>なお、Anaconda環境の構築については下記にまとめていますので、ご参照ください。<br />
+<a href="http://blog.algolab.jp/post/2016/08/21/pyenv-anaconda-ubuntu/">【随時更新】pyenv + Anaconda (Ubuntu 16.04 LTS) で機械学習のPython開発環境をオールインワンで整える</a></p>
+
+<h2 id="dlibのサンプルを動かす">dlibのサンプルを動かす</h2>
+
+<pre><code class="language-sh">$ git clone https://github.com/davisking/dlib.git
+$ cd dlib
+$ python python_examples/face_detector.py examples/faces/2007_007763.jpg 
+Processing file: examples/faces/2007_007763.jpg
+Number of faces detected: 7
+Detection 0: Left: 93 Top: 194 Right: 129 Bottom: 230
+Detection 1: Left: 193 Top: 90 Right: 229 Bottom: 126
+Detection 2: Left: 293 Top: 86 Right: 329 Bottom: 122
+Detection 3: Left: 157 Top: 114 Right: 193 Bottom: 150
+Detection 4: Left: 177 Top: 214 Right: 213 Bottom: 250
+Detection 5: Left: 381 Top: 89 Right: 424 Bottom: 132
+Detection 6: Left: 309 Top: 233 Right: 352 Bottom: 276
+Hit enter to continue
+</code></pre>
+
+<p>領域
+Faster R-CNN</p>
+
+      
+  <div id="share-this" class="col span_10">
+    <span class='st_twitter_large' displayText='Tweet'></span>
+    <span class='st_facebook_large' displayText='Facebook'></span>
+    <span class='st_hatena_large' displayText='Hatena'></span>
+    <span class='st_googleplus_large' displayText='Google +'></span>
+    <span class='st_pocket_large' displayText='Pocket'></span>
     
-    <div class="summary">
-      <h2><a href="http://blog.algolab.jp/post/2016/07/14/r-env-hands-on/">R-env:連舞® ハンズオンで RoBoHoN（ロボホン）・ Sota（ソータ）と戯れてきた </a></h2>
     
-<div class="meta">
-  
-    <span>2016/07/14</span>
-  
-  
-    <span>|</span>
-    
-      <a href="/tags/robot">#ロボット</a>&nbsp;
-    
-      <a href="/tags/study-session">#勉強会</a>&nbsp;
-    
-  
-  <span>|&nbsp;Shinpei Kawahito</span>
-</div>
+  </div>
 
 
-    </div>
+
+    </article>
     
+ <aside><div id="disqus_thread"></div></aside>
+
+<script type="text/javascript">
+     
+    var disqus_shortname = 'algolab';
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
   </main>
+
+  
+  <nav class="pagination-single">
+    
+    
+      <span class="next"><a href="http://blog.algolab.jp/post/2016/07/14/r-env-hands-on/" rel="next">R-env:連舞® ハンズオンで RoBoHoN（ロボホン）・ Sota（ソータ）と戯れてきた</a> &rarr;</span>
+    
+  </nav>
+  
 
 <div id="sidebar" class="row gutters">
   <div class="col span_6">
