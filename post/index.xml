@@ -39,6 +39,8 @@
 
 &lt;h3 id=&#34;起動設定&#34;&gt;起動設定&lt;/h3&gt;
 
+&lt;p&gt;VNCサーバーからXcfeを起動するように設定を行います。&lt;/p&gt;
+
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vi ~/.vnc/xstartup
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -86,6 +88,21 @@ Would you like to enter a view-only password (y/n)? n
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vncserver -kill :1
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;キーの設定&#34;&gt;キーの設定&lt;/h3&gt;
+
+&lt;p&gt;デフォルトのままだとキーがうまく効かないので編集します。&lt;br /&gt;
+&lt;code&gt;Applications&lt;/code&gt; &amp;gt; &lt;code&gt;Settings&lt;/code&gt; &amp;gt; &lt;code&gt;Window Manager&lt;/code&gt; &amp;gt; &lt;code&gt;Keyboard&lt;/code&gt;の設定を開きます。&lt;/p&gt;
+
+&lt;h4 id=&#34;tabの設定&#34;&gt;Tabの設定&lt;/h4&gt;
+
+&lt;p&gt;&lt;code&gt;Switch window for same application&lt;/code&gt;を選択して、&lt;code&gt;Clear&lt;/code&gt;することで、&lt;code&gt;Tab&lt;/code&gt;キーが正常に動作するようになります。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/22/ubuntu-xfce-tightvnc-server//tab.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
 </description>
     </item>
     
@@ -99,7 +116,7 @@ Would you like to enter a view-only password (y/n)? n
 
 &lt;p&gt;筆者の機械学習系のPython開発環境は、&lt;a href=&#34;https://www.vagrantup.com/&#34;&gt;Vagrant&lt;/a&gt; を用いた &lt;a href=&#34;https://atlas.hashicorp.com/bento/boxes/ubuntu-16.04&#34;&gt;Ubuntu (16.04 LTS)&lt;/a&gt; 上に構築しています。&lt;br /&gt;
 ここでは、画像認識、音声認識、自然言語処理などに必要な環境をオールインワンで構築する手順をまとめます。&lt;br /&gt;
-(2016/08/21 初版公開)&lt;/p&gt;
+(2016/08/22 最終更新)&lt;/p&gt;
 
 &lt;h2 id=&#34;osバージョン&#34;&gt;OSバージョン&lt;/h2&gt;
 
@@ -116,6 +133,13 @@ DISTRIB_DESCRIPTION=&amp;quot;Ubuntu 16.04.1 LTS&amp;quot;
 Linux vagrant 4.4.0-31-generic #50-Ubuntu SMP Wed Jul 13 00:07:12 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;h2 id=&#34;汎用パッケージのインストール&#34;&gt;汎用パッケージのインストール&lt;/h2&gt;
+
+&lt;p&gt;事前に、汎用的に必要なパッケージをインストールしておきます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install -y git swig cmake
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;h2 id=&#34;pyenv-anaconda-の環境を構築&#34;&gt;pyenv + Anaconda の環境を構築&lt;/h2&gt;
 
 &lt;p&gt;Python環境は、pyenv + Anacodaを用いて構築します。&lt;br /&gt;
@@ -128,7 +152,7 @@ pyenvやAnacondaの概要やメリットについては、下記の記事に詳�
 
 &lt;p&gt;まず、必要なパッケージをインストールします。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install -y git make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;pyenvのインストール&#34;&gt;pyenvのインストール&lt;/h3&gt;
@@ -234,7 +258,7 @@ $ pip install --upgrade pip
 &lt;p&gt;画像処理系が充実している機械学習ライブラリ&lt;br /&gt;
 &lt;a href=&#34;http://dlib.net/&#34;&gt;http://dlib.net/&lt;/a&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ conda install -y -c menpo dlib
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ conda install -y -c wordsforthewise dlib
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;音声認識&#34;&gt;音声認識&lt;/h2&gt;

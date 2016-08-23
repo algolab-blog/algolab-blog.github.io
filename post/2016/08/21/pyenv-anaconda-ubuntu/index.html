@@ -111,7 +111,7 @@
 
 <p>筆者の機械学習系のPython開発環境は、<a href="https://www.vagrantup.com/">Vagrant</a> を用いた <a href="https://atlas.hashicorp.com/bento/boxes/ubuntu-16.04">Ubuntu (16.04 LTS)</a> 上に構築しています。<br />
 ここでは、画像認識、音声認識、自然言語処理などに必要な環境をオールインワンで構築する手順をまとめます。<br />
-(2016/08/21 初版公開)</p>
+(2016/08/22 最終更新)</p>
 
 <h2 id="osバージョン">OSバージョン</h2>
 
@@ -128,6 +128,13 @@ DISTRIB_DESCRIPTION=&quot;Ubuntu 16.04.1 LTS&quot;
 Linux vagrant 4.4.0-31-generic #50-Ubuntu SMP Wed Jul 13 00:07:12 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux
 </code></pre>
 
+<h2 id="汎用パッケージのインストール">汎用パッケージのインストール</h2>
+
+<p>事前に、汎用的に必要なパッケージをインストールしておきます。</p>
+
+<pre><code class="language-sh">$ sudo apt-get install -y git swig cmake
+</code></pre>
+
 <h2 id="pyenv-anaconda-の環境を構築">pyenv + Anaconda の環境を構築</h2>
 
 <p>Python環境は、pyenv + Anacodaを用いて構築します。<br />
@@ -140,7 +147,7 @@ pyenvやAnacondaの概要やメリットについては、下記の記事に詳�
 
 <p>まず、必要なパッケージをインストールします。</p>
 
-<pre><code class="language-sh">$ sudo apt-get install -y git make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev
+<pre><code class="language-sh">$ sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev
 </code></pre>
 
 <h3 id="pyenvのインストール">pyenvのインストール</h3>
@@ -246,7 +253,7 @@ $ pip install --upgrade pip
 <p>画像処理系が充実している機械学習ライブラリ<br />
 <a href="http://dlib.net/">http://dlib.net/</a></p>
 
-<pre><code class="language-sh">$ conda install -y -c menpo dlib
+<pre><code class="language-sh">$ conda install -y -c wordsforthewise dlib
 </code></pre>
 
 <h2 id="音声認識">音声認識</h2>

@@ -131,6 +131,8 @@
 
 <h3 id="起動設定">起動設定</h3>
 
+<p>VNCサーバーからXcfeを起動するように設定を行います。</p>
+
 <pre><code class="language-sh">$ vi ~/.vnc/xstartup
 </code></pre>
 
@@ -178,6 +180,21 @@ Would you like to enter a view-only password (y/n)? n
 
 <pre><code class="language-sh">$ vncserver -kill :1
 </code></pre>
+
+<h3 id="キーの設定">キーの設定</h3>
+
+<p>デフォルトのままだとキーがうまく効かないので編集します。<br />
+<code>Applications</code> &gt; <code>Settings</code> &gt; <code>Window Manager</code> &gt; <code>Keyboard</code>の設定を開きます。</p>
+
+<h4 id="tabの設定">Tabの設定</h4>
+
+<p><code>Switch window for same application</code>を選択して、<code>Clear</code>することで、<code>Tab</code>キーが正常に動作するようになります。</p>
+
+<figure>
+  <img src="/images//post/2016/08/22/ubuntu-xfce-tightvnc-server//tab.png"/>
+  
+</figure>
+
 
       
   <div id="share-this" class="col span_10">
