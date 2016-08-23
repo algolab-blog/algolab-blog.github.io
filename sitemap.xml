@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://blog.algolab.jp/</loc>
+    <lastmod>2016-08-22T17:53:57+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/post/2016/08/22/ubuntu-xfce-tightvnc-server/</loc>
+    <lastmod>2016-08-22T17:53:57+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/post/2016/08/21/pyenv-anaconda-ubuntu/</loc>
+    <lastmod>2016-08-21T17:22:48+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/post/2016/08/18/telephone-appointment-simulation-bot/</loc>
+    <lastmod>2016-08-18T15:20:16+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/post/2016/08/16/speech-framework/</loc>
+    <lastmod>2016-08-16T19:34:57+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/post/2016/08/16/calendar-report/</loc>
+    <lastmod>2016-08-16T17:34:11+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/post/2016/08/11/raspberry-pi-alexa/</loc>
+    <lastmod>2016-08-11T19:08:44+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/post/2016/08/07/deep-learning-introduction/</loc>
+    <lastmod>2016-08-07T15:46:48+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/post/2016/08/03/torch-aws-gpu-ubuntu/</loc>
+    <lastmod>2016-08-03T17:12:34+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/post/2016/08/01/tf-dqn-simple-1/</loc>
+    <lastmod>2016-08-01T22:06:25+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/post/2016/08/01/ai-training-kick-off/</loc>
+    <lastmod>2016-08-01T12:11:45+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/post/2016/07/30/seq2seq-chatbot/</loc>
+    <lastmod>2016-07-30T15:50:23+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/post/2016/07/29/mary-meeker-2016/</loc>
+    <lastmod>2016-07-29T11:47:41+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/post/2016/07/25/ai-training/</loc>
+    <lastmod>2016-07-25T16:35:26+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/post/2016/07/21/icml-2016-reading/</loc>
+    <lastmod>2016-07-22T10:14:41+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/post/2016/07/14/r-env-hands-on/</loc>
+    <lastmod>2016-07-14T17:40:56+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/about/</loc>
+    <lastmod>2016-01-01T00:00:00+09:00</lastmod>
+  </url>
+  
+</urlset>

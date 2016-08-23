@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Development Environment on ALGO GEEKS</title>
+    <link>http://blog.algolab.jp/tags/development-environment/</link>
+    <description>Recent content in Development Environment on ALGO GEEKS</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Mon, 22 Aug 2016 17:53:57 +0900</lastBuildDate>
+    <atom:link href="http://blog.algolab.jp/tags/development-environment/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Ubuntu 16.04 LTSにXcfeとTightVNC Serverでリモートデスクトップ環境を構築する</title>
+      <link>http://blog.algolab.jp/post/2016/08/22/ubuntu-xfce-tightvnc-server/</link>
+      <pubDate>Mon, 22 Aug 2016 17:53:57 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/08/22/ubuntu-xfce-tightvnc-server/</guid>
+      <description>
+
+&lt;p&gt;Macから &lt;a href=&#34;https://www.vagrantup.com/&#34;&gt;Vagrant&lt;/a&gt; 上の &lt;a href=&#34;https://atlas.hashicorp.com/bento/boxes/ubuntu-16.04&#34;&gt;Ubuntu (16.04 LTS)&lt;/a&gt; へリモートデスクトップでアクセスする手順をまとめます。&lt;/p&gt;
+
+&lt;h2 id=&#34;デスクトップ環境のインストール&#34;&gt;デスクトップ環境のインストール&lt;/h2&gt;
+
+&lt;p&gt;デスクトップ環境には高速な軽量なXfceを用います。(お好みに合わせてください)&lt;br /&gt;
+&lt;a href=&#34;https://www.xfce.org/&#34;&gt;https://www.xfce.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install -y xfce4 xfce4-goodies
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;tightvnc-serverのセットアップ&#34;&gt;TightVNC Serverのセットアップ&lt;/h2&gt;
+
+&lt;p&gt;リモートデスクトップを使用するため、TightVNCを用いてVNCサーバーを立てます。&lt;br /&gt;
+&lt;a href=&#34;http://www.tightvnc.com/&#34;&gt;http://www.tightvnc.com/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;インストール&#34;&gt;インストール&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install tightvncserver
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;起動設定&#34;&gt;起動設定&lt;/h3&gt;
+
+&lt;p&gt;VNCサーバーからXcfeを起動するように設定を行います。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vi ~/.vnc/xstartup
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/bin/bash
+xrdb $HOME/.Xresources
+startxfce4 &amp;amp;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;起動&#34;&gt;起動&lt;/h3&gt;
+
+&lt;p&gt;初回起動時には、アクセスする際のパスワードが求められるので入力します。&lt;br /&gt;
+view-only のパスワードは特に必要ないので、&lt;code&gt;n&lt;/code&gt;を選択しました。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vncserver
+
+You will require a password to access your desktops.
+
+Password:
+Verify:
+Would you like to enter a view-only password (y/n)? n
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;アクセス&#34;&gt;アクセス&lt;/h3&gt;
+
+&lt;p&gt;MacのFinderから&lt;code&gt;移動&lt;/code&gt; &amp;gt; &lt;code&gt;サーバーへ接続&lt;/code&gt;で、VNCクライアントを起動します。&lt;br /&gt;
+アドレスバーには&lt;code&gt;vnc://[サーバーのIPアドレス]:5901&lt;/code&gt;を入力してください。
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/22/ubuntu-xfce-tightvnc-server//vnc_client.png&#34;/&gt;
+  
+&lt;/figure&gt;
+&lt;/p&gt;
+
+&lt;p&gt;パスワードによる認証の後、リモートデスクトップにアクセスできます。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/22/ubuntu-xfce-tightvnc-server//vnc_server.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;h3 id=&#34;停止&#34;&gt;停止&lt;/h3&gt;
+
+&lt;p&gt;以下のコマンドで停止します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vncserver -kill :1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;自動起動の設定&#34;&gt;自動起動の設定&lt;/h3&gt;
+
+&lt;h4 id=&#34;起動ファイルの作成&#34;&gt;起動ファイルの作成&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo vi /etc/systemd/system/vncserver@.service
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;{{USERNAME}}&lt;/code&gt;は環境に合わせて設定してください。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;[Unit]
+Description=Start TightVNC server at startup
+After=syslog.target network.target
+
+[Service]
+Type=forking
+User={{USERNAME}}
+PAMName=login
+PIDFile=/home/{{USERNAME}}/.vnc/%H:%i.pid
+ExecStartPre=-/usr/bin/vncserver -kill :%i &amp;gt; /dev/null 2&amp;gt;&amp;amp;1
+ExecStart=/usr/bin/vncserver -depth 24 -geometry 1280x800 :%i
+ExecStop=/usr/bin/vncserver -kill :%i
+
+[Install]
+WantedBy=multi-user.target
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;自動起動の設定-1&#34;&gt;自動起動の設定&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo systemctl daemon-reload
+$ sudo systemctl enable vncserver@1.service
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;起動-1&#34;&gt;起動&lt;/h3&gt;
+
+&lt;p&gt;以下のコマンドで手動で起動できるようになります。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo systemctl start vncserver@1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;ステータス確認&#34;&gt;ステータス確認&lt;/h3&gt;
+
+&lt;p&gt;ステータスは以下のコマンドで確認します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo systemctl status vncserver@1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;キーの設定&#34;&gt;キーの設定&lt;/h3&gt;
+
+&lt;p&gt;デフォルトのままだとキーがうまく効かないので編集します。&lt;br /&gt;
+&lt;code&gt;Applications&lt;/code&gt; &amp;gt; &lt;code&gt;Settings&lt;/code&gt; &amp;gt; &lt;code&gt;Window Manager&lt;/code&gt; &amp;gt; &lt;code&gt;Keyboard&lt;/code&gt;の設定を開きます。&lt;/p&gt;
+
+&lt;h4 id=&#34;tabの設定&#34;&gt;Tabの設定&lt;/h4&gt;
+
+&lt;p&gt;&lt;code&gt;Switch window for same application&lt;/code&gt;を選択して、&lt;code&gt;Clear&lt;/code&gt;することで、&lt;code&gt;Tab&lt;/code&gt;キーが正常に動作するようになります。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/22/ubuntu-xfce-tightvnc-server//tab.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+</description>
+    </item>
+    
+    <item>
+      <title>【随時更新】pyenv &#43; Anaconda (Ubuntu 16.04 LTS) で機械学習のPython開発環境をオールインワンで整える</title>
+      <link>http://blog.algolab.jp/post/2016/08/21/pyenv-anaconda-ubuntu/</link>
+      <pubDate>Sun, 21 Aug 2016 17:22:48 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/08/21/pyenv-anaconda-ubuntu/</guid>
+      <description>
+
+&lt;p&gt;筆者の機械学習系のPython開発環境は、&lt;a href=&#34;https://www.vagrantup.com/&#34;&gt;Vagrant&lt;/a&gt; を用いた &lt;a href=&#34;https://atlas.hashicorp.com/bento/boxes/ubuntu-16.04&#34;&gt;Ubuntu (16.04 LTS)&lt;/a&gt; 上に構築しています。&lt;br /&gt;
+ここでは、画像認識、音声認識、自然言語処理などに必要な環境をオールインワンで構築する手順をまとめます。&lt;br /&gt;
+(2016/08/22 最終更新)&lt;/p&gt;
+
+&lt;h2 id=&#34;osバージョン&#34;&gt;OSバージョン&lt;/h2&gt;
+
+&lt;p&gt;OSバージョンは下記の通りです。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cat /etc/lsb-release
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=16.04
+DISTRIB_CODENAME=xenial
+DISTRIB_DESCRIPTION=&amp;quot;Ubuntu 16.04.1 LTS&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ uname -a
+Linux vagrant 4.4.0-31-generic #50-Ubuntu SMP Wed Jul 13 00:07:12 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;汎用パッケージのインストール&#34;&gt;汎用パッケージのインストール&lt;/h2&gt;
+
+&lt;p&gt;事前に、汎用的に必要なパッケージをインストールしておきます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install -y git swig cmake
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;pyenv-anaconda-の環境を構築&#34;&gt;pyenv + Anaconda の環境を構築&lt;/h2&gt;
+
+&lt;p&gt;Python環境は、pyenv + Anacodaを用いて構築します。&lt;br /&gt;
+pyenvやAnacondaの概要やメリットについては、下記の記事に詳しくまとまっています。&lt;br /&gt;
+&lt;a href=&#34;http://qiita.com/y__sama/items/5b62d31cb7e6ed50f02c&#34;&gt;データサイエンティストを目指す人のpython環境構築 2016&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;上記の記事にあるように、ここでもpyenvはAnacondaのインストーラとしてのみ使用し、Python環境の切り替えはAnacondaで行うこととします。&lt;/p&gt;
+
+&lt;h3 id=&#34;必要なパッケージのインストール&#34;&gt;必要なパッケージのインストール&lt;/h3&gt;
+
+&lt;p&gt;まず、必要なパッケージをインストールします。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;pyenvのインストール&#34;&gt;pyenvのインストール&lt;/h3&gt;
+
+&lt;p&gt;pyenvおよびプラグインをインストールし、環境を整えます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ git clone git://github.com/yyuu/pyenv.git ~/.pyenv
+$ git clone https://github.com/yyuu/pyenv-pip-rehash.git ~/.pyenv/plugins/pyenv-pip-rehash
+$ echo &#39;export PYENV_ROOT=&amp;quot;$HOME/.pyenv&amp;quot;&#39; &amp;gt;&amp;gt; ~/.bashrc
+$ echo &#39;export PATH=&amp;quot;$PYENV_ROOT/bin:$PATH&amp;quot;&#39; &amp;gt;&amp;gt; ~/.bashrc
+$ echo &#39;eval &amp;quot;$(pyenv init -)&amp;quot;&#39; &amp;gt;&amp;gt; ~/.bashrc
+$ source ~/.bashrc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;anacondaのインストール&#34;&gt;Anacondaのインストール&lt;/h3&gt;
+
+&lt;p&gt;まず、最新のAnaconda (Python 3系) のバージョンを確認します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pyenv install -l | grep anaconda3
+  anaconda3-2.0.0
+  anaconda3-2.0.1
+  anaconda3-2.1.0
+  anaconda3-2.2.0
+  anaconda3-2.3.0
+  anaconda3-2.4.0
+  anaconda3-2.4.1
+  anaconda3-2.5.0
+  anaconda3-4.0.0
+  anaconda3-4.1.0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最新のAnaconda (ここでは4.1.0) をインストールし、デフォルトとして設定します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pyenv install anaconda3-4.1.0
+$ pyenv global anaconda3-4.1.0
+$ echo &#39;export PATH=&amp;quot;$PYENV_ROOT/versions/anaconda3-4.1.0/bin/:$PATH&amp;quot;&#39; &amp;gt;&amp;gt; ~/.bashrc
+$ source ~/.bashrc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Pythonの環境を確認します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ python --version
+Python 3.5.1 :: Anaconda 4.1.0 (64-bit)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;pythonライブラリのインストール&#34;&gt;Pythonライブラリのインストール&lt;/h2&gt;
+
+&lt;p&gt;以下、用途に応じて必要なPythonライブラリ (+ 本体) をインストールしていきます。&lt;br /&gt;
+&lt;code&gt;conda&lt;/code&gt;経由が便利なものは&lt;code&gt;conda&lt;/code&gt;で、それ以外は&lt;code&gt;pip&lt;/code&gt;で行います。&lt;/p&gt;
+
+&lt;p&gt;諸々インストールする前に自身を更新しておきます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ conda update -y conda
+$ pip install --upgrade pip
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;深層学習ライブラリ&#34;&gt;深層学習ライブラリ&lt;/h2&gt;
+
+&lt;h3 id=&#34;tensorflow&#34;&gt;TensorFlow&lt;/h3&gt;
+
+&lt;p&gt;Googleの深層学習ライブラリ。&lt;code&gt;conda&lt;/code&gt;経由で最新バージョンを一発でインストールします。&lt;br /&gt;
+&lt;a href=&#34;https://www.tensorflow.org/&#34;&gt;https://www.tensorflow.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ conda install -y -c jjhelmus tensorflow
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;chainer&#34;&gt;Chainer&lt;/h3&gt;
+
+&lt;p&gt;PFNの深層学習ライブラリ&lt;br /&gt;
+&lt;a href=&#34;http://chainer.org/&#34;&gt;http://chainer.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pip install chainer
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;keras&#34;&gt;Keras&lt;/h3&gt;
+
+&lt;p&gt;TensorFlowおよびTheanoのラッパー。同時にTheanoも入ります。&lt;br /&gt;
+&lt;a href=&#34;https://keras.io/&#34;&gt;https://keras.io/&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pip install keras
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;画像認識&#34;&gt;画像認識&lt;/h2&gt;
+
+&lt;h3 id=&#34;imagemagick&#34;&gt;ImageMagick&lt;/h3&gt;
+
+&lt;p&gt;画像処理ライブラリ。&lt;code&gt;conda&lt;/code&gt;経由で本体もまとめてインストールします。&lt;br /&gt;
+&lt;a href=&#34;http://imagemagick.org/script/index.php&#34;&gt;http://imagemagick.org/script/index.php&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ conda install -y -c kalefranz imagemagick
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;opencv&#34;&gt;OpenCV&lt;/h3&gt;
+
+&lt;p&gt;コンピュータビジョンライブラリ&lt;br /&gt;
+&lt;a href=&#34;http://opencv.org/&#34;&gt;http://opencv.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ conda install -y -c menpo opencv3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;dlib&#34;&gt;Dlib&lt;/h3&gt;
+
+&lt;p&gt;画像処理系が充実している機械学習ライブラリ&lt;br /&gt;
+&lt;a href=&#34;http://dlib.net/&#34;&gt;http://dlib.net/&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ conda install -y -c wordsforthewise dlib
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;音声認識&#34;&gt;音声認識&lt;/h2&gt;
+
+&lt;p&gt;音声・動画処理ライブラリ。Ubuntu16.04から本体は&lt;code&gt;apt-get&lt;/code&gt;で入るようになりました。&lt;br /&gt;
+&lt;a href=&#34;https://ffmpeg.org/&#34;&gt;https://ffmpeg.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt install -y ffmpeg
+$ pip install ffmpy
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;自然言語処理&#34;&gt;自然言語処理&lt;/h2&gt;
+
+&lt;h3 id=&#34;mecab&#34;&gt;MeCab&lt;/h3&gt;
+
+&lt;p&gt;形態素解析エンジン。本体は&lt;code&gt;apt-get&lt;/code&gt;でインストールします。&lt;br /&gt;
+&lt;a href=&#34;http://taku910.github.io/mecab/&#34;&gt;http://taku910.github.io/mecab/&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get -y install libmecab-dev mecab mecab-ipadic mecab-ipadic-utf8
+$ pip install mecab-python3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;gensim&#34;&gt;gensim&lt;/h3&gt;
+
+&lt;p&gt;トピックモデルのライブラリ&lt;br /&gt;
+&lt;a href=&#34;https://radimrehurek.com/gensim/&#34;&gt;https://radimrehurek.com/gensim/&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pip install gensim
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;強化学習&#34;&gt;強化学習&lt;/h2&gt;
+
+&lt;h3 id=&#34;openai-gym&#34;&gt;OpenAI Gym&lt;/h3&gt;
+
+&lt;p&gt;強化学習のトレーニング環境&lt;br /&gt;
+&lt;a href=&#34;https://gym.openai.com/&#34;&gt;https://gym.openai.com/&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pip install gym
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;その他便利ツール&#34;&gt;その他便利ツール&lt;/h2&gt;
+
+&lt;h3 id=&#34;tightvnc-server&#34;&gt;TightVNC Server&lt;/h3&gt;
+
+&lt;p&gt;リモートデスクトップ環境。下記の記事を参照してください。&lt;br /&gt;
+&lt;a href=&#34;http://blog.algolab.jp/post/2016/08/22/ubuntu-xfce-tightvnc-server/&#34;&gt;Ubuntu 16.04 LTSにXcfeとTightVNC Serverでリモートデスクトップ環境を構築する&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>TorchをAWSのGPUインスタンス (Ubuntu 14.04) で動かす</title>
+      <link>http://blog.algolab.jp/post/2016/08/03/torch-aws-gpu-ubuntu/</link>
+      <pubDate>Wed, 03 Aug 2016 17:12:34 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/08/03/torch-aws-gpu-ubuntu/</guid>
+      <description>
+
+&lt;p&gt;TorchをAWSのGPUインスタンス (Ubuntu 14.04) で動かす手順をまとめます。&lt;br /&gt;
+環境は以下の通りです。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Ubuntu Server 14.04 LTS&lt;/li&gt;
+&lt;li&gt;CUDA7.5&lt;/li&gt;
+&lt;li&gt;CuDNN v5&lt;/li&gt;
+&lt;li&gt;Torch7&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;インスタンスを起動&#34;&gt;インスタンスを起動&lt;/h2&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/03/torch-aws-gpu-ubuntu//ubuntu.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;Ubuntu Server 14.04 LTS (HVM), SSD Volume Type - ami-2d39803a をベースに構築します。&lt;br /&gt;
+インスタンスタイプはg2.2xlargeを用いました。&lt;br /&gt;
+ストレージ容量はデフォルトの8GBでは不足するので、16GBとします。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/03/torch-aws-gpu-ubuntu//storage.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;h2 id=&#34;パッケージ更新&#34;&gt;パッケージ更新&lt;/h2&gt;
+
+&lt;p&gt;インスタンスが起動したら、SSHでログインのうえ、まずパッケージを更新します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get update
+$ sudo apt-get upgrade -y
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;cudaインストール&#34;&gt;CUDAインストール&lt;/h2&gt;
+
+&lt;p&gt;CUDAのインストールはハマりどころが多いですが、先人の知恵にならって進めます。&lt;br /&gt;
+&lt;a href=&#34;https://gist.github.com/erikbern/78ba519b97b440e10640&#34;&gt;https://gist.github.com/erikbern/78ba519b97b440e10640&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;既存のドライバ (Noveau) を無効にします。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ echo -e &amp;quot;blacklist nouveau\nblacklist lbm-nouveau\noptions nouveau modeset=0\nalias nouveau off\nalias lbm-nouveau off\n&amp;quot; | sudo tee /etc/modprobe.d/blacklist-nouveau.conf
+echo options nouveau modeset=0 | sudo tee -a /etc/modprobe.d/nouveau-kms.conf
+sudo update-initramfs -u
+sudo reboot
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;必要なカーネルモジュールをインストールします。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install -y linux-image-extra-virtual
+$ sudo reboot
+$ sudo apt-get install -y linux-source linux-headers-`uname -r`
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;CUDA7.5をインストールします。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ wget http://developer.download.nvidia.com/compute/cuda/7.5/Prod/local_installers/cuda_7.5.18_linux.run
+$ chmod +x cuda_7.5.18_linux.run
+$ ./cuda_7.5.18_linux.run -extract=`pwd`/nvidia_installers
+$ cd nvidia_installers
+$ sudo ./NVIDIA-Linux-x86_64-352.39.run
+$ sudo modprobe nvidia
+$ sudo ./cuda-linux64-rel-7.5.18-19867135.run
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;途中でシンボリックリンクを作成するか聞かれますが、yesを選択します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;Would you like to create a symbolic link /usr/local/cuda pointing to /usr/local/cuda-7.5? ((y)es/(n)o/(a)bort) [ default is yes ]: y
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;CUDAのパスを環境変数に追加します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ echo -e &amp;quot;export PATH=/usr/local/cuda/bin:\$PATH\nexport LD_LIBRARY_PATH=/usr/local/cuda/lib64:\$LD_LIBRARY_PATH&amp;quot; | tee -a ~/.bashrc
+$ source ~/.bashrc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;cudnnインストール&#34;&gt;CUDNNインストール&lt;/h2&gt;
+
+&lt;p&gt;まず、下記のサイトからアカウントを登録します。&lt;br /&gt;
+&lt;a href=&#34;https://developer.nvidia.com/cudnn&#34;&gt;https://developer.nvidia.com/cudnn&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;アカウント登録後、ダウンロードページから、cuDNN v5 Library for Linuxをダウンロードします。
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/03/torch-aws-gpu-ubuntu//cudnn.png&#34;/&gt;
+  
+&lt;/figure&gt;
+&lt;/p&gt;
+
+&lt;p&gt;ダウンロードしたファイルをサーバへ転送後、サーバ上で展開します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ tar -xzf cudnn-7.5-linux-x64-v5.0-ga.tgz
+$ sudo cp cuda/lib64/libcudnn* /usr/local/cuda-7.5/lib64
+$ sudo cp cuda/include/cudnn.h /usr/local/cuda/include
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;torchインストール&#34;&gt;Torchインストール&lt;/h2&gt;
+
+&lt;p&gt;公式に従って、インストールします。&lt;br /&gt;
+&lt;a href=&#34;http://torch.ch/docs/getting-started.html&#34;&gt;http://torch.ch/docs/getting-started.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install -y git
+$ git clone https://github.com/torch/distro.git ~/torch --recursive
+$ cd ~/torch; bash install-deps;
+$ ./install.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;環境変数を.bashrcに書き込むか聞かれますが、yesを選択します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;Do you want to automatically prepend the Torch install location
+to PATH and LD_LIBRARY_PATH in your /home/ubuntu/.bashrc? (yes/no)
+[yes] &amp;gt;&amp;gt;&amp;gt; 
+yes
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;環境変数を反映します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ source ~/.bashrc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最後に、CUDAおよびcuDNNを使うためのLuaライブラリをインストールします。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ luarocks install cutorch
+$ luarocks install cunn
+$ luarocks install cunnx
+$ luarocks install https://raw.githubusercontent.com/soumith/cudnn.torch/master/cudnn-scm-1.rockspec
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;以上で環境構築は完了です。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
