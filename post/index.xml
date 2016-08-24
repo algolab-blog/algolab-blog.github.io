@@ -121,7 +121,7 @@ client.change_resource_record_sets(
       <guid>http://blog.algolab.jp/post/2016/08/22/ubuntu-xfce-tightvnc-server/</guid>
       <description>
 
-&lt;p&gt;Macから &lt;a href=&#34;https://www.vagrantup.com/&#34;&gt;Vagrant&lt;/a&gt; 上の &lt;a href=&#34;https://atlas.hashicorp.com/bento/boxes/ubuntu-16.04&#34;&gt;Ubuntu (16.04 LTS)&lt;/a&gt; へリモートデスクトップでアクセスする手順をまとめます。&lt;/p&gt;
+&lt;p&gt;MacからUbuntu (16.04 LTS) へリモートデスクトップでアクセスする手順をまとめます。&lt;/p&gt;
 
 &lt;h2 id=&#34;デスクトップ環境のインストール&#34;&gt;デスクトップ環境のインストール&lt;/h2&gt;
 
@@ -281,13 +281,6 @@ DISTRIB_DESCRIPTION=&amp;quot;Ubuntu 16.04.1 LTS&amp;quot;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ uname -a
 Linux vagrant 4.4.0-31-generic #50-Ubuntu SMP Wed Jul 13 00:07:12 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;汎用パッケージのインストール&#34;&gt;汎用パッケージのインストール&lt;/h2&gt;
-
-&lt;p&gt;事前に、汎用的に必要なパッケージをインストールしておきます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install -y git swig cmake
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;pyenv-anaconda-の環境を構築&#34;&gt;pyenv + Anaconda の環境を構築&lt;/h2&gt;
