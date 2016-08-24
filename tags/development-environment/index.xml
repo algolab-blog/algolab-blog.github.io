@@ -6,8 +6,117 @@
     <description>Recent content in Development Environment on ALGO GEEKS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 22 Aug 2016 17:53:57 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 24 Aug 2016 15:48:58 +0900</lastBuildDate>
     <atom:link href="http://blog.algolab.jp/tags/development-environment/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>VPNサーバのパブリックIPをDNSに登録する 〜Raspberry Pi上で定期実行〜</title>
+      <link>http://blog.algolab.jp/post/2016/08/24/vpn-dns/</link>
+      <pubDate>Wed, 24 Aug 2016 15:48:58 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/08/24/vpn-dns/</guid>
+      <description>
+
+&lt;p&gt;弊社オフィスではVPN環境を構築していますが、固定IPを取得していないため、パブリックIPが変わるたびにVPNサーバーの接続先を変更しなければならず面倒です。
+そこで定期的にIPアドレスを取得し、DNSに登録するようにします。&lt;/p&gt;
+
+&lt;p&gt;実行環境は以下のとおりです。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;スクリプト実行: Raspberry Pi&lt;/li&gt;
+&lt;li&gt;DNS登録: AWS SDK for Python (Boto 3)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;aws-sdk-for-python-のインストールおよび設定&#34;&gt;AWS SDK for Python のインストールおよび設定&lt;/h2&gt;
+
+&lt;p&gt;DNSはAWSのRoute53で管理しており、その操作のためにSDKを導入します。&lt;br /&gt;
+なお、Raspberry PiにはPython (2.7系) がデフォルトでインストールされているため、そのまま用います。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo pip install boto3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;続いて、Credentialを設定します。&lt;code&gt;YOUR_KEY&lt;/code&gt;および&lt;code&gt;YOUR_SECRET&lt;/code&gt;は環境に合わせて設定してください。&lt;br /&gt;
+(Route53へのアクセス権限があれば問題ありません)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vi ~/.aws/credentials
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;[default]
+aws_access_key_id = YOUR_KEY
+aws_secret_access_key = YOUR_SECRET
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;dns更新&#34;&gt;DNS更新&lt;/h2&gt;
+
+&lt;p&gt;DNS更新には&lt;code&gt;change_resource_record_sets&lt;/code&gt;メソッドを使用します。&lt;br /&gt;
+詳細は、&lt;a href=&#34;http://boto3.readthedocs.io/en/latest/reference/services/route53.html#Route53.Client.change_resource_record_sets&#34;&gt;公式ドキュメント&lt;/a&gt; を参照してください。&lt;/p&gt;
+
+&lt;h2 id=&#34;パブリックipの取得&#34;&gt;パブリックIPの取得&lt;/h2&gt;
+
+&lt;p&gt;パブリックIPは、&lt;a href=&#34;http://httpbin.org&#34;&gt;httpbin.org&lt;/a&gt; にアクセスして取得します。&lt;br /&gt;
+レスポンスとしては以下のようなものが返ってきます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ curl http://httpbin.org/ip
+{
+    &amp;quot;origin&amp;quot;: &amp;quot;xxx.xxx.xxx.xxx&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;スクリプト&#34;&gt;スクリプト&lt;/h2&gt;
+
+&lt;p&gt;以上を踏まえて、スクリプトを書いていきます。&lt;br /&gt;
+&lt;code&gt;DOMAIN&lt;/code&gt;および&lt;code&gt;HOST&lt;/code&gt;は環境に合わせて書き換えてください。下記では&lt;code&gt;hoge.example.com&lt;/code&gt;を登録する例としています。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# -*- coding: utf-8 -*-
+
+import json
+import urllib2
+
+import boto3
+
+DOMAIN = &#39;hoge&#39;
+HOST = &#39;example.com&#39;
+TTL = 300
+
+# パブリックIPアドレスの取得
+response = urllib2.urlopen(&#39;http://httpbin.org/ip&#39;)
+json_str = response.read()
+ip_address = json.loads(json_str)[&#39;origin&#39;]
+
+# AWS SDK Client
+client = boto3.client(&#39;route53&#39;)
+
+# hosted_zone_idの取得
+hosted_zones = client.list_hosted_zones()[&#39;HostedZones&#39;]
+hosted_zone_id = filter(lambda h: h[&#39;Name&#39;] == HOST + &#39;.&#39;, hosted_zones)[0][&#39;Id&#39;]
+
+# 更新内容
+change_batch = {
+    &#39;Changes&#39;: [
+        {
+            &#39;Action&#39;: &#39;UPSERT&#39;,
+            &#39;ResourceRecordSet&#39;: {
+                &#39;Name&#39;: DOMAIN + &#39;.&#39; + HOST + &#39;.&#39;,
+                &#39;Type&#39;: &#39;A&#39;,
+                &#39;TTL&#39;: TTL,
+                &#39;ResourceRecords&#39;: [
+                    {&#39;Value&#39;: ip_address}
+                ]
+            }
+        }
+    ]
+}
+
+# 更新
+client.change_resource_record_sets(
+    HostedZoneId = hosted_zone_id,
+    ChangeBatch = change_batch
+)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;あとは、上記のスクリプトを&lt;code&gt;cron&lt;/code&gt;に登録するなどして、定期実行させれば完了です。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Ubuntu 16.04 LTSにXcfeとTightVNC Serverでリモートデスクトップ環境を構築する</title>

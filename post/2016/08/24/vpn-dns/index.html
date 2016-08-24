@@ -7,7 +7,7 @@
   <title>
     
     
-      Googleカレンダー解析ツール作りました 〜時間の使い方チェッカー〜
+      VPNサーバのパブリックIPをDNSに登録する 〜Raspberry Pi上で定期実行〜
     
     &nbsp;|&nbsp;ALGO GEEKS
   </title>
@@ -17,7 +17,7 @@
   <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.algolab.jp/post/2016/08/16/calendar-report/"/>
+  <link rel="canonical" href="http://blog.algolab.jp/post/2016/08/24/vpn-dns/"/>
 
   
   <link rel="stylesheet" href="/css/sanitize.css">
@@ -90,17 +90,17 @@
   
   <main id="single" role="main">
     <div class="article-header">
-      <h1>Googleカレンダー解析ツール作りました 〜時間の使い方チェッカー〜</h1>
+      <h1>VPNサーバのパブリックIPをDNSに登録する 〜Raspberry Pi上で定期実行〜</h1>
       
 
 <div class="meta">
   
-    <span>2016/08/16</span>
+    <span>2016/08/24</span>
   
   
     <span>|</span>
     
-      <a href="/tags/product">#プロダクト</a>&nbsp;
+      <a href="/tags/development-environment">#環境構築</a>&nbsp;
     
   
   
@@ -115,80 +115,104 @@
     <article>
       
 
-<figure>
-  <img src="/images//post/2016/08/16/calendar-report//demo.png"/>
-  
-</figure>
+<p>弊社オフィスではVPN環境を構築していますが、固定IPを取得していないため、パブリックIPが変わるたびにVPNサーバーの接続先を変更しなければならず面倒です。
+そこで定期的にIPアドレスを取得し、DNSに登録するようにします。</p>
 
-
-<p>タイトルの通りですが、時間の使い方チェッカーというツールを作りました (だいぶ前に作っていました)。<br />
-<a href="http://tools.algolab.jp/calendar_reports">http://tools.algolab.jp/calendar_reports</a></p>
-
-<p>ソースコードはGitHubに公開しています。<br />
-<a href="https://github.com/algolab-inc/algo-tools/">https://github.com/algolab-inc/algo-tools/</a></p>
-
-<h2 id="時間の使い方チェッカーとは">時間の使い方チェッカーとは？</h2>
+<p>実行環境は以下のとおりです。</p>
 
 <ul>
-<li>Googleカレンダーを解析して可視化するツールです</li>
-<li>タイトルを括弧で囲っているイベントのみを解析対象としています
-
-<ul>
-<li>(例) [仕事]</li>
-</ul></li>
-<li>括弧を連続することで階層を表現することができます
-
-<ul>
-<li>(例) [仕事][営業]</li>
-</ul></li>
-<li>データは一切保存しません (&larr;大事)</li>
+<li>スクリプト実行: Raspberry Pi</li>
+<li>DNS登録: AWS SDK for Python (Boto 3)</li>
 </ul>
 
-<h2 id="開発のきっかけ">開発のきっかけ</h2>
+<h2 id="aws-sdk-for-python-のインストールおよび設定">AWS SDK for Python のインストールおよび設定</h2>
 
-<p>弊社では、仕事を(準)委任契約でいただくことがあり、作業時間ログをGoogleカレンダー上で管理していました。<br />
-そして、月末に集計を手作業で行っていましたが、それを自動化したい、というのがきっかけです。</p>
+<p>DNSはAWSのRoute53で管理しており、その操作のためにSDKを導入します。<br />
+なお、Raspberry PiにはPython (2.7系) がデフォルトでインストールされているため、そのまま用います。</p>
 
-<h2 id="実際に使ってみて">実際に使ってみて</h2>
+<pre><code class="language-sh">$ sudo pip install boto3
+</code></pre>
 
-<p>せっかくなので、全ての作業時間ログをGoogleカレンダー上で管理するということを数ヶ月間行ってみています。</p>
+<p>続いて、Credentialを設定します。<code>YOUR_KEY</code>および<code>YOUR_SECRET</code>は環境に合わせて設定してください。<br />
+(Route53へのアクセス権限があれば問題ありません)</p>
 
-<p>作業時間ログを都度つける行動は習慣化しているため (常にカレンダーを立ち上げています) 入力作業に負担はなく、後から時間の使い方を振り返ることができるのでなかなか良い感じです。</p>
+<pre><code class="language-sh">$ vi ~/.aws/credentials
+</code></pre>
 
-<p>具体的には、以下のような階層構造で管理を行っています。</p>
+<pre><code class="language-sh">[default]
+aws_access_key_id = YOUR_KEY
+aws_secret_access_key = YOUR_SECRET
+</code></pre>
 
-<ul>
-<li>受託
+<h2 id="dns更新">DNS更新</h2>
 
-<ul>
-<li>プロジェクト1</li>
-<li>プロジェクト2</li>
-<li>&hellip;</li>
-</ul></li>
-<li>自社
+<p>DNS更新には<code>change_resource_record_sets</code>メソッドを使用します。<br />
+詳細は、<a href="http://boto3.readthedocs.io/en/latest/reference/services/route53.html#Route53.Client.change_resource_record_sets">公式ドキュメント</a> を参照してください。</p>
 
-<ul>
-<li>サービスA</li>
-<li>サービスB</li>
-<li>&hellip;</li>
-</ul></li>
-<li>経営
+<h2 id="パブリックipの取得">パブリックIPの取得</h2>
 
-<ul>
-<li>経営計画</li>
-<li>財務</li>
-<li>&hellip;</li>
-</ul></li>
-</ul>
+<p>パブリックIPは、<a href="http://httpbin.org">httpbin.org</a> にアクセスして取得します。<br />
+レスポンスとしては以下のようなものが返ってきます。</p>
 
-<p>弊社は受託事業を行いながら自社サービスを開発しており、また筆者は代表を務めているので、時間の使い方としては、大きく「受託」「自社」「経営」の3つに分かれます。</p>
+<pre><code class="language-sh">$ curl http://httpbin.org/ip
+{
+    &quot;origin&quot;: &quot;xxx.xxx.xxx.xxx&quot;
+}
+</code></pre>
 
-<p>その下にも幾つか階層を設けていますが、基本的にはこの3つの時間比率を毎月振り返るようにしています。</p>
+<h2 id="スクリプト">スクリプト</h2>
 
-<h2 id="おわりに">おわりに</h2>
+<p>以上を踏まえて、スクリプトを書いていきます。<br />
+<code>DOMAIN</code>および<code>HOST</code>は環境に合わせて書き換えてください。下記では<code>hoge.example.com</code>を登録する例としています。</p>
 
-<p>時間の使い方を可視化してみると色々な気づきがあります。是非試してみてください！<br />
-<a href="http://tools.algolab.jp/calendar_reports">http://tools.algolab.jp/calendar_reports</a></p>
+<pre><code class="language-python"># -*- coding: utf-8 -*-
+
+import json
+import urllib2
+
+import boto3
+
+DOMAIN = 'hoge'
+HOST = 'example.com'
+TTL = 300
+
+# パブリックIPアドレスの取得
+response = urllib2.urlopen('http://httpbin.org/ip')
+json_str = response.read()
+ip_address = json.loads(json_str)['origin']
+
+# AWS SDK Client
+client = boto3.client('route53')
+
+# hosted_zone_idの取得
+hosted_zones = client.list_hosted_zones()['HostedZones']
+hosted_zone_id = filter(lambda h: h['Name'] == HOST + '.', hosted_zones)[0]['Id']
+
+# 更新内容
+change_batch = {
+    'Changes': [
+        {
+            'Action': 'UPSERT',
+            'ResourceRecordSet': {
+                'Name': DOMAIN + '.' + HOST + '.',
+                'Type': 'A',
+                'TTL': TTL,
+                'ResourceRecords': [
+                    {'Value': ip_address}
+                ]
+            }
+        }
+    ]
+}
+
+# 更新
+client.change_resource_record_sets(
+    HostedZoneId = hosted_zone_id,
+    ChangeBatch = change_batch
+)
+</code></pre>
+
+<p>あとは、上記のスクリプトを<code>cron</code>に登録するなどして、定期実行させれば完了です。</p>
 
       
   <div id="share-this" class="col span_10">
@@ -227,10 +251,8 @@
   
   <nav class="pagination-single">
     
-      <span class="previous">&larr; <a href="http://blog.algolab.jp/post/2016/08/11/raspberry-pi-alexa/" rel="prev">Amazon Echoを6,000円で自作する 〜Raspberry Pi 3 &#43; Alexa Voice Services (AVS)〜</a></span>
+      <span class="previous">&larr; <a href="http://blog.algolab.jp/post/2016/08/22/ubuntu-xfce-tightvnc-server/" rel="prev">Ubuntu 16.04 LTSにXcfeとTightVNC Serverでリモートデスクトップ環境を構築する</a></span>
     
-    
-      <span class="next"><a href="http://blog.algolab.jp/post/2016/08/16/speech-framework/" rel="next">iOSで音声認識 〜Speech Frameworkを試す〜</a> &rarr;</span>
     
   </nav>
   

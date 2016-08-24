@@ -6,8 +6,117 @@
     <description>Recent content on ALGO GEEKS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 22 Aug 2016 17:53:57 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 24 Aug 2016 15:48:58 +0900</lastBuildDate>
     <atom:link href="http://blog.algolab.jp/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>VPNサーバのパブリックIPをDNSに登録する 〜Raspberry Pi上で定期実行〜</title>
+      <link>http://blog.algolab.jp/post/2016/08/24/vpn-dns/</link>
+      <pubDate>Wed, 24 Aug 2016 15:48:58 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/08/24/vpn-dns/</guid>
+      <description>
+
+&lt;p&gt;弊社オフィスではVPN環境を構築していますが、固定IPを取得していないため、パブリックIPが変わるたびにVPNサーバーの接続先を変更しなければならず面倒です。
+そこで定期的にIPアドレスを取得し、DNSに登録するようにします。&lt;/p&gt;
+
+&lt;p&gt;実行環境は以下のとおりです。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;スクリプト実行: Raspberry Pi&lt;/li&gt;
+&lt;li&gt;DNS登録: AWS SDK for Python (Boto 3)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;aws-sdk-for-python-のインストールおよび設定&#34;&gt;AWS SDK for Python のインストールおよび設定&lt;/h2&gt;
+
+&lt;p&gt;DNSはAWSのRoute53で管理しており、その操作のためにSDKを導入します。&lt;br /&gt;
+なお、Raspberry PiにはPython (2.7系) がデフォルトでインストールされているため、そのまま用います。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo pip install boto3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;続いて、Credentialを設定します。&lt;code&gt;YOUR_KEY&lt;/code&gt;および&lt;code&gt;YOUR_SECRET&lt;/code&gt;は環境に合わせて設定してください。&lt;br /&gt;
+(Route53へのアクセス権限があれば問題ありません)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vi ~/.aws/credentials
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;[default]
+aws_access_key_id = YOUR_KEY
+aws_secret_access_key = YOUR_SECRET
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;dns更新&#34;&gt;DNS更新&lt;/h2&gt;
+
+&lt;p&gt;DNS更新には&lt;code&gt;change_resource_record_sets&lt;/code&gt;メソッドを使用します。&lt;br /&gt;
+詳細は、&lt;a href=&#34;http://boto3.readthedocs.io/en/latest/reference/services/route53.html#Route53.Client.change_resource_record_sets&#34;&gt;公式ドキュメント&lt;/a&gt; を参照してください。&lt;/p&gt;
+
+&lt;h2 id=&#34;パブリックipの取得&#34;&gt;パブリックIPの取得&lt;/h2&gt;
+
+&lt;p&gt;パブリックIPは、&lt;a href=&#34;http://httpbin.org&#34;&gt;httpbin.org&lt;/a&gt; にアクセスして取得します。&lt;br /&gt;
+レスポンスとしては以下のようなものが返ってきます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ curl http://httpbin.org/ip
+{
+    &amp;quot;origin&amp;quot;: &amp;quot;xxx.xxx.xxx.xxx&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;スクリプト&#34;&gt;スクリプト&lt;/h2&gt;
+
+&lt;p&gt;以上を踏まえて、スクリプトを書いていきます。&lt;br /&gt;
+&lt;code&gt;DOMAIN&lt;/code&gt;および&lt;code&gt;HOST&lt;/code&gt;は環境に合わせて書き換えてください。下記では&lt;code&gt;hoge.example.com&lt;/code&gt;を登録する例としています。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# -*- coding: utf-8 -*-
+
+import json
+import urllib2
+
+import boto3
+
+DOMAIN = &#39;hoge&#39;
+HOST = &#39;example.com&#39;
+TTL = 300
+
+# パブリックIPアドレスの取得
+response = urllib2.urlopen(&#39;http://httpbin.org/ip&#39;)
+json_str = response.read()
+ip_address = json.loads(json_str)[&#39;origin&#39;]
+
+# AWS SDK Client
+client = boto3.client(&#39;route53&#39;)
+
+# hosted_zone_idの取得
+hosted_zones = client.list_hosted_zones()[&#39;HostedZones&#39;]
+hosted_zone_id = filter(lambda h: h[&#39;Name&#39;] == HOST + &#39;.&#39;, hosted_zones)[0][&#39;Id&#39;]
+
+# 更新内容
+change_batch = {
+    &#39;Changes&#39;: [
+        {
+            &#39;Action&#39;: &#39;UPSERT&#39;,
+            &#39;ResourceRecordSet&#39;: {
+                &#39;Name&#39;: DOMAIN + &#39;.&#39; + HOST + &#39;.&#39;,
+                &#39;Type&#39;: &#39;A&#39;,
+                &#39;TTL&#39;: TTL,
+                &#39;ResourceRecords&#39;: [
+                    {&#39;Value&#39;: ip_address}
+                ]
+            }
+        }
+    ]
+}
+
+# 更新
+client.change_resource_record_sets(
+    HostedZoneId = hosted_zone_id,
+    ChangeBatch = change_batch
+)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;あとは、上記のスクリプトを&lt;code&gt;cron&lt;/code&gt;に登録するなどして、定期実行させれば完了です。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Ubuntu 16.04 LTSにXcfeとTightVNC Serverでリモートデスクトップ環境を構築する</title>
@@ -1775,100 +1884,6 @@ Adrew Ng氏は、2020年には検索の半分以上が音声か画像になる�
 
 &lt;p&gt;まとめは以上となります。&lt;br /&gt;
 貴重な場を提供していただいた関係者の方々、ありがとうございました。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>R-env:連舞® ハンズオンで RoBoHoN（ロボホン）・ Sota（ソータ）と戯れてきた</title>
-      <link>http://blog.algolab.jp/post/2016/07/14/r-env-hands-on/</link>
-      <pubDate>Thu, 14 Jul 2016 17:40:56 +0900</pubDate>
-      
-      <guid>http://blog.algolab.jp/post/2016/07/14/r-env-hands-on/</guid>
-      <description>
-
-&lt;p&gt;&lt;a href=&#34;https://r-env.doorkeeper.jp/events/48273&#34;&gt;[R-env:連舞® Innovation Hub] R-env:連舞®×RoBoHoNでロボットサービス開発体験ハンズオン&lt;/a&gt; に参加してきましたので、その模様をレポートします。&lt;/p&gt;
-
-&lt;h2 id=&#34;r-env-連舞-とは&#34;&gt;R-env:連舞® とは&lt;/h2&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/07/14/r-env-hands-on//r-env.jpg&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;NTTが開発を行っている、様々なロボットやデバイスと連携し、 ビジュアルプログラミング環境を用いて誰でも簡単に開発を行うことのできるプラットフォームです。&lt;/p&gt;
-
-&lt;h2 id=&#34;robohon-とは&#34;&gt;RoBoHoN とは&lt;/h2&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/07/14/r-env-hands-on//robohon.jpg&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;2016/06/29にSDKが一般公開されたのが記憶に新しいですが、SHARPが開発しているロボット電話です。&lt;br /&gt;
-Androidをベースとしており、標準機能の他に、HVML (Hyper Voice Markup Language) という独自の言語を用いてシナリオを作成することができるようです。&lt;br /&gt;
-SDKは &lt;a href=&#34;https://robohon.com/&#34;&gt;公式ページ&lt;/a&gt; 内のマイページよりダウンロード可能です。&lt;/p&gt;
-
-&lt;h2 id=&#34;r-env-と-robohon-の連携&#34;&gt;R-env と RoBoHoN の連携&lt;/h2&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/07/14/r-env-hands-on//r-env-robohon.jpg&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;R-envとRoBoHoNなどの機器の間でWebSocketによる通信を行うことでインタラクションを実現しています。&lt;br /&gt;
-上記の図は、R-envからRoBoHonに処理を依頼する例ですが、RoBoHoN側からイベント (持ち上げられた、など) をR-envへ通知することができます。&lt;br /&gt;
-また、R-envには幾つもの機器を登録することができるので、例えばRoBoHoNに「エアコンつけて！」と頼むとエアコンが起動する、といったことも実現することが可能です。&lt;/p&gt;
-
-&lt;h2 id=&#34;ハンズオン&#34;&gt;ハンズオン&lt;/h2&gt;
-
-&lt;p&gt;今回のハンズオンでは、R-envおよびRoBoHoNの紹介の後、30分程度の自由な開発時間がありました。&lt;br /&gt;
-Sotaも動かしても良い、とのことだったので、RoBoHonとSotaに簡単な会話をさせてみることにしました。&lt;/p&gt;
-
-&lt;h2 id=&#34;シナリオを作成する&#34;&gt;シナリオを作成する&lt;/h2&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/07/14/r-env-hands-on//screen_1.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;GUIでフローを定義していく形となります。&lt;br /&gt;
-ボックスにイベントの定義、矢印にイベント遷移条件の定義を行います。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/07/14/r-env-hands-on//screen_2.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;イベントの詳細を定義する画面です。&lt;br /&gt;
-ここでは、RoBoHonのプロジェクタを起動するイベントを定義しています。&lt;/p&gt;
-
-&lt;h2 id=&#34;動いた&#34;&gt;動いた！&lt;/h2&gt;
-
-
-&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
-  &lt;iframe src=&#34;//www.youtube.com/embed/A-ArkARJUpQ&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; allowfullscreen frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
- &lt;/div&gt;
-
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;RoBoHoN:&lt;/strong&gt; はじめまして、ロボホンです。&lt;br /&gt;
-&lt;strong&gt;Sota:&lt;/strong&gt; はじめまして、ソータです。ロボホン、プロジェクタ写して！&lt;br /&gt;
-&lt;strong&gt;RoBoHoN:&lt;/strong&gt; （プロジェクタを写す）&lt;br /&gt;
-&lt;strong&gt;Sota:&lt;/strong&gt; ありがとう！僕からは音楽を流すね！（音楽を流す）&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;最終的に上記のようなシナリオが完成しました！リアルにモノが動くので、感動もひとしおです！！&lt;/p&gt;
-
-&lt;h2 id=&#34;おわりに&#34;&gt;おわりに&lt;/h2&gt;
-
-&lt;p&gt;手軽にロボットプログラミングが体験でき、非常に貴重な経験となりました。&lt;br /&gt;
-ハンズオンは定期的に開催しているようなので、みなさんも体験してみてはいかがでしょうか？&lt;br /&gt;
-&lt;a href=&#34;https://r-env.doorkeeper.jp/&#34;&gt;R-env:連舞® Innovation Hub&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
