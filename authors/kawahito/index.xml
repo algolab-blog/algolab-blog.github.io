@@ -17,15 +17,10 @@
       <guid>http://blog.algolab.jp/post/2016/08/24/vpn-dns/</guid>
       <description>
 
-&lt;p&gt;弊社オフィスではVPN環境を構築していますが、固定IPを取得していないため、パブリックIPが変わるたびにVPNサーバーの接続先を変更しなければならず面倒です。
-そこで定期的にIPアドレスを取得し、DNSに登録するようにします。&lt;/p&gt;
+&lt;p&gt;弊社オフィスではVPN環境を構築していますが、固定IPを取得していないため、パブリックIPが変わるたびにVPNサーバーの接続先を変更しなければならず面倒です。&lt;/p&gt;
 
-&lt;p&gt;実行環境は以下のとおりです。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;スクリプト実行: Raspberry Pi&lt;/li&gt;
-&lt;li&gt;DNS登録: AWS SDK for Python (Boto 3)&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;そこで定期的にIPアドレスを取得し、DNSに登録するようにしました。&lt;br /&gt;
+ここでは、Raspberry Pi 上でAWS SDK for Python (Boto 3) を用いて定期実行させる手順をまとめます。&lt;/p&gt;
 
 &lt;h2 id=&#34;aws-sdk-for-python-のインストールおよび設定&#34;&gt;AWS SDK for Python のインストールおよび設定&lt;/h2&gt;
 
