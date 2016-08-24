@@ -268,7 +268,7 @@ $ export DISPLAY=:1.0
 $ mvn exec:exec
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;GUIに出てくるURLにアクセスしてデバイスの登録になります。ここも &lt;a href=&#34;https://github.com/amzn/alexa-avs-raspberry-pi#user-content-10---obtain-authorization-from-login-with-amazon&#34;&gt;公式Doc&lt;/a&gt; の画像のとおりです。以上が終わると、AVSを利用できます。&lt;/p&gt;
+&lt;p&gt;GUIに出てくるURLにアクセスしてデバイスの登録になります。ここも &lt;a href=&#34;https://github.com/amzn/alexa-avs-raspberry-pi#user-content-10---obtain-authorsization-from-login-with-amazon&#34;&gt;公式Doc&lt;/a&gt; の画像のとおりです。以上が終わると、AVSを利用できます。&lt;/p&gt;
 
 &lt;h2 id=&#34;次回予告&#34;&gt;次回予告&lt;/h2&gt;
 
