@@ -6,8 +6,155 @@
     <description>Recent content in Kawahito on ALGO GEEKS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 24 Aug 2016 15:48:58 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 25 Aug 2016 16:28:18 +0900</lastBuildDate>
     <atom:link href="http://blog.algolab.jp/authors/kawahito/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>麻雀カメラプロジェクト再始動？ 〜【導入編】テンプレートマッチングによる麻雀牌判定〜</title>
+      <link>http://blog.algolab.jp/post/2016/08/25/mahjong-camera-introduction/</link>
+      <pubDate>Thu, 25 Aug 2016 16:28:18 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/08/25/mahjong-camera-introduction/</guid>
+      <description>
+
+&lt;p&gt;2014年の終わり頃に「麻雀カメラ」というiPhoneアプリを作っていました。&lt;br /&gt;
+カメラをかざすだけで麻雀の得点計算を行ってくれるアプリです。&lt;/p&gt;
+
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//www.youtube.com/embed/livDDcygEDU&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; allowfullscreen frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+
+
+&lt;p&gt;動画を見ていただければ一目瞭然ですが、さすがに実用では使えない、ということでお蔵入りしました&amp;hellip;。&lt;br /&gt;
+(時間がかかるだけでなく、精度もあまり良くありませんでした。)&lt;/p&gt;
+
+&lt;p&gt;あれから一年半、技術の進歩は目覚ましく、いまならば良いものが作れるのでは？と思い立ち、再挑戦してみることにしました。&lt;/p&gt;
+
+&lt;p&gt;今回は、導入編として、当時用いていた手法 (テンプレートマッチング) について説明します。&lt;/p&gt;
+
+&lt;h2 id=&#34;画像判定プロセス&#34;&gt;画像判定プロセス&lt;/h2&gt;
+
+&lt;p&gt;画像に何が写っているか判定するためには、大きく「検出 (Detection)」と「認識 (Recognition)」というプロセスに分かれます。&lt;/p&gt;
+
+&lt;h3 id=&#34;検出&#34;&gt;検出&lt;/h3&gt;
+
+&lt;p&gt;物体が画像内のどこにあるかを判定するプロセス。&lt;br /&gt;
+下記の画像でいうと、赤枠をつけていくイメージです。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/25/mahjong-camera-introduction//detection_1.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;h3 id=&#34;認識&#34;&gt;認識&lt;/h3&gt;
+
+&lt;p&gt;検出された領域に写っている物体が何であるかを判定するプロセス。&lt;br /&gt;
+具体的には、下記の物体が「五萬」である、と識別することを言います。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/25/mahjong-camera-introduction//5m.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;h2 id=&#34;検出の難しさ&#34;&gt;検出の難しさ&lt;/h2&gt;
+
+&lt;p&gt;麻雀牌判定においては、特に「検出」のプロセスが困難です。&lt;br /&gt;
+横並びの複数牌に対し、どこが牌の境界かを判断することが非常に難しいのです。&lt;br /&gt;
+例えば、下記の画像を考えてみましょう。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/25/mahjong-camera-introduction//detection_2.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;人間の目には、3つの牌の境界を判断することはできますが、&lt;br /&gt;
+機械では、下記の赤枠の部分を1つの牌として検出してしまう、ということが起こり得てしまいます。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/25/mahjong-camera-introduction//detection_3.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;牌の境界には溝らしきものが存在するので、画像処理で溝を判定し境界とみなす、というような実装も考えられますが、光の具合や撮影角度などによって溝が見えなくなってしまうこともあるため、このような特定のルールを設ける方法では一筋縄ではいきません。&lt;/p&gt;
+
+&lt;h2 id=&#34;当時用いていたアルゴリズム&#34;&gt;当時用いていたアルゴリズム&lt;/h2&gt;
+
+&lt;p&gt;当時はどのように判定していたかというと、前処理を加えた画像に対し、テンプレートマッチングという手法を用いていました。(古くからある手法です)&lt;/p&gt;
+
+&lt;h2 id=&#34;前処理&#34;&gt;前処理&lt;/h2&gt;
+
+&lt;p&gt;前処理として、画像全体から牌が写っている全体領域を切り出します。&lt;br /&gt;
+牌の全体領域と背景には明らかに差が見て取れるので、これは比較的容易に行うことができます。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/25/mahjong-camera-introduction//detection_4.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;具体的には、二値化画像に対し輪郭抽出を行い、頂点数や面積が一定以上のものの外接矩形を牌の全体領域としてみなす、という処理をしています。&lt;/p&gt;
+
+&lt;p&gt;処理後の画像はこのような形となります。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/25/mahjong-camera-introduction//template_matching_1.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;h2 id=&#34;テンプレートマッチング&#34;&gt;テンプレートマッチング&lt;/h2&gt;
+
+&lt;p&gt;前処理を行った画像に対し、テンプレートマッチングを用いて牌を判定していきます。&lt;/p&gt;
+
+&lt;p&gt;テンプレートマッチングとは、テンプレート画像を少しずつ端から端までずらしていって、その類似度を計算していく、という手法です。&lt;/p&gt;
+
+&lt;p&gt;例えばテンプレート画像に「五萬」を用いるとしましょう。&lt;br /&gt;
+下記のように、少しずつずらして類似度を計算していき、その値を保持しておきます。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/25/mahjong-camera-introduction//template_matching_2.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;そして、一番類似度が高い領域を個別牌領域としてみなします。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/25/mahjong-camera-introduction//template_matching_3.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;実際には、テンプレート画像には、麻雀牌の種類 (34) x 上下左右の方向 (4) の合計136個を用い、一番類似度の高かったものを採用しています。&lt;/p&gt;
+
+&lt;p&gt;そして、確定した領域を除いた残りの領域に対して更にテンプレートマッチングを繰り返していくことで牌の判定を行っていました。&lt;/p&gt;
+
+&lt;h2 id=&#34;問題点&#34;&gt;問題点&lt;/h2&gt;
+
+&lt;p&gt;テンプレートマッチングは、いわば総当たり作戦で「検出」と「認識」を一度に行ってしまおうというものです。&lt;br /&gt;
+ご想像の通り、非常に効率が悪く、判定に時間がかかってしまいます。&lt;/p&gt;
+
+&lt;p&gt;またテンプレート画像は上下左右の4方向しか用意していないため、例えば下記の中だと「六萬」の判定がうまくいきません。
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/25/mahjong-camera-introduction//template_matching_4.png&#34;/&gt;
+  
+&lt;/figure&gt;
+&lt;/p&gt;
+
+&lt;p&gt;単純に考えると、テンプレートを増やせば良さそうですが、速度とのトレードオフなので現実的ではありません。&lt;/p&gt;
+
+&lt;h2 id=&#34;次回予告&#34;&gt;次回予告&lt;/h2&gt;
+
+&lt;p&gt;このように、テンプレートマッチングを用いる手法では、限られた条件下 (横並びに綺麗に牌が並んでいる) ではそれなりに精度は出るものの、条件から外れると精度が落ち、また判定に時間もかかってしまいました。&lt;/p&gt;
+
+&lt;p&gt;次回以降、これらの問題点を解決すべく、いろいろな手法を試していきたいと思います。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>VPNサーバのパブリックIPをDNSに登録する 〜Raspberry Pi上で定期実行〜</title>
@@ -1672,224 +1819,6 @@ Adrew Ng氏は、2020年には検索の半分以上が音声か画像になる�
 
 &lt;p&gt;次回はAさんのキックオフの内容についてお届けします。&lt;br /&gt;
 (2016/8/1 公開しました &amp;rarr; &lt;a href=&#34;http://blog.algolab.jp/post/2016/08/01/ai-training-kick-off/&#34;&gt;AIトレーニングキックオフ 〜ハムケツを認識したい〜&lt;/a&gt;)&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>ICML2016読み会まとめ</title>
-      <link>http://blog.algolab.jp/post/2016/07/21/icml-2016-reading/</link>
-      <pubDate>Fri, 22 Jul 2016 10:14:41 +0900</pubDate>
-      
-      <guid>http://blog.algolab.jp/post/2016/07/21/icml-2016-reading/</guid>
-      <description>
-
-&lt;p&gt;&lt;a href=&#34;http://connpass.com/event/34960/&#34;&gt;ICML2016読み会&lt;/a&gt; の内容をまとめました。&lt;br /&gt;
-ニコ生配信URL：&lt;a href=&#34;http://live.nicovideo.jp/watch/lv268597918&#34;&gt;http://live.nicovideo.jp/watch/lv268597918&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;icml概要&#34;&gt;ICML概要&lt;/h2&gt;
-
-&lt;p&gt;林浩平さん (&lt;a href=&#34;https://twitter.com/hayasick&#34;&gt;@hayasick&lt;/a&gt;
-) / 産業技術総合研究所&lt;/p&gt;
-
-&lt;p&gt;&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/2OrjGekQEu2Bgr&#34; class=&#34;slideshare&#34; width=&#34;595&#34; height=&#34;485&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt;
-
-&lt;br /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;ICMLはNIPSに次ぐ機械学習の国際会議&lt;/li&gt;
-&lt;li&gt;ディープラーニングと、それに伴う最適化がトレンド&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;dropout-distillation&#34;&gt;Dropout distillation&lt;/h2&gt;
-
-&lt;p&gt;佐野正太郎さん (&lt;a href=&#34;https://twitter.com/g_votte&#34;&gt;@g_votte&lt;/a&gt;
-) / リクルートコミュニケーションズ&lt;/p&gt;
-
-&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/GSKKG9nwXe83zR&#34; class=&#34;slideshare&#34; width=&#34;595&#34; height=&#34;485&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt;
-
-
-&lt;p&gt;論文: &lt;a href=&#34;http://jmlr.org/proceedings/papers/v48/bulo16.html&#34;&gt;http://jmlr.org/proceedings/papers/v48/bulo16.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Dropout is a popular stochastic regularization technique for deep neural networks that works by randomly dropping (i.e. zeroing) units from the network during training. This randomization process allows to implicitly train an ensemble of exponentially many networks sharing the same parametrization, which should be averaged at test time to deliver the final prediction. A typical workaround for this intractable averaging operation consists in scaling the layers undergoing dropout randomization. This simple rule called ’standard dropout’ is efficient, but might degrade the accuracy of the prediction. In this work we introduce a novel approach, coined ’dropout distillation’, that allows us to train a predictor in a way to better approximate the intractable, but preferable, averaging process, while keeping under control its computational efficiency. We are thus able to construct models that are as efficient as standard dropout, or even more efficient, while being more accurate. Experiments on standard benchmark datasets demonstrate the validity of our method, yielding consistent improvements over conventional dropout.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Dropoutを学習に用いた場合、その予測において、時間と精度を両立することが難しかった&lt;/li&gt;
-&lt;li&gt;Distillation (蒸留法) を応用することで、短時間で精度よく予測を行うモデルを構築した&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;ja&#34; dir=&#34;ltr&#34;&gt;「Dropout Distillation」Dropout を使って学習したモデルを利用して予測をするときの話。本当は Dropout の平均を取ると精度が上がるが遅い。そこで Distillation を使ったらよかったよという話。 &lt;a href=&#34;https://twitter.com/hashtag/icml_yomi?src=hash&#34;&gt;#icml_yomi&lt;/a&gt;&lt;/p&gt;&amp;mdash; Takuya Akiba (@iwiwi) &lt;a href=&#34;https://twitter.com/iwiwi/status/756002188770410496&#34;&gt;July 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
-&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;ja&#34; dir=&#34;ltr&#34;&gt;&lt;a href=&#34;https://twitter.com/hashtag/icml_yomi?src=hash&#34;&gt;#icml_yomi&lt;/a&gt; 来た。間違えて歌舞伎座行ってしまった（汗&lt;br&gt;dropout distillation、普通のドロップアウトより良いという話だが、学習時間のオーダーじゃなくて学習時間が同じ、で比べないとフェアじゃない気がする。平均化SGDあたりと実は等価だったりしないのかなあ&lt;/p&gt;&amp;mdash; Nakatani Shuyo (@shuyo) &lt;a href=&#34;https://twitter.com/shuyo/status/756002470573121536&#34;&gt;July 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;learning-convolutional-neural-networks-for-graphs&#34;&gt;Learning Convolutional Neural Networks for Graphs&lt;/h2&gt;
-
-&lt;p&gt;秋葉拓哉さん (&lt;a href=&#34;https://twitter.com/iwiwi&#34;&gt;@iwiwi&lt;/a&gt;
-) / Preferred Networks&lt;/p&gt;
-
-&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/3htE46MNnSfNQy&#34; class=&#34;slideshare&#34; width=&#34;595&#34; height=&#34;485&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt;
-
-
-&lt;p&gt;論文: &lt;a href=&#34;http://jmlr.org/proceedings/papers/v48/niepert16.html&#34;&gt;http://jmlr.org/proceedings/papers/v48/niepert16.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Numerous important problems can be framed as learning from graph data. We propose a framework for learning convolutional neural networks for arbitrary graphs. These graphs may be undirected, directed, and with both discrete and continuous node and edge attributes. Analogous to image-based convolutional networks that operate on locally connected regions of the input, we present a general approach to extracting locally connected regions from graphs. Using established benchmark data sets, we demonstrate that the learned feature representations are competitive with state of the art graph kernels and that their computation is highly efficient.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-&lt;li&gt;グラフ構造 (化学化合物など) をCNNで学習させたいが、そのまま突っ込むことは難しい&lt;/li&gt;
-&lt;li&gt;WL カーネルを応用したアルゴリズムを用いて、グラフ構造をテンソルに変換した
-&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;ja&#34; dir=&#34;ltr&#34;&gt;グラフをCNNに突っ込む話、これはCNNになってない的結論になってたが、k方向は近傍の展開なので、ちゃんとCNNの一般化になってる。CNNじゃなくてもいいよね、というのは確かに思ったが、最初に選んだ頂点数wをグラフごとに変えたいならCNNにするしか &lt;a href=&#34;https://twitter.com/hashtag/icml_yomi?src=hash&#34;&gt;#icml_yomi&lt;/a&gt;&lt;/p&gt;&amp;mdash; Nakatani Shuyo (@shuyo) &lt;a href=&#34;https://twitter.com/shuyo/status/756011698117419008&#34;&gt;July 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;estimating-structured-vector-autoregressive-models&#34;&gt;Estimating Structured Vector Autoregressive Models&lt;/h2&gt;
-
-&lt;p&gt;谷本啓さん (&lt;a href=&#34;https://twitter.com/akira_dev&#34;&gt;@akira_dev&lt;/a&gt;
-) / NEC&lt;/p&gt;
-
-&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/uzp8O2l8b8LyZK&#34; class=&#34;slideshare&#34; width=&#34;595&#34; height=&#34;485&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt;
-
-
-&lt;p&gt;論文: &lt;a href=&#34;http://jmlr.org/proceedings/papers/v48/melnyk16.html&#34;&gt;http://jmlr.org/proceedings/papers/v48/melnyk16.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Numerous important problems can be framed as learning from graph data. We propose a framework for learning convolutional neural networks for arbitrary graphs. These graphs may be undirected, directed, and with both discrete and continuous node and edge attributes. Analogous to image-based convolutional networks that operate on locally connected regions of the input, we present a general approach to extracting locally connected regions from graphs. Using established benchmark data sets, we demonstrate that the learned feature representations are competitive with state of the art graph kernels and that their computation is highly efficient.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-&lt;li&gt;一般のノルムでの正規化を用いた VARモデルの推定の非漸近的な解析を行った&lt;/li&gt;
-&lt;li&gt;収束ルートはi.i.dと同じだった&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;meta-learning-with-memory-augmented-neural-networks&#34;&gt;Meta-Learning with Memory-Augmented Neural Networks&lt;/h2&gt;
-
-&lt;p&gt;渡辺有祐さん / SONY&lt;/p&gt;
-
-&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/tj8ML4cdtq2M7s&#34; class=&#34;slideshare&#34; width=&#34;595&#34; height=&#34;485&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt;
-
-
-&lt;p&gt;論文: &lt;a href=&#34;http://jmlr.org/proceedings/papers/v48/santoro16.html&#34;&gt;http://jmlr.org/proceedings/papers/v48/santoro16.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Modeling the distribution of natural images is a landmark problem in unsupervised learning. This task requires an image model that is at once expressive, tractable and scalable. We present a deep neural network that sequentially predicts the pixels in an image along the two spatial dimensions. Our method models the discrete probability of the raw pixel values and encodes the complete set of dependencies in the image. Architectural novelties include fast two-dimensional recurrent layers and an effective use of residual connections in deep recurrent networks. We achieve log-likelihood scores on natural images that are considerably better than the previous state of the art. Our main results also provide benchmarks on the diverse ImageNet dataset. Samples generated from the model appear crisp, varied and globally coherent.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Neural Turing Machine を One-Shot Learning に応用し、高い精度を得た&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;ja&#34; dir=&#34;ltr&#34;&gt;&lt;a href=&#34;https://twitter.com/hashtag/icml_yomi?src=hash&#34;&gt;#icml_yomi&lt;/a&gt; transfer learning + contextual bandit てところか．この後，multi-step 行動最適化にするんだろうな．&lt;/p&gt;&amp;mdash; Ugo-Nama (@movingsloth) &lt;a href=&#34;https://twitter.com/movingsloth/status/756028694196396032&#34;&gt;July 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
-&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;ja&#34; dir=&#34;ltr&#34;&gt;「Meta-Learning with Memory-Augmented Neural Networks」Neural Turing Machine の拡張を提案。One-Shot Learning のアルゴリズムを学習させると k 近傍法よりも高い性能。 &lt;a href=&#34;https://twitter.com/hashtag/icml_yomi?src=hash&#34;&gt;#icml_yomi&lt;/a&gt;&lt;/p&gt;&amp;mdash; Takuya Akiba (@iwiwi) &lt;a href=&#34;https://twitter.com/iwiwi/status/756031082303152130&#34;&gt;July 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;pixel-recurrent-neural-networks&#34;&gt;Pixel Recurrent Neural Networks&lt;/h2&gt;
-
-&lt;p&gt;得居誠也さん (&lt;a href=&#34;https://twitter.com/beam2d&#34;&gt;@beam2d&lt;/a&gt;
-) / Preferred Networks&lt;/p&gt;
-
-&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/3bJ5TFJmX7Bk1K&#34; class=&#34;slideshare&#34; width=&#34;595&#34; height=&#34;485&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt;
-
-
-&lt;p&gt;論文: &lt;a href=&#34;http://jmlr.org/proceedings/papers/v48/oord16.html&#34;&gt;http://jmlr.org/proceedings/papers/v48/oord16.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Modeling the distribution of natural images is a landmark problem in unsupervised learning. This task requires an image model that is at once expressive, tractable and scalable. We present a deep neural network that sequentially predicts the pixels in an image along the two spatial dimensions. Our method models the discrete probability of the raw pixel values and encodes the complete set of dependencies in the image. Architectural novelties include fast two-dimensional recurrent layers and an effective use of residual connections in deep recurrent networks. We achieve log-likelihood scores on natural images that are considerably better than the previous state of the art. Our main results also provide benchmarks on the diverse ImageNet dataset. Samples generated from the model appear crisp, varied and globally coherent.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-&lt;li&gt;画像生成において、VAEやGANとは異なる自己回帰 (RNNに似たもの) のアプローチを用いたところ、綺麗な画像を生成できた&lt;/li&gt;
-&lt;li&gt;並列化により、高速な勾配計算も両立した&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;ja&#34; dir=&#34;ltr&#34;&gt;PixelRNNの話、これに似てるなぁ &lt;a href=&#34;https://t.co/oI8oDBUm1e&#34;&gt;https://t.co/oI8oDBUm1e&lt;/a&gt; &lt;a href=&#34;https://twitter.com/hashtag/icml_yomi?src=hash&#34;&gt;#icml_yomi&lt;/a&gt;&lt;/p&gt;&amp;mdash; snneko (@snneko) &lt;a href=&#34;https://twitter.com/snneko/status/756037448879136768&#34;&gt;July 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
-&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;ja&#34; dir=&#34;ltr&#34;&gt;PixelRNN、出力は各チャンネル 256値の多クラス分類なのか。すげー。思いついてもやらない系だなあ。でもそれでくっきりした画像が生成できる可能性があるなら今度試してみるかなあ。&lt;a href=&#34;https://twitter.com/hashtag/icml_yomi?src=hash&#34;&gt;#icml_yomi&lt;/a&gt;&lt;/p&gt;&amp;mdash; Nakatani Shuyo (@shuyo) &lt;a href=&#34;https://twitter.com/shuyo/status/756038954550304768&#34;&gt;July 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
-&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;ja&#34; dir=&#34;ltr&#34;&gt;定性的ってレベルじゃない単なる個人的な印象だけど、GAN系の生成する画像はノイジーでぼやっとしがちだが、何が写っているかはわかる。PixelRNN はくっきりした画像を生成するが、よく見たら何が写っているのかさっぱりわからん。 &lt;a href=&#34;https://twitter.com/hashtag/icml_yomi?src=hash&#34;&gt;#icml_yomi&lt;/a&gt;&lt;/p&gt;&amp;mdash; Nakatani Shuyo (@shuyo) &lt;a href=&#34;https://twitter.com/shuyo/status/756042609060040705&#34;&gt;July 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;dynamic-memory-networks-for-visual-and-textual-question-answering&#34;&gt;Dynamic Memory Networks for Visual and Textual Question Answering&lt;/h2&gt;
-
-&lt;p&gt;花木健太郎さん &lt;a href=&#34;https://twitter.com/csstudyabroad&#34;&gt;@csstudyabroad&lt;/a&gt;
- / IBM&lt;/p&gt;
-
-&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/efLeWADDGXz14D&#34; class=&#34;slideshare&#34; width=&#34;595&#34; height=&#34;485&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt;
-
-
-&lt;p&gt;論文: &lt;a href=&#34;http://jmlr.org/proceedings/papers/v48/xiong16.html&#34;&gt;http://jmlr.org/proceedings/papers/v48/xiong16.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Neural network architectures with memory and attention mechanisms exhibit certain reason- ing capabilities required for question answering. One such architecture, the dynamic memory net- work (DMN), obtained high accuracy on a variety of language tasks. However, it was not shown whether the architecture achieves strong results for question answering when supporting facts are not marked during training or whether it could be applied to other modalities such as images. Based on an analysis of the DMN, we propose several improvements to its memory and input modules. Together with these changes we introduce a novel input module for images in order to be able to answer visual questions. Our new DMN+ model improves the state of the art on both the Visual Question Answering dataset and the bAbI-10k text question-answering dataset without supporting fact supervision.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Memory Network内のMemory Moduleを改良した&lt;/li&gt;
-&lt;li&gt;テキストではなく、画像を用いたQAタスクでも精度が出た&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;ja&#34; dir=&#34;ltr&#34;&gt;Memory Network，なんかピンとこないんだよなあ。これでもかってくらいヒューリスティックを積んで積んで積みまくってくるからかなあ。 &lt;a href=&#34;https://twitter.com/hashtag/icml_yomi?src=hash&#34;&gt;#icml_yomi&lt;/a&gt;&lt;/p&gt;&amp;mdash; Nakatani Shuyo (@shuyo) &lt;a href=&#34;https://twitter.com/shuyo/status/756047518291460096&#34;&gt;July 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
-&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;Memory Networks for Language Understanding, ICML Tutorial 2016 &lt;a href=&#34;https://t.co/ssPEmP1Pf9&#34;&gt;https://t.co/ssPEmP1Pf9&lt;/a&gt; &lt;a href=&#34;https://twitter.com/hashtag/icml_yomi?src=hash&#34;&gt;#icml_yomi&lt;/a&gt;&lt;/p&gt;&amp;mdash; Pnz (@penzant) &lt;a href=&#34;https://twitter.com/penzant/status/756050102670598144&#34;&gt;July 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
-&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;Theano Implementation of Dynamic Memory Networks for Visual and Textual Question Answering &lt;a href=&#34;https://t.co/a8ijZKcnwS&#34;&gt;https://t.co/a8ijZKcnwS&lt;/a&gt; &lt;a href=&#34;https://twitter.com/hashtag/icml_yomi?src=hash&#34;&gt;#icml_yomi&lt;/a&gt;&lt;/p&gt;&amp;mdash; Pnz (@penzant) &lt;a href=&#34;https://twitter.com/penzant/status/756050917686816768&#34;&gt;July 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
-&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;ja&#34; dir=&#34;ltr&#34;&gt;&lt;a href=&#34;https://twitter.com/hashtag/icml_yomi?src=hash&#34;&gt;#icml_yomi&lt;/a&gt; &lt;a href=&#34;https://t.co/EOaOfKLH40&#34;&gt;https://t.co/EOaOfKLH40&lt;/a&gt; 黒魔術はここね🎵&lt;/p&gt;&amp;mdash; prototechno (@prototechno) &lt;a href=&#34;https://twitter.com/prototechno/status/756051774436356096&#34;&gt;July 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;generative-adversarial-text-to-image-synthesis&#34;&gt;Generative Adversarial Text to Image Synthesis&lt;/h2&gt;
-
-&lt;p&gt;廣芝和之さん (&lt;a href=&#34;https://twitter.com/hiho_karuta&#34;&gt;@hiho_karuta&lt;/a&gt;
-) / ドワンゴ&lt;/p&gt;
-
-&lt;iframe allowfullscreen=&#34;allowfullscreen&#34; frameborder=&#34;0&#34; scrolling=&#34;no&#34; src=&#34;http://niconare.nicovideo.jp/embed_works/kn1626&#34; style=&#34;max-width: 100%;&#34; width=&#34;485&#34; height=&#34;413&#34;&gt;&lt;/iframe&gt;
-
-
-&lt;p&gt;論文: &lt;a href=&#34;http://jmlr.org/proceedings/papers/v48/reed16.html&#34;&gt;http://jmlr.org/proceedings/papers/v48/reed16.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Automatic synthesis of realistic images from text would be interesting and useful, but current AI systems are still far from this goal. However, in recent years generic and powerful recurrent neural network architectures have been developed to learn discriminative text feature representations. Meanwhile, deep convolutional generative adversarial networks (GANs) have begun to generate highly compelling images of specific categories such as faces, album covers, room interiors and flowers. In this work, we develop a novel deep architecture and GAN formulation to effectively bridge these advances in text and image modeling, translating visual concepts from characters to pixels. We demonstrate the capability of our model to generate plausible images of birds and flowers from detailed text descriptions.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-&lt;li&gt;GANのアーキテクチャを応用し、 文章から画像を生成することができた&lt;/li&gt;
-&lt;li&gt;文章だけでは表せない情報は、スタイル、という概念を用いて吸収した&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;ja&#34; dir=&#34;ltr&#34;&gt;文字情報ではない情報（スタイル）を転写（ex. 背景を継承）&lt;br&gt;画像からスタイルを求める関数を学習&lt;br&gt;スタイルZと文章をGに与える&lt;br&gt;スライド &lt;a href=&#34;https://t.co/c5lB0JIjgg&#34;&gt;https://t.co/c5lB0JIjgg&lt;/a&gt;&lt;br&gt;実装 &lt;a href=&#34;https://t.co/JpFDDp7bJo&#34;&gt;https://t.co/JpFDDp7bJo&lt;/a&gt;&lt;a href=&#34;https://twitter.com/hashtag/icml_yomi?src=hash&#34;&gt;#icml_yomi&lt;/a&gt;&lt;/p&gt;&amp;mdash; Ryobot | りょぼっと (@_Ryobot) &lt;a href=&#34;https://twitter.com/_Ryobot/status/756057271877050369&#34;&gt;July 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
-&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;ja&#34; dir=&#34;ltr&#34;&gt;「Generative Adversarial Text to Image Synthesis」GAN を応用して文章から画像を生成。生成側に画像と文章を入れ、判定側は画像が文章と一致しているかも学習させる。 &lt;a href=&#34;https://t.co/ipQyxAsInL&#34;&gt;https://t.co/ipQyxAsInL&lt;/a&gt; &lt;a href=&#34;https://twitter.com/hashtag/icml_yomi?src=hash&#34;&gt;#icml_yomi&lt;/a&gt;&lt;/p&gt;&amp;mdash; Takuya Akiba (@iwiwi) &lt;a href=&#34;https://twitter.com/iwiwi/status/756058225657511936&#34;&gt;July 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;deep-speech-2-end-to-end-speech-recognition-in-english-and-mandarin&#34;&gt;Deep Speech 2 : End-to-End Speech Recognition in English and Mandarin&lt;/h2&gt;
-
-&lt;p&gt;西鳥羽二郎さん (&lt;a href=&#34;https://twitter.com/jnishi&#34;&gt;@jnishi&lt;/a&gt;
-) / Preferred Infrastructure&lt;/p&gt;
-
-&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/z0e4lCCp712kue&#34; class=&#34;slideshare&#34; width=&#34;595&#34; height=&#34;485&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt;
-
-
-&lt;p&gt;論文: &lt;a href=&#34;http://jmlr.org/proceedings/papers/v48/amodei16.html&#34;&gt;http://jmlr.org/proceedings/papers/v48/amodei16.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;We show that an end-to-end deep learning approach can be used to recognize either English or Mandarin Chinese speech–two vastly different languages. Because it replaces entire pipelines of hand-engineered components with neural networks, end-to-end learning allows us to handle a diverse variety of speech including noisy environments, accents and different languages. Key to our approach is our application of HPC techniques, enabling experiments that previously took weeks to now run in days. This allows us to iterate more quickly to identify superior architectures and algorithms. As a result, in several cases, our system is competitive with the transcription of human workers when benchmarked on standard datasets. Finally, using a technique called Batch Dispatch with GPUs in the data center, we show that our system can be inexpensively deployed in an online setting, delivering low latency when serving users at scale.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-&lt;li&gt;End to Endの音声認識モデルを構築し、人手による書き起こしよりも高い精度を得た&lt;/li&gt;
-&lt;li&gt;異なる言語や、雑音のあるなしにも対応可能なモデルとなった&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;ja&#34; dir=&#34;ltr&#34;&gt;&lt;a href=&#34;https://twitter.com/hashtag/icml_yomi?src=hash&#34;&gt;#icml_yomi&lt;/a&gt; これ試そ / “WING » Downloads » Chinese Microtext Dataset” &lt;a href=&#34;https://t.co/tnkejvjfZ2&#34;&gt;https://t.co/tnkejvjfZ2&lt;/a&gt;&lt;/p&gt;&amp;mdash; prototechno (@prototechno) &lt;a href=&#34;https://twitter.com/prototechno/status/756065132116008961&#34;&gt;July 21, 2016&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
-
-&lt;h2 id=&#34;おわりに&#34;&gt;おわりに&lt;/h2&gt;
-
-&lt;p&gt;まとめは以上となります。&lt;br /&gt;
-貴重な場を提供していただいた関係者の方々、ありがとうございました。&lt;/p&gt;
 </description>
     </item>
     

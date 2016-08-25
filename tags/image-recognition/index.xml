@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Image Recognition on ALGO GEEKS</title>
+    <link>http://blog.algolab.jp/tags/image-recognition/</link>
+    <description>Recent content in Image Recognition on ALGO GEEKS</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Thu, 25 Aug 2016 16:28:18 +0900</lastBuildDate>
+    <atom:link href="http://blog.algolab.jp/tags/image-recognition/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>麻雀カメラプロジェクト再始動？ 〜【導入編】テンプレートマッチングによる麻雀牌判定〜</title>
+      <link>http://blog.algolab.jp/post/2016/08/25/mahjong-camera-introduction/</link>
+      <pubDate>Thu, 25 Aug 2016 16:28:18 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/08/25/mahjong-camera-introduction/</guid>
+      <description>
+
+&lt;p&gt;2014年の終わり頃に「麻雀カメラ」というiPhoneアプリを作っていました。&lt;br /&gt;
+カメラをかざすだけで麻雀の得点計算を行ってくれるアプリです。&lt;/p&gt;
+
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//www.youtube.com/embed/livDDcygEDU&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; allowfullscreen frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+
+
+&lt;p&gt;動画を見ていただければ一目瞭然ですが、さすがに実用では使えない、ということでお蔵入りしました&amp;hellip;。&lt;br /&gt;
+(時間がかかるだけでなく、精度もあまり良くありませんでした。)&lt;/p&gt;
+
+&lt;p&gt;あれから一年半、技術の進歩は目覚ましく、いまならば良いものが作れるのでは？と思い立ち、再挑戦してみることにしました。&lt;/p&gt;
+
+&lt;p&gt;今回は、導入編として、当時用いていた手法 (テンプレートマッチング) について説明します。&lt;/p&gt;
+
+&lt;h2 id=&#34;画像判定プロセス&#34;&gt;画像判定プロセス&lt;/h2&gt;
+
+&lt;p&gt;画像に何が写っているか判定するためには、大きく「検出 (Detection)」と「認識 (Recognition)」というプロセスに分かれます。&lt;/p&gt;
+
+&lt;h3 id=&#34;検出&#34;&gt;検出&lt;/h3&gt;
+
+&lt;p&gt;物体が画像内のどこにあるかを判定するプロセス。&lt;br /&gt;
+下記の画像でいうと、赤枠をつけていくイメージです。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/25/mahjong-camera-introduction//detection_1.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;h3 id=&#34;認識&#34;&gt;認識&lt;/h3&gt;
+
+&lt;p&gt;検出された領域に写っている物体が何であるかを判定するプロセス。&lt;br /&gt;
+具体的には、下記の物体が「五萬」である、と識別することを言います。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/25/mahjong-camera-introduction//5m.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;h2 id=&#34;検出の難しさ&#34;&gt;検出の難しさ&lt;/h2&gt;
+
+&lt;p&gt;麻雀牌判定においては、特に「検出」のプロセスが困難です。&lt;br /&gt;
+横並びの複数牌に対し、どこが牌の境界かを判断することが非常に難しいのです。&lt;br /&gt;
+例えば、下記の画像を考えてみましょう。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/25/mahjong-camera-introduction//detection_2.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;人間の目には、3つの牌の境界を判断することはできますが、&lt;br /&gt;
+機械では、下記の赤枠の部分を1つの牌として検出してしまう、ということが起こり得てしまいます。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/25/mahjong-camera-introduction//detection_3.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;牌の境界には溝らしきものが存在するので、画像処理で溝を判定し境界とみなす、というような実装も考えられますが、光の具合や撮影角度などによって溝が見えなくなってしまうこともあるため、このような特定のルールを設ける方法では一筋縄ではいきません。&lt;/p&gt;
+
+&lt;h2 id=&#34;当時用いていたアルゴリズム&#34;&gt;当時用いていたアルゴリズム&lt;/h2&gt;
+
+&lt;p&gt;当時はどのように判定していたかというと、前処理を加えた画像に対し、テンプレートマッチングという手法を用いていました。(古くからある手法です)&lt;/p&gt;
+
+&lt;h2 id=&#34;前処理&#34;&gt;前処理&lt;/h2&gt;
+
+&lt;p&gt;前処理として、画像全体から牌が写っている全体領域を切り出します。&lt;br /&gt;
+牌の全体領域と背景には明らかに差が見て取れるので、これは比較的容易に行うことができます。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/25/mahjong-camera-introduction//detection_4.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;具体的には、二値化画像に対し輪郭抽出を行い、頂点数や面積が一定以上のものの外接矩形を牌の全体領域としてみなす、という処理をしています。&lt;/p&gt;
+
+&lt;p&gt;処理後の画像はこのような形となります。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/25/mahjong-camera-introduction//template_matching_1.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;h2 id=&#34;テンプレートマッチング&#34;&gt;テンプレートマッチング&lt;/h2&gt;
+
+&lt;p&gt;前処理を行った画像に対し、テンプレートマッチングを用いて牌を判定していきます。&lt;/p&gt;
+
+&lt;p&gt;テンプレートマッチングとは、テンプレート画像を少しずつ端から端までずらしていって、その類似度を計算していく、という手法です。&lt;/p&gt;
+
+&lt;p&gt;例えばテンプレート画像に「五萬」を用いるとしましょう。&lt;br /&gt;
+下記のように、少しずつずらして類似度を計算していき、その値を保持しておきます。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/25/mahjong-camera-introduction//template_matching_2.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;そして、一番類似度が高い領域を個別牌領域としてみなします。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/25/mahjong-camera-introduction//template_matching_3.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;実際には、テンプレート画像には、麻雀牌の種類 (34) x 上下左右の方向 (4) の合計136個を用い、一番類似度の高かったものを採用しています。&lt;/p&gt;
+
+&lt;p&gt;そして、確定した領域を除いた残りの領域に対して更にテンプレートマッチングを繰り返していくことで牌の判定を行っていました。&lt;/p&gt;
+
+&lt;h2 id=&#34;問題点&#34;&gt;問題点&lt;/h2&gt;
+
+&lt;p&gt;テンプレートマッチングは、いわば総当たり作戦で「検出」と「認識」を一度に行ってしまおうというものです。&lt;br /&gt;
+ご想像の通り、非常に効率が悪く、判定に時間がかかってしまいます。&lt;/p&gt;
+
+&lt;p&gt;またテンプレート画像は上下左右の4方向しか用意していないため、例えば下記の中だと「六萬」の判定がうまくいきません。
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/25/mahjong-camera-introduction//template_matching_4.png&#34;/&gt;
+  
+&lt;/figure&gt;
+&lt;/p&gt;
+
+&lt;p&gt;単純に考えると、テンプレートを増やせば良さそうですが、速度とのトレードオフなので現実的ではありません。&lt;/p&gt;
+
+&lt;h2 id=&#34;次回予告&#34;&gt;次回予告&lt;/h2&gt;
+
+&lt;p&gt;このように、テンプレートマッチングを用いる手法では、限られた条件下 (横並びに綺麗に牌が並んでいる) ではそれなりに精度は出るものの、条件から外れると精度が落ち、また判定に時間もかかってしまいました。&lt;/p&gt;
+
+&lt;p&gt;次回以降、これらの問題点を解決すべく、いろいろな手法を試していきたいと思います。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
