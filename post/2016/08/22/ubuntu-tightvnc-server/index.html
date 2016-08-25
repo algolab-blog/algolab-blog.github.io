@@ -7,7 +7,7 @@
   <title>
     
     
-      Ubuntu 16.04 LTSにXcfeとTightVNC Serverでリモートデスクトップ環境を構築する
+      Ubuntu 16.04 LTSにXcfe (or LXDE) とTightVNC Serverでリモートデスクトップ環境を構築する
     
     &nbsp;|&nbsp;ALGO GEEKS
   </title>
@@ -17,7 +17,7 @@
   <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.algolab.jp/post/2016/08/22/ubuntu-xfce-tightvnc-server/"/>
+  <link rel="canonical" href="http://blog.algolab.jp/post/2016/08/22/ubuntu-tightvnc-server/"/>
 
   
   <link rel="stylesheet" href="/css/sanitize.css">
@@ -90,7 +90,7 @@
   
   <main id="single" role="main">
     <div class="article-header">
-      <h1>Ubuntu 16.04 LTSにXcfeとTightVNC Serverでリモートデスクトップ環境を構築する</h1>
+      <h1>Ubuntu 16.04 LTSにXcfe (or LXDE) とTightVNC Serverでリモートデスクトップ環境を構築する</h1>
       
 
 <div class="meta">
@@ -119,10 +119,21 @@
 
 <h2 id="デスクトップ環境のインストール">デスクトップ環境のインストール</h2>
 
-<p>デスクトップ環境には高速な軽量なXfceを用います。(お好みに合わせてください)<br />
-<a href="https://www.xfce.org/">https://www.xfce.org/</a></p>
+<p>デスクトップ環境には高速な軽量なXfceもしくはLXDEを最小限の構成でインストールします。<br />
+(お好みに合わせてください)</p>
+
+<h3 id="xfceの場合">Xfceの場合</h3>
+
+<p><a href="https://www.xfce.org/">https://www.xfce.org/</a></p>
 
 <pre><code class="language-sh">$ sudo apt-get install -y xfce4 xfce4-goodies
+</code></pre>
+
+<h3 id="lxdeの場合">LXDEの場合</h3>
+
+<p><a href="http://lxde.org/">http://lxde.org/</a></p>
+
+<pre><code class="language-sh">$ sudo apt-get install -y lxde-core
 </code></pre>
 
 <h2 id="tightvnc-serverのセットアップ">TightVNC Serverのセットアップ</h2>
@@ -142,9 +153,18 @@
 <pre><code class="language-sh">$ vi ~/.vnc/xstartup
 </code></pre>
 
+<h4 id="xfceの場合-1">Xfceの場合</h4>
+
 <pre><code>#!/bin/bash
 xrdb $HOME/.Xresources
 startxfce4 &amp;
+</code></pre>
+
+<h4 id="lxdeの場合-1">LXDEの場合</h4>
+
+<pre><code>#!/bin/bash
+xrdb $HOME/.Xresources
+lxsession -s LXDE &amp;
 </code></pre>
 
 <h3 id="起動">起動</h3>
@@ -167,7 +187,7 @@ Would you like to enter a view-only password (y/n)? n
 <p>MacのFinderから<code>移動</code> &gt; <code>サーバーへ接続</code>で、VNCクライアントを起動します。<br />
 アドレスバーには<code>vnc://[サーバーのIPアドレス]:5901</code>を入力してください。
 <figure>
-  <img src="/images//post/2016/08/22/ubuntu-xfce-tightvnc-server//vnc_client.png"/>
+  <img src="/images//post/2016/08/22/ubuntu-tightvnc-server//vnc_client.png"/>
   
 </figure>
 </p>
@@ -175,7 +195,7 @@ Would you like to enter a view-only password (y/n)? n
 <p>パスワードによる認証の後、リモートデスクトップにアクセスできます。</p>
 
 <figure>
-  <img src="/images//post/2016/08/22/ubuntu-xfce-tightvnc-server//vnc_server.png"/>
+  <img src="/images//post/2016/08/22/ubuntu-tightvnc-server//vnc_server.png"/>
   
 </figure>
 
@@ -233,17 +253,15 @@ $ sudo systemctl enable vncserver@1.service
 <pre><code class="language-sh">$ sudo systemctl status vncserver@1
 </code></pre>
 
-<h3 id="キーの設定">キーの設定</h3>
+<h2 id="xfce固有の設定">Xfce固有の設定</h2>
 
 <p>デフォルトのままだとキーがうまく効かないので編集します。<br />
 <code>Applications</code> &gt; <code>Settings</code> &gt; <code>Window Manager</code> &gt; <code>Keyboard</code>の設定を開きます。</p>
 
-<h4 id="tabの設定">Tabの設定</h4>
-
 <p><code>Switch window for same application</code>を選択して、<code>Clear</code>することで、<code>Tab</code>キーが正常に動作するようになります。</p>
 
 <figure>
-  <img src="/images//post/2016/08/22/ubuntu-xfce-tightvnc-server//tab.png"/>
+  <img src="/images//post/2016/08/22/ubuntu-tightvnc-server//tab.png"/>
   
 </figure>
 
@@ -300,7 +318,7 @@ $ sudo systemctl enable vncserver@1.service
       
         <li><a href="http://blog.algolab.jp/post/2016/08/24/vpn-dns/">VPNサーバのパブリックIPをDNSに登録する 〜Raspberry Pi上で定期実行〜 </a></li>
       
-        <li><a href="http://blog.algolab.jp/post/2016/08/22/ubuntu-xfce-tightvnc-server/">Ubuntu 16.04 LTSにXcfeとTightVNC Serverでリモートデスクトップ環境を構築する </a></li>
+        <li><a href="http://blog.algolab.jp/post/2016/08/22/ubuntu-tightvnc-server/">Ubuntu 16.04 LTSにXcfe (or LXDE) とTightVNC Serverでリモートデスクトップ環境を構築する </a></li>
       
         <li><a href="http://blog.algolab.jp/post/2016/08/21/pyenv-anaconda-ubuntu/">pyenv &#43; Anaconda (Ubuntu 16.04 LTS) で機械学習のPython開発環境をオールインワンで整える【随時更新】 </a></li>
       

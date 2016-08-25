@@ -114,21 +114,32 @@ client.change_resource_record_sets(
     </item>
     
     <item>
-      <title>Ubuntu 16.04 LTSにXcfeとTightVNC Serverでリモートデスクトップ環境を構築する</title>
-      <link>http://blog.algolab.jp/post/2016/08/22/ubuntu-xfce-tightvnc-server/</link>
+      <title>Ubuntu 16.04 LTSにXcfe (or LXDE) とTightVNC Serverでリモートデスクトップ環境を構築する</title>
+      <link>http://blog.algolab.jp/post/2016/08/22/ubuntu-tightvnc-server/</link>
       <pubDate>Mon, 22 Aug 2016 17:53:57 +0900</pubDate>
       
-      <guid>http://blog.algolab.jp/post/2016/08/22/ubuntu-xfce-tightvnc-server/</guid>
+      <guid>http://blog.algolab.jp/post/2016/08/22/ubuntu-tightvnc-server/</guid>
       <description>
 
 &lt;p&gt;MacからUbuntu (16.04 LTS) へリモートデスクトップでアクセスする手順をまとめます。&lt;/p&gt;
 
 &lt;h2 id=&#34;デスクトップ環境のインストール&#34;&gt;デスクトップ環境のインストール&lt;/h2&gt;
 
-&lt;p&gt;デスクトップ環境には高速な軽量なXfceを用います。(お好みに合わせてください)&lt;br /&gt;
-&lt;a href=&#34;https://www.xfce.org/&#34;&gt;https://www.xfce.org/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;デスクトップ環境には高速な軽量なXfceもしくはLXDEを最小限の構成でインストールします。&lt;br /&gt;
+(お好みに合わせてください)&lt;/p&gt;
+
+&lt;h3 id=&#34;xfceの場合&#34;&gt;Xfceの場合&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.xfce.org/&#34;&gt;https://www.xfce.org/&lt;/a&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install -y xfce4 xfce4-goodies
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;lxdeの場合&#34;&gt;LXDEの場合&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://lxde.org/&#34;&gt;http://lxde.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install -y lxde-core
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;tightvnc-serverのセットアップ&#34;&gt;TightVNC Serverのセットアップ&lt;/h2&gt;
@@ -148,9 +159,18 @@ client.change_resource_record_sets(
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vi ~/.vnc/xstartup
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;h4 id=&#34;xfceの場合-1&#34;&gt;Xfceの場合&lt;/h4&gt;
+
 &lt;pre&gt;&lt;code&gt;#!/bin/bash
 xrdb $HOME/.Xresources
 startxfce4 &amp;amp;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;lxdeの場合-1&#34;&gt;LXDEの場合&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/bin/bash
+xrdb $HOME/.Xresources
+lxsession -s LXDE &amp;amp;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;起動&#34;&gt;起動&lt;/h3&gt;
@@ -173,7 +193,7 @@ Would you like to enter a view-only password (y/n)? n
 &lt;p&gt;MacのFinderから&lt;code&gt;移動&lt;/code&gt; &amp;gt; &lt;code&gt;サーバーへ接続&lt;/code&gt;で、VNCクライアントを起動します。&lt;br /&gt;
 アドレスバーには&lt;code&gt;vnc://[サーバーのIPアドレス]:5901&lt;/code&gt;を入力してください。
 &lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/22/ubuntu-xfce-tightvnc-server//vnc_client.png&#34;/&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/22/ubuntu-tightvnc-server//vnc_client.png&#34;/&gt;
   
 &lt;/figure&gt;
 &lt;/p&gt;
@@ -181,7 +201,7 @@ Would you like to enter a view-only password (y/n)? n
 &lt;p&gt;パスワードによる認証の後、リモートデスクトップにアクセスできます。&lt;/p&gt;
 
 &lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/22/ubuntu-xfce-tightvnc-server//vnc_server.png&#34;/&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/22/ubuntu-tightvnc-server//vnc_server.png&#34;/&gt;
   
 &lt;/figure&gt;
 
@@ -239,17 +259,15 @@ $ sudo systemctl enable vncserver@1.service
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo systemctl status vncserver@1
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;キーの設定&#34;&gt;キーの設定&lt;/h3&gt;
+&lt;h2 id=&#34;xfce固有の設定&#34;&gt;Xfce固有の設定&lt;/h2&gt;
 
 &lt;p&gt;デフォルトのままだとキーがうまく効かないので編集します。&lt;br /&gt;
 &lt;code&gt;Applications&lt;/code&gt; &amp;gt; &lt;code&gt;Settings&lt;/code&gt; &amp;gt; &lt;code&gt;Window Manager&lt;/code&gt; &amp;gt; &lt;code&gt;Keyboard&lt;/code&gt;の設定を開きます。&lt;/p&gt;
 
-&lt;h4 id=&#34;tabの設定&#34;&gt;Tabの設定&lt;/h4&gt;
-
 &lt;p&gt;&lt;code&gt;Switch window for same application&lt;/code&gt;を選択して、&lt;code&gt;Clear&lt;/code&gt;することで、&lt;code&gt;Tab&lt;/code&gt;キーが正常に動作するようになります。&lt;/p&gt;
 
 &lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/22/ubuntu-xfce-tightvnc-server//tab.png&#34;/&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/22/ubuntu-tightvnc-server//tab.png&#34;/&gt;
   
 &lt;/figure&gt;
 
@@ -456,7 +474,8 @@ $ pip install mecab-python3
 &lt;h3 id=&#34;tightvnc-server&#34;&gt;TightVNC Server&lt;/h3&gt;
 
 &lt;p&gt;リモートデスクトップ環境。下記の記事を参照してください。&lt;br /&gt;
-&lt;a href=&#34;http://blog.algolab.jp/post/2016/08/22/ubuntu-xfce-tightvnc-server/&#34;&gt;Ubuntu 16.04 LTSにXcfeとTightVNC Serverでリモートデスクトップ環境を構築する&lt;/a&gt;&lt;/p&gt;
+&lt;a href=&#34;No page found with path or logical name &#34;post/2016/08/22/ubuntu-xfce-tightvnc-server.md&#34;.
+&#34;&gt;Ubuntu 16.04 LTSにXcfeとTightVNC Serverでリモートデスクトップ環境を構築する&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
