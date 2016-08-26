@@ -26,7 +26,7 @@
 &lt;p&gt;LINEがBOT API、FacebookがMessenger Platformを発表してから数ヶ月たちました。&lt;br /&gt;
 これまでに数々のチャットボットがリリースされていますが、まだ活用方法を模索している段階かと思います。&lt;/p&gt;
 
-&lt;p&gt;その中で、コミュニケーション教育ツールとしての活用可能性があるのではないかと考え、実験的に「テレアポ模擬トレーニングBot」を &lt;a href=&#34;http://www.torix-corp.com/&#34;&gt;TORiX&lt;/a&gt; さんと共同開発させていただきました。(弊社は実装部分を担当致しました)&lt;/p&gt;
+&lt;p&gt;その中で、コミュニケーション教育ツールとしての活用可能性があるのではないかと考え、実験的に「テレアポ模擬トレーニングBot」を &lt;a href=&#34;http://www.torix-corp.com/&#34;&gt;TORiX&lt;/a&gt; さんと共同開発させていただきました。&lt;/p&gt;
 
 &lt;p&gt;今回は、このBotの概要と、開発に至った経緯について書きたいと思います。&lt;/p&gt;
 
