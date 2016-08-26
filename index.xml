@@ -222,8 +222,7 @@ TTL = 300
 
 # パブリックIPアドレスの取得
 response = urllib2.urlopen(&#39;http://httpbin.org/ip&#39;)
-json_str = response.read()
-ip_address = json.loads(json_str)[&#39;origin&#39;]
+ip_address = json.loads(response.read())[&#39;origin&#39;]
 
 # AWS SDK Client
 client = boto3.client(&#39;route53&#39;)
