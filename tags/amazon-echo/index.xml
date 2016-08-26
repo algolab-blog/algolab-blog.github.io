@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Amazon Echo on ALGO GEEKS</title>
+    <link>http://blog.algolab.jp/tags/amazon-echo/</link>
+    <description>Recent content in Amazon Echo on ALGO GEEKS</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Thu, 11 Aug 2016 19:08:44 +0900</lastBuildDate>
+    <atom:link href="http://blog.algolab.jp/tags/amazon-echo/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Amazon Echoを6,000円で自作する 〜Raspberry Pi 3 &#43; Alexa Voice Services (AVS)〜</title>
+      <link>http://blog.algolab.jp/post/2016/08/11/raspberry-pi-alexa/</link>
+      <pubDate>Thu, 11 Aug 2016 19:08:44 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/08/11/raspberry-pi-alexa/</guid>
+      <description>
+
+&lt;p&gt;&lt;a href=&#34;http://blog.algolab.jp/post/2016/07/29/mary-meeker-2016/&#34;&gt;音声は新しいパラダイムシフトになる 〜2016年度版メアリー・ミーカー氏レポートまとめ〜&lt;/a&gt; でも触れたように、次世代デバイスとしてAmazon Echoは注目するべき存在です。&lt;/p&gt;
+
+&lt;p&gt;しかしながら、日本では技適の関係で未だ使用できません。&lt;br /&gt;
+ただ、Alexa Voice Services (AVS) というものが公開されており、Amazon Echoを様々なデバイスで動作させることが可能です。&lt;/p&gt;
+
+&lt;p&gt;今回は、Raspberry Pi 3からAVSを利用できるようにしました。&lt;br /&gt;
+セットアップについては下記にある通りですが、低予算での最低限の手順をまとめてみます。
+&lt;a href=&#34;https://github.com/amzn/alexa-avs-raspberry-pi&#34;&gt;https://github.com/amzn/alexa-avs-raspberry-pi&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;完成したもの&#34;&gt;完成したもの&lt;/h2&gt;
+
+&lt;p&gt;いきなり動画ですが、こんな感じで動きます。英語で話かけると、リクエストを解釈して実行してくれたり、音声で応答してくれて面白いです。
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//www.youtube.com/embed/fWubPL5_YaU&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; allowfullscreen frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+&lt;/p&gt;
+
+&lt;h2 id=&#34;用意したもの&#34;&gt;用意したもの&lt;/h2&gt;
+
+&lt;p&gt;音声入力にUSBマイクロフォンが必要なので、Raspberry Pi 3と併せて購入。他はありあわせで用意しました。&lt;br /&gt;
+Raspberry Pi用のディスプレイを用意してもよいですが、今回はVNC server (Linux版リモートデスクトップ) を使います。&lt;/p&gt;
+
+&lt;h3 id=&#34;買ったもの&#34;&gt;買ったもの&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Raspberry Pi 3 (4,800円)
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/gp/product/B01D1FR2WE/&#34;&gt;https://www.amazon.co.jp/gp/product/B01D1FR2WE/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;USBマイクロフォン (1,600円)
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/gp/product/B0027WPY82&#34;&gt;https://www.amazon.co.jp/gp/product/B0027WPY82&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;ありあわせ&#34;&gt;ありあわせ&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Micro SDカード
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/dp/B00CDJNOX6/&#34;&gt;https://www.amazon.co.jp/dp/B00CDJNOX6/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Micro-USB (A-MicroB) ケーブル&lt;/li&gt;
+&lt;li&gt;スピーカー&lt;/li&gt;
+&lt;li&gt;LANケーブル&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;raspberry-pi-を起動する&#34;&gt;Raspberry Pi を起動する&lt;/h2&gt;
+
+&lt;h3 id=&#34;osイメージの準備&#34;&gt;OSイメージの準備&lt;/h3&gt;
+
+&lt;p&gt;以下の記事を参考に進めました。&lt;br /&gt;
+&lt;a href=&#34;http://qiita.com/onlyindreams/items/acc70807b69b43e176bf&#34;&gt;Raspberry Pi 3にRaspbianをインストール(Mac OS X を使用)&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Rasbian Jessie は &lt;code&gt;2016-05-27&lt;/code&gt; リリースのものを用いました。&lt;/li&gt;
+&lt;li&gt;ddコマンドのオプションで、ブロックサイズを大文字 (&lt;code&gt;bs=1M&lt;/code&gt;) で指定&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;起動手順&#34;&gt;起動手順&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;MicroSD、LAN、 USBマイクロフォン、スピーカーを接続しておきます。&lt;/li&gt;
+&lt;li&gt;電源用としてUSBケーブルを挿すとBIOSが起動します。今回はOSであるRaspbian Jessieも自動で起動しました。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;必要なアカウント-ライブラリの準備&#34;&gt;必要なアカウント・ライブラリの準備&lt;/h2&gt;
+
+&lt;p&gt;AVSを利用するために必要なものを諸々準備します。&lt;/p&gt;
+
+&lt;h3 id=&#34;amazon-developer-アカウントの登録&#34;&gt;Amazon Developer アカウントの登録&lt;/h3&gt;
+
+&lt;p&gt;下記よりアカウントを登録します。登録済みであれば不要です。&lt;br /&gt;
+&lt;a href=&#34;https://developer.amazon.com/login.html&#34;&gt;https://developer.amazon.com/login.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;サンプルアプリのダウンロード&#34;&gt;サンプルアプリのダウンロード&lt;/h3&gt;
+
+&lt;p&gt;公式のGithub上にある &lt;a href=&#34;https://github.com/amzn/alexa-avs-raspberry-pi/archive/master.zip&#34;&gt;Sample app&lt;/a&gt; をダウンロード&amp;amp;解凍して下記のようにデスクトップなどのパスに保存します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;/home/pi/Desktop/alexa-avs-raspberry-pi-master/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;vnc-serverのインストール&#34;&gt;VNC Serverのインストール&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# install
+$ sudo apt-get install tightvncserver
+# run
+$ tightvncserver
+# auto run setup
+$ vi /home/pi/.config/tightvnc.desktop
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;tightvnc.desktop&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;[Desktop Entry]
+Type=Application
+Name=TightVNC
+Exec=vncserver :1
+StartupNotify=false
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;vlcのインストール&#34;&gt;VLCのインストール&lt;/h3&gt;
+
+&lt;p&gt;VLC media playerをインストールします。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# install
+$ sudo apt-get install vlc-nox vlc-data
+# add env vars
+$ echo &amp;quot;export LD_LIBRARY_PATH=/usr/lib/vlc&amp;quot; &amp;gt;&amp;gt; ~/.bashrc
+$ echo &amp;quot;export VLC_PLUGIN_PATH=/usr/lib/vlc/plugins&amp;quot; &amp;gt;&amp;gt; ~/.bashrc
+$ soure ~/.bashrc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;nodeとnpmのインストール&#34;&gt;NodeとNPMのインストール&lt;/h3&gt;
+
+&lt;p&gt;後に出てくるサーバーの起動に必要なNodeとNPMをインストールします。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# apt-get update &amp;amp; upgrade. It takes about 15 min.
+$ sudo apt-get update &amp;amp;&amp;amp; sudo apt-get upgrade
+# install nodejs
+$ curl -sL https://deb.nodesource.com/setup | sudo bash -
+$ sudo apt-get install nodejs
+$ cd /home/pi/Desktop/alexa-avs-raspberry-pi-master/samples/companionService
+$ npm install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;jdkとmavenのインストール&#34;&gt;JDKとMavenのインストール&lt;/h3&gt;
+
+&lt;p&gt;公式DocはMavenの環境変数は &lt;code&gt;/etc/profile.d/maven.sh&lt;/code&gt; に追加する方法ですが、うまくいかなかったので手っ取り早く &lt;code&gt;bashrc&lt;/code&gt; に追加して進めました。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# java
+$ cd /home/pi/Desktop/alexa-avs-raspberry-pi-master/samples/javaclient
+$ ./install-java8.sh
+# maven
+$ wget http://apache.osuosl.org/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
+$ sudo tar xvf apache-maven-3.3.9-bin.tar.gz  -C /opt
+# add maven_vars
+$ echo &amp;quot;export M2_HOME=/opt/apache-maven-3.3.9&amp;quot; &amp;gt;&amp;gt; ~/.bashrc
+$ echo &amp;quot;export PATH=$PATH:$M2_HOME/bin&amp;quot; &amp;gt;&amp;gt; ~/.bashrc
+$ source ~/.bashrc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;証明書生成スクリプトを実行&#34;&gt;証明書生成スクリプトを実行&lt;/h3&gt;
+
+&lt;p&gt;プロダクトID、シリアル番号、パスワードの3つを入力します。今回はパスワードは空のままで進めます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ /home/pi/Desktop/alexa-avs-raspberry-pi-master/samples/javaclient/generate.sh
+&amp;gt; product ID: my_device
+&amp;gt; Serial Number: 123456
+&amp;gt; Password: [blank]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;クライアントidとclientsecretを発行&#34;&gt;クライアントIDとClientSecretを発行&lt;/h3&gt;
+
+&lt;p&gt;ここは &lt;a href=&#34;https://github.com/amzn/alexa-avs-raspberry-pi#user-content-6---getting-started-with-alexa-voice-service&#34;&gt;公式Doc&lt;/a&gt; の画像のとおり進めればよいです。&lt;/p&gt;
+
+&lt;h3 id=&#34;サーバとクライアントを起動&#34;&gt;サーバとクライアントを起動&lt;/h3&gt;
+
+&lt;p&gt;下記のとおりサーバを起動します。 &lt;code&gt;config.js&lt;/code&gt; には先ほど発行したクライアントIDとClientSecretを入力しておきます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# setup clientId and ClientSecret
+$ vi /home/pi/Desktop/alexa-avs-raspberry-pi-master/samples/companionService/config.js
+$ cd /home/pi/Desktop/alexa-avs-raspberry-pi-master/samples/companionService
+$ npm start
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;続いてクライアントも起動します。起動するとGUIも一緒に立ち上がります。 &lt;code&gt;DISPLAY=:1.0&lt;/code&gt; はVNC経由の場合の指定です。外部ディスプレイを使う場合は &lt;code&gt;DISPLAY=:0.0&lt;/code&gt; です。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd /home/pi/Desktop/alexa-avs-raspberry-pi-master/samples/javaclient
+$ mvn install
+$ export DISPLAY=:1.0
+$ mvn exec:exec
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;GUIに出てくるURLにアクセスしてデバイスの登録になります。ここも &lt;a href=&#34;https://github.com/amzn/alexa-avs-raspberry-pi#user-content-10---obtain-authorsization-from-login-with-amazon&#34;&gt;公式Doc&lt;/a&gt; の画像のとおりです。以上が終わると、AVSを利用できます。&lt;/p&gt;
+
+&lt;h2 id=&#34;次回予告&#34;&gt;次回予告&lt;/h2&gt;
+
+&lt;p&gt;次回はAlexa Skillsを登録して使ってみようと思います。乞うご期待。Don&amp;rsquo;t miss out!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

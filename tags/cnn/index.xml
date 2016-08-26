@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cnn on ALGO GEEKS</title>
+    <link>http://blog.algolab.jp/tags/cnn/</link>
+    <description>Recent content in Cnn on ALGO GEEKS</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Sun, 07 Aug 2016 15:46:48 +0900</lastBuildDate>
+    <atom:link href="http://blog.algolab.jp/tags/cnn/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>ディープラーニング徹底入門 〜AIトレーニング第1回〜</title>
+      <link>http://blog.algolab.jp/post/2016/08/07/deep-learning-introduction/</link>
+      <pubDate>Sun, 07 Aug 2016 15:46:48 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/08/07/deep-learning-introduction/</guid>
+      <description>
+
+&lt;p&gt;弊社で実施している &lt;a href=&#34;http://blog.algolab.jp/post/2016/07/25/ai-training/&#34;&gt;AIトレーニング&lt;/a&gt; の実況中継シリーズです。&lt;br /&gt;
+前回の内容は &lt;a href=&#34;http://blog.algolab.jp/post/2016/08/01/ai-training-kick-off/&#34;&gt;AIトレーニングキックオフ 〜ハムケツを認識したい〜&lt;/a&gt; をご覧ください。&lt;br /&gt;
+今回は、ディープラーニングのイメージを掴んでもらうためにAさんにお話した内容をお届けします。&lt;/p&gt;
+
+&lt;h2 id=&#34;画像認識とは&#34;&gt;画像認識とは？&lt;/h2&gt;
+
+&lt;p&gt;さて、突然ですが、皆さんに問題です。&lt;br /&gt;
+以下のようにグループが分かれているものとします。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/07/deep-learning-introduction//group_1.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;このとき、下の画像はどちらのグループになるでしょうか？&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/07/deep-learning-introduction//square_red.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;正解は「B」です。正解者の皆さんおめでとうございます！&lt;br /&gt;
+ではなぜ「B」なのか。おそらくこう考えたはずです。&lt;/p&gt;
+
+&lt;p&gt;「色がポイントだ。青ければグループA、赤ければグループB。だから、この画像はグループBだろう。」&lt;/p&gt;
+
+&lt;p&gt;図式化すると、下記のような形かと思います。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/07/deep-learning-introduction//image_recognition_1.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;これが画像を見分けるメカニズムで、これを機械に代替させようというのが機械学習における画像認識の分野です。&lt;br /&gt;
+そして、機械学習の文脈では、前半を「特徴抽出」、後半を「分類」と呼びます。&lt;/p&gt;
+
+&lt;h2 id=&#34;画像認識の難しさ&#34;&gt;画像認識の難しさ&lt;/h2&gt;
+
+&lt;p&gt;さて、冒頭に出した問題ですが、以下のようなグループ分けだったらどうでしょう。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/07/deep-learning-introduction//group_2.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;先ほどは「色」に注目しましたが、今度は「形」に注目して判定する必要がありそうです。&lt;br /&gt;
+図を再掲すると以下のようになります。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/07/deep-learning-introduction//image_recognition_2.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;このように、注目するポイントは問題設定によって異なります。&lt;br /&gt;
+そして、この注目する部分を決める「特徴抽出」の設計は、人間が行う必要があり、大変でした。&lt;/p&gt;
+
+&lt;h2 id=&#34;ディープラーニングとは&#34;&gt;ディープラーニングとは？&lt;/h2&gt;
+
+&lt;p&gt;これらの作業を機械が自動的に行ってくれるのがディープラーニングです。&lt;br /&gt;
+具体的には、この画像はグループA、この画像はグループBといったように大量の画像を機械に覚えさせるだけで良い、というイメージです。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/07/deep-learning-introduction//deep_learning.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;つまり、これまでよりも簡単に画像認識ができるようになったということです。しかも、より高い精度が出るようになったということで、ディープラーニングは爆発的に広まりました。&lt;/p&gt;
+
+&lt;h2 id=&#34;畳み込みニューラルネットワーク-cnn&#34;&gt;畳み込みニューラルネットワーク (CNN)&lt;/h2&gt;
+
+&lt;p&gt;画像認識におけるディープラーニングでは、畳み込みニューラルネットワークが用いられるのが一般的です。&lt;br /&gt;
+教科書などでは、よく下記のような図が用いられていると思います。
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/07/deep-learning-introduction//dnn.png&#34;/&gt;
+  
+&lt;/figure&gt;
+&lt;/p&gt;
+
+&lt;p&gt;縦に並んだ丸の列が「層」を表しており、上記の図は4層のニューラルネットワークを表現しています。&lt;br /&gt;
+大雑把にいうと、最後の層の前までで「特徴抽出」を行い、最後の層で「分類」を行っていると考えてください。&lt;br /&gt;
+本当はそれぞれの層に意味がありますが、現段階では上記の理解で十分かと思います。&lt;/p&gt;
+
+&lt;h2 id=&#34;次回予告&#34;&gt;次回予告&lt;/h2&gt;
+
+&lt;p&gt;ディープラーニング（畳み込みニューラルネットワーク）のイメージを掴んでいただいた上で、Aさんに課題を設定しました。&lt;/p&gt;
+
+&lt;p&gt;「学習済みモデルを用いて、画像の特徴抽出を行い、次元削減を行った上で可視化せよ」&lt;/p&gt;
+
+&lt;p&gt;見慣れない用語が幾つか出てきましたが、調べれば理解出来る内容だと考え、上記課題としました。&lt;br /&gt;
+次回はその内容についてお届けします。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

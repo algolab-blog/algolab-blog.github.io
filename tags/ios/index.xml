@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ios on ALGO GEEKS</title>
+    <link>http://blog.algolab.jp/tags/ios/</link>
+    <description>Recent content in Ios on ALGO GEEKS</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Tue, 16 Aug 2016 19:34:57 +0900</lastBuildDate>
+    <atom:link href="http://blog.algolab.jp/tags/ios/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>iOSで音声認識 〜Speech Frameworkを試す〜</title>
+      <link>http://blog.algolab.jp/post/2016/08/16/speech-framework/</link>
+      <pubDate>Tue, 16 Aug 2016 19:34:57 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/08/16/speech-framework/</guid>
+      <description>
+
+&lt;p&gt;2016/08/16現在、まだβ版という位置づけですが、Apple謹製の音声認識エンジン (Speech Framework) が公開されています。今回は、下記のサンプルコードを動作させてみます。
+&lt;a href=&#34;https://developer.apple.com/library/prerelease/content/samplecode/SpeakToMe/Introduction/Intro.html&#34;&gt;https://developer.apple.com/library/prerelease/content/samplecode/SpeakToMe/Introduction/Intro.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;動作を確認するにはXcode 8.0以降、iOS 10.0 以降が必要なので、環境を整えるところから始めます。&lt;/p&gt;
+
+&lt;h2 id=&#34;apple-developer-program-へ登録&#34;&gt;Apple Developer Program へ登録&lt;/h2&gt;
+
+&lt;p&gt;諸々インストールするためには、Developer登録が必須なので、以下より登録を行います。
+&lt;a href=&#34;https://developer.apple.com/programs/jp/&#34;&gt;https://developer.apple.com/programs/jp/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;xcode-8-betaをmacにインストール&#34;&gt;Xcode 8 betaをMacにインストール&lt;/h2&gt;
+
+&lt;p&gt;Macから下記ページへアクセスし、Xcode 8 betaをダウンロード、インストールします。&lt;br /&gt;
+&lt;a href=&#34;https://developer.apple.com/download/&#34;&gt;https://developer.apple.com/download/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;ios-10-betaをiphone-にインストール&#34;&gt;iOS 10 betaをiPhone にインストール&lt;/h2&gt;
+
+&lt;p&gt;iPhoneか下記ページへアクセスし、iOS 10 betaをダウンロード、インストールします。&lt;br /&gt;
+&lt;a href=&#34;https://developer.apple.com/download/&#34;&gt;https://developer.apple.com/download/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;サンプルコードをダウンロード&#34;&gt;サンプルコードをダウンロード&lt;/h2&gt;
+
+&lt;p&gt;下記ページより、サンプルコードをダウンロードします。
+&lt;a href=&#34;https://developer.apple.com/library/prerelease/content/samplecode/SpeakToMe/Introduction/Intro.html&#34;&gt;https://developer.apple.com/library/prerelease/content/samplecode/SpeakToMe/Introduction/Intro.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/16/speech-framework//speak_to_me.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;h2 id=&#34;署名の確認&#34;&gt;署名の確認&lt;/h2&gt;
+
+&lt;p&gt;サンプルコードを開き、&lt;code&gt;TARGETS -&amp;gt; General -&amp;gt; Signing&lt;/code&gt;にDeveloper登録を行っているTeamが選択されているか確認します。
+(ここが正しく設定されていないと実機でのビルドに失敗します)&lt;/p&gt;
+
+&lt;h2 id=&#34;日本語対応&#34;&gt;日本語対応&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;ViewController.swift&lt;/code&gt;の15行目、言語指定のコードを&lt;code&gt;en-US&lt;/code&gt;から&lt;code&gt;ja-JP&lt;/code&gt;に書き換えます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-swift&#34;&gt;private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: &amp;quot;ja-JP&amp;quot;))!
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;認識精度を確認&#34;&gt;認識精度を確認&lt;/h2&gt;
+
+&lt;p&gt;実機で動作させ、認識精度を確認してみます。まず、「吾輩は猫である」を認識させてみます。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;認識結果がこちら。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;吾輩は猫である。名前はまだない。どこで生まれたかとんと見当がつかん。何でも薄暗いじめじめした所でニャンニャン泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;ほぼ正解と言っていい認識精度です。ここまで精度が高いとは正直驚きです。&lt;/p&gt;
+
+&lt;h2 id=&#34;次回予告&#34;&gt;次回予告&lt;/h2&gt;
+
+&lt;p&gt;次回はサンプルコードの中身を追ってみようと思います。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
