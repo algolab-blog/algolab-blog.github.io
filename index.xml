@@ -6,8 +6,202 @@
     <description>Recent content on ALGO GEEKS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Thu, 25 Aug 2016 16:28:18 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 29 Aug 2016 16:10:04 +0900</lastBuildDate>
     <atom:link href="http://blog.algolab.jp/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Alexa Skills Kitを</title>
+      <link>http://blog.algolab.jp/post/2016/08/29/alexa-skills-kit/</link>
+      <pubDate>Mon, 29 Aug 2016 16:10:04 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/08/29/alexa-skills-kit/</guid>
+      <description>
+
+&lt;p&gt;こちらの記事の続きとなります。&lt;br /&gt;
+&lt;a href=&#34;http://blog.algolab.jp/post/2016/08/11/raspberry-pi-alexa/&#34;&gt;Amazon Echoを6,000円で自作する 〜Raspberry Pi 3 + Alexa Voice Services (AVS)〜&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;前回はRaspberry PiからAVS (Alexa Voice Services) を使ってみましたが、今回は、好みの機能を追加できるAlexa Skills Kitを使ってみたいと思います。&lt;/p&gt;
+
+&lt;p&gt;公式の &lt;a href=&#34;https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit/docs/developing-an-alexa-skill-as-a-lambda-function&#34;&gt;ドキュメント&lt;/a&gt; と &lt;a href=&#34;https://developer.amazon.com/public/community/post/TxDJWS16KUPVKO/New-Alexa-Skills-Kit-Template-Build-a-Trivia-Skill-in-under-an-Hour&#34;&gt;ポスト&lt;/a&gt; を参考に、今回は「Color Expert」のSkillを使ってみます。&lt;br /&gt;
+Alexa SkillsはLambdaファンクション上で実行されるので、AWS LambdaとAlexa Skillsの設定が必要になります。&lt;/p&gt;
+
+&lt;h2 id=&#34;aws-lambdaの作成&#34;&gt;AWS Lambdaの作成&lt;/h2&gt;
+
+&lt;p&gt;AWSマネジメントコンソールにログインし、&lt;a href=&#34;https://console.aws.amazon.com/lambda/home&#34;&gt;Lambda&lt;/a&gt; のページを開きます。&lt;/p&gt;
+
+&lt;p&gt;リージョンがバージニア北部(US East (N. Virginia))になっていることを確認し、なっていなければ変更します。Lambdaファンクションを利用してAlexa Skillsを使うのに、現在他のリージョンはサポートされていません。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-1.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;&lt;code&gt;Create a Lambda function&lt;/code&gt;をクリックするとBlueprint一覧画面になります。ここから&lt;code&gt;alexa-skills-kit-color-expert&lt;/code&gt;を選択します。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-2.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;Lambdaファンクションを呼び出すトリガーの選択画面になるので、灰色の点線のボックスをクリックし、&lt;code&gt;Alexa Skills Kit&lt;/code&gt;を選び&lt;code&gt;Next&lt;/code&gt;をクリックします。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-3.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;Lambdaファンクションの構成画面になります。Nameには「colorExpertTest」などと入力します。&lt;/p&gt;
+
+&lt;p&gt;RoleにはLambdaを使うのが初めてであれば、&lt;code&gt;Create new role from template(s)&lt;/code&gt;から新しくRoleを作成し、Role Nameには「lambda_basic_execution」などと入力します。&lt;/p&gt;
+
+&lt;p&gt;Policy templatesには&lt;code&gt;AMI read-only permissions&lt;/code&gt;などを選択すればOKです。&lt;/p&gt;
+
+&lt;p&gt;Lambda function codeなど他の項目はデフォルトのままでも問題ありません。&lt;/p&gt;
+
+&lt;p&gt;一通り入力・変更が終わったら&lt;code&gt;Next&lt;/code&gt;をクリックします。&lt;/p&gt;
+
+&lt;p&gt;そうすると、下記のような確認画面になります。問題なければ&lt;code&gt;Create function&lt;/code&gt;をクリックします。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-4.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;トリガーのテスト画面になります。念のため&lt;code&gt;Test&lt;/code&gt;をクリックすると、デフォルトのテストであるAlexa Start Sessionが走ります。実行結果がSuceededとなること、ログ出力に先ほどのLambda function codeの出力結果が表示されていればOKです。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-5.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;これで作成は完了です。最後にLambdaファンクションの呼び出し先となるARNをメモしておきます。上記スクリーンショットで右上の一部灰色でマスクしている文字列です。&lt;/p&gt;
+
+&lt;h2 id=&#34;alexa-skillの作成&#34;&gt;Alexa Skillの作成&lt;/h2&gt;
+
+&lt;p&gt;Raspberry Piが登録されているアカウントでAmazon Developer Consoleにログインし、&lt;a href=&#34;https://developer.amazon.com/edw/home.html&#34;&gt;Alexa&lt;/a&gt; のページに進みます。&lt;/p&gt;
+
+&lt;p&gt;Alexa Skills Kitの&lt;code&gt;Get Started&lt;/code&gt;をクリックします。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-6.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;&lt;code&gt;Add a New Skill&lt;/code&gt;から新規にSkillを登録します。実際に話しかけて呼び出すときの名前となるInvocation Nameには「color expert」と入力して、&lt;code&gt;Next&lt;/code&gt;をクリックします。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-7.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;Interaction Modelの定義画面になります。これがAlexaに話しかけてやり取りをする内容になります。今回は&lt;a href=&#34;https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit/docs/developing-an-alexa-skill-as-a-lambda-function&#34;&gt;公式ドキュメント&lt;/a&gt;のとおりにIntent Schame, Custom Slot Types, Sample Utterancesを下記のようにします。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-8.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;Intent_Schema&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+  &amp;quot;intents&amp;quot;: [
+    {
+      &amp;quot;intent&amp;quot;: &amp;quot;MyColorIsIntent&amp;quot;,
+      &amp;quot;slots&amp;quot;: [
+        {
+          &amp;quot;name&amp;quot;: &amp;quot;Color&amp;quot;,
+          &amp;quot;type&amp;quot;: &amp;quot;LIST_OF_COLORS&amp;quot;
+        }
+      ]
+    },
+    {
+      &amp;quot;intent&amp;quot;: &amp;quot;WhatsMyColorIntent&amp;quot;
+    },
+    {
+      &amp;quot;intent&amp;quot;: &amp;quot;AMAZON.HelpIntent&amp;quot;
+    }
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Custom_Slot_Type&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;LIST_OF_COLORS
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Custom_Slot_Type_Values&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;green
+red
+blue
+orange
+gold
+silver
+yellow
+black
+white
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Sample_Utterances&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;WhatsMyColorIntent what&#39;s my favorite color
+WhatsMyColorIntent what is my favorite color
+WhatsMyColorIntent what&#39;s my color
+WhatsMyColorIntent what is my color
+WhatsMyColorIntent my color
+WhatsMyColorIntent my favorite color
+WhatsMyColorIntent get my color
+WhatsMyColorIntent get my favorite color
+WhatsMyColorIntent give me my favorite color
+WhatsMyColorIntent give me my color
+WhatsMyColorIntent what my color is
+WhatsMyColorIntent what my favorite color is
+WhatsMyColorIntent yes
+WhatsMyColorIntent yup
+WhatsMyColorIntent sure
+WhatsMyColorIntent yes please
+MyColorIsIntent my favorite color is {Color}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;次にEndpointなどの設定画面になります。先ほどメモしておいたARNを入力します。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-9.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;次にTest画面になります。Enter Utteranceに先ほどSample Utteranceに定義した文章を入力して&lt;code&gt;Ask color expert&lt;/code&gt;をクリックします。するとLambdaで処理が実行されて返答される文章などを含んだレスポンスが返ってきます。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-10.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;残りの設定項目に Publishing infomation, Privacy &amp;amp; Compliance がありますが、これらはAlexa Skillをpubulishingするときに必要で、手元の実機での実行には必要ないので今回は割愛します。&lt;/p&gt;
+
+&lt;h1 id=&#34;動作確認&#34;&gt;動作確認&lt;/h1&gt;
+
+&lt;p&gt;まずAmazon Developer Consoleと同じアカウントでAmazon Alexaにログインして&lt;a href=&#34;http://alexa.amazon.com/spa/index.html#skills/your-skills&#34;&gt;Skill一覧画面&lt;/a&gt;から先ほど作成したSkillがあることを確認します。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-11.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;あとは下記の動画のように話しかけて動作するか確認します。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>麻雀カメラプロジェクト再始動？ 〜【導入編】テンプレートマッチングによる麻雀牌判定〜</title>
@@ -1769,55 +1963,6 @@ Adrew Ng氏は、2020年には検索の半分以上が音声か画像になる�
 
 &lt;p&gt;まとめは以上となります。&lt;br /&gt;
 未来を見据えたときに、やはり「音声」は外せないキーワードとなってくるのではないでしょうか。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>AIトレーニングはじめました</title>
-      <link>http://blog.algolab.jp/post/2016/07/25/ai-training/</link>
-      <pubDate>Mon, 25 Jul 2016 16:35:26 +0900</pubDate>
-      
-      <guid>http://blog.algolab.jp/post/2016/07/25/ai-training/</guid>
-      <description>
-
-&lt;p&gt;弊社では、ITエンジニア向けに機械学習スキルの習得をサポートする試み (AIトレーニング) をはじめました。&lt;br /&gt;
-ここでは、1人目の受講者であるAさんの許可を頂き、実況中継という形で、その内容を随時公開していきたいと思います。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/07/25/ai-training//training.jpg&#34;/&gt;
-  
-  &lt;figcaption&gt;&lt;p&gt;http://www.ashinari.com/2009/07/18-024460.php&lt;/p&gt;&lt;/figcaption&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;h2 id=&#34;なぜやるのか&#34;&gt;なぜやるのか&lt;/h2&gt;
-
-&lt;p&gt;一言で言えば、技術習得までの最短経路が人によって異なるため、です。&lt;/p&gt;
-
-&lt;p&gt;機械学習がカバーする領域はとても広範囲に渡るため、どのようなことを身につけたいか (ゴール)、および、現状のスキルによって、習得経路が一本道ではありません。&lt;/p&gt;
-
-&lt;p&gt;一方で、書籍などの教材は、体系的・網羅的に記述されているものの、個々に最適化されてはいません。&lt;/p&gt;
-
-&lt;p&gt;そのため、機械学習スキルを身につけようとした際、何から手をつけて良いかわからない、入門書から始めてみたがゴールにどう繋がるか見えず挫折してしまった、というようなケースがよく見られます。&lt;/p&gt;
-
-&lt;p&gt;そこで、個々に最適化した道筋を提示することで上記の問題が解決できるのではないか、と考え、AIトレーニングを開始することにしました。&lt;/p&gt;
-
-&lt;h2 id=&#34;どうやってやるのか&#34;&gt;どうやってやるのか&lt;/h2&gt;
-
-&lt;p&gt;基本的には、弊社は道筋を示す役割に徹し、独習という形で進めさせていただいています。&lt;/p&gt;
-
-&lt;p&gt;具体的には、週1回程度オフラインでお打ち合わせをさせていただきながら、現時点での習得状況を踏まえ、道筋を柔軟に提示させていただきます。&lt;/p&gt;
-
-&lt;p&gt;また、理解の助けになると判断した場合には、その場で講習という形を取る場合もあります。&lt;br /&gt;
-そして、随時出てくる疑問点においては、オンラインでの質問を受け付けています。&lt;/p&gt;
-
-&lt;p&gt;期間としては、内容にもよりますが、2ヶ月程度での習得を目指しています。&lt;/p&gt;
-
-&lt;h2 id=&#34;次回予告&#34;&gt;次回予告&lt;/h2&gt;
-
-&lt;p&gt;次回はAさんのキックオフの内容についてお届けします。&lt;br /&gt;
-(2016/8/1 公開しました &amp;rarr; &lt;a href=&#34;http://blog.algolab.jp/post/2016/08/01/ai-training-kick-off/&#34;&gt;AIトレーニングキックオフ 〜ハムケツを認識したい〜&lt;/a&gt;)&lt;/p&gt;
 </description>
     </item>
     

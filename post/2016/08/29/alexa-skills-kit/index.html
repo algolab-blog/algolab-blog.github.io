@@ -5,13 +5,13 @@
   <title>
     
     
-      Googleカレンダー解析ツール作りました 〜時間の使い方チェッカー〜
+      Alexa Skills Kitを
     
     &nbsp;|&nbsp;ALGO GEEKS
   </title>
 
   <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
-  <link rel="canonical" href="http://blog.algolab.jp/post/2016/08/16/calendar-report/"/>
+  <link rel="canonical" href="http://blog.algolab.jp/post/2016/08/29/alexa-skills-kit/"/>
 
   <link rel="stylesheet" href="/css/sanitize.css">
   <link rel="stylesheet" href="/css/responsive.css">
@@ -57,17 +57,21 @@
   
   <main id="single" role="main">
     <div class="article-header">
-      <h1>Googleカレンダー解析ツール作りました 〜時間の使い方チェッカー〜</h1>
+      <h1>Alexa Skills Kitを</h1>
       
 
 <div class="meta">
   
-    <span>2016/08/16</span>
+    <span>2016/08/29</span>
   
   
     <span>|</span>
     
-      <a href="/tags/product">#プロダクト</a>&nbsp;
+      <a href="/tags/speech-recognition">#音声認識</a>&nbsp;
+    
+      <a href="/tags/amazon-echo">#Amazon Echo</a>&nbsp;
+    
+      <a href="/tags/raspberry-pi">#Raspberry Pi</a>&nbsp;
     
   
   
@@ -82,80 +86,189 @@
     <article>
       
 
+<p>こちらの記事の続きとなります。<br />
+<a href="http://blog.algolab.jp/post/2016/08/11/raspberry-pi-alexa/">Amazon Echoを6,000円で自作する 〜Raspberry Pi 3 + Alexa Voice Services (AVS)〜</a></p>
+
+<p>前回はRaspberry PiからAVS (Alexa Voice Services) を使ってみましたが、今回は、好みの機能を追加できるAlexa Skills Kitを使ってみたいと思います。</p>
+
+<p>公式の <a href="https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit/docs/developing-an-alexa-skill-as-a-lambda-function">ドキュメント</a> と <a href="https://developer.amazon.com/public/community/post/TxDJWS16KUPVKO/New-Alexa-Skills-Kit-Template-Build-a-Trivia-Skill-in-under-an-Hour">ポスト</a> を参考に、今回は「Color Expert」のSkillを使ってみます。<br />
+Alexa SkillsはLambdaファンクション上で実行されるので、AWS LambdaとAlexa Skillsの設定が必要になります。</p>
+
+<h2 id="aws-lambdaの作成">AWS Lambdaの作成</h2>
+
+<p>AWSマネジメントコンソールにログインし、<a href="https://console.aws.amazon.com/lambda/home">Lambda</a> のページを開きます。</p>
+
+<p>リージョンがバージニア北部(US East (N. Virginia))になっていることを確認し、なっていなければ変更します。Lambdaファンクションを利用してAlexa Skillsを使うのに、現在他のリージョンはサポートされていません。</p>
+
 <figure>
-  <img src="/images//post/2016/08/16/calendar-report//demo.png"/>
+  <img src="/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-1.png"/>
   
 </figure>
 
 
-<p>タイトルの通りですが、時間の使い方チェッカーというツールを作りました (だいぶ前に作っていました)。<br />
-<a href="http://tools.algolab.jp/calendar_reports">http://tools.algolab.jp/calendar_reports</a></p>
+<p><code>Create a Lambda function</code>をクリックするとBlueprint一覧画面になります。ここから<code>alexa-skills-kit-color-expert</code>を選択します。</p>
 
-<p>ソースコードはGitHubに公開しています。<br />
-<a href="https://github.com/algolab-inc/algo-tools/">https://github.com/algolab-inc/algo-tools/</a></p>
+<figure>
+  <img src="/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-2.png"/>
+  
+</figure>
 
-<h2 id="時間の使い方チェッカーとは">時間の使い方チェッカーとは？</h2>
 
-<ul>
-<li>Googleカレンダーを解析して可視化するツールです</li>
-<li>タイトルを括弧で囲っているイベントのみを解析対象としています
+<p>Lambdaファンクションを呼び出すトリガーの選択画面になるので、灰色の点線のボックスをクリックし、<code>Alexa Skills Kit</code>を選び<code>Next</code>をクリックします。</p>
 
-<ul>
-<li>(例) [仕事]</li>
-</ul></li>
-<li>括弧を連続することで階層を表現することができます
+<figure>
+  <img src="/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-3.png"/>
+  
+</figure>
 
-<ul>
-<li>(例) [仕事][営業]</li>
-</ul></li>
-<li>データは一切保存しません (&larr;大事)</li>
-</ul>
 
-<h2 id="開発のきっかけ">開発のきっかけ</h2>
+<p>Lambdaファンクションの構成画面になります。Nameには「colorExpertTest」などと入力します。</p>
 
-<p>弊社では、仕事を(準)委任契約でいただくことがあり、作業時間ログをGoogleカレンダー上で管理していました。<br />
-そして、月末に集計を手作業で行っていましたが、それを自動化したい、というのがきっかけです。</p>
+<p>RoleにはLambdaを使うのが初めてであれば、<code>Create new role from template(s)</code>から新しくRoleを作成し、Role Nameには「lambda_basic_execution」などと入力します。</p>
 
-<h2 id="実際に使ってみて">実際に使ってみて</h2>
+<p>Policy templatesには<code>AMI read-only permissions</code>などを選択すればOKです。</p>
 
-<p>せっかくなので、全ての作業時間ログをGoogleカレンダー上で管理するということを数ヶ月間行ってみています。</p>
+<p>Lambda function codeなど他の項目はデフォルトのままでも問題ありません。</p>
 
-<p>作業時間ログを都度つける行動は習慣化しているため (常にカレンダーを立ち上げています) 入力作業に負担はなく、後から時間の使い方を振り返ることができるのでなかなか良い感じです。</p>
+<p>一通り入力・変更が終わったら<code>Next</code>をクリックします。</p>
 
-<p>具体的には、以下のような階層構造で管理を行っています。</p>
+<p>そうすると、下記のような確認画面になります。問題なければ<code>Create function</code>をクリックします。</p>
 
-<ul>
-<li>受託
+<figure>
+  <img src="/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-4.png"/>
+  
+</figure>
 
-<ul>
-<li>プロジェクト1</li>
-<li>プロジェクト2</li>
-<li>&hellip;</li>
-</ul></li>
-<li>自社
 
-<ul>
-<li>サービスA</li>
-<li>サービスB</li>
-<li>&hellip;</li>
-</ul></li>
-<li>経営
+<p>トリガーのテスト画面になります。念のため<code>Test</code>をクリックすると、デフォルトのテストであるAlexa Start Sessionが走ります。実行結果がSuceededとなること、ログ出力に先ほどのLambda function codeの出力結果が表示されていればOKです。</p>
 
-<ul>
-<li>経営計画</li>
-<li>財務</li>
-<li>&hellip;</li>
-</ul></li>
-</ul>
+<figure>
+  <img src="/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-5.png"/>
+  
+</figure>
 
-<p>弊社は受託事業を行いながら自社サービスを開発しており、また筆者は代表を務めているので、時間の使い方としては、大きく「受託」「自社」「経営」の3つに分かれます。</p>
 
-<p>その下にも幾つか階層を設けていますが、基本的にはこの3つの時間比率を毎月振り返るようにしています。</p>
+<p>これで作成は完了です。最後にLambdaファンクションの呼び出し先となるARNをメモしておきます。上記スクリーンショットで右上の一部灰色でマスクしている文字列です。</p>
 
-<h2 id="おわりに">おわりに</h2>
+<h2 id="alexa-skillの作成">Alexa Skillの作成</h2>
 
-<p>時間の使い方を可視化してみると色々な気づきがあります。是非試してみてください！<br />
-<a href="http://tools.algolab.jp/calendar_reports">http://tools.algolab.jp/calendar_reports</a></p>
+<p>Raspberry Piが登録されているアカウントでAmazon Developer Consoleにログインし、<a href="https://developer.amazon.com/edw/home.html">Alexa</a> のページに進みます。</p>
+
+<p>Alexa Skills Kitの<code>Get Started</code>をクリックします。</p>
+
+<figure>
+  <img src="/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-6.png"/>
+  
+</figure>
+
+
+<p><code>Add a New Skill</code>から新規にSkillを登録します。実際に話しかけて呼び出すときの名前となるInvocation Nameには「color expert」と入力して、<code>Next</code>をクリックします。</p>
+
+<figure>
+  <img src="/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-7.png"/>
+  
+</figure>
+
+
+<p>Interaction Modelの定義画面になります。これがAlexaに話しかけてやり取りをする内容になります。今回は<a href="https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit/docs/developing-an-alexa-skill-as-a-lambda-function">公式ドキュメント</a>のとおりにIntent Schame, Custom Slot Types, Sample Utterancesを下記のようにします。</p>
+
+<figure>
+  <img src="/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-8.png"/>
+  
+</figure>
+
+
+<p>Intent_Schema</p>
+
+<pre><code class="language-json">{
+  &quot;intents&quot;: [
+    {
+      &quot;intent&quot;: &quot;MyColorIsIntent&quot;,
+      &quot;slots&quot;: [
+        {
+          &quot;name&quot;: &quot;Color&quot;,
+          &quot;type&quot;: &quot;LIST_OF_COLORS&quot;
+        }
+      ]
+    },
+    {
+      &quot;intent&quot;: &quot;WhatsMyColorIntent&quot;
+    },
+    {
+      &quot;intent&quot;: &quot;AMAZON.HelpIntent&quot;
+    }
+  ]
+}
+</code></pre>
+
+<p>Custom_Slot_Type</p>
+
+<pre><code class="language-json">LIST_OF_COLORS
+</code></pre>
+
+<p>Custom_Slot_Type_Values</p>
+
+<pre><code class="language-json">green
+red
+blue
+orange
+gold
+silver
+yellow
+black
+white
+</code></pre>
+
+<p>Sample_Utterances</p>
+
+<pre><code class="language-json">WhatsMyColorIntent what's my favorite color
+WhatsMyColorIntent what is my favorite color
+WhatsMyColorIntent what's my color
+WhatsMyColorIntent what is my color
+WhatsMyColorIntent my color
+WhatsMyColorIntent my favorite color
+WhatsMyColorIntent get my color
+WhatsMyColorIntent get my favorite color
+WhatsMyColorIntent give me my favorite color
+WhatsMyColorIntent give me my color
+WhatsMyColorIntent what my color is
+WhatsMyColorIntent what my favorite color is
+WhatsMyColorIntent yes
+WhatsMyColorIntent yup
+WhatsMyColorIntent sure
+WhatsMyColorIntent yes please
+MyColorIsIntent my favorite color is {Color}
+</code></pre>
+
+<p>次にEndpointなどの設定画面になります。先ほどメモしておいたARNを入力します。</p>
+
+<figure>
+  <img src="/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-9.png"/>
+  
+</figure>
+
+
+<p>次にTest画面になります。Enter Utteranceに先ほどSample Utteranceに定義した文章を入力して<code>Ask color expert</code>をクリックします。するとLambdaで処理が実行されて返答される文章などを含んだレスポンスが返ってきます。</p>
+
+<figure>
+  <img src="/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-10.png"/>
+  
+</figure>
+
+
+<p>残りの設定項目に Publishing infomation, Privacy &amp; Compliance がありますが、これらはAlexa Skillをpubulishingするときに必要で、手元の実機での実行には必要ないので今回は割愛します。</p>
+
+<h1 id="動作確認">動作確認</h1>
+
+<p>まずAmazon Developer Consoleと同じアカウントでAmazon Alexaにログインして<a href="http://alexa.amazon.com/spa/index.html#skills/your-skills">Skill一覧画面</a>から先ほど作成したSkillがあることを確認します。</p>
+
+<figure>
+  <img src="/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-11.png"/>
+  
+</figure>
+
+
+<p>あとは下記の動画のように話しかけて動作するか確認します。</p>
 
       
   <div id="share-this" class="col span_10">
@@ -194,10 +307,8 @@
   
   <nav class="pagination-single">
     
-      <span class="previous">&larr; <a href="http://blog.algolab.jp/post/2016/08/11/raspberry-pi-alexa/" rel="prev">Amazon Echoを6,000円で自作する 〜Raspberry Pi 3 &#43; Alexa Voice Services (AVS)〜</a></span>
+      <span class="previous">&larr; <a href="http://blog.algolab.jp/post/2016/08/25/mahjong-camera-introduction/" rel="prev">麻雀カメラプロジェクト再始動？ 〜【導入編】テンプレートマッチングによる麻雀牌判定〜</a></span>
     
-    
-      <span class="next"><a href="http://blog.algolab.jp/post/2016/08/16/speech-framework/" rel="next">iOSで音声認識 〜Speech Frameworkを試す〜</a> &rarr;</span>
     
   </nav>
   
