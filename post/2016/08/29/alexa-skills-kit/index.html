@@ -89,10 +89,78 @@
 <p>こちらの記事の続きとなります。<br />
 <a href="http://blog.algolab.jp/post/2016/08/11/raspberry-pi-alexa/">Amazon Echoを6,000円で自作する 〜Raspberry Pi 3 + Alexa Voice Services (AVS)〜</a></p>
 
-<p>前回はRaspberry PiからAVS (Alexa Voice Services) を使ってみましたが、今回は、好みの機能を追加できるAlexa Skills Kitを使ってみたいと思います。</p>
+<p>前回はRaspberry PiからAVS (Alexa Voice Services) を使ってみましたが、今回は、Alexa Skills Kitを使ってみたいと思います。</p>
 
 <p>公式の <a href="https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit/docs/developing-an-alexa-skill-as-a-lambda-function">ドキュメント</a> と <a href="https://developer.amazon.com/public/community/post/TxDJWS16KUPVKO/New-Alexa-Skills-Kit-Template-Build-a-Trivia-Skill-in-under-an-Hour">ポスト</a> を参考に、今回は「Color Expert」のSkillを使ってみます。<br />
 Alexa SkillsはLambdaファンクション上で実行されるので、AWS LambdaとAlexa Skillsの設定が必要になります。</p>
+
+<h2 id="alexa-skill-kit-概要">Alexa Skill Kit 概要</h2>
+
+<p>Amazon Echo には好みの機能を追加できるSkillという機能があり、「カスタムスキル」と「スマートホームスキル」の2種類を登録することができます。</p>
+
+<p><a href="https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/understanding-the-different-types-of-skills">https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/understanding-the-different-types-of-skills</a></p>
+
+<h3 id="カスタムスキル">カスタムスキル</h3>
+
+<figure>
+  <img src="/images//post/2016/08/29/alexa-skills-kit//custom-skill.png"/>
+  
+</figure>
+
+
+<ul>
+<li>ピザを注文したり、タクシーを呼んだり色々なことができる</li>
+<li>Invocation Name (スキルの呼び名のこと、後述) で呼び出す</li>
+<li>リクエストは「intent」としてマッピングされる
+
+<ul>
+<li>ピザの注文 &rarr; OrderPizza intent</li>
+</ul></li>
+</ul>
+
+<h3 id="スマートホームスキル">スマートホームスキル</h3>
+
+<figure>
+  <img src="/images//post/2016/08/29/alexa-skills-kit//smart-home-skill.png"/>
+  
+</figure>
+
+
+<ul>
+<li>Smart home device (灯りやエアコンなど) を操作できる</li>
+<li>Invocation Nameで呼び出すのは不要</li>
+</ul>
+
+<h2 id="invocation-name-スキルの呼び名-のガイドライン">Invocation Name (スキルの呼び名) のガイドライン</h2>
+
+<p><a href="https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit/docs/choosing-the-invocation-name-for-an-alexa-skill">https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit/docs/choosing-the-invocation-name-for-an-alexa-skill</a></p>
+
+<ul>
+<li>原則的に1単語はNG、 Launch phrase(ask, tell, etc&hellip;), Amazon, Alexaなどは禁止文字。</li>
+<li>呼び出し方には以下の3通りの方法がある</li>
+</ul>
+
+<h3 id="リクエストと一緒に呼び出す">リクエストと一緒に呼び出す</h3>
+
+<blockquote>
+<p>“Alexa, Ask Daily Horoscopes for Gemini”<br />
+“Alexa, Talk to Daily Horoscopes and give me the horoscope for Taurus”<br />
+“Alexa, give me my Taurus horoscope using Daily Horoscopes”</p>
+</blockquote>
+
+<h3 id="リクエストなしで呼び出す">リクエストなしで呼び出す</h3>
+
+<blockquote>
+<p>“Alexa, open Daily Horoscopes”<br />
+“Alexa, start Daily Horoscopes”<br />
+“Alexa, ask Daily Horoscopes”</p>
+</blockquote>
+
+<h3 id="invocation-nameだけで呼び出す">Invocation Nameだけで呼び出す</h3>
+
+<blockquote>
+<p>“Alexa, Daily Horoscopes”</p>
+</blockquote>
 
 <h2 id="aws-lambdaの作成">AWS Lambdaの作成</h2>
 

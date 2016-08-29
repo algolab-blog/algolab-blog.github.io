@@ -20,10 +20,78 @@
 &lt;p&gt;こちらの記事の続きとなります。&lt;br /&gt;
 &lt;a href=&#34;http://blog.algolab.jp/post/2016/08/11/raspberry-pi-alexa/&#34;&gt;Amazon Echoを6,000円で自作する 〜Raspberry Pi 3 + Alexa Voice Services (AVS)〜&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;前回はRaspberry PiからAVS (Alexa Voice Services) を使ってみましたが、今回は、好みの機能を追加できるAlexa Skills Kitを使ってみたいと思います。&lt;/p&gt;
+&lt;p&gt;前回はRaspberry PiからAVS (Alexa Voice Services) を使ってみましたが、今回は、Alexa Skills Kitを使ってみたいと思います。&lt;/p&gt;
 
 &lt;p&gt;公式の &lt;a href=&#34;https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit/docs/developing-an-alexa-skill-as-a-lambda-function&#34;&gt;ドキュメント&lt;/a&gt; と &lt;a href=&#34;https://developer.amazon.com/public/community/post/TxDJWS16KUPVKO/New-Alexa-Skills-Kit-Template-Build-a-Trivia-Skill-in-under-an-Hour&#34;&gt;ポスト&lt;/a&gt; を参考に、今回は「Color Expert」のSkillを使ってみます。&lt;br /&gt;
 Alexa SkillsはLambdaファンクション上で実行されるので、AWS LambdaとAlexa Skillsの設定が必要になります。&lt;/p&gt;
+
+&lt;h2 id=&#34;alexa-skill-kit-概要&#34;&gt;Alexa Skill Kit 概要&lt;/h2&gt;
+
+&lt;p&gt;Amazon Echo には好みの機能を追加できるSkillという機能があり、「カスタムスキル」と「スマートホームスキル」の2種類を登録することができます。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/understanding-the-different-types-of-skills&#34;&gt;https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/understanding-the-different-types-of-skills&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;カスタムスキル&#34;&gt;カスタムスキル&lt;/h3&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/29/alexa-skills-kit//custom-skill.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;ピザを注文したり、タクシーを呼んだり色々なことができる&lt;/li&gt;
+&lt;li&gt;Invocation Name (スキルの呼び名のこと、後述) で呼び出す&lt;/li&gt;
+&lt;li&gt;リクエストは「intent」としてマッピングされる
+
+&lt;ul&gt;
+&lt;li&gt;ピザの注文 &amp;rarr; OrderPizza intent&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;スマートホームスキル&#34;&gt;スマートホームスキル&lt;/h3&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/29/alexa-skills-kit//smart-home-skill.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;Smart home device (灯りやエアコンなど) を操作できる&lt;/li&gt;
+&lt;li&gt;Invocation Nameで呼び出すのは不要&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;invocation-name-スキルの呼び名-のガイドライン&#34;&gt;Invocation Name (スキルの呼び名) のガイドライン&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit/docs/choosing-the-invocation-name-for-an-alexa-skill&#34;&gt;https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit/docs/choosing-the-invocation-name-for-an-alexa-skill&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;原則的に1単語はNG、 Launch phrase(ask, tell, etc&amp;hellip;), Amazon, Alexaなどは禁止文字。&lt;/li&gt;
+&lt;li&gt;呼び出し方には以下の3通りの方法がある&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;リクエストと一緒に呼び出す&#34;&gt;リクエストと一緒に呼び出す&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;“Alexa, Ask Daily Horoscopes for Gemini”&lt;br /&gt;
+“Alexa, Talk to Daily Horoscopes and give me the horoscope for Taurus”&lt;br /&gt;
+“Alexa, give me my Taurus horoscope using Daily Horoscopes”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;リクエストなしで呼び出す&#34;&gt;リクエストなしで呼び出す&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;“Alexa, open Daily Horoscopes”&lt;br /&gt;
+“Alexa, start Daily Horoscopes”&lt;br /&gt;
+“Alexa, ask Daily Horoscopes”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;invocation-nameだけで呼び出す&#34;&gt;Invocation Nameだけで呼び出す&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;“Alexa, Daily Horoscopes”&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;h2 id=&#34;aws-lambdaの作成&#34;&gt;AWS Lambdaの作成&lt;/h2&gt;
 
