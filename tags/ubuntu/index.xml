@@ -186,16 +186,16 @@ $ sudo systemctl enable vncserver@1.service
 
 &lt;p&gt;OSバージョンは下記の通りです。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cat /etc/lsb-release
+&lt;pre&gt;&lt;code class=&#34;language-sh hljs bash&#34;&gt;$ cat /etc/lsb-release
 DISTRIB_ID=Ubuntu
-DISTRIB_RELEASE=16.04
+DISTRIB_RELEASE=&lt;span class=&#34;hljs-number&#34;&gt;16.04&lt;/span&gt;
 DISTRIB_CODENAME=xenial
-DISTRIB_DESCRIPTION=&amp;quot;Ubuntu 16.04.1 LTS&amp;quot;
+DISTRIB_DESCRIPTION=&lt;span class=&#34;hljs-string&#34;&gt;&#34;Ubuntu 16.04.1 LTS&#34;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh hljs bash&#34;&gt;$ uname &lt;span class=&#34;hljs-operator&#34;&gt;-a&lt;/span&gt;
+Linux vagrant &lt;span class=&#34;hljs-number&#34;&gt;4.4&lt;/span&gt;.&lt;span class=&#34;hljs-number&#34;&gt;0&lt;/span&gt;-&lt;span class=&#34;hljs-number&#34;&gt;31&lt;/span&gt;-generic &lt;span class=&#34;hljs-comment&#34;&gt;#50-Ubuntu SMP Wed Jul 13 00:07:12 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ uname -a
-Linux vagrant 4.4.0-31-generic #50-Ubuntu SMP Wed Jul 13 00:07:12 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux
-&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;pyenv-anaconda-の環境を構築&#34;&gt;pyenv + Anaconda の環境を構築&lt;/h2&gt;
 
