@@ -38,7 +38,7 @@
 
 &lt;ul&gt;
 &lt;li&gt;ピザを注文したり、タクシーを呼んだり色々なことができる&lt;/li&gt;
-&lt;li&gt;Invocation Name (スキルの呼び名のこと、後述) で呼び出す&lt;/li&gt;
+&lt;li&gt;Invocation Name (スキルの呼び名) で呼び出す&lt;/li&gt;
 &lt;li&gt;リクエストは「intent」としてマッピングされる
 
 &lt;ul&gt;
@@ -58,37 +58,6 @@
 &lt;li&gt;Smart home device (灯りやエアコンなど) を操作できる&lt;/li&gt;
 &lt;li&gt;Invocation Nameで呼び出すのは不要&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;h3 id=&#34;invocation-name-スキルの呼び名-のガイドライン&#34;&gt;Invocation Name (スキルの呼び名) のガイドライン&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit/docs/choosing-the-invocation-name-for-an-alexa-skill&#34;&gt;https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit/docs/choosing-the-invocation-name-for-an-alexa-skill&lt;/a&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;原則的に1単語はNG、 Launch phrase(ask, tell, etc&amp;hellip;), Amazon, Alexaなどは禁止文字。&lt;/li&gt;
-&lt;li&gt;呼び出し方には以下の3通りの方法がある&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&#34;リクエストと一緒に呼び出す&#34;&gt;リクエストと一緒に呼び出す&lt;/h4&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;“Alexa, Ask Daily Horoscopes for Gemini”&lt;br /&gt;
-“Alexa, Talk to Daily Horoscopes and give me the horoscope for Taurus”&lt;br /&gt;
-“Alexa, give me my Taurus horoscope using Daily Horoscopes”&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h4 id=&#34;リクエストなしで呼び出す&#34;&gt;リクエストなしで呼び出す&lt;/h4&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;“Alexa, open Daily Horoscopes”&lt;br /&gt;
-“Alexa, start Daily Horoscopes”&lt;br /&gt;
-“Alexa, ask Daily Horoscopes”&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h4 id=&#34;invocation-nameだけで呼び出す&#34;&gt;Invocation Nameだけで呼び出す&lt;/h4&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;“Alexa, Daily Horoscopes”&lt;/p&gt;
-&lt;/blockquote&gt;
 
 &lt;h2 id=&#34;今回作るもの&#34;&gt;今回作るもの&lt;/h2&gt;
 
