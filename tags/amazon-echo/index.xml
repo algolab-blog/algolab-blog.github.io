@@ -22,7 +22,7 @@
 
 &lt;p&gt;前回はRaspberry PiからAVS (Alexa Voice Services) を使ってみましたが、今回は、Alexa Skills Kitを使ってみたいと思います。&lt;/p&gt;
 
-&lt;h2 id=&#34;alexa-skill-kit-概要&#34;&gt;Alexa Skill Kit 概要&lt;/h2&gt;
+&lt;h2 id=&#34;alexa-skill-kitとは&#34;&gt;Alexa Skill Kitとは&lt;/h2&gt;
 
 &lt;p&gt;AVSには好みの機能を追加できるSkillという機能があり、「カスタムスキル」と「スマートホームスキル」の2種類を登録することができます。&lt;/p&gt;
 
@@ -355,6 +355,10 @@ Exec=vncserver :1
 StartupNotify=false
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;h3 id=&#34;vncでraspberry-piへアクセス&#34;&gt;VNCでRaspberry Piへアクセス&lt;/h3&gt;
+
+&lt;p&gt;Macからアクセスする手順は &lt;a href=&#34;http://blog.algolab.jp/post/2016/08/22/ubuntu-tightvnc-server/#アクセス&#34;&gt;こちら&lt;/a&gt; をご参照ください。&lt;/p&gt;
+
 &lt;h3 id=&#34;vlcのインストール&#34;&gt;VLCのインストール&lt;/h3&gt;
 
 &lt;p&gt;VLC media playerをインストールします。&lt;/p&gt;
@@ -432,7 +436,8 @@ $ mvn exec:exec
 
 &lt;h2 id=&#34;次回予告&#34;&gt;次回予告&lt;/h2&gt;
 
-&lt;p&gt;次回はAlexa Skillsを登録して使ってみようと思います。乞うご期待。Don&amp;rsquo;t miss out!&lt;/p&gt;
+&lt;p&gt;次回はAlexa Skillsを登録して使ってみようと思います。乞うご期待。Don&amp;rsquo;t miss out!&lt;br /&gt;
+(2016/08/25 公開しました &amp;rarr; &lt;a href=&#34;http://blog.algolab.jp/post/2016/08/29/alexa-skills-kit/&#34;&gt;Alexa Skills KitをAWS Lamdaから使う&lt;/a&gt;)&lt;/p&gt;
 </description>
     </item>
     
