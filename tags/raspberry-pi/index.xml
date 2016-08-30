@@ -22,12 +22,9 @@
 
 &lt;p&gt;前回はRaspberry PiからAVS (Alexa Voice Services) を使ってみましたが、今回は、Alexa Skills Kitを使ってみたいと思います。&lt;/p&gt;
 
-&lt;p&gt;公式の &lt;a href=&#34;https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit/docs/developing-an-alexa-skill-as-a-lambda-function&#34;&gt;ドキュメント&lt;/a&gt; と &lt;a href=&#34;https://developer.amazon.com/public/community/post/TxDJWS16KUPVKO/New-Alexa-Skills-Kit-Template-Build-a-Trivia-Skill-in-under-an-Hour&#34;&gt;ポスト&lt;/a&gt; を参考に、今回は「Color Expert」のSkillを使ってみます。&lt;br /&gt;
-Alexa SkillsはLambdaファンクション上で実行されるので、AWS LambdaとAlexa Skillsの設定が必要になります。&lt;/p&gt;
-
 &lt;h2 id=&#34;alexa-skill-kit-概要&#34;&gt;Alexa Skill Kit 概要&lt;/h2&gt;
 
-&lt;p&gt;Amazon Echo には好みの機能を追加できるSkillという機能があり、「カスタムスキル」と「スマートホームスキル」の2種類を登録することができます。&lt;/p&gt;
+&lt;p&gt;AVSには好みの機能を追加できるSkillという機能があり、「カスタムスキル」と「スマートホームスキル」の2種類を登録することができます。&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/understanding-the-different-types-of-skills&#34;&gt;https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/understanding-the-different-types-of-skills&lt;/a&gt;&lt;/p&gt;
 
@@ -62,7 +59,7 @@ Alexa SkillsはLambdaファンクション上で実行されるので、AWS Lamb
 &lt;li&gt;Invocation Nameで呼び出すのは不要&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;invocation-name-スキルの呼び名-のガイドライン&#34;&gt;Invocation Name (スキルの呼び名) のガイドライン&lt;/h2&gt;
+&lt;h3 id=&#34;invocation-name-スキルの呼び名-のガイドライン&#34;&gt;Invocation Name (スキルの呼び名) のガイドライン&lt;/h3&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit/docs/choosing-the-invocation-name-for-an-alexa-skill&#34;&gt;https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit/docs/choosing-the-invocation-name-for-an-alexa-skill&lt;/a&gt;&lt;/p&gt;
 
@@ -71,7 +68,7 @@ Alexa SkillsはLambdaファンクション上で実行されるので、AWS Lamb
 &lt;li&gt;呼び出し方には以下の3通りの方法がある&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;リクエストと一緒に呼び出す&#34;&gt;リクエストと一緒に呼び出す&lt;/h3&gt;
+&lt;h4 id=&#34;リクエストと一緒に呼び出す&#34;&gt;リクエストと一緒に呼び出す&lt;/h4&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;“Alexa, Ask Daily Horoscopes for Gemini”&lt;br /&gt;
@@ -79,7 +76,7 @@ Alexa SkillsはLambdaファンクション上で実行されるので、AWS Lamb
 “Alexa, give me my Taurus horoscope using Daily Horoscopes”&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h3 id=&#34;リクエストなしで呼び出す&#34;&gt;リクエストなしで呼び出す&lt;/h3&gt;
+&lt;h4 id=&#34;リクエストなしで呼び出す&#34;&gt;リクエストなしで呼び出す&lt;/h4&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;“Alexa, open Daily Horoscopes”&lt;br /&gt;
@@ -87,11 +84,16 @@ Alexa SkillsはLambdaファンクション上で実行されるので、AWS Lamb
 “Alexa, ask Daily Horoscopes”&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h3 id=&#34;invocation-nameだけで呼び出す&#34;&gt;Invocation Nameだけで呼び出す&lt;/h3&gt;
+&lt;h4 id=&#34;invocation-nameだけで呼び出す&#34;&gt;Invocation Nameだけで呼び出す&lt;/h4&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;“Alexa, Daily Horoscopes”&lt;/p&gt;
 &lt;/blockquote&gt;
+
+&lt;h2 id=&#34;今回作るもの&#34;&gt;今回作るもの&lt;/h2&gt;
+
+&lt;p&gt;公式の &lt;a href=&#34;https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit/docs/developing-an-alexa-skill-as-a-lambda-function&#34;&gt;ドキュメント&lt;/a&gt; と &lt;a href=&#34;https://developer.amazon.com/public/community/post/TxDJWS16KUPVKO/New-Alexa-Skills-Kit-Template-Build-a-Trivia-Skill-in-under-an-Hour&#34;&gt;ポスト&lt;/a&gt; を参考に、今回は「Color Expert」のSkillを使ってみます。&lt;br /&gt;
+Alexa SkillsはLambdaファンクション上で実行されるので、AWS LambdaとAlexa Skillsの設定が必要になります。&lt;/p&gt;
 
 &lt;h2 id=&#34;aws-lambdaの作成&#34;&gt;AWS Lambdaの作成&lt;/h2&gt;
 
@@ -441,8 +443,8 @@ Raspberry Pi用のディスプレイを用意してもよいですが、今回�
 &lt;a href=&#34;http://qiita.com/onlyindreams/items/acc70807b69b43e176bf&#34;&gt;Raspberry Pi 3にRaspbianをインストール(Mac OS X を使用)&lt;/a&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Rasbian Jessie は &lt;code&gt;2016-05-27&lt;/code&gt; リリースのものを用いました。&lt;/li&gt;
-&lt;li&gt;ddコマンドのオプションで、ブロックサイズを大文字 (&lt;code&gt;bs=1M&lt;/code&gt;) で指定&lt;/li&gt;
+&lt;li&gt;Rasbian Jessie は &lt;code&gt;2016-05-27&lt;/code&gt; リリースのものを用いました&lt;/li&gt;
+&lt;li&gt;ddコマンドのオプションで、ブロックサイズは大文字 (&lt;code&gt;bs=1M&lt;/code&gt;) で指定しました&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&#34;起動手順&#34;&gt;起動手順&lt;/h3&gt;
@@ -494,7 +496,7 @@ StartupNotify=false
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# install
 $ sudo apt-get install vlc-nox vlc-data
 # add env vars
-$ echo &amp;quot;export LD_LIBRARY_PATH=/usr/lib/vlc&amp;quot; &amp;gt;&amp;gt; ~/.bashrc
+$ echo &amp;quot;export LD_LIBRARY_PATH=/usr/lib/vlc:$LD_LIBRARY_PATH&amp;quot; &amp;gt;&amp;gt; ~/.bashrc
 $ echo &amp;quot;export VLC_PLUGIN_PATH=/usr/lib/vlc/plugins&amp;quot; &amp;gt;&amp;gt; ~/.bashrc
 $ soure ~/.bashrc
 &lt;/code&gt;&lt;/pre&gt;

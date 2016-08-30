@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="/css/responsive.css">
   <link rel="stylesheet" href="/css/highlight_monokai.css">
   <link rel="stylesheet" href="/css/theme.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
   <link rel="stylesheet" href="/css/custom.css">
 
   <link href="http://blog.algolab.jp/index.xml" rel="alternate" type="application/rss+xml" title="ALGO GEEKS" />
@@ -503,6 +504,10 @@ Adrew Ng氏は、2020年には検索の半分以上が音声か画像になる�
   var diff = diff.split(/(?=(?:\d{3})+$)/).join();
   var target = $("#doraemon-birthday");
   target.text("ドラえもん誕生まであと"+diff+"日");
+</script>
+
+<script>
+  $("a[href^='http']").not('[href*="'+location.hostname+'"]').attr("target","_blank").after(' <i class="fa fa-external-link"></i>');
 </script>
 
 <script src="/js/highlight.pack.js"></script>

@@ -432,6 +432,8 @@ $ conda install -y -c wordsforthewise dlib
 
 &lt;h2 id=&#34;音声認識&#34;&gt;音声認識&lt;/h2&gt;
 
+&lt;h3 id=&#34;ffmpeg&#34;&gt;FFmpeg&lt;/h3&gt;
+
 &lt;p&gt;音声・動画処理ライブラリ。Ubuntu16.04から本体は&lt;code&gt;apt-get&lt;/code&gt;で入るようになりました。&lt;br /&gt;
 &lt;a href=&#34;https://ffmpeg.org/&#34;&gt;https://ffmpeg.org/&lt;/a&gt;&lt;/p&gt;
 

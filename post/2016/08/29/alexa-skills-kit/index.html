@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="/css/responsive.css">
   <link rel="stylesheet" href="/css/highlight_monokai.css">
   <link rel="stylesheet" href="/css/theme.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
   <link rel="stylesheet" href="/css/custom.css">
 
   <link href="http://blog.algolab.jp/index.xml" rel="alternate" type="application/rss+xml" title="ALGO GEEKS" />
@@ -91,12 +92,9 @@
 
 <p>前回はRaspberry PiからAVS (Alexa Voice Services) を使ってみましたが、今回は、Alexa Skills Kitを使ってみたいと思います。</p>
 
-<p>公式の <a href="https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit/docs/developing-an-alexa-skill-as-a-lambda-function">ドキュメント</a> と <a href="https://developer.amazon.com/public/community/post/TxDJWS16KUPVKO/New-Alexa-Skills-Kit-Template-Build-a-Trivia-Skill-in-under-an-Hour">ポスト</a> を参考に、今回は「Color Expert」のSkillを使ってみます。<br />
-Alexa SkillsはLambdaファンクション上で実行されるので、AWS LambdaとAlexa Skillsの設定が必要になります。</p>
-
 <h2 id="alexa-skill-kit-概要">Alexa Skill Kit 概要</h2>
 
-<p>Amazon Echo には好みの機能を追加できるSkillという機能があり、「カスタムスキル」と「スマートホームスキル」の2種類を登録することができます。</p>
+<p>AVSには好みの機能を追加できるSkillという機能があり、「カスタムスキル」と「スマートホームスキル」の2種類を登録することができます。</p>
 
 <p><a href="https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/understanding-the-different-types-of-skills">https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/understanding-the-different-types-of-skills</a></p>
 
@@ -131,7 +129,7 @@ Alexa SkillsはLambdaファンクション上で実行されるので、AWS Lamb
 <li>Invocation Nameで呼び出すのは不要</li>
 </ul>
 
-<h2 id="invocation-name-スキルの呼び名-のガイドライン">Invocation Name (スキルの呼び名) のガイドライン</h2>
+<h3 id="invocation-name-スキルの呼び名-のガイドライン">Invocation Name (スキルの呼び名) のガイドライン</h3>
 
 <p><a href="https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit/docs/choosing-the-invocation-name-for-an-alexa-skill">https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit/docs/choosing-the-invocation-name-for-an-alexa-skill</a></p>
 
@@ -140,7 +138,7 @@ Alexa SkillsはLambdaファンクション上で実行されるので、AWS Lamb
 <li>呼び出し方には以下の3通りの方法がある</li>
 </ul>
 
-<h3 id="リクエストと一緒に呼び出す">リクエストと一緒に呼び出す</h3>
+<h4 id="リクエストと一緒に呼び出す">リクエストと一緒に呼び出す</h4>
 
 <blockquote>
 <p>“Alexa, Ask Daily Horoscopes for Gemini”<br />
@@ -148,7 +146,7 @@ Alexa SkillsはLambdaファンクション上で実行されるので、AWS Lamb
 “Alexa, give me my Taurus horoscope using Daily Horoscopes”</p>
 </blockquote>
 
-<h3 id="リクエストなしで呼び出す">リクエストなしで呼び出す</h3>
+<h4 id="リクエストなしで呼び出す">リクエストなしで呼び出す</h4>
 
 <blockquote>
 <p>“Alexa, open Daily Horoscopes”<br />
@@ -156,11 +154,16 @@ Alexa SkillsはLambdaファンクション上で実行されるので、AWS Lamb
 “Alexa, ask Daily Horoscopes”</p>
 </blockquote>
 
-<h3 id="invocation-nameだけで呼び出す">Invocation Nameだけで呼び出す</h3>
+<h4 id="invocation-nameだけで呼び出す">Invocation Nameだけで呼び出す</h4>
 
 <blockquote>
 <p>“Alexa, Daily Horoscopes”</p>
 </blockquote>
+
+<h2 id="今回作るもの">今回作るもの</h2>
+
+<p>公式の <a href="https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit/docs/developing-an-alexa-skill-as-a-lambda-function">ドキュメント</a> と <a href="https://developer.amazon.com/public/community/post/TxDJWS16KUPVKO/New-Alexa-Skills-Kit-Template-Build-a-Trivia-Skill-in-under-an-Hour">ポスト</a> を参考に、今回は「Color Expert」のSkillを使ってみます。<br />
+Alexa SkillsはLambdaファンクション上で実行されるので、AWS LambdaとAlexa Skillsの設定が必要になります。</p>
 
 <h2 id="aws-lambdaの作成">AWS Lambdaの作成</h2>
 
@@ -586,6 +589,10 @@ MyColorIsIntent my favorite color is {Color}
   var diff = diff.split(/(?=(?:\d{3})+$)/).join();
   var target = $("#doraemon-birthday");
   target.text("ドラえもん誕生まであと"+diff+"日");
+</script>
+
+<script>
+  $("a[href^='http']").not('[href*="'+location.hostname+'"]').attr("target","_blank").after(' <i class="fa fa-external-link"></i>');
 </script>
 
 <script src="/js/highlight.pack.js"></script>
