@@ -5,13 +5,13 @@
   <title>
     
     
-      テレアポ模擬トレーニングBot 〜コミュニケーション教育ツールとしてのチャットボットの活用可能性〜
+      Kaldiで音声を学習させる 〜ディープラーニングを用いた音声認識ツールキット〜
     
     &nbsp;|&nbsp;ALGO GEEKS
   </title>
 
   <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
-  <link rel="canonical" href="http://blog.algolab.jp/post/2016/08/18/telephone-appointment-simulation-bot/"/>
+  <link rel="canonical" href="http://blog.algolab.jp/post/2016/08/31/kaldi/"/>
 
   <link rel="stylesheet" href="/css/sanitize.css">
   <link rel="stylesheet" href="/css/responsive.css">
@@ -58,19 +58,21 @@
   
   <main id="single" role="main">
     <div class="article-header">
-      <h1>テレアポ模擬トレーニングBot 〜コミュニケーション教育ツールとしてのチャットボットの活用可能性〜</h1>
+      <h1>Kaldiで音声を学習させる 〜ディープラーニングを用いた音声認識ツールキット〜</h1>
       
 
 <div class="meta">
   
-    <span>2016/08/18</span>
+    <span>2016/08/31</span>
   
   
     <span>|</span>
     
-      <a href="/tags/chat-bot">#チャットボット</a>&nbsp;
+      <a href="/tags/speech-recognition">#音声認識</a>&nbsp;
     
-      <a href="/tags/product">#プロダクト</a>&nbsp;
+      <a href="/tags/kaldi">#Kaldi</a>&nbsp;
+    
+      <a href="/tags/ubuntu">#Ubuntu</a>&nbsp;
     
   
   
@@ -98,83 +100,224 @@
       
 
 <figure>
-  <img src="/images//post/2016/08/18/telephone-appointment-simulation-bot//cover.png"/>
+  <img src="/images//post/2016/08/31/kaldi//kaldi_text_and_logo.png"/>
   
 </figure>
 
 
-<p>LINEがBOT API、FacebookがMessenger Platformを発表してから数ヶ月たちました。<br />
-これまでに数々のチャットボットがリリースされていますが、まだ活用方法を模索している段階かと思います。</p>
+<h2 id="kaldiとは">Kaldiとは</h2>
 
-<p>その中で、コミュニケーション教育ツールとしての活用可能性があるのではないかと考え、実験的に「テレアポ模擬トレーニングBot」を <a href="http://www.torix-corp.com/">TORiX</a> さんと共同開発させていただきました。</p>
+<p>C++で書かれた音声認識ツールキットで、Apache Licence 2.0で公開されています。<br />
+音響モデルにDNN (Deep Neural Network) を用いているのが特長です。</p>
 
-<p>今回は、このBotの概要と、開発に至った経緯について書きたいと思います。</p>
+<p><a href="http://kaldi-asr.org/">http://kaldi-asr.org/</a></p>
 
-<h2 id="テレアポ模擬トレーニングbotとは">テレアポ模擬トレーニングBotとは</h2>
+<p>今回はKaldiを動作させ、yesかnoの音声を判別するモデルを学習させてみます。</p>
 
-<figure>
-  <img src="/images//post/2016/08/18/telephone-appointment-simulation-bot//story.png"/>
-  
-</figure>
+<h2 id="環境">環境</h2>
 
+<p>Vagrant上のUbuntu 16.04 LTSを用いています。
+<pre><code class="language-sh hljs bash">$ cat /etc/lsb-release
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=<span class="hljs-number">16.04</span>
+DISTRIB_CODENAME=xenial
+DISTRIB_DESCRIPTION=<span class="hljs-string">"Ubuntu 16.04.1 LTS"</span>
+</code></pre>
+<pre><code class="language-sh hljs bash">$ uname <span class="hljs-operator">-a</span>
+Linux vagrant <span class="hljs-number">4.4</span>.<span class="hljs-number">0</span>-<span class="hljs-number">31</span>-generic <span class="hljs-comment">#50-Ubuntu SMP Wed Jul 13 00:07:12 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux</span>
+</code></pre>
+</p>
 
-<p>ストーリー形式で、テレアポを擬似体験することのできるコンテンツです。下記ボタンから体験できます。</p>
+<h2 id="kaldiのダウンロード">Kaldiのダウンロード</h2>
 
-<script>
-window.fbAsyncInit = function() {
-  FB.init({
-    appId: "131078513971096",
-    xfbml: true,
-    version: "v2.6"
-  });
-};
+<p>Githubよりダウンロードします。</p>
 
-(function(d, s, id){
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) { return; }
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/ja_JP/sdk.js";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-</script>
+<pre><code class="language-sh">$ git clone https://github.com/kaldi-asr/kaldi.git
+</code></pre>
 
-<div class="fb-messengermessageus"
-  messenger_app_id="131078513971096"
-  page_id="1771482106414711">
-</div>
+<h2 id="インストール">インストール</h2>
 
+<p>インストール方法は<code>INSTALL</code>ファイルに最新情報が記載されているので、それに従います。</p>
 
-<p>ボタンが動作しない場合は、下記ページからメッセージを送ってみてください。<br />
-<a href="https://www.facebook.com/1771482106414711/">https://www.facebook.com/1771482106414711/</a></p>
-
-<h2 id="開発の経緯">開発の経緯</h2>
-
-<p>コミュニケーション領域の教育においては、擬似的にでも経験を積むことが一番スキルが身につく手段であると考えていますが、
-書籍や動画等のコンテンツではそれを体験することが困難です。</p>
-
-<p>その中で、チャットボットを用いれば容易に実現できるのではないか、と考えたのが開発のきっかけです。</p>
-
-<p>実際に、テレアポ模擬トレーニングBotは1日もかからず実装することができました。<br />
-(ストーリー作成には別途1日かかりました。)</p>
-
-<h2 id="コミュニケーション教育ツールとしての可能性">コミュニケーション教育ツールとしての可能性</h2>
-
-<p>今回は題材としてテレアポを取り上げましたが、他にも応用可能性はあると考えています。</p>
-
-<p>例えば、<a href="https://the-board.jp/">board</a> を展開する <a href="http://www.velc.co.jp/about/">VELC</a> さんは、カスタマーサポートの教育にBotを用いていると語っています。</p>
+<pre><code class="language-sh">$ cd kaldi
+$ cat INSTALL
+</code></pre>
 
 <blockquote>
-<p>そこで重要になってくるのが教育です。それに使っているのが、チャットツールである「Slack（スラック）」のbotです。<br />
-Slack上で「ok board」と打ち込むと、FAQからSlackに質問だけがランダムに飛んでくるようになっています。スタッフには空き時間にそれを使って回答文を作成する練習をしてもらい、後で僕がレビューをする。</p>
+<p>This is the official Kaldi INSTALL. Look also at INSTALL.md for the git mirror installation.<br />
+[for native Windows install, see windows/INSTALL]</p>
 
-<p>引用元: <a href="https://seleck.cc/article/475">「カスタマーサクセス」を意識したことはない。自然に神対応を実現した、CSの理想形</a></p>
+<p>(1)<br />
+go to tools/  and follow INSTALL instructions there.</p>
+
+<p>(2)<br />
+go to src/ and follow INSTALL instructions there.</p>
 </blockquote>
 
-<h2 id="おわりに">おわりに</h2>
+<p><code>tools</code>および<code>src</code>フォルダの<code>INSTALL</code>を見れば良いようなので、まず<code>tools</code>から確認していきます。</p>
 
-<p>今回は、チャットボットを「チャットUIを用いたインタラクティブなアプリを簡単に作れるツール」として捉え、コミュニケーション教育ツールとしての活用可能性についてお届けしました。</p>
+<h2 id="toolsのインストール">toolsのインストール</h2>
 
-<p>チャットボットはまだまだ可能性を秘めていると思いますので、今後も注目していきたいと思います。</p>
+<pre><code class="language-sh">$ cd tools
+$ cat INSTALL
+</code></pre>
+
+<blockquote>
+<p>To install the most important prerequisites for Kaldi:</p>
+
+<p>&nbsp;first do</p>
+
+<p>&nbsp;&nbsp;extras/check_dependencies.sh</p>
+
+<p>to see if there are any system-level installations or modifications you need to do.<br />
+Check the output carefully: there are some things that will make your life a lot<br />
+easier if you fix them at this stage.</p>
+
+<p>Then run</p>
+
+<p>&nbsp;make</p>
+
+<p>If you have multiple CPUs and want to speed things up, you can do a parallel<br />
+build by supplying the &ldquo;-j&rdquo; option to make, e.g. to use 4 CPUs:</p>
+
+<p>&nbsp;&nbsp;make -j 4</p>
+
+<p>By default, Kaldi builds against OpenFst-1.3.4. If you want to build against<br />
+OpenFst-1.4, edit the Makefile in this folder. Note that this change requires<br />
+a relatively new compiler with C++11 support, e.g. gcc &gt;= 4.6, clang &gt;= 3.0.</p>
+
+<p>In extras/, there are also various scripts to install extra bits and pieces that<br />
+are used by individual example scripts.  If an example script needs you to run<br />
+one of those scripts, it will tell you what to do.</p>
+</blockquote>
+
+<p>概要は以下の通りです。</p>
+
+<ul>
+<li><code>extras/check_dependencies.sh</code>で依存関係をチェック</li>
+<li><code>make</code>コマンドでインストールを行う
+
+<ul>
+<li>マルチコアのCPUの場合は<code>j</code>オプションをつけることでインストールが並列化できる (早くなる)</li>
+</ul></li>
+</ul>
+
+<h3 id="依存関係のチェック">依存関係のチェック</h3>
+
+<p>スクリプトを用いて依存関係をチェックします。</p>
+
+<pre><code class="language-sh">$ extras/check_dependencies.sh
+
+extras/check_dependencies.sh: automake is not installed.
+extras/check_dependencies.sh: autoconf is not installed.
+extras/check_dependencies.sh: neither libtoolize nor glibtoolize is installed
+extras/check_dependencies.sh: subversion is not installed
+extras/check_dependencies.sh: default or create an bash alias for kaldi scripts to run correctly
+extras/check_dependencies.sh: we recommend that you run (our best guess):
+ sudo apt-get install  automake autoconf libtool subversion
+You should probably do:
+ sudo apt-get install libatlas3-base
+/bin/sh is linked to dash, and currently some of the scripts will not run
+properly.  We recommend to run:
+ sudo ln -s -f bash /bin/sh
+</code></pre>
+
+<p>サジェストされた通りに進めます。<br />
+(環境によって出てくるメッセージが異なるのでご注意下さい)</p>
+
+<pre><code class="language-sh">$ sudo apt-get install automake autoconf libtool subversion
+$ sudo apt-get install -y libatlas3-base
+$ sudo ln -s -f bash /bin/sh
+</code></pre>
+
+<p>再度依存関係をチェックすると、OKとなりました。</p>
+
+<pre><code class="language-sh">$ extras/check_dependencies.sh
+extras/check_dependencies.sh: all OK.
+</code></pre>
+
+<h3 id="インストール-1">インストール</h3>
+
+<p>まず、手元の環境のCPUコア数を調べます。</p>
+
+<pre><code class="language-sh">$ nproc
+4
+</code></pre>
+
+<p>筆者の環境は4コアだったので、<code>j</code>オプションを用いて並列インストールを行います。</p>
+
+<pre><code class="language-sh">$ sudo make -j 4
+</code></pre>
+
+<h2 id="srcのインストール">srcのインストール</h2>
+
+<pre><code class="language-sh">$ cd ../src
+$ cat INSTALL
+</code></pre>
+
+<blockquote>
+<p>These instructions are valid for UNIX-like systems (these steps have<br />
+been run on various Linux distributions; Darwin; Cygwin).  For native Windows<br />
+compilation, see ../windows/INSTALL.</p>
+
+<p>You must first have completed the installation steps in ../tools/INSTALL<br />
+(compiling OpenFst; getting ATLAS and CLAPACK headers).</p>
+
+<p>The installation instructions are:<br />
+./configure<br />
+make depend<br />
+make</p>
+
+<p>Note that &ldquo;make&rdquo; takes a long time; you can speed it up by running make<br />
+in parallel if you have multiple CPUs, for instance<br />
+ make depend -j 8<br />
+ make -j 8<br />
+For more information, see documentation at <a href="http://kaldi-asr.org/doc/">http://kaldi-asr.org/doc/</a><br />
+and click on &ldquo;The build process (how Kaldi is compiled)&rdquo;.</p>
+</blockquote>
+
+<p>以下の3つのコマンドを叩けば良いようので、一つずつ叩いていきます。</p>
+
+<pre><code class="language-sh">$ ./configure
+$ sudo make depend -j 4
+$ sudo make -j 4
+</code></pre>
+
+<h2 id="サンプルの動作確認">サンプルの動作確認</h2>
+
+<p><code>egs</code>以下にサンプルが公開されています。<br />
+ここでは、<code>yes</code>と<code>no</code>を判別する非常に小さなタスクを学習させてみます。</p>
+
+<pre><code class="language-sh">cd ../egs/yesno
+cat README.txt
+</code></pre>
+
+<blockquote>
+<p>The &ldquo;yesno&rdquo; corpus is a very small dataset of recordings of one individual<br />
+saying yes or no multiple times per recording, in Hebrew.  It is available from<br />
+<a href="http://www.openslr.org/1">http://www.openslr.org/1</a>.<br />
+It is mainly included here as an easy way to test out the Kaldi scripts.</p>
+
+<p>The test set is perfectly recognized at the monophone stage, so the dataset is<br />
+not exactly challenging.</p>
+
+<p>The scripts are in s5/.</p>
+</blockquote>
+
+<p>ヘブライ語で<code>yes</code>と<code>no</code>を喋っているコーパスを学習データとして用いるようです。<br />
+<code>s5</code>フォルダに動作用のスクリプトがあるので、動かしてみます。</p>
+
+<pre><code class="language-sh">$ cd s5
+$ sh run.sh
+...
+%WER 0.00 [ 0 / 232, 0 ins, 0 del, 0 sub ] exp/mono0a/decode_test_yesno/wer_10
+</code></pre>
+
+<p>WER (単語誤り率) が 0% という結果となりました。</p>
+
+<h2 id="次回予告">次回予告</h2>
+
+<p>次回はサンプルのソースコードを追ってみたいと思います。</p>
 
       
   <div id="share-this">
@@ -222,10 +365,8 @@ Slack上で「ok board」と打ち込むと、FAQからSlackに質問だけが�
   
   <nav class="pagination-single">
     
-      <span class="previous">&larr; <a href="http://blog.algolab.jp/post/2016/08/16/speech-framework/" rel="prev">iOSで音声認識 〜Speech Frameworkを試す〜</a></span>
+      <span class="previous">&larr; <a href="http://blog.algolab.jp/post/2016/08/29/alexa-skills-kit/" rel="prev">Alexa Skills KitをAWS Lamdaから使う</a></span>
     
-    
-      <span class="next"><a href="http://blog.algolab.jp/post/2016/08/21/pyenv-anaconda-ubuntu/" rel="next">pyenv &#43; Anaconda (Ubuntu 16.04 LTS) で機械学習のPython開発環境をオールインワンで整える【随時更新】</a> &rarr;</span>
     
   </nav>
   

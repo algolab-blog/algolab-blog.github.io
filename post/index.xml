@@ -6,8 +6,238 @@
     <description>Recent content in Posts on ALGO GEEKS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 29 Aug 2016 16:10:04 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 31 Aug 2016 14:39:10 +0900</lastBuildDate>
     <atom:link href="http://blog.algolab.jp/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Kaldiで音声を学習させる 〜ディープラーニングを用いた音声認識ツールキット〜</title>
+      <link>http://blog.algolab.jp/post/2016/08/31/kaldi/</link>
+      <pubDate>Wed, 31 Aug 2016 14:39:10 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/08/31/kaldi/</guid>
+      <description>
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/31/kaldi//kaldi_text_and_logo.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;h2 id=&#34;kaldiとは&#34;&gt;Kaldiとは&lt;/h2&gt;
+
+&lt;p&gt;C++で書かれた音声認識ツールキットで、Apache Licence 2.0で公開されています。&lt;br /&gt;
+音響モデルにDNN (Deep Neural Network) を用いているのが特長です。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://kaldi-asr.org/&#34;&gt;http://kaldi-asr.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;今回はKaldiを動作させ、yesかnoの音声を判別するモデルを学習させてみます。&lt;/p&gt;
+
+&lt;h2 id=&#34;環境&#34;&gt;環境&lt;/h2&gt;
+
+&lt;p&gt;Vagrant上のUbuntu 16.04 LTSを用いています。
+&lt;pre&gt;&lt;code class=&#34;language-sh hljs bash&#34;&gt;$ cat /etc/lsb-release
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=&lt;span class=&#34;hljs-number&#34;&gt;16.04&lt;/span&gt;
+DISTRIB_CODENAME=xenial
+DISTRIB_DESCRIPTION=&lt;span class=&#34;hljs-string&#34;&gt;&#34;Ubuntu 16.04.1 LTS&#34;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh hljs bash&#34;&gt;$ uname &lt;span class=&#34;hljs-operator&#34;&gt;-a&lt;/span&gt;
+Linux vagrant &lt;span class=&#34;hljs-number&#34;&gt;4.4&lt;/span&gt;.&lt;span class=&#34;hljs-number&#34;&gt;0&lt;/span&gt;-&lt;span class=&#34;hljs-number&#34;&gt;31&lt;/span&gt;-generic &lt;span class=&#34;hljs-comment&#34;&gt;#50-Ubuntu SMP Wed Jul 13 00:07:12 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/p&gt;
+
+&lt;h2 id=&#34;kaldiのダウンロード&#34;&gt;Kaldiのダウンロード&lt;/h2&gt;
+
+&lt;p&gt;Githubよりダウンロードします。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ git clone https://github.com/kaldi-asr/kaldi.git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;インストール&#34;&gt;インストール&lt;/h2&gt;
+
+&lt;p&gt;インストール方法は&lt;code&gt;INSTALL&lt;/code&gt;ファイルに最新情報が記載されているので、それに従います。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd kaldi
+$ cat INSTALL
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;This is the official Kaldi INSTALL. Look also at INSTALL.md for the git mirror installation.&lt;br /&gt;
+[for native Windows install, see windows/INSTALL]&lt;/p&gt;
+
+&lt;p&gt;(1)&lt;br /&gt;
+go to tools/  and follow INSTALL instructions there.&lt;/p&gt;
+
+&lt;p&gt;(2)&lt;br /&gt;
+go to src/ and follow INSTALL instructions there.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;code&gt;tools&lt;/code&gt;および&lt;code&gt;src&lt;/code&gt;フォルダの&lt;code&gt;INSTALL&lt;/code&gt;を見れば良いようなので、まず&lt;code&gt;tools&lt;/code&gt;から確認していきます。&lt;/p&gt;
+
+&lt;h2 id=&#34;toolsのインストール&#34;&gt;toolsのインストール&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd tools
+$ cat INSTALL
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;To install the most important prerequisites for Kaldi:&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp;first do&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp;&amp;nbsp;extras/check_dependencies.sh&lt;/p&gt;
+
+&lt;p&gt;to see if there are any system-level installations or modifications you need to do.&lt;br /&gt;
+Check the output carefully: there are some things that will make your life a lot&lt;br /&gt;
+easier if you fix them at this stage.&lt;/p&gt;
+
+&lt;p&gt;Then run&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp;make&lt;/p&gt;
+
+&lt;p&gt;If you have multiple CPUs and want to speed things up, you can do a parallel&lt;br /&gt;
+build by supplying the &amp;ldquo;-j&amp;rdquo; option to make, e.g. to use 4 CPUs:&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp;&amp;nbsp;make -j 4&lt;/p&gt;
+
+&lt;p&gt;By default, Kaldi builds against OpenFst-1.3.4. If you want to build against&lt;br /&gt;
+OpenFst-1.4, edit the Makefile in this folder. Note that this change requires&lt;br /&gt;
+a relatively new compiler with C++11 support, e.g. gcc &amp;gt;= 4.6, clang &amp;gt;= 3.0.&lt;/p&gt;
+
+&lt;p&gt;In extras/, there are also various scripts to install extra bits and pieces that&lt;br /&gt;
+are used by individual example scripts.  If an example script needs you to run&lt;br /&gt;
+one of those scripts, it will tell you what to do.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;概要は以下の通りです。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;extras/check_dependencies.sh&lt;/code&gt;で依存関係をチェック&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;make&lt;/code&gt;コマンドでインストールを行う
+
+&lt;ul&gt;
+&lt;li&gt;マルチコアのCPUの場合は&lt;code&gt;j&lt;/code&gt;オプションをつけることでインストールが並列化できる (早くなる)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;依存関係のチェック&#34;&gt;依存関係のチェック&lt;/h3&gt;
+
+&lt;p&gt;スクリプトを用いて依存関係をチェックします。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ extras/check_dependencies.sh
+
+extras/check_dependencies.sh: automake is not installed.
+extras/check_dependencies.sh: autoconf is not installed.
+extras/check_dependencies.sh: neither libtoolize nor glibtoolize is installed
+extras/check_dependencies.sh: subversion is not installed
+extras/check_dependencies.sh: default or create an bash alias for kaldi scripts to run correctly
+extras/check_dependencies.sh: we recommend that you run (our best guess):
+ sudo apt-get install  automake autoconf libtool subversion
+You should probably do:
+ sudo apt-get install libatlas3-base
+/bin/sh is linked to dash, and currently some of the scripts will not run
+properly.  We recommend to run:
+ sudo ln -s -f bash /bin/sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;サジェストされた通りに進めます。&lt;br /&gt;
+(環境によって出てくるメッセージが異なるのでご注意下さい)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install automake autoconf libtool subversion
+$ sudo apt-get install -y libatlas3-base
+$ sudo ln -s -f bash /bin/sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;再度依存関係をチェックすると、OKとなりました。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ extras/check_dependencies.sh
+extras/check_dependencies.sh: all OK.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;インストール-1&#34;&gt;インストール&lt;/h3&gt;
+
+&lt;p&gt;まず、手元の環境のCPUコア数を調べます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ nproc
+4
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;筆者の環境は4コアだったので、&lt;code&gt;j&lt;/code&gt;オプションを用いて並列インストールを行います。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo make -j 4
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;srcのインストール&#34;&gt;srcのインストール&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd ../src
+$ cat INSTALL
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;These instructions are valid for UNIX-like systems (these steps have&lt;br /&gt;
+been run on various Linux distributions; Darwin; Cygwin).  For native Windows&lt;br /&gt;
+compilation, see ../windows/INSTALL.&lt;/p&gt;
+
+&lt;p&gt;You must first have completed the installation steps in ../tools/INSTALL&lt;br /&gt;
+(compiling OpenFst; getting ATLAS and CLAPACK headers).&lt;/p&gt;
+
+&lt;p&gt;The installation instructions are:&lt;br /&gt;
+./configure&lt;br /&gt;
+make depend&lt;br /&gt;
+make&lt;/p&gt;
+
+&lt;p&gt;Note that &amp;ldquo;make&amp;rdquo; takes a long time; you can speed it up by running make&lt;br /&gt;
+in parallel if you have multiple CPUs, for instance&lt;br /&gt;
+ make depend -j 8&lt;br /&gt;
+ make -j 8&lt;br /&gt;
+For more information, see documentation at &lt;a href=&#34;http://kaldi-asr.org/doc/&#34;&gt;http://kaldi-asr.org/doc/&lt;/a&gt;&lt;br /&gt;
+and click on &amp;ldquo;The build process (how Kaldi is compiled)&amp;rdquo;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;以下の3つのコマンドを叩けば良いようので、一つずつ叩いていきます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ./configure
+$ sudo make depend -j 4
+$ sudo make -j 4
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;サンプルの動作確認&#34;&gt;サンプルの動作確認&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;egs&lt;/code&gt;以下にサンプルが公開されています。&lt;br /&gt;
+ここでは、&lt;code&gt;yes&lt;/code&gt;と&lt;code&gt;no&lt;/code&gt;を判別する非常に小さなタスクを学習させてみます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;cd ../egs/yesno
+cat README.txt
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;The &amp;ldquo;yesno&amp;rdquo; corpus is a very small dataset of recordings of one individual&lt;br /&gt;
+saying yes or no multiple times per recording, in Hebrew.  It is available from&lt;br /&gt;
+&lt;a href=&#34;http://www.openslr.org/1&#34;&gt;http://www.openslr.org/1&lt;/a&gt;.&lt;br /&gt;
+It is mainly included here as an easy way to test out the Kaldi scripts.&lt;/p&gt;
+
+&lt;p&gt;The test set is perfectly recognized at the monophone stage, so the dataset is&lt;br /&gt;
+not exactly challenging.&lt;/p&gt;
+
+&lt;p&gt;The scripts are in s5/.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;ヘブライ語で&lt;code&gt;yes&lt;/code&gt;と&lt;code&gt;no&lt;/code&gt;を喋っているコーパスを学習データとして用いるようです。&lt;br /&gt;
+&lt;code&gt;s5&lt;/code&gt;フォルダに動作用のスクリプトがあるので、動かしてみます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd s5
+$ sh run.sh
+...
+%WER 0.00 [ 0 / 232, 0 ins, 0 del, 0 sub ] exp/mono0a/decode_test_yesno/wer_10
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;WER (単語誤り率) が 0% という結果となりました。&lt;/p&gt;
+
+&lt;h2 id=&#34;次回予告&#34;&gt;次回予告&lt;/h2&gt;
+
+&lt;p&gt;次回はサンプルのソースコードを追ってみたいと思います。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Alexa Skills KitをAWS Lamdaから使う</title>
@@ -1832,183 +2062,6 @@ $ mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
 
 &lt;p&gt;実用的に使える精度か、という点では疑問符が残るものの、End-to-End で学習ができるというのは魅力的です。&lt;br /&gt;
 いかに有用なデータセットを構築するか、が重要なポイントとなってきそうです。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>音声は新しいパラダイムシフトになる 〜2016年度版メアリー・ミーカー氏レポートまとめ〜</title>
-      <link>http://blog.algolab.jp/post/2016/07/29/mary-meeker-2016/</link>
-      <pubDate>Fri, 29 Jul 2016 11:47:41 +0900</pubDate>
-      
-      <guid>http://blog.algolab.jp/post/2016/07/29/mary-meeker-2016/</guid>
-      <description>
-
-&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/D0N5V1PjTsIasR&#34; class=&#34;slideshare&#34; width=&#34;595&#34; height=&#34;485&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt;
-
-
-&lt;p&gt;&lt;strong&gt;「音声インターフェースは新しいパラダイムシフトになる」&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;伝説のアナリスト、メアリー・ミーカー氏は、 &lt;a href=&#34;http://www.kpcb.com/internet-trends&#34;&gt;インターネット・トレンド&lt;/a&gt; 2016年度版の中で述べています。&lt;br /&gt;
-ここでは、レポートの中から、音声に関するものをまとめていきます。&lt;/p&gt;
-
-&lt;h2 id=&#34;インターフェースの技術革新は10年毎に起きる&#34;&gt;インターフェースの技術革新は10年毎に起きる&lt;/h2&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/07/29/mary-meeker-2016//114.jpg&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;ヒューマンインターフェースの歴史を振り返ってみると、ここ半世紀においては10年単位で技術革新が起きていることが分かります。&lt;br /&gt;
-iPhoneによる、タッチ + カメラインターフェースが登場したのが 2007年。&lt;br /&gt;
-次の10年では、SiriやAmazon Echoに代表される音声インターフェースが技術革新を起こすだろう、と予測しています。&lt;/p&gt;
-
-&lt;h2 id=&#34;音声は最も効率の良い入力方法である&#34;&gt;音声は最も効率の良い入力方法である&lt;/h2&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/07/29/mary-meeker-2016//116.jpg&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;なぜ音声か、という問いに対して、メリットと独自性の観点から理由を述べています。&lt;br /&gt;
-何より、「早い」「簡単」というのが音声インターフェースのメリットでしょう。&lt;br /&gt;
-また、煩雑なGUIを必要とせず、低コストで場所をとらないことから、IoTとも相性が良い、としています。&lt;/p&gt;
-
-&lt;h2 id=&#34;音声認識は人間並みに進歩&#34;&gt;音声認識は人間並みに進歩&lt;/h2&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/07/29/mary-meeker-2016//118.jpg&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;Googleの研究成果によると、語彙数、認識精度ともに年々向上しています。&lt;/p&gt;
-
-&lt;h2 id=&#34;特に-認識精度はここ数年で急激に向上&#34;&gt;特に、認識精度はここ数年で急激に向上&lt;/h2&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/07/29/mary-meeker-2016//119.jpg&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;数年前までは良くて80%程度だったものが、最近は90%を優に超えてきているのが分かります。&lt;br /&gt;
-人工知能研究の権威である、BaiduのAndrew Ng氏は、精度が 99% を超えるとゲームチェンジャーになる (= 世界が変わる) と述べています。&lt;br /&gt;
-技術進歩の鍵となるのはディープラーニングで、音声認識分野においては、Baiduが一歩リードしている印象です。&lt;br /&gt;
-Baidu の論文については、下記の記事内でも取り上げていますのでご参照ください。&lt;br /&gt;
-&lt;a href=&#34;http://blog.algolab.jp/post/2016/07/21/icml-2016-reading/#deep-speech-2-end-to-end-speech-recognition-in-english-and-mandarin&#34;&gt;ICML2016読み会 まとめ&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;音声アシスタントの利用は技術の進歩が牽引&#34;&gt;音声アシスタントの利用は技術の進歩が牽引&lt;/h2&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/07/29/mary-meeker-2016//121.jpg&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;入力インターフェースがキーボードから音声に置き換わるのはまだ少し早いと前置きをしながら、利用状況についてまとめています。&lt;br /&gt;
-音声アシスタントの利用者は2015年時点で65%で、使い始めるきっかけとしては、ソフトウェア技術の進歩の理由が一番とのことです。&lt;/p&gt;
-
-&lt;h2 id=&#34;音声検索の利用は開始時点の35倍に&#34;&gt;音声検索の利用は開始時点の35倍に&lt;/h2&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/07/29/mary-meeker-2016//122.jpg&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;iPhoneおよびGoogleが音声検索を開始したのが2008年ですが、その時に比べ、利用回数は右肩あがりに伸びています。&lt;/p&gt;
-
-&lt;h2 id=&#34;タイピングが難しい中国語ではさらに伸長&#34;&gt;タイピングが難しい中国語ではさらに伸長&lt;/h2&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/07/29/mary-meeker-2016//123.jpg&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;Baiduの利用状況を見ると、音声入力、音声読み上げともに伸びています。&lt;br /&gt;
-スマートフォンにおける言語のタイピングのしやすさ、も音声入力への利用へ影響を与えそうです。&lt;/p&gt;
-
-&lt;h2 id=&#34;1日に6-8回音声検索する&#34;&gt;1日に6-8回音声検索する&lt;/h2&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/07/29/mary-meeker-2016//124.jpg&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;&lt;a href=&#34;http://www.soundhound.com/hound&#34;&gt;Hound&lt;/a&gt; (音声アシスタントアプリ) のデータによると、1日で6-8回音声検索を行うようです。&lt;br /&gt;
-カテゴリとしては、「一般情報」「エンターテイメント」「地域情報」「アシスタント」の4つにまたがる、とのことです。&lt;/p&gt;
-
-&lt;h2 id=&#34;2020年には音声検索が50-を超える&#34;&gt;2020年には音声検索が50%を超える&lt;/h2&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/07/29/mary-meeker-2016//125.jpg&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;音声検索の利用について、過去、現在、未来をまとめています。&lt;br /&gt;
-Adrew Ng氏は、2020年には検索の半分以上が音声か画像になる、と予測しています。&lt;/p&gt;
-
-&lt;h2 id=&#34;ハンズフリー-画面フリー&#34;&gt;ハンズフリー &amp;amp; 画面フリー&lt;/h2&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/07/29/mary-meeker-2016//127.jpg&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;音声インターフェースを使う理由のトップが、「手 (もしくは画面) がふさがっている時に便利だから」で、&lt;br /&gt;
-利用シチュエーションとしては、「家」「車」「移動中」が大部分を占めています。&lt;/p&gt;
-
-&lt;h2 id=&#34;プラットフォームは構築され-サードパーティの動きも速い&#34;&gt;プラットフォームは構築され、サードパーティの動きも速い&lt;/h2&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/07/29/mary-meeker-2016//129.jpg&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;前のスライドで述べた「家」「車」「移動中」において、Amazon Alexaは様々なOEMを提供しています。&lt;br /&gt;
-また、Alexaを拡張できるAlexa Skills Kitの開発も盛んになっています。&lt;/p&gt;
-
-&lt;h2 id=&#34;ショッピングも迅速に&#34;&gt;ショッピングも迅速に&lt;/h2&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/07/29/mary-meeker-2016//130.jpg&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;Amazonは、ショッピングをモバイルアプリから音声入力へ置き換えることを目指しています。&lt;/p&gt;
-
-&lt;h2 id=&#34;amazon-echoの所有率は5&#34;&gt;Amazon Echoの所有率は5%&lt;/h2&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/07/29/mary-meeker-2016//131.jpg&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;CIRPによると、AmazonEchoの所有者は5%で、認知度は61%とのことです。&lt;/p&gt;
-
-&lt;h2 id=&#34;2016年は産業の変わり目となる&#34;&gt;2016年は産業の変わり目となる&lt;/h2&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/07/29/mary-meeker-2016//133.jpg&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;コンピュータ産業の変わり目は後から振り返ると明確なものであると前置きした上で、iPhoneの売上が2015年にピークを迎えたことを分岐点と捉え、今後はAmazon Echoの売上が急激に伸びるのではないか、と締めくくっています。&lt;/p&gt;
-
-&lt;h2 id=&#34;おわりに&#34;&gt;おわりに&lt;/h2&gt;
-
-&lt;p&gt;まとめは以上となります。&lt;br /&gt;
-未来を見据えたときに、やはり「音声」は外せないキーワードとなってくるのではないでしょうか。&lt;/p&gt;
 </description>
     </item>
     
