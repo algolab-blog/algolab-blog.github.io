@@ -893,7 +893,7 @@ $ sudo systemctl enable vncserver@1.service
 
 &lt;p&gt;筆者の機械学習系のPython開発環境は、&lt;a href=&#34;https://www.vagrantup.com/&#34;&gt;Vagrant&lt;/a&gt; を用いた &lt;a href=&#34;https://atlas.hashicorp.com/bento/boxes/ubuntu-16.04&#34;&gt;Ubuntu (16.04 LTS)&lt;/a&gt; 上に構築しています。&lt;br /&gt;
 ここでは、画像認識、音声認識、自然言語処理などに必要な環境をオールインワンで構築する手順をまとめます。&lt;br /&gt;
-(最終更新日: 2016/08/22)&lt;/p&gt;
+(最終更新日: 2016/08/31)&lt;/p&gt;
 
 &lt;h2 id=&#34;osバージョン&#34;&gt;OSバージョン&lt;/h2&gt;
 
@@ -983,24 +983,27 @@ $ pip install --upgrade pip
 
 &lt;h3 id=&#34;tensorflow&#34;&gt;TensorFlow&lt;/h3&gt;
 
-&lt;p&gt;Googleの深層学習ライブラリ。&lt;code&gt;conda&lt;/code&gt;経由で最新バージョンを一発でインストールします。&lt;br /&gt;
-&lt;a href=&#34;https://www.tensorflow.org/&#34;&gt;https://www.tensorflow.org/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.tensorflow.org/&#34;&gt;https://www.tensorflow.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Googleの深層学習ライブラリ。&lt;code&gt;conda&lt;/code&gt;経由で最新バージョンを一発でインストールします。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ conda install -y -c jjhelmus tensorflow
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;chainer&#34;&gt;Chainer&lt;/h3&gt;
 
-&lt;p&gt;PFNの深層学習ライブラリ&lt;br /&gt;
-&lt;a href=&#34;http://chainer.org/&#34;&gt;http://chainer.org/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://chainer.org/&#34;&gt;http://chainer.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;PFNの深層学習ライブラリ。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pip install chainer
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;keras&#34;&gt;Keras&lt;/h3&gt;
 
-&lt;p&gt;TensorFlowおよびTheanoのラッパー。同時にTheanoも入ります。&lt;br /&gt;
-&lt;a href=&#34;https://keras.io/&#34;&gt;https://keras.io/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://keras.io/&#34;&gt;https://keras.io/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;TensorFlowおよびTheanoのラッパー。同時にTheanoも入ります。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pip install keras
 &lt;/code&gt;&lt;/pre&gt;
@@ -1009,24 +1012,27 @@ $ pip install --upgrade pip
 
 &lt;h3 id=&#34;imagemagick&#34;&gt;ImageMagick&lt;/h3&gt;
 
-&lt;p&gt;画像処理ライブラリ。&lt;code&gt;conda&lt;/code&gt;経由で本体もまとめてインストールします。&lt;br /&gt;
-&lt;a href=&#34;http://imagemagick.org/script/index.php&#34;&gt;http://imagemagick.org/script/index.php&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://imagemagick.org/script/index.php&#34;&gt;http://imagemagick.org/script/index.php&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;画像処理ライブラリ。&lt;code&gt;conda&lt;/code&gt;経由で本体もまとめてインストールします。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ conda install -y -c kalefranz imagemagick
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;opencv&#34;&gt;OpenCV&lt;/h3&gt;
 
-&lt;p&gt;コンピュータビジョンライブラリ&lt;br /&gt;
-&lt;a href=&#34;http://opencv.org/&#34;&gt;http://opencv.org/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://opencv.org/&#34;&gt;http://opencv.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;コンピュータビジョンライブラリ。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ conda install -y -c menpo opencv3
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;dlib&#34;&gt;Dlib&lt;/h3&gt;
 
-&lt;p&gt;画像処理系が充実している機械学習ライブラリ。&lt;code&gt;cmake&lt;/code&gt;と&lt;code&gt;boost-python&lt;/code&gt;も同時にインストールします。&lt;br /&gt;
-&lt;a href=&#34;http://dlib.net/&#34;&gt;http://dlib.net/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://dlib.net/&#34;&gt;http://dlib.net/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;画像処理系が充実している機械学習ライブラリ。&lt;code&gt;cmake&lt;/code&gt;と&lt;code&gt;boost-python&lt;/code&gt;も同時にインストールします。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install libboost-python-dev cmake
 $ conda install -y -c wordsforthewise dlib
@@ -1034,18 +1040,27 @@ $ conda install -y -c wordsforthewise dlib
 
 &lt;h3 id=&#34;selective-search&#34;&gt;Selective Search&lt;/h3&gt;
 
-&lt;p&gt;Alpacaが提供しているSelectiveSearchに特化したライブラリ&lt;br /&gt;
-&lt;a href=&#34;https://github.com/AlpacaDB/selectivesearch&#34;&gt;https://github.com/AlpacaDB/selectivesearch&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/AlpacaDB/selectivesearch&#34;&gt;https://github.com/AlpacaDB/selectivesearch&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Alpacaが提供しているSelectiveSearchに特化したライブラリ。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pip install selectivesearch
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;音声認識&#34;&gt;音声認識&lt;/h2&gt;
 
+&lt;h3 id=&#34;kaldi&#34;&gt;Kaldi&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://kaldi.org/&#34;&gt;http://kaldi.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;深層学習を用いた音声認識ツールキット。下記の記事を参照してください。&lt;br /&gt;
+&lt;a href=&#34;http://blog.algolab.jp/post/2016/08/31/kaldi/&#34;&gt;Kaldiで音声を学習させる 〜ディープラーニングを用いた音声認識ツールキット〜&lt;/a&gt;&lt;/p&gt;
+
 &lt;h3 id=&#34;ffmpeg&#34;&gt;FFmpeg&lt;/h3&gt;
 
-&lt;p&gt;音声・動画処理ライブラリ。Ubuntu16.04から本体は&lt;code&gt;apt-get&lt;/code&gt;で入るようになりました。&lt;br /&gt;
-&lt;a href=&#34;https://ffmpeg.org/&#34;&gt;https://ffmpeg.org/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://ffmpeg.org/&#34;&gt;https://ffmpeg.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;音声・動画処理ライブラリ。Ubuntu16.04から本体は&lt;code&gt;apt-get&lt;/code&gt;で入るようになりました。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt install -y ffmpeg
 $ pip install ffmpy
@@ -1055,8 +1070,9 @@ $ pip install ffmpy
 
 &lt;h3 id=&#34;mecab&#34;&gt;MeCab&lt;/h3&gt;
 
-&lt;p&gt;形態素解析エンジン。本体は&lt;code&gt;apt-get&lt;/code&gt;でインストールします。&lt;br /&gt;
-&lt;a href=&#34;http://taku910.github.io/mecab/&#34;&gt;http://taku910.github.io/mecab/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://taku910.github.io/mecab/&#34;&gt;http://taku910.github.io/mecab/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;形態素解析エンジン。本体は&lt;code&gt;apt-get&lt;/code&gt;でインストールします。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get -y install libmecab-dev mecab mecab-ipadic mecab-ipadic-utf8
 $ pip install mecab-python3
@@ -1064,8 +1080,9 @@ $ pip install mecab-python3
 
 &lt;h3 id=&#34;gensim&#34;&gt;gensim&lt;/h3&gt;
 
-&lt;p&gt;トピックモデルのライブラリ&lt;br /&gt;
-&lt;a href=&#34;https://radimrehurek.com/gensim/&#34;&gt;https://radimrehurek.com/gensim/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://radimrehurek.com/gensim/&#34;&gt;https://radimrehurek.com/gensim/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;トピックモデルのライブラリ。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pip install gensim
 &lt;/code&gt;&lt;/pre&gt;
@@ -1074,8 +1091,9 @@ $ pip install mecab-python3
 
 &lt;h3 id=&#34;openai-gym&#34;&gt;OpenAI Gym&lt;/h3&gt;
 
-&lt;p&gt;強化学習のトレーニング環境&lt;br /&gt;
-&lt;a href=&#34;https://gym.openai.com/&#34;&gt;https://gym.openai.com/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://gym.openai.com/&#34;&gt;https://gym.openai.com/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;強化学習のトレーニング環境。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pip install gym
 &lt;/code&gt;&lt;/pre&gt;
@@ -1083,6 +1101,8 @@ $ pip install mecab-python3
 &lt;h2 id=&#34;その他便利ツール&#34;&gt;その他便利ツール&lt;/h2&gt;
 
 &lt;h3 id=&#34;tightvnc-server&#34;&gt;TightVNC Server&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.tightvnc.com/&#34;&gt;http://www.tightvnc.com/&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;リモートデスクトップ環境。下記の記事を参照してください。&lt;br /&gt;
 &lt;a href=&#34;http://blog.algolab.jp/post/2016/08/22/ubuntu-tightvnc-server/&#34;&gt;Ubuntu 16.04 LTSにXcfeとTightVNC Serverでリモートデスクトップ環境を構築する&lt;/a&gt;&lt;/p&gt;
