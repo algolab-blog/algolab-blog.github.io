@@ -194,7 +194,7 @@ one of those scripts, it will tell you what to do.</p>
 <p>概要は以下の通りです。</p>
 
 <ul>
-<li><code>extras/check_dependencies.sh</code>で依存関係をチェック</li>
+<li><code>extras/check_dependencies.sh</code>で依存関係をチェックする</li>
 <li><code>make</code>コマンドでインストールを行う
 
 <ul>
@@ -249,6 +249,60 @@ extras/check_dependencies.sh: all OK.
 <pre><code class="language-sh">$ sudo make -j 4
 </code></pre>
 
+<p>以下のライブラリがインストールされます。</p>
+
+<ul>
+<li>OpenFst
+
+<ul>
+<li>重み付き有限状態トランスデューサー (WFST) を扱うライブラリ</li>
+</ul></li>
+<li>sph2pipe
+
+<ul>
+<li>SPHEREファイルのコンバータ</li>
+</ul></li>
+<li>sclite
+
+<ul>
+<li>音声認識結果をスコアリングするためのライブラリ</li>
+</ul></li>
+<li>ATLAS
+
+<ul>
+<li>線形代数ライブラリ</li>
+</ul></li>
+<li>CLAPACK
+
+<ul>
+<li>線形代数ライブラリ</li>
+</ul></li>
+</ul>
+
+<h3 id="オプション-言語モデルツールキットのインストール">(オプション) 言語モデルツールキットのインストール</h3>
+
+<p>また、言語モデルのツールキット (IRSTLM や SRILM) を使用する場合は追加でインストールします。</p>
+
+<h4 id="irstlm">IRSTLM</h4>
+
+<pre><code class="language-sh">$ extras/install_irstlm.sh
+</code></pre>
+
+<h4 id="srlm">SRLM</h4>
+
+<p>下記からファイルをダウンロードし、<code>srilm.tgz</code>というファイル名にした上で、<code>tools/</code>直下に配置します。<br />
+<a href="http://www.speech.sri.com/projects/srilm/download.html">http://www.speech.sri.com/projects/srilm/download.html</a></p>
+
+<p>また、インストールにはGNU awkが必要なので導入します。</p>
+
+<pre><code class="language-sh">$ sudo apt-get install -y gawk
+</code></pre>
+
+<p>本体をインストールします。</p>
+
+<pre><code class="language-sh">$ extras/install_srilm.sh
+</code></pre>
+
 <h2 id="srcのインストール">srcのインストール</h2>
 
 <pre><code class="language-sh">$ cd ../src
@@ -276,7 +330,7 @@ For more information, see documentation at <a href="http://kaldi-asr.org/doc/">h
 and click on &ldquo;The build process (how Kaldi is compiled)&rdquo;.</p>
 </blockquote>
 
-<p>以下の3つのコマンドを叩けば良いようので、一つずつ叩いていきます。</p>
+<p>以下の3つのコマンドを叩けば良いようなので、一つずつ叩いていきます。</p>
 
 <pre><code class="language-sh">$ ./configure
 $ sudo make depend -j 4

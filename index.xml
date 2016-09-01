@@ -112,7 +112,7 @@ one of those scripts, it will tell you what to do.&lt;/p&gt;
 &lt;p&gt;概要は以下の通りです。&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;extras/check_dependencies.sh&lt;/code&gt;で依存関係をチェック&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;extras/check_dependencies.sh&lt;/code&gt;で依存関係をチェックする&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;make&lt;/code&gt;コマンドでインストールを行う
 
 &lt;ul&gt;
@@ -167,6 +167,60 @@ extras/check_dependencies.sh: all OK.
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo make -j 4
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;p&gt;以下のライブラリがインストールされます。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;OpenFst
+
+&lt;ul&gt;
+&lt;li&gt;重み付き有限状態トランスデューサー (WFST) を扱うライブラリ&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;sph2pipe
+
+&lt;ul&gt;
+&lt;li&gt;SPHEREファイルのコンバータ&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;sclite
+
+&lt;ul&gt;
+&lt;li&gt;音声認識結果をスコアリングするためのライブラリ&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;ATLAS
+
+&lt;ul&gt;
+&lt;li&gt;線形代数ライブラリ&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;CLAPACK
+
+&lt;ul&gt;
+&lt;li&gt;線形代数ライブラリ&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;オプション-言語モデルツールキットのインストール&#34;&gt;(オプション) 言語モデルツールキットのインストール&lt;/h3&gt;
+
+&lt;p&gt;また、言語モデルのツールキット (IRSTLM や SRILM) を使用する場合は追加でインストールします。&lt;/p&gt;
+
+&lt;h4 id=&#34;irstlm&#34;&gt;IRSTLM&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ extras/install_irstlm.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;srlm&#34;&gt;SRLM&lt;/h4&gt;
+
+&lt;p&gt;下記からファイルをダウンロードし、&lt;code&gt;srilm.tgz&lt;/code&gt;というファイル名にした上で、&lt;code&gt;tools/&lt;/code&gt;直下に配置します。&lt;br /&gt;
+&lt;a href=&#34;http://www.speech.sri.com/projects/srilm/download.html&#34;&gt;http://www.speech.sri.com/projects/srilm/download.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;また、インストールにはGNU awkが必要なので導入します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install -y gawk
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;本体をインストールします。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ extras/install_srilm.sh
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;h2 id=&#34;srcのインストール&#34;&gt;srcのインストール&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd ../src
@@ -194,7 +248,7 @@ For more information, see documentation at &lt;a href=&#34;http://kaldi-asr.org/
 and click on &amp;ldquo;The build process (how Kaldi is compiled)&amp;rdquo;.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;以下の3つのコマンドを叩けば良いようので、一つずつ叩いていきます。&lt;/p&gt;
+&lt;p&gt;以下の3つのコマンドを叩けば良いようなので、一つずつ叩いていきます。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ./configure
 $ sudo make depend -j 4
