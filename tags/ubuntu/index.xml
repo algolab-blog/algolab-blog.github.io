@@ -464,7 +464,7 @@ $ sudo systemctl enable vncserver@1.service
 
 &lt;p&gt;筆者の機械学習系のPython開発環境は、&lt;a href=&#34;https://www.vagrantup.com/&#34;&gt;Vagrant&lt;/a&gt; を用いた &lt;a href=&#34;https://atlas.hashicorp.com/bento/boxes/ubuntu-16.04&#34;&gt;Ubuntu (16.04 LTS)&lt;/a&gt; 上に構築しています。&lt;br /&gt;
 ここでは、画像認識、音声認識、自然言語処理などに必要な環境をオールインワンで構築する手順をまとめます。&lt;br /&gt;
-(最終更新日: 2016/08/31)&lt;/p&gt;
+(最終更新日: 2016/09/04)&lt;/p&gt;
 
 &lt;h2 id=&#34;osバージョン&#34;&gt;OSバージョン&lt;/h2&gt;
 
@@ -605,7 +605,7 @@ $ pip install --upgrade pip
 
 &lt;p&gt;画像処理系が充実している機械学習ライブラリ。&lt;code&gt;cmake&lt;/code&gt;と&lt;code&gt;boost-python&lt;/code&gt;も同時にインストールします。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install libboost-python-dev cmake
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get -y install libboost-python-dev cmake
 $ conda install -y -c wordsforthewise dlib
 &lt;/code&gt;&lt;/pre&gt;
 
