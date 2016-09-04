@@ -815,6 +815,37 @@ client.change_resource_record_sets(
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install tightvncserver
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;h3 id=&#34;初回起動&#34;&gt;初回起動&lt;/h3&gt;
+
+&lt;p&gt;諸々設定ファイルを作成するため、一度起動します。&lt;br /&gt;
+初回起動時には、アクセスする際のパスワードが求められるので入力します。&lt;br /&gt;
+view-only のパスワードは特に必要ないので、&lt;code&gt;n&lt;/code&gt;を選択しました。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vncserver
+
+You will require a password to access your desktops.
+
+Password:
+Verify:
+Would you like to enter a view-only password (y/n)? n
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;以下のような起動メッセージが出ると思います。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;New &#39;X&#39; desktop is hostname:1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最後の数字 (ここでは1) がデスクトップ番号となるので覚えておきます。&lt;/p&gt;
+
+&lt;h3 id=&#34;停止&#34;&gt;停止&lt;/h3&gt;
+
+&lt;p&gt;以下のコマンドで停止します。&lt;br /&gt;
+最後にデスクトップ番号を指定します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vncserver -kill :1
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;h3 id=&#34;起動設定&#34;&gt;起動設定&lt;/h3&gt;
 
 &lt;p&gt;VNCサーバーからデスクトップを起動するように設定を行います。&lt;/p&gt;
@@ -836,30 +867,22 @@ xrdb $HOME/.Xresources
 lxsession -s LXDE &amp;amp;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;起動&#34;&gt;起動&lt;/h3&gt;
-
-&lt;p&gt;初回起動時には、アクセスする際のパスワードが求められるので入力します。&lt;br /&gt;
-view-only のパスワードは特に必要ないので、&lt;code&gt;n&lt;/code&gt;を選択しました。&lt;/p&gt;
+&lt;h3 id=&#34;再度起動&#34;&gt;再度起動&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vncserver
-
-You will require a password to access your desktops.
-
-Password:
-Verify:
-Would you like to enter a view-only password (y/n)? n
-...
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;アクセス&#34;&gt;アクセス&lt;/h3&gt;
 
 &lt;p&gt;MacのFinderから&lt;code&gt;移動&lt;/code&gt; &amp;gt; &lt;code&gt;サーバーへ接続&lt;/code&gt;で、VNCクライアントを起動します。&lt;br /&gt;
-アドレスバーには&lt;code&gt;vnc://[サーバーのIPアドレス]:5901&lt;/code&gt;を入力してください。
+アドレスバーには&lt;code&gt;vnc://[サーバーのIPアドレス]:5901&lt;/code&gt;を入力してください。&lt;br /&gt;
+正確には、ポート番号は5900 + デスクトップ番号となるので、環境によって変えてください。&lt;/p&gt;
+
 &lt;figure&gt;
   &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/22/ubuntu-tightvnc-server//vnc_client.png&#34;/&gt;
   
 &lt;/figure&gt;
-&lt;/p&gt;
+
 
 &lt;p&gt;パスワードによる認証の後、リモートデスクトップにアクセスできます。&lt;/p&gt;
 
@@ -869,9 +892,9 @@ Would you like to enter a view-only password (y/n)? n
 &lt;/figure&gt;
 
 
-&lt;h3 id=&#34;停止&#34;&gt;停止&lt;/h3&gt;
+&lt;h3 id=&#34;再度停止&#34;&gt;再度停止&lt;/h3&gt;
 
-&lt;p&gt;以下のコマンドで停止します。&lt;/p&gt;
+&lt;p&gt;自動起動の設定を行うため、再度停止します。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vncserver -kill :1
 &lt;/code&gt;&lt;/pre&gt;
@@ -908,9 +931,10 @@ WantedBy=multi-user.target
 $ sudo systemctl enable vncserver@1.service
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;起動-1&#34;&gt;起動&lt;/h4&gt;
+&lt;h4 id=&#34;起動&#34;&gt;起動&lt;/h4&gt;
 
-&lt;p&gt;以下のコマンドで手動で起動できるようになります。&lt;/p&gt;
+&lt;p&gt;以下のコマンドで手動で起動できるようになります。&lt;br /&gt;
+&lt;code&gt;@&lt;/code&gt;以下がデスクトップ番号です。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo systemctl start vncserver@1
 &lt;/code&gt;&lt;/pre&gt;

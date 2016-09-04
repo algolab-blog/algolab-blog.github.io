@@ -129,6 +129,37 @@
 <pre><code class="language-sh">$ sudo apt-get install tightvncserver
 </code></pre>
 
+<h3 id="初回起動">初回起動</h3>
+
+<p>諸々設定ファイルを作成するため、一度起動します。<br />
+初回起動時には、アクセスする際のパスワードが求められるので入力します。<br />
+view-only のパスワードは特に必要ないので、<code>n</code>を選択しました。</p>
+
+<pre><code class="language-sh">$ vncserver
+
+You will require a password to access your desktops.
+
+Password:
+Verify:
+Would you like to enter a view-only password (y/n)? n
+...
+</code></pre>
+
+<p>以下のような起動メッセージが出ると思います。</p>
+
+<pre><code class="language-sh">New 'X' desktop is hostname:1
+</code></pre>
+
+<p>最後の数字 (ここでは1) がデスクトップ番号となるので覚えておきます。</p>
+
+<h3 id="停止">停止</h3>
+
+<p>以下のコマンドで停止します。<br />
+最後にデスクトップ番号を指定します。</p>
+
+<pre><code class="language-sh">$ vncserver -kill :1
+</code></pre>
+
 <h3 id="起動設定">起動設定</h3>
 
 <p>VNCサーバーからデスクトップを起動するように設定を行います。</p>
@@ -150,30 +181,22 @@ xrdb $HOME/.Xresources
 lxsession -s LXDE &amp;
 </code></pre>
 
-<h3 id="起動">起動</h3>
-
-<p>初回起動時には、アクセスする際のパスワードが求められるので入力します。<br />
-view-only のパスワードは特に必要ないので、<code>n</code>を選択しました。</p>
+<h3 id="再度起動">再度起動</h3>
 
 <pre><code class="language-sh">$ vncserver
-
-You will require a password to access your desktops.
-
-Password:
-Verify:
-Would you like to enter a view-only password (y/n)? n
-...
 </code></pre>
 
 <h3 id="アクセス">アクセス</h3>
 
 <p>MacのFinderから<code>移動</code> &gt; <code>サーバーへ接続</code>で、VNCクライアントを起動します。<br />
-アドレスバーには<code>vnc://[サーバーのIPアドレス]:5901</code>を入力してください。
+アドレスバーには<code>vnc://[サーバーのIPアドレス]:5901</code>を入力してください。<br />
+正確には、ポート番号は5900 + デスクトップ番号となるので、環境によって変えてください。</p>
+
 <figure>
   <img src="/images//post/2016/08/22/ubuntu-tightvnc-server//vnc_client.png"/>
   
 </figure>
-</p>
+
 
 <p>パスワードによる認証の後、リモートデスクトップにアクセスできます。</p>
 
@@ -183,9 +206,9 @@ Would you like to enter a view-only password (y/n)? n
 </figure>
 
 
-<h3 id="停止">停止</h3>
+<h3 id="再度停止">再度停止</h3>
 
-<p>以下のコマンドで停止します。</p>
+<p>自動起動の設定を行うため、再度停止します。</p>
 
 <pre><code class="language-sh">$ vncserver -kill :1
 </code></pre>
@@ -222,9 +245,10 @@ WantedBy=multi-user.target
 $ sudo systemctl enable vncserver@1.service
 </code></pre>
 
-<h4 id="起動-1">起動</h4>
+<h4 id="起動">起動</h4>
 
-<p>以下のコマンドで手動で起動できるようになります。</p>
+<p>以下のコマンドで手動で起動できるようになります。<br />
+<code>@</code>以下がデスクトップ番号です。</p>
 
 <pre><code class="language-sh">$ sudo systemctl start vncserver@1
 </code></pre>
