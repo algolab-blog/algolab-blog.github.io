@@ -6,8 +6,78 @@
     <description>Recent content in Ios on ALGO GEEKS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Tue, 16 Aug 2016 19:34:57 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 07 Sep 2016 16:52:58 +0900</lastBuildDate>
     <atom:link href="http://blog.algolab.jp/tags/ios/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>無料で最速にD-U-N-S® Numberを取得する 〜東京商工リサーチで照会〜</title>
+      <link>http://blog.algolab.jp/post/2016/09/07/duns/</link>
+      <pubDate>Wed, 07 Sep 2016 16:52:58 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/09/07/duns/</guid>
+      <description>
+
+&lt;p&gt;Apple Developer Program の法人登録の際に D-U-N-S® Number が必要になりますが、&lt;a href=&#34;https://developer.apple.com/support/D-U-N-S/&#34;&gt;公式&lt;/a&gt; が紹介している方法だと時間がかかり、かつ、やり取りが英語のため面倒です。&lt;/p&gt;
+
+&lt;p&gt;国内企業であれば、東京商工リサーチ経由で、無料、かつ、最速で当日中に取得することができます。&lt;/p&gt;
+
+&lt;p&gt;ここではその手順をまとめます。&lt;/p&gt;
+
+&lt;h2 id=&#34;アクセス&#34;&gt;アクセス&lt;/h2&gt;
+
+&lt;p&gt;下記のページへアクセスし、&lt;code&gt;D-U-N-S® Number検索&lt;/code&gt;をクリックします。&lt;br /&gt;
+&lt;a href=&#34;https://duns-number-jp.dnb.com/search/jpn/login.asp&#34;&gt;https://duns-number-jp.dnb.com/search/jpn/login.asp&lt;/a&gt;&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/09/07/duns//duns_1.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;h2 id=&#34;検索&#34;&gt;検索&lt;/h2&gt;
+
+&lt;p&gt;企業名（日本語）に自社の名前を入れて&lt;code&gt;検索&lt;/code&gt;をクリックします。&lt;br /&gt;
+注意書にもあるように、株式会社等の法人格は除いて入力する必要があります。&lt;br /&gt;
+また、商号変更を行っている際は、最初に登記した時点での名前を入力してください。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/09/07/duns//duns_2.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;h2 id=&#34;検索結果&#34;&gt;検索結果&lt;/h2&gt;
+
+&lt;p&gt;検索で見つかったら、青色の&lt;code&gt;DUNS&lt;/code&gt;ボタンをクリックします。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/09/07/duns//duns_3.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;h2 id=&#34;使用許諾&#34;&gt;使用許諾&lt;/h2&gt;
+
+&lt;p&gt;使用許諾書に同意します。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/09/07/duns//duns_4.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;h2 id=&#34;照会申し込みフォーム&#34;&gt;照会申し込みフォーム&lt;/h2&gt;
+
+&lt;p&gt;申し込みフォームへ必要事項を記入のうえ、&lt;code&gt;確認&lt;/code&gt;-&amp;gt;&lt;code&gt;送信&lt;/code&gt;をクリックすれば完了です。&lt;br /&gt;
+筆者の場合は数時間以内にメールにて回答いただきました。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/09/07/duns//duns_5.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+</description>
+    </item>
     
     <item>
       <title>iOSで音声認識 〜Speech Frameworkを試す〜</title>
