@@ -22,6 +22,15 @@
 
 &lt;p&gt;前回はRaspberry PiからAVS (Alexa Voice Services) を使ってみましたが、今回は、Alexa Skills Kitを使ってみたいと思います。&lt;/p&gt;
 
+&lt;h2 id=&#34;完成したもの&#34;&gt;完成したもの&lt;/h2&gt;
+
+&lt;p&gt;Alexaが自分の好みの色を覚えてくれるようになりました。
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//www.youtube.com/embed/HAOPIuFDdik&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; allowfullscreen frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+&lt;/p&gt;
+
 &lt;h2 id=&#34;alexa-skill-kitとは&#34;&gt;Alexa Skill Kitとは&lt;/h2&gt;
 
 &lt;p&gt;AVSには好みの機能を追加できるSkillという機能があり、「カスタムスキル」と「スマートホームスキル」の2種類を登録することができます。&lt;/p&gt;
@@ -110,7 +119,9 @@ Alexa SkillsはLambdaファンクション上で実行されるので、AWS Lamb
 &lt;/figure&gt;
 
 
-&lt;p&gt;トリガーのテスト画面になります。念のため&lt;code&gt;Test&lt;/code&gt;をクリックすると、デフォルトのテストであるAlexa Start Sessionが走ります。実行結果がSuceededとなること、ログ出力に先ほどのLambda function codeの出力結果が表示されていればOKです。&lt;/p&gt;
+&lt;p&gt;トリガーのテスト画面になります。
+&lt;code&gt;Test&lt;/code&gt;をクリック &amp;rarr; &lt;code&gt;Alexa Start Session&lt;/code&gt;を選択 &amp;rarr; &lt;code&gt;save and test&lt;/code&gt;をクリックと進むとTestが走ります。
+実行結果がSuceededとなること、ログ出力に先ほどのLambda function codeの出力結果が表示されていればOKです。&lt;/p&gt;
 
 &lt;figure&gt;
   &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-5.png&#34;/&gt;

@@ -105,6 +105,15 @@
 
 <p>前回はRaspberry PiからAVS (Alexa Voice Services) を使ってみましたが、今回は、Alexa Skills Kitを使ってみたいと思います。</p>
 
+<h2 id="完成したもの">完成したもの</h2>
+
+<p>Alexaが自分の好みの色を覚えてくれるようになりました。
+
+<div style="position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;">
+  <iframe src="//www.youtube.com/embed/HAOPIuFDdik" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" allowfullscreen frameborder="0"></iframe>
+ </div>
+</p>
+
 <h2 id="alexa-skill-kitとは">Alexa Skill Kitとは</h2>
 
 <p>AVSには好みの機能を追加できるSkillという機能があり、「カスタムスキル」と「スマートホームスキル」の2種類を登録することができます。</p>
@@ -193,7 +202,9 @@ Alexa SkillsはLambdaファンクション上で実行されるので、AWS Lamb
 </figure>
 
 
-<p>トリガーのテスト画面になります。念のため<code>Test</code>をクリックすると、デフォルトのテストであるAlexa Start Sessionが走ります。実行結果がSuceededとなること、ログ出力に先ほどのLambda function codeの出力結果が表示されていればOKです。</p>
+<p>トリガーのテスト画面になります。
+<code>Test</code>をクリック &rarr; <code>Alexa Start Session</code>を選択 &rarr; <code>save and test</code>をクリックと進むとTestが走ります。
+実行結果がSuceededとなること、ログ出力に先ほどのLambda function codeの出力結果が表示されていればOKです。</p>
 
 <figure>
   <img src="/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-5.png"/>
