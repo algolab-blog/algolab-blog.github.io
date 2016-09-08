@@ -5,14 +5,14 @@
   <title>
     
     
-      iOSで音声認識 〜Speech Frameworkを試す〜
+      データサイエンスLT祭り 資料まとめ
     
     &nbsp;|&nbsp;ALGO GEEKS
   </title>
 
   <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1" />
   <meta name="google-site-verification" content="DmTgCYn-qNNekSNxji7FGHMXvq3_4vrKm3pkvI9llLo" />
-  <link rel="canonical" href="http://blog.algolab.jp/post/2016/08/16/speech-framework/"/>
+  <link rel="canonical" href="http://blog.algolab.jp/post/2016/09/08/dslt/"/>
 
   <link rel="stylesheet" href="/css/sanitize.css" />
   <link rel="stylesheet" href="/css/responsive.css" />
@@ -59,19 +59,17 @@
   
   <main id="single" role="main">
     <div class="article-header">
-      <h1>iOSで音声認識 〜Speech Frameworkを試す〜</h1>
+      <h1>データサイエンスLT祭り 資料まとめ</h1>
       
 
 <div class="meta">
   
-    <span>2016/08/16</span>
+    <span>2016/09/08</span>
   
   
     <span>|</span>
     
-      <a href="/tags/speech-recognition">#音声認識</a>&nbsp;
-    
-      <a href="/tags/ios">#iOS</a>&nbsp;
+      <a href="/tags/study-session">#勉強会</a>&nbsp;
     
   
   
@@ -98,68 +96,72 @@
 
       
 
-<p>2016/08/16現在、まだβ版という位置づけですが、Apple謹製の音声認識エンジン (Speech Framework) が公開されています。今回は、下記のサンプルコードを動作させてみます。
-<a href="https://developer.apple.com/library/prerelease/content/samplecode/SpeakToMe/Introduction/Intro.html">https://developer.apple.com/library/prerelease/content/samplecode/SpeakToMe/Introduction/Intro.html</a></p>
+<p>「データサイエンスLT祭り」の資料を確認できたものから随時まとめていきます。<br />
+<a href="http://data-science-lt.connpass.com/event/35289/">http://data-science-lt.connpass.com/event/35289/</a><br />
+<a href="http://data-science-lt.connpass.com/event/35412/">http://data-science-lt.connpass.com/event/35412/</a></p>
 
-<p>動作を確認するにはXcode 8.0以降、iOS 10.0 以降が必要なので、環境を整えるところから始めます。</p>
+<h2 id="rise-jupyter-notebookでお手軽スライド作成-hugoshortcode-1">RISE: Jupyter Notebookでお手軽スライド作成 / <a href="https://twitter.com/sfchaos">@sfchaos</a>
+</h2>
 
-<h2 id="apple-developer-program-へ登録">Apple Developer Program へ登録</h2>
+<p><a href="https://github.com/sfchaos/dslt20160907">https://github.com/sfchaos/dslt20160907</a></p>
 
-<p>諸々インストールするためには、Developer登録が必須なので、以下より登録を行います。
-<a href="https://developer.apple.com/programs/jp/">https://developer.apple.com/programs/jp/</a></p>
+<h2 id="low-bias-high-varianceとfilter-bubbleな私-hugoshortcode-2">Low Bias High VarianceとFilter Bubbleな私 / <a href="https://twitter.com/tetsuroito">@tetsuroito</a>
+</h2>
 
-<h2 id="xcode-8-betaをmacにインストール">Xcode 8 betaをMacにインストール</h2>
+<script async class='speakerdeck-embed' data-id='050358760ef54eaea5de43bde2dd18c8' data-ratio='1.33333333333333' src='//speakerdeck.com/assets/embed.js'></script>
 
-<p>Macから下記ページへアクセスし、Xcode 8 betaをダウンロード、インストールします。<br />
-<a href="https://developer.apple.com/download/">https://developer.apple.com/download/</a></p>
+<h2 id="実務家のためのデータサイエンス速習法-hugoshortcode-4">実務家のためのデータサイエンス速習法 / <a href="https://twitter.com/shakezo_">@shakezo_</a>
+</h2>
 
-<h2 id="ios-10-betaをiphone-にインストール">iOS 10 betaをiPhone にインストール</h2>
+<h2 id="面倒くさいこと考えたくないあなたへ-tpotと機械学習-hugoshortcode-5">面倒くさいこと考えたくないあなたへ〜TPOTと機械学習〜 / <a href="https://twitter.com/tereka114">@tereka114</a>
+</h2>
 
-<p>iPhoneか下記ページへアクセスし、iOS 10 betaをダウンロード、インストールします。<br />
-<a href="https://developer.apple.com/download/">https://developer.apple.com/download/</a></p>
-
-<h2 id="サンプルコードをダウンロード">サンプルコードをダウンロード</h2>
-
-<p>下記ページより、サンプルコードをダウンロードします。
-<a href="https://developer.apple.com/library/prerelease/content/samplecode/SpeakToMe/Introduction/Intro.html">https://developer.apple.com/library/prerelease/content/samplecode/SpeakToMe/Introduction/Intro.html</a></p>
-
-<figure>
-  <img src="/images//post/2016/08/16/speech-framework//speak_to_me.png"/>
-  
-</figure>
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/xKDz487fnppbKk" class="slideshare" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
 
 
-<h2 id="署名の確認">署名の確認</h2>
+<h2 id="ご注文はスパムですか-hugoshortcode-7">ご注文はスパムですか / <a href="https://twitter.com/k66dango">@k66dango</a>
+</h2>
 
-<p>サンプルコードを開き、<code>TARGETS -&gt; General -&gt; Signing</code>にDeveloper登録を行っているTeamが選択されているか確認します。
-(ここが正しく設定されていないと実機でのビルドに失敗します)</p>
+<h2 id="データ分析者だけどリアルタイム分析がしたい-hugoshortcode-8">データ分析者だけどリアルタイム分析がしたい / <a href="https://twitter.com/kos59125">@kos59125</a>
+</h2>
 
-<h2 id="日本語対応">日本語対応</h2>
+<p><a href="https://docs.com/kos59125/2122?c=Tqf7Mh">https://docs.com/kos59125/2122?c=Tqf7Mh</a></p>
 
-<p><code>ViewController.swift</code>の15行目、言語指定のコードを<code>en-US</code>から<code>ja-JP</code>に書き換えます。</p>
+<h2 id="チャンプがやまかすを一撃する方法-hugoshortcode-9">チャンプがやまかすを一撃する方法 / <a href="https://twitter.com/millionsmile">@millionsmile</a>
+</h2>
 
-<pre><code class="language-swift">private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: &quot;ja-JP&quot;))!
-</code></pre>
+<h2 id="階層ベイズモデルで割安mobile-pcを探す-hugoshortcode-10">階層ベイズモデルで割安mobile PCを探す / <a href="https://twitter.com/berobero11">@berobero11</a>
+</h2>
 
-<h2 id="認識精度を確認">認識精度を確認</h2>
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/kOMYOJ6KywOYC8" class="slideshare" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
 
-<p>実機で動作させ、認識精度を確認してみます。まず、「吾輩は猫である」を認識させてみます。</p>
 
-<blockquote>
-<p>吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。</p>
-</blockquote>
+<h2 id="サラリーマンのための計算社会科学-hugoshortcode-12">サラリーマンのための計算社会科学 / <a href="https://twitter.com/mtknnktm">@mtknnktm</a>
+</h2>
 
-<p>認識結果がこちら。</p>
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/41adcDWlVcTicj" class="slideshare" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
 
-<blockquote>
-<p>吾輩は猫である。名前はまだない。どこで生まれたかとんと見当がつかん。何でも薄暗いじめじめした所でニャンニャン泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。</p>
-</blockquote>
 
-<p>ほぼ正解と言っていい認識精度です。ここまで精度が高いとは正直驚きです。</p>
+<h2 id="aucが0-01改善したってどういうことですか-hugoshortcode-14">AUCが0.01改善したってどういうことですか？ / <a href="https://twitter.com/Kenmatsu4">@Kenmatsu4</a>
+</h2>
 
-<h2 id="次回予告">次回予告</h2>
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/8zufiekGQcGspR" class="slideshare" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
 
-<p>次回はサンプルコードの中身を追ってみようと思います。</p>
+
+<h2 id="特徴量抽出するつもりが-夜な夜なクリーチャーを生み出してしまっている話-hugoshortcode-16">特徴量抽出するつもりが、夜な夜なクリーチャーを生み出してしまっている話 / <a href="https://twitter.com/Ryosuke0624">@Ryosuke0624</a>
+</h2>
+
+<h2 id="初心者向けに機械学習のハンズオンセミナーをしてみてわかったこと-hugoshortcode-17">初心者向けに機械学習のハンズオンセミナーをしてみてわかったこと / <a href="https://twitter.com/__john__smith__">@__john__smith__</a>
+</h2>
+
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/ji3tlWlYjusRKp" class="slideshare" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+
+
+<h2 id="reproducebility-100倍-dockerマン-hugoshortcode-19">Reproducebility 100倍 Dockerマン / <a href="https://twitter.com/teramonagi">@teramonagi</a>
+</h2>
+
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/lopySOx7zWRxHf" class="slideshare" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+
 
       
   <div id="share-this">
@@ -208,10 +210,8 @@
   
   <nav class="pagination-single">
     
-      <span class="previous">&larr; <a href="http://blog.algolab.jp/post/2016/08/16/calendar-report/" rel="prev">Googleカレンダー解析ツール作りました 〜時間の使い方チェッカー〜</a></span>
+      <span class="previous">&larr; <a href="http://blog.algolab.jp/post/2016/09/07/duns/" rel="prev">無料で最速にD-U-N-S® Numberを取得する 〜東京商工リサーチで照会〜</a></span>
     
-    
-      <span class="next"><a href="http://blog.algolab.jp/post/2016/08/18/telephone-appointment-simulation-bot/" rel="next">テレアポ模擬トレーニングBot 〜コミュニケーション教育ツールとしてのチャットボットの活用可能性〜</a> &rarr;</span>
     
   </nav>
   
