@@ -115,7 +115,7 @@
 
 <p>筆者の機械学習系のPython開発環境は、<a href="https://www.vagrantup.com/">Vagrant</a> を用いた <a href="https://atlas.hashicorp.com/bento/boxes/ubuntu-16.04">Ubuntu (16.04 LTS)</a> 上に構築しています。<br />
 ここでは、画像認識、音声認識、自然言語処理などに必要な環境をオールインワンで構築する手順をまとめます。<br />
-(最終更新日: 2016/09/08)</p>
+(最終更新日: 2016/09/10)</p>
 
 <h2 id="osバージョン">OSバージョン</h2>
 
@@ -282,10 +282,18 @@ $ conda install -y -c wordsforthewise dlib
 
 <p><a href="https://ffmpeg.org/">https://ffmpeg.org/</a></p>
 
-<p>音声・動画処理ライブラリ。Ubuntu16.04から本体は<code>apt-get</code>で入るようになりました。</p>
+<p>音声・動画処理ライブラリ。</p>
 
-<pre><code class="language-sh">$ sudo apt install -y ffmpeg
-$ pip install ffmpy
+<pre><code class="language-sh">$ conda install -y -c conda-forge ffmpeg
+</code></pre>
+
+<h3 id="librosa">librosa</h3>
+
+<p><a href="https://github.com/librosa/librosa">https://github.com/librosa/librosa</a></p>
+
+<p>音声・音楽解析ライブラリ。</p>
+
+<pre><code class="language-sh">$ conda install -y -c conda-forge librosa
 </code></pre>
 
 <h2 id="自然言語処理">自然言語処理</h2>
