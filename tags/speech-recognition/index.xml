@@ -6,8 +6,182 @@
     <description>Recent content in Speech Recognition on ALGO GEEKS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 31 Aug 2016 14:39:10 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 13 Sep 2016 20:00:03 +0900</lastBuildDate>
     <atom:link href="http://blog.algolab.jp/tags/speech-recognition/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>重み付き有限状態トランスデューサ (WFST) をOpenFstで作成する</title>
+      <link>http://blog.algolab.jp/post/2016/09/13/openfst/</link>
+      <pubDate>Tue, 13 Sep 2016 20:00:03 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/09/13/openfst/</guid>
+      <description>
+
+&lt;p&gt;音声認識などの分野では、重み付き有限状態トランスデューサ (WFST) が今でも広く用いられています。&lt;br /&gt;
+ここではOpenFstを用いて簡単なサンプルを作成してみます。&lt;br /&gt;
+&lt;a href=&#34;http://www.openfst.org&#34;&gt;http://www.openfst.org&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;有限状態トランスデューサ-fst-finite-state-transducer&#34;&gt;有限状態トランスデューサ (FST: Finite-State Transducer)&lt;/h2&gt;
+
+&lt;p&gt;FSTというと一見小難しいですが、簡単に言えば、入力記号列に対して出力記号列を返す変換器です。&lt;br /&gt;
+一番単純な例からみてみましょう。下図をご覧ください。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/09/13/openfst//fst_1.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;これは&lt;code&gt;a&lt;/code&gt;の入力に対して&lt;code&gt;A&lt;/code&gt;を返すFSTです。詳しく見ていきます。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/09/13/openfst//fst_2.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;まず、初期状態から始まり、最終状態に遷移できたもののみ出力を行う、という制約があります。&lt;br /&gt;
+そして、遷移の条件が&lt;code&gt;入力:出力&lt;/code&gt;という形で表現されます。&lt;br /&gt;
+上記の例では&lt;code&gt;a&lt;/code&gt;以外の入力は受け付けないこととなります。&lt;/p&gt;
+
+&lt;p&gt;少し複雑になった例をみてみましょう。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/09/13/openfst//fst_3.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;これは&lt;code&gt;ab&lt;/code&gt;の入力に対して&lt;code&gt;AB&lt;/code&gt;を、&lt;code&gt;ba&lt;/code&gt;の入力に対して&lt;code&gt;BA&lt;/code&gt;を出力します。&lt;br /&gt;
+例えば、&lt;code&gt;ab&lt;/code&gt;の入力に対しては、&lt;code&gt;0&lt;/code&gt; &amp;rarr; &lt;code&gt;1&lt;/code&gt; &amp;rarr; &lt;code&gt;2&lt;/code&gt; と遷移できるので、&lt;code&gt;AB&lt;/code&gt;を出力することになります。&lt;/p&gt;
+
+&lt;h2 id=&#34;重み付き有限状態トランスデューサ-wfst-weighted-finite-state-transducer&#34;&gt;重み付き有限状態トランスデューサ (WFST: Weighted Finite-State Transducer)&lt;/h2&gt;
+
+&lt;p&gt;FSTに重みを加えたものがWFSTとなります。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/09/13/openfst//wfst.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;&lt;code&gt;/&lt;/code&gt;以下の数値が重みを表し、WFSTは記号列と重みを出力します。&lt;br /&gt;
+例えば&lt;code&gt;ab&lt;/code&gt;の入力に対しては、&lt;code&gt;AB&lt;/code&gt;とともに重み&lt;code&gt;4.5 (= 0.5 + 1.5 + 3.0)&lt;/code&gt;を出力ことになります。&lt;/p&gt;
+
+&lt;h2 id=&#34;openfst&#34;&gt;OpenFst&lt;/h2&gt;
+
+&lt;p&gt;それではOpenFstを用いて実際にWFSTを作成してみましょう。&lt;/p&gt;
+
+&lt;h3 id=&#34;インストール&#34;&gt;インストール&lt;/h3&gt;
+
+&lt;p&gt;ダウンロード及びインストール方法については下記の公式ドキュメントをご参照ください。&lt;br /&gt;
+&lt;a href=&#34;http://www.openfst.org/twiki/bin/view/FST/FstDownload&#34;&gt;http://www.openfst.org/twiki/bin/view/FST/FstDownload&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;筆者の環境では、Kaldiの導入時に同時にインストールを行いました。&lt;br /&gt;
+&lt;a href=&#34;http://blog.algolab.jp/post/2016/08/31/kaldi/&#34;&gt;Kaldiで音声を学習させる 〜ディープラーニングを用いた音声認識ツールキット〜&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;以下のコマンドが叩ければ正常にインストールが完了しています。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ fstcompile --help
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;wfst作成&#34;&gt;WFST作成&lt;/h3&gt;
+
+&lt;p&gt;ここからは下記のリンクを参考に進めます。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.openfst.org/twiki/bin/view/FST/FstQuickTour&#34;&gt;http://www.openfst.org/twiki/bin/view/FST/FstQuickTour&lt;/a&gt;
+&lt;a href=&#34;http://kaldi-asr.org/doc/tutorial_looking.html&#34;&gt;http://kaldi-asr.org/doc/tutorial_looking.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;具体的には下図に示すWFSTを作成してみます。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/09/13/openfst//binary.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;FSTファイルはテキストで表現できます。下記のように定義していきます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# arc format: src dest ilabel olabel [weight]
+# final state format: state [weight]
+# lines may occur in any order except initial state must be first line
+# unspecified weights default to 0.0 (for the library-default Weight type)
+$ cat &amp;gt;text.fst &amp;lt;&amp;lt;EOF
+0 1 a x .5
+0 1 b y 1.5
+1 2 c z 2.5
+2 3.5
+EOF
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;入力記号列は内部的には数値で表現するため、その定義を行います。&lt;code&gt;&amp;lt;eps&amp;gt;&lt;/code&gt;は空を表します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cat &amp;gt;isyms.txt &amp;lt;&amp;lt;EOF
+&amp;lt;eps&amp;gt; 0
+a 1
+b 2
+c 3
+EOF
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;同様に出力記号列の定義も行います。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cat &amp;gt;osyms.txt &amp;lt;&amp;lt;EOF
+&amp;lt;eps&amp;gt; 0
+x 1
+y 2
+z 3
+EOF
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;バイナリ形式にコンパイルします。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ fstcompile --isymbols=isyms.txt --osymbols=osyms.txt text.fst binary.fst
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これでWFSTが作成できました。&lt;/p&gt;
+
+&lt;h3 id=&#34;wfstの演算&#34;&gt;WFSTの演算&lt;/h3&gt;
+
+&lt;p&gt;上記は簡単な例ですが、様々なモデルをWFSTで表現することができます。&lt;br /&gt;
+そして、WFST形式で表現すると、各種演算が可能になるというメリットがあります。&lt;/p&gt;
+
+&lt;p&gt;簡単な演算をしてみましょう。2つのWFSTを合成する演算してみます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ fstcompose binary.fst binary.fst binary2.fst
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;テキスト形式で確認してみます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ fstprint --isymbols=isyms.txt --osymbols=osyms.txt binary2.fst
+0 1 a x 1
+0 1 b y 3
+1 2 c z 5
+2 7
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;元に比べて重みが倍になっていることがわかります。&lt;br /&gt;
+また、&lt;a href=&#34;http://www.graphviz.org&#34;&gt;Graphviz&lt;/a&gt; で操作可能なdot形式で出力することもできます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ fstdraw --isymbols=isyms.txt --osymbols=osyms.txt binary2.fst binary2.dot
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Graphvizがインストールされている場合は、下記コマンドでpngに形式に出力することができます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ dot -Tpng binary2.dot &amp;gt; binary2.png
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;以下の画像が出力されました。
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/09/13/openfst//binary2.png&#34;/&gt;
+  
+&lt;/figure&gt;
+&lt;/p&gt;
+
+&lt;p&gt;その他詳しい操作については公式ドキュメントをご参照ください。&lt;br /&gt;
+&lt;a href=&#34;http://www.openfst.org/&#34;&gt;http://www.openfst.org/&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Kaldiで音声を学習させる 〜ディープラーニングを用いた音声認識ツールキット〜</title>

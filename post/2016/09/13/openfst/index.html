@@ -5,14 +5,14 @@
   <title>
     
     
-      超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜導入編〜
+      重み付き有限状態トランスデューサ (WFST) をOpenFstで作成する
     
     &nbsp;|&nbsp;ALGO GEEKS
   </title>
 
   <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1" />
   <meta name="google-site-verification" content="DmTgCYn-qNNekSNxji7FGHMXvq3_4vrKm3pkvI9llLo" />
-  <link rel="canonical" href="http://blog.algolab.jp/post/2016/08/01/tf-dqn-simple-1/"/>
+  <link rel="canonical" href="http://blog.algolab.jp/post/2016/09/13/openfst/"/>
 
   <link rel="stylesheet" href="/css/sanitize.css" />
   <link rel="stylesheet" href="/css/responsive.css" />
@@ -60,21 +60,19 @@
   
   <main id="single" role="main">
     <div class="article-header">
-      <h1>超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜導入編〜</h1>
+      <h1>重み付き有限状態トランスデューサ (WFST) をOpenFstで作成する</h1>
       
 
 <div class="meta">
   
-    <span>2016/08/01</span>
+    <span>2016/09/13</span>
   
   
     <span>|</span>
     
-      <a href="/tags/reinforcement-learning">#強化学習</a>&nbsp;
+      <a href="/tags/speech-recognition">#音声認識</a>&nbsp;
     
-      <a href="/tags/dqn">#DQN</a>&nbsp;
-    
-      <a href="/tags/tensorflow">#TensorFlow</a>&nbsp;
+      <a href="/tags/openfst">#OpenFst</a>&nbsp;
     
   
   
@@ -101,92 +99,169 @@
 
       
 
-<p>みなさん、DQNしてますか？<br />
-DQNについては、下記の記事によくまとめられており、実装してみようとした方も多いのではないでしょうか。</p>
+<p>音声認識などの分野では、重み付き有限状態トランスデューサ (WFST) が今でも広く用いられています。<br />
+ここではOpenFstを用いて簡単なサンプルを作成してみます。<br />
+<a href="http://www.openfst.org">http://www.openfst.org</a></p>
 
-<ul>
-<li><a href="http://qiita.com/Ugo-Nama/items/08c6a5f6a571335972d5">DQNの生い立ち　＋　Deep Q-NetworkをChainerで書いた</a><br /></li>
-<li><a href="http://qiita.com/icoxfog417/items/242439ecd1a477ece312">ゼロからDeepまで学ぶ強化学習</a><br /></li>
-</ul>
+<h2 id="有限状態トランスデューサ-fst-finite-state-transducer">有限状態トランスデューサ (FST: Finite-State Transducer)</h2>
 
-<p>しかし、いざ自力で動作させてみようとすると、こんな問題にぶち当たると思います。</p>
-
-<p>「学習時間なげえ。。。」</p>
-
-<p>DQNに限らず、ディープラーニングのモデルを学習させようとすると、平気で数日以上かかります。<br />
-そして、学習させたモデルが期待通りの動作をしなかったとしたら、もう投げ出したくなってしまいます。<br />
-(よくある話です)</p>
-
-<p>なので、筆者が新しいモデルを一から実装する際には、なるべく単純なモデル、データから始めるようにしています。</p>
-
-<p>ここでは、超シンプルなDQNを実装し、動作させてみることにします。<br />
-早速いってみましょう。CPUで3分もあれば学習が終わります！</p>
-
-<h2 id="まずは動かしてみよう">まずは動かしてみよう</h2>
+<p>FSTというと一見小難しいですが、簡単に言えば、入力記号列に対して出力記号列を返す変換器です。<br />
+一番単純な例からみてみましょう。下図をご覧ください。</p>
 
 <figure>
-  <img src="/images//post/2016/08/01/tf-dqn-simple-1//demo-catch_ball.gif"/>
+  <img src="/images//post/2016/09/13/openfst//fst_1.png"/>
   
 </figure>
 
 
-<h3 id="概要">概要</h3>
+<p>これは<code>a</code>の入力に対して<code>A</code>を返すFSTです。詳しく見ていきます。</p>
 
-<p>具体的には、上図のように上から落ちてくるボールをキャッチする、というタスクを学習させます。<br />
-TensorFlowで実装しており、ソースコードは下記に公開しています。<br />
-<a href="https://github.com/algolab-inc/tf-dqn-simple">https://github.com/algolab-inc/tf-dqn-simple</a></p>
+<figure>
+  <img src="/images//post/2016/09/13/openfst//fst_2.png"/>
+  
+</figure>
 
-<h3 id="環境構築">環境構築</h3>
 
-<p>はじめにソースコードをダウンロードします。</p>
+<p>まず、初期状態から始まり、最終状態に遷移できたもののみ出力を行う、という制約があります。<br />
+そして、遷移の条件が<code>入力:出力</code>という形で表現されます。<br />
+上記の例では<code>a</code>以外の入力は受け付けないこととなります。</p>
 
-<pre><code class="language-sh">$ git clone https://github.com/algolab-inc/tf-dqn-simple.git
+<p>少し複雑になった例をみてみましょう。</p>
+
+<figure>
+  <img src="/images//post/2016/09/13/openfst//fst_3.png"/>
+  
+</figure>
+
+
+<p>これは<code>ab</code>の入力に対して<code>AB</code>を、<code>ba</code>の入力に対して<code>BA</code>を出力します。<br />
+例えば、<code>ab</code>の入力に対しては、<code>0</code> &rarr; <code>1</code> &rarr; <code>2</code> と遷移できるので、<code>AB</code>を出力することになります。</p>
+
+<h2 id="重み付き有限状態トランスデューサ-wfst-weighted-finite-state-transducer">重み付き有限状態トランスデューサ (WFST: Weighted Finite-State Transducer)</h2>
+
+<p>FSTに重みを加えたものがWFSTとなります。</p>
+
+<figure>
+  <img src="/images//post/2016/09/13/openfst//wfst.png"/>
+  
+</figure>
+
+
+<p><code>/</code>以下の数値が重みを表し、WFSTは記号列と重みを出力します。<br />
+例えば<code>ab</code>の入力に対しては、<code>AB</code>とともに重み<code>4.5 (= 0.5 + 1.5 + 3.0)</code>を出力ことになります。</p>
+
+<h2 id="openfst">OpenFst</h2>
+
+<p>それではOpenFstを用いて実際にWFSTを作成してみましょう。</p>
+
+<h3 id="インストール">インストール</h3>
+
+<p>ダウンロード及びインストール方法については下記の公式ドキュメントをご参照ください。<br />
+<a href="http://www.openfst.org/twiki/bin/view/FST/FstDownload">http://www.openfst.org/twiki/bin/view/FST/FstDownload</a></p>
+
+<p>筆者の環境では、Kaldiの導入時に同時にインストールを行いました。<br />
+<a href="http://blog.algolab.jp/post/2016/08/31/kaldi/">Kaldiで音声を学習させる 〜ディープラーニングを用いた音声認識ツールキット〜</a></p>
+
+<p>以下のコマンドが叩ければ正常にインストールが完了しています。</p>
+
+<pre><code class="language-sh">$ fstcompile --help
 </code></pre>
 
-<p>次に、動作のためにTensorFlowとMatplotlibが必要なので、インストールします。</p>
+<h3 id="wfst作成">WFST作成</h3>
 
-<p>Tensorflowについては下記リンクを参照のうえインストールを行ってください。<br />
-<a href="https://www.tensorflow.org/versions/master/get_started/os_setup.html">https://www.tensorflow.org/versions/master/get_started/os_setup.html</a><br />
-(2016/08/01現在、Python3.5.2 + Tensorflow0.9.0での動作を確認しています)</p>
+<p>ここからは下記のリンクを参考に進めます。</p>
 
-<p>Matolotlibはpipでインストールします。</p>
+<p><a href="http://www.openfst.org/twiki/bin/view/FST/FstQuickTour">http://www.openfst.org/twiki/bin/view/FST/FstQuickTour</a>
+<a href="http://kaldi-asr.org/doc/tutorial_looking.html">http://kaldi-asr.org/doc/tutorial_looking.html</a></p>
 
-<pre><code class="language-sh">$ pip install matplotlib
+<p>具体的には下図に示すWFSTを作成してみます。</p>
+
+<figure>
+  <img src="/images//post/2016/09/13/openfst//binary.png"/>
+  
+</figure>
+
+
+<p>FSTファイルはテキストで表現できます。下記のように定義していきます。</p>
+
+<pre><code class="language-sh"># arc format: src dest ilabel olabel [weight]
+# final state format: state [weight]
+# lines may occur in any order except initial state must be first line
+# unspecified weights default to 0.0 (for the library-default Weight type)
+$ cat &gt;text.fst &lt;&lt;EOF
+0 1 a x .5
+0 1 b y 1.5
+1 2 c z 2.5
+2 3.5
+EOF
 </code></pre>
 
-<h3 id="学習">学習</h3>
+<p>入力記号列は内部的には数値で表現するため、その定義を行います。<code>&lt;eps&gt;</code>は空を表します。</p>
 
-<p>環境が整ったら、ソースコードのディレクトリに移動して、train.pyを叩くと学習が始まります。</p>
-
-<pre><code class="language-sh">$ cd tf-dqn-simple
-$ python train.py
+<pre><code class="language-sh">$ cat &gt;isyms.txt &lt;&lt;EOF
+&lt;eps&gt; 0
+a 1
+b 2
+c 3
+EOF
 </code></pre>
 
-<p>下記のようなログが出ていれば、正しく学習が行われています。</p>
+<p>同様に出力記号列の定義も行います。</p>
 
-<blockquote>
-<p>EPOCH: 000/999 | WIN: 001 | LOSS: 0.0068 | Q_MAX: 0.0008<br />
-EPOCH: 001/999 | WIN: 002 | LOSS: 0.0447 | Q_MAX: 0.0013<br />
-&hellip;</p>
-</blockquote>
-
-<p>数分ほどで学習が終わったかと思います。<br />
-では学習したモデルでテストしてみましょう。</p>
-
-<pre><code class="language-sh">$ python test.py
+<pre><code class="language-sh">$ cat &gt;osyms.txt &lt;&lt;EOF
+&lt;eps&gt; 0
+x 1
+y 2
+z 3
+EOF
 </code></pre>
 
-<blockquote>
-<p>WIN: 001/001 (100.0%)<br />
-WIN: 002/002 (100.0%)<br />
-&hellip;</p>
-</blockquote>
+<p>バイナリ形式にコンパイルします。</p>
 
-<p>キャッチボールのアニメーションとともに、上記のようなログが出れば成功です。<br />
-きちんと動作しましたでしょうか？<br />
-学習がうまくいっていれば、おそらく100%でキャッチできていると思います。</p>
+<pre><code class="language-sh">$ fstcompile --isymbols=isyms.txt --osymbols=osyms.txt text.fst binary.fst
+</code></pre>
 
-<p>次回は、実装編についてお届けします。</p>
+<p>これでWFSTが作成できました。</p>
+
+<h3 id="wfstの演算">WFSTの演算</h3>
+
+<p>上記は簡単な例ですが、様々なモデルをWFSTで表現することができます。<br />
+そして、WFST形式で表現すると、各種演算が可能になるというメリットがあります。</p>
+
+<p>簡単な演算をしてみましょう。2つのWFSTを合成する演算してみます。</p>
+
+<pre><code class="language-sh">$ fstcompose binary.fst binary.fst binary2.fst
+</code></pre>
+
+<p>テキスト形式で確認してみます。</p>
+
+<pre><code class="language-sh">$ fstprint --isymbols=isyms.txt --osymbols=osyms.txt binary2.fst
+0 1 a x 1
+0 1 b y 3
+1 2 c z 5
+2 7
+</code></pre>
+
+<p>元に比べて重みが倍になっていることがわかります。<br />
+また、<a href="http://www.graphviz.org">Graphviz</a> で操作可能なdot形式で出力することもできます。</p>
+
+<pre><code class="language-sh">$ fstdraw --isymbols=isyms.txt --osymbols=osyms.txt binary2.fst binary2.dot
+</code></pre>
+
+<p>Graphvizがインストールされている場合は、下記コマンドでpngに形式に出力することができます。</p>
+
+<pre><code class="language-sh">$ dot -Tpng binary2.dot &gt; binary2.png
+</code></pre>
+
+<p>以下の画像が出力されました。
+<figure>
+  <img src="/images//post/2016/09/13/openfst//binary2.png"/>
+  
+</figure>
+</p>
+
+<p>その他詳しい操作については公式ドキュメントをご参照ください。<br />
+<a href="http://www.openfst.org/">http://www.openfst.org/</a></p>
 
       
   <div id="share-this">
@@ -235,10 +310,8 @@ WIN: 002/002 (100.0%)<br />
   
   <nav class="pagination-single">
     
-      <span class="previous">&larr; <a href="http://blog.algolab.jp/post/2016/08/01/ai-training-kick-off/" rel="prev">AIトレーニングキックオフ 〜ハムケツを認識したい〜</a></span>
+      <span class="previous">&larr; <a href="http://blog.algolab.jp/post/2016/09/08/dslt/" rel="prev">データサイエンスLT祭り 資料まとめ</a></span>
     
-    
-      <span class="next"><a href="http://blog.algolab.jp/post/2016/08/03/torch-aws-gpu-ubuntu/" rel="next">TorchをAWSのGPUインスタンス (Ubuntu 14.04) で動かす</a> &rarr;</span>
     
   </nav>
   
