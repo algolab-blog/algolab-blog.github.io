@@ -80,7 +80,7 @@
 &lt;p&gt;筆者の環境では、Kaldiの導入時に同時にインストールを行いました。&lt;br /&gt;
 &lt;a href=&#34;http://blog.algolab.jp/post/2016/08/31/kaldi/&#34;&gt;Kaldiで音声を学習させる 〜ディープラーニングを用いた音声認識ツールキット〜&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;以下のコマンドが叩ければ正常にインストールが完了しています。&lt;/p&gt;
+&lt;p&gt;以下のコマンドが叩ければ、WFST作成に進むことができます。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ fstcompile --help
 &lt;/code&gt;&lt;/pre&gt;
