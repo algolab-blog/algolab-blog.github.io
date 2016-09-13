@@ -87,9 +87,8 @@
 
 &lt;h3 id=&#34;wfst作成&#34;&gt;WFST作成&lt;/h3&gt;
 
-&lt;p&gt;ここからは下記のリンクを参考に進めます。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://www.openfst.org/twiki/bin/view/FST/FstQuickTour&#34;&gt;http://www.openfst.org/twiki/bin/view/FST/FstQuickTour&lt;/a&gt;
+&lt;p&gt;ここからは下記のリンクを参考に進めます。&lt;br /&gt;
+&lt;a href=&#34;http://www.openfst.org/twiki/bin/view/FST/FstQuickTour&#34;&gt;http://www.openfst.org/twiki/bin/view/FST/FstQuickTour&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&#34;http://kaldi-asr.org/doc/tutorial_looking.html&#34;&gt;http://kaldi-asr.org/doc/tutorial_looking.html&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;具体的には下図に示すWFSTを作成してみます。&lt;/p&gt;
