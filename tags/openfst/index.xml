@@ -23,7 +23,7 @@
 
 &lt;h2 id=&#34;有限状態トランスデューサ-fst-finite-state-transducer&#34;&gt;有限状態トランスデューサ (FST: Finite-State Transducer)&lt;/h2&gt;
 
-&lt;p&gt;FSTというと一見小難しいですが、簡単に言えば、入力記号列に対して出力記号列を返す変換器です。&lt;br /&gt;
+&lt;p&gt;FSTとは、簡単に言えば、入力記号列に対して出力記号列を返す変換器です。&lt;br /&gt;
 一番単純な例からみてみましょう。下図をご覧ください。&lt;/p&gt;
 
 &lt;figure&gt;
@@ -40,9 +40,9 @@
 &lt;/figure&gt;
 
 
-&lt;p&gt;まず、初期状態から始まり、最終状態に遷移できたもののみ出力を行う、という制約があります。&lt;br /&gt;
+&lt;p&gt;FSTには、初期状態から始まり最終状態に遷移できたもののみ出力を行う、という制約があります。&lt;br /&gt;
 そして、遷移の条件が&lt;code&gt;入力:出力&lt;/code&gt;という形で表現されます。&lt;br /&gt;
-上記の例では&lt;code&gt;a&lt;/code&gt;以外の入力は受け付けないこととなります。&lt;/p&gt;
+ですので、上記の例では&lt;code&gt;a&lt;/code&gt;以外の入力は受け付けないことになります。&lt;/p&gt;
 
 &lt;p&gt;少し複雑になった例をみてみましょう。&lt;/p&gt;
 
@@ -66,7 +66,7 @@
 
 
 &lt;p&gt;&lt;code&gt;/&lt;/code&gt;以下の数値が重みを表し、WFSTは記号列と重みを出力します。&lt;br /&gt;
-例えば&lt;code&gt;ab&lt;/code&gt;の入力に対しては、&lt;code&gt;AB&lt;/code&gt;とともに重み&lt;code&gt;4.5 (= 0.5 + 1.5 + 3.0)&lt;/code&gt;を出力ことになります。&lt;/p&gt;
+例えば&lt;code&gt;ab&lt;/code&gt;の入力に対しては、&lt;code&gt;AB&lt;/code&gt;とともに重み&lt;code&gt;4.5 (= 0.5 + 1.5 + 3.0)&lt;/code&gt;を出力することになります。&lt;/p&gt;
 
 &lt;h2 id=&#34;openfst&#34;&gt;OpenFst&lt;/h2&gt;
 
@@ -91,7 +91,7 @@
 &lt;a href=&#34;http://www.openfst.org/twiki/bin/view/FST/FstQuickTour&#34;&gt;http://www.openfst.org/twiki/bin/view/FST/FstQuickTour&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&#34;http://kaldi-asr.org/doc/tutorial_looking.html&#34;&gt;http://kaldi-asr.org/doc/tutorial_looking.html&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;具体的には下図に示すWFSTを作成してみます。&lt;/p&gt;
+&lt;p&gt;具体的には下図に示すWFSTを作成していきます。&lt;/p&gt;
 
 &lt;figure&gt;
   &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/09/13/openfst//binary.png&#34;/&gt;
