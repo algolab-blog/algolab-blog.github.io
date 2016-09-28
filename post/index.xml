@@ -35,7 +35,7 @@
 
 &lt;p&gt;まず、スキルの起動から一連のやり取り（正常系）を表した図が上記のようになります。&lt;/p&gt;
 
-&lt;p&gt;大きな構造として、Alexaの中にスキル(青色)がいくつもあるイメージをしてください。各スキルで実行できる処理はIntent (赤色) として定義されます。&lt;/p&gt;
+&lt;p&gt;大きな構造として、Alexaの中にスキル (青色) がいくつもあるイメージをしてください。各スキルで実行できる処理はIntent (赤色) として定義されます。&lt;/p&gt;
 
 &lt;p&gt;それでは順を追って、スキル起動 （①〜④）、MyColorIsIntent （⑤〜⑧）、WhatsMyColorIntent （⑨〜⑫）の3つに分けて説明していきます。&lt;/p&gt;
 
@@ -1143,7 +1143,7 @@ MyColorIsIntent my favorite color is {Color}
 
 &lt;p&gt;残りの設定項目に Publishing infomation, Privacy &amp;amp; Compliance がありますが、これらはAlexa Skillをpubulishingするときに必要で、手元の実機での実行には必要ないので今回は割愛します。&lt;/p&gt;
 
-&lt;h1 id=&#34;動作確認&#34;&gt;動作確認&lt;/h1&gt;
+&lt;h2 id=&#34;動作確認&#34;&gt;動作確認&lt;/h2&gt;
 
 &lt;p&gt;まずAmazon Developer Consoleと同じアカウントでAmazon Alexaにログインして&lt;a href=&#34;http://alexa.amazon.com/spa/index.html#skills/your-skills&#34;&gt;Skill一覧画面&lt;/a&gt;から先ほど作成したSkillがあることを確認します。&lt;/p&gt;
 
@@ -1153,7 +1153,12 @@ MyColorIsIntent my favorite color is {Color}
 &lt;/figure&gt;
 
 
-&lt;p&gt;あとは下記の動画のように話しかけて動作するか確認します。&lt;/p&gt;
+&lt;p&gt;あとは冒頭の動画のように話しかけて動作するか確認します。&lt;/p&gt;
+
+&lt;h2 id=&#34;次回予告&#34;&gt;次回予告&lt;/h2&gt;
+
+&lt;p&gt;次回はソースコードの中身を見てみます。&lt;br /&gt;
+(2016/09/28 公開しました &amp;rarr; &lt;a href=&#34;http://blog.algolab.jp/post/2016/09/28/alexa-color-expert/&#34;&gt;AlexaスキルとLambdaファンクションはどのように連携しているか&lt;/a&gt;)&lt;/p&gt;
 </description>
     </item>
     
