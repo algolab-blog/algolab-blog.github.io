@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>
+    
+    
+      AlexaスキルとLambdaファンクションはどのように連携しているか
+    
+    &nbsp;|&nbsp;ALGO GEEKS
+  </title>
+
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1" />
+  <meta name="google-site-verification" content="DmTgCYn-qNNekSNxji7FGHMXvq3_4vrKm3pkvI9llLo" />
+  <link rel="canonical" href="http://blog.algolab.jp/post/2016/09/28/alexa-color-expert/"/>
+
+  <link rel="stylesheet" href="/css/sanitize.css" />
+  <link rel="stylesheet" href="/css/responsive.css" />
+  <link rel="stylesheet" href="/css/highlight_monokai.css" />
+  <link rel="stylesheet" href="/css/theme.css" />
+  <link rel="stylesheet" href="/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="/css/custom.css" />
+
+  <link href="http://blog.algolab.jp/index.xml" rel="alternate" type="application/rss+xml" title="ALGO GEEKS" />
+  <link href="http://blog.algolab.jp/index.xml" rel="feed" type="application/rss+xml" title="ALGO GEEKS" />
+
+  <link rel="shortcut icon" href="/images/favicon.ico" />
+
+</head>
+
+<body>
+<div class="container">
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_8">
+        <h1>
+          <a href="http://blog.algolab.jp/">ALGO GEEKS</a>
+        </h1>
+        
+          <h2 class="row">
+            <span class="site-subtitle">株式会社アルゴラボBLOG</span>
+            <span id="doraemon-birthday" class="site-subtitle"></span>
+          </h2>
+        
+      </div>
+      <div id="social" class="col span_4">
+        <ul>
+          <li><a href="/about">ABOUT</a></li>
+          <li><a href="/tags">TAG</a></li>
+          
+          
+          
+          <li><a href="http://blog.algolab.jp/index.xml" type="application/rss+xml" target="_blank">RSS</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  
+  <main id="single" role="main">
+    <div class="article-header">
+      <h1>AlexaスキルとLambdaファンクションはどのように連携しているか</h1>
+      
+
+<div class="meta">
+  
+    <span>2016/09/28</span>
+  
+  
+    <span>|</span>
+    
+      <a href="/tags/speech-recognition">#音声認識</a>&nbsp;
+    
+      <a href="/tags/amazon-echo">#Amazon Echo</a>&nbsp;
+    
+      <a href="/tags/raspberry-pi">#Raspberry Pi</a>&nbsp;
+    
+  
+  
+    <span>
+      |&nbsp;
+      <a href="/authors/kawahito">Shinpei Kawahito</a>&nbsp;
+    </span>
+  
+</div>
+
+    </div>
+    <article>
+      
+  <div id="share-this">
+    <span class='st_twitter_large' displayText='Tweet'></span>
+    <span class='st_facebook_large' displayText='Facebook'></span>
+    <span class='st_hatena_large' displayText='Hatena'></span>
+    <span class='st_googleplus_large' displayText='Google +'></span>
+    <span class='st_pocket_large' displayText='Pocket'></span>
+    
+    
+  </div>
+
+
+      
+
+<p>こちらの記事の続きとなります。<br />
+<a href="http://blog.algolab.jp/post/2016/08/29/alexa-skills-kit/">Alexa Skills KitをAWS Lamdaから使う</a></p>
+
+<p>前回はサンプルとして用意されている「Color Expert」のAlexaスキルをLambdaファンクションを利用して動かしてみました。<br />
+今回は「Color Expert」を例としてAlexaスキルとLambdaファンクションがどのように連携しているか説明したいと思います。</p>
+
+<h2 id="概念図">概念図</h2>
+
+<figure>
+  <img src="/images//post/2016/09/28/alexa-color-expert//flow.png"/>
+  
+</figure>
+
+
+<p>&nbsp;</p>
+
+<p>まず、スキルの起動から一連のやり取り（正常系）を表した図が上記のようになります。</p>
+
+<p>大きな構造として、Alexaの中にスキル(青色)がいくつもあるイメージをしてください。各スキルで実行できる処理はIntent (赤色) として定義されます。</p>
+
+<p>それでは順を追って、スキル起動 （①〜④）、MyColorIsIntent （⑤〜⑧）、WhatsMyColorIntent （⑨〜⑫）の3つに分けて説明していきます。</p>
+
+<h2 id="スキル起動-①-④">スキル起動 （①〜④）</h2>
+
+<p>ユーザが「Alexa, ask ○○○」と話しかけることで処理が始まります。○○○の部分はスキル名となります。
+今回の場合は「Color Expert」 なので、下記のようになります。なお、このスキル名はAlexaが持っている全てのスキルを通じてユニークである必要があります。</p>
+
+<blockquote>
+<p><strong>ユーザ:</strong>「Alexa, ask color expert」</p>
+</blockquote>
+
+<p>Alexaがリクエスト①の音声をテキストに変換し、該当するスキルの起動リクエスト②がLambdaに送られます。その後、起動メッセージを含んだレスポンス③がAlexaに返り、Alexaがその起動メーセージを音声に変換し下記の応答④が返ります。
+この一連の流れでColor expertのスキルが起動します。</p>
+
+<blockquote>
+<p><strong>Alexa:</strong> 「Welcome to the Alexa Skills Kit sample. Please tell me your favorite color by saying, my favorite color is red」</p>
+</blockquote>
+
+<h2 id="mycolorisintent-⑤-⑧">MyColorIsIntent （⑤〜⑧）</h2>
+
+<p>次にAlexaの言うとおり下記のように話しかけてみます（⑤）。</p>
+
+<blockquote>
+<p><strong>ユーザ:</strong> 「My favorite color is blue」</p>
+</blockquote>
+
+<p>このとき予め設定されているどの Intent かを判断し、入力である「blue」を slots にセットします。この情報はJsonに変換され、Lambda にリクエスト⑥がされることになります。ちなみに、slots にセットされる情報は音声入力の精度を高めるために Custom Slot Types で定義した情報が参照されて決まります。
+Lambdaリクエスト⑥は具体的に下記のようになります。</p>
+
+<pre><code class="language-json:lambda_request">{
+  &quot;session&quot;: {
+    &quot;sessionId&quot;: &quot;SessionId.xxx&quot;,
+    &quot;application&quot;: {
+      &quot;applicationId&quot;: &quot;amzn1.ask.skill.xxx&quot;
+    },
+    &quot;attributes&quot;: {},
+    &quot;user&quot;: {
+      &quot;userId&quot;: &quot;amzn1.ask.account.xxx&quot;
+    },
+    &quot;new&quot;: false
+  },
+  &quot;request&quot;: {
+    &quot;type&quot;: &quot;IntentRequest&quot;,
+    &quot;requestId&quot;: &quot;EdwRequestId.xxx&quot;,
+    &quot;locale&quot;: &quot;en-US&quot;,
+    &quot;timestamp&quot;: &quot;2016-09-10T10:30:30Z&quot;,
+    &quot;intent&quot;: {
+      &quot;name&quot;: &quot;MyColorIsIntent&quot;,
+      &quot;slots&quot;: {
+        &quot;Color&quot;: {
+          &quot;name&quot;: &quot;Color&quot;,
+          &quot;value&quot;: &quot;blue&quot;
+        }
+      }
+    }
+  },
+  &quot;version&quot;: &quot;1.0&quot;
+}
+</code></pre>
+
+<p>Lambdaは上記リクエスト⑥を受け取り、予めNode.jsなどのソースコードで定義されている処理を動かします。ソースコードの一部を見てみると、下記で「MyColorIsIntent」を判別し、 <code>setColorInSession()</code> で処理がされることになります。</p>
+
+<pre><code class="language-javascript:function_onIntent">function onIntent(intentRequest, session, callback) {
+    console.log(&quot;onIntent requestId=&quot; + intentRequest.requestId +
+        &quot;, sessionId=&quot; + session.sessionId);
+
+    var intent = intentRequest.intent,
+        intentName = intentRequest.intent.name;
+
+    if (&quot;MyColorIsIntent&quot; === intentName) {
+        setColorInSession(intent, session, callback);
+    } else if (&quot;WhatsMyColorIntent&quot; === intentName) {
+        getColorFromSession(intent, session, callback);
+    } else if (&quot;AMAZON.HelpIntent&quot; === intentName) {
+        getWelcomeResponse(callback);
+    } else if (&quot;AMAZON.StopIntent&quot; === intentName || &quot;AMAZON.CancelIntent&quot; === intentName) {
+        handleSessionEndRequest(callback);
+    } else {
+        throw &quot;Invalid intent&quot;;
+    }
+}
+</code></pre>
+
+<p><code>setColorInSession()</code>のソースコードも見てみます。</p>
+
+<pre><code class="language-javascript:function_setColorInSession">function setColorInSession(intent, session, callback) {
+    var cardTitle = intent.name;
+    var favoriteColorSlot = intent.slots.Color;
+    var repromptText = &quot;&quot;;
+    var sessionAttributes = {};
+    var shouldEndSession = false;
+    var speechOutput = &quot;&quot;;
+
+    if (favoriteColorSlot) {
+        var favoriteColor = favoriteColorSlot.value;
+        sessionAttributes = createFavoriteColorAttributes(favoriteColor);
+        speechOutput = &quot;I now know your favorite color is &quot; + favoriteColor + &quot;. You can ask me &quot; +
+            &quot;your favorite color by saying, what's my favorite color?&quot;;
+        repromptText = &quot;You can ask me your favorite color by saying, what's my favorite color?&quot;;
+    } else {
+        speechOutput = &quot;I'm not sure what your favorite color is. Please try again&quot;;
+        repromptText = &quot;I'm not sure what your favorite color is. You can tell me your &quot; +
+            &quot;favorite color by saying, my favorite color is red&quot;;
+    }
+
+    callback(sessionAttributes,
+         buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+}
+</code></pre>
+
+<p><code>sessionAttributes</code> に <code>favoriteColor</code> をセットし、ここで書かれているレスポンスの文言などはJsonに変換されて⑦としてAlexaに返されることになります。
+その後、Alexaがこのレスポンス⑦を受取り、下記のように返答⑧が返ります。</p>
+
+<p><strong>入力を正しく受け取れた場合</strong></p>
+
+<blockquote>
+<p><strong>Alexa:</strong> 「I now know your favorite color is red. You can ask me. your favorite color by saying, what&rsquo;s my favorite color?」</p>
+</blockquote>
+
+<p><strong>入力を正しく受け取れなかった場合</strong></p>
+
+<blockquote>
+<p><strong>Alexa:</strong> 「I&rsquo;m not sure what your favorite color is. Please try again」</p>
+</blockquote>
+
+<p>ちなみに、正しく受け取れた場合のレスポンス⑦の内容は下記になります。入力を正しく受け取れた場合は⑨の流れに進みます。正しく受け取れなかった場合は⑤のもう一度好きな色を教える流れになります。</p>
+
+<pre><code class="language-json:lambda_response">{
+  &quot;version&quot;: &quot;1.0&quot;,
+  &quot;response&quot;: {
+    &quot;outputSpeech&quot;: {
+      &quot;type&quot;: &quot;PlainText&quot;,
+      &quot;text&quot;: &quot;I now know your favorite color is blue. You can ask me your favorite color by saying, what's my favorite color?&quot;
+    },
+    &quot;card&quot;: {
+      &quot;content&quot;: &quot;SessionSpeechlet - I now know your favorite color is blue. You can ask me your favorite color by saying, what's my favorite color?&quot;,
+      &quot;title&quot;: &quot;SessionSpeechlet - MyColorIsIntent&quot;,
+      &quot;type&quot;: &quot;Simple&quot;
+    },
+    &quot;reprompt&quot;: {
+      &quot;outputSpeech&quot;: {
+        &quot;type&quot;: &quot;PlainText&quot;,
+        &quot;text&quot;: &quot;You can ask me your favorite color by saying, what's my favorite color?&quot;
+      }
+    },
+    &quot;shouldEndSession&quot;: false
+  },
+  &quot;sessionAttributes&quot;: {
+    &quot;favoriteColor&quot;: &quot;blue&quot;
+  }
+}
+</code></pre>
+
+<h2 id="whatsmycolorintent-⑨-⑫">WhatsMyColorIntent (⑨〜⑫)</h2>
+
+<p>ここもIntentの処理になるので、⑤〜⑧と処理の流れは同じになります(リクエストとレスポンスの具体的な内容は割愛)。ここでもAlexaの言うとおり下記のように話しかけてみます(⑨)。</p>
+
+<blockquote>
+<p><strong>ユーザ:</strong>「What&rsquo;s my favorite color?」</p>
+</blockquote>
+
+<p>そうすると⑥と同様にどのIntentかを判断し、WhatsMyColorIntentのLambdaリクエスト⑩が送られます。
+⑦と同様に <code>onIntent()</code> の判別処理がされ、今度は <code>getColorFromSession()</code> に進みます。</p>
+
+<pre><code class="language-javascript:function_getColorFromSession">function getColorFromSession(intent, session, callback) {
+    var favoriteColor;
+    var repromptText = null;
+    var sessionAttributes = {};
+    var shouldEndSession = false;
+    var speechOutput = &quot;&quot;;
+
+    if (session.attributes) {
+        favoriteColor = session.attributes.favoriteColor;
+    }
+
+    if (favoriteColor) {
+        speechOutput = &quot;Your favorite color is &quot; + favoriteColor + &quot;. Goodbye.&quot;;
+        shouldEndSession = true;
+    } else {
+        speechOutput = &quot;I'm not sure what your favorite color is, you can say, my favorite color &quot; +
+            &quot; is red&quot;;
+    }
+
+    callback(sessionAttributes,
+         buildSpeechletResponse(intent.name, speechOutput, repromptText, shouldEndSession));
+}
+</code></pre>
+
+<p><code>favoriteColor</code> がセット済みであればそれを含んだメッセージを作り、なければ再度好きな色を聞くメッセージを返すという流れになります。⑪としてレスポンスを返し、Alexaが音声化して下記のように応答⑫をします。</p>
+
+<p><strong>好きな色がセットされている場合</strong></p>
+
+<blockquote>
+<p><strong>Alexa:</strong> 「Your favorite color is blue. Goodbyde.」</p>
+</blockquote>
+
+<p><strong>好きな色がセットされてない場合</strong></p>
+
+<blockquote>
+<p><strong>Alexa:</strong> 「I&rsquo;m not sure what your favorite color is, you can say, my favorite color is red」</p>
+</blockquote>
+
+<p>なお、正常系の場合、ソースコードにあるように <code>shouldEndSession</code> を <code>true</code> としているので、ここでセッションを終了し Color expert のスキルは終了となります。</p>
+
+<h2 id="まとめ">まとめ</h2>
+
+<ul>
+<li>概念図とソースコードを交えてAlexaスキルとLambdaファンクションがどのように機能しているかを説明しました。</li>
+<li>AlexaスキルではユーザからのメッセージとIntentとの対応付けを制御し、Lambdaファンクションの方で各Intentの処理をする仕組みになっているのが分かりました。</li>
+<li>それでは、次回オリジナルのスキルを作ってみようと思います。</li>
+</ul>
+
+      
+  <div id="share-this">
+    <span class='st_twitter_large' displayText='Tweet'></span>
+    <span class='st_facebook_large' displayText='Facebook'></span>
+    <span class='st_hatena_large' displayText='Hatena'></span>
+    <span class='st_googleplus_large' displayText='Google +'></span>
+    <span class='st_pocket_large' displayText='Pocket'></span>
+    
+    
+  </div>
+
+
+      
+
+<div id="author" class="row">
+  <img src="/images/authors/kawahito.png" id="avater" class="col" />
+  <div>
+    <div id="name"><a href="/authors/kawahito">Shinpei Kawahito</a></div>
+    <div>阪神と天下一品が好きなエンジニア。
+</div>
+  </div>
+</div>
+
+    </article>
+    
+ <aside><div id="disqus_thread"></div></aside>
+
+<script type="text/javascript">
+     
+    var disqus_shortname = 'algolab';
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+  </main>
+
+  
+  <nav class="pagination-single">
+    
+      <span class="previous">&larr; <a href="http://blog.algolab.jp/post/2016/09/13/openfst/" rel="prev">重み付き有限状態トランスデューサ (WFST) をOpenFstで作成する</a></span>
+    
+    
+  </nav>
+  
+
+<div id="sidebar">
+  <div>
+    <h3>最新記事</h3>
+    <ul>
+      
+        <li><a href="http://blog.algolab.jp/post/2016/09/28/alexa-color-expert/">AlexaスキルとLambdaファンクションはどのように連携しているか </a></li>
+      
+        <li><a href="http://blog.algolab.jp/post/2016/09/13/openfst/">重み付き有限状態トランスデューサ (WFST) をOpenFstで作成する </a></li>
+      
+        <li><a href="http://blog.algolab.jp/post/2016/09/08/dslt/">データサイエンスLT祭り 資料まとめ </a></li>
+      
+        <li><a href="http://blog.algolab.jp/post/2016/09/07/duns/">無料で最速にD-U-N-S® Numberを取得する 〜東京商工リサーチで照会〜 </a></li>
+      
+        <li><a href="http://blog.algolab.jp/post/2016/08/31/kaldi/">Kaldiで音声を学習させる 〜ディープラーニングを用いた音声認識ツールキット〜 </a></li>
+      
+    <ul>
+  </div>
+  <div>
+    <h3>タグ</h3>
+     <ul class="taxonomies tags">
+   
+   
+     <li>
+       <a href="/tags/speech-recognition">
+         音声認識 (7)
+       </a>
+     </li>
+   
+     <li>
+       <a href="/tags/development-environment">
+         環境構築 (4)
+       </a>
+     </li>
+   
+     <li>
+       <a href="/tags/raspberry-pi">
+         Raspberry Pi (4)
+       </a>
+     </li>
+   
+     <li>
+       <a href="/tags/ubuntu">
+         Ubuntu (4)
+       </a>
+     </li>
+   
+     <li>
+       <a href="/tags/ai-training">
+         AIトレーニング (3)
+       </a>
+     </li>
+   
+     <li>
+       <a href="/tags/amazon-echo">
+         Amazon Echo (3)
+       </a>
+     </li>
+   
+     <li>
+       <a href="/tags/study-session">
+         勉強会 (3)
+       </a>
+     </li>
+   
+     <li>
+       <a href="/tags/chat-bot">
+         チャットボット (2)
+       </a>
+     </li>
+   
+     <li>
+       <a href="/tags/image-recognition">
+         画像認識 (2)
+       </a>
+     </li>
+   
+     <li>
+       <a href="/tags/ios">
+         iOS (2)
+       </a>
+     </li>
+   
+     <li>
+       <a href="/tags/product">
+         プロダクト (2)
+       </a>
+     </li>
+   
+     <li>
+       <a href="/tags/torch">
+         Torch (2)
+       </a>
+     </li>
+   
+     <li>
+       <a href="/tags/aws">
+         AWS (1)
+       </a>
+     </li>
+   
+     <li>
+       <a href="/tags/cnn">
+         CNN (1)
+       </a>
+     </li>
+   
+     <li>
+       <a href="/tags/dqn">
+         DQN (1)
+       </a>
+     </li>
+   
+     <li>
+       <a href="/tags/icml">
+         ICML (1)
+       </a>
+     </li>
+   
+     <li>
+       <a href="/tags/kaldi">
+         Kaldi (1)
+       </a>
+     </li>
+   
+     <li>
+       <a href="/tags/mahjong-camera">
+         麻雀カメラ (1)
+       </a>
+     </li>
+   
+     <li>
+       <a href="/tags/mary-meeker">
+         メアリー・ミーカー (1)
+       </a>
+     </li>
+   
+     <li>
+       <a href="/tags/nlp">
+         自然言語処理 (1)
+       </a>
+     </li>
+   
+     <li>
+       <a href="/tags/openfst">
+         OpenFst (1)
+       </a>
+     </li>
+   
+     <li>
+       <a href="/tags/r-env">
+         R-env:連舞® (1)
+       </a>
+     </li>
+   
+     <li>
+       <a href="/tags/reinforcement-learning">
+         強化学習 (1)
+       </a>
+     </li>
+   
+     <li>
+       <a href="/tags/report">
+         レポート (1)
+       </a>
+     </li>
+   
+     <li>
+       <a href="/tags/robohon">
+         RoBoHoN (1)
+       </a>
+     </li>
+   
+     <li>
+       <a href="/tags/robot">
+         ロボット (1)
+       </a>
+     </li>
+   
+     <li>
+       <a href="/tags/seq2seq">
+         Seq2Seq (1)
+       </a>
+     </li>
+   
+     <li>
+       <a href="/tags/sota">
+         Sota (1)
+       </a>
+     </li>
+   
+     <li>
+       <a href="/tags/tensorflow">
+         TensorFlow (1)
+       </a>
+     </li>
+   
+ </ul>
+
+  </div>
+</div>
+
+  <footer role="contentinfo">
+    <div style="text-align:center;">
+      
+      © 2016 Algo Lab Inc.
+    </div>
+  </footer>
+</div>
+
+<script src="/js/jquery-3.1.0.min.js"></script>
+<script>
+  var today = new Date();
+  var birthday = new Date('2112-09-03');
+  var diff = Math.ceil((birthday - today) / 86400000).toString();
+  var diff = diff.split(/(?=(?:\d{3})+$)/).join();
+  var target = $("#doraemon-birthday");
+  target.text("ドラえもん誕生まであと"+diff+"日");
+</script>
+
+<script>
+  $("a[href^='http']").not('[href*="'+location.hostname+'"]').attr("target","_blank").after('&nbsp;<i class="fa fa-external-link"></i>');
+</script>
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+  <script type="text/javascript">var switchTo5x=true;</script>
+  <script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
+  <script type="text/javascript">stLight.options({publisher: '68ab120e-79d6-4b3c-ae2e-4e7f8099de14', doNotHash: true, doNotCopy: true, hashAddressBar: false});</script>
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-70610940-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+  
+    <script type='text/javascript'>
+    (function(a,h,k,o,t,y){
+     a['LoyalTrackerObject']=o;a[o]=a[o]||function(){(a[o].q=a[o].q||[]).push(arguments)};
+     a[o].l=1*new Date();t=h.createElement('script');y=h.getElementsByTagName('script')[0];
+     t.async=1;t.src=k;y.parentNode.insertBefore(t,y);
+     })(window, document, '//c.attracie.info/static/app.js', '_lgy_lt');
+    _lgy_lt('set', 'media', '073b51e13b38');
+    _lgy_lt('send', 'pageview');
+    _lgy_lt('send', 'read');
+    </script>
+  
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+</body>
+</html>
+

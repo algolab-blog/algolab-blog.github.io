@@ -6,8 +6,250 @@
     <description>Recent content on ALGO GEEKS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Tue, 13 Sep 2016 20:00:03 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 28 Sep 2016 16:26:57 +0900</lastBuildDate>
     <atom:link href="http://blog.algolab.jp/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>AlexaスキルとLambdaファンクションはどのように連携しているか</title>
+      <link>http://blog.algolab.jp/post/2016/09/28/alexa-color-expert/</link>
+      <pubDate>Wed, 28 Sep 2016 16:26:57 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/09/28/alexa-color-expert/</guid>
+      <description>
+
+&lt;p&gt;こちらの記事の続きとなります。&lt;br /&gt;
+&lt;a href=&#34;http://blog.algolab.jp/post/2016/08/29/alexa-skills-kit/&#34;&gt;Alexa Skills KitをAWS Lamdaから使う&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;前回はサンプルとして用意されている「Color Expert」のAlexaスキルをLambdaファンクションを利用して動かしてみました。&lt;br /&gt;
+今回は「Color Expert」を例としてAlexaスキルとLambdaファンクションがどのように連携しているか説明したいと思います。&lt;/p&gt;
+
+&lt;h2 id=&#34;概念図&#34;&gt;概念図&lt;/h2&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/09/28/alexa-color-expert//flow.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+
+&lt;p&gt;まず、スキルの起動から一連のやり取り（正常系）を表した図が上記のようになります。&lt;/p&gt;
+
+&lt;p&gt;大きな構造として、Alexaの中にスキル(青色)がいくつもあるイメージをしてください。各スキルで実行できる処理はIntent (赤色) として定義されます。&lt;/p&gt;
+
+&lt;p&gt;それでは順を追って、スキル起動 （①〜④）、MyColorIsIntent （⑤〜⑧）、WhatsMyColorIntent （⑨〜⑫）の3つに分けて説明していきます。&lt;/p&gt;
+
+&lt;h2 id=&#34;スキル起動-①-④&#34;&gt;スキル起動 （①〜④）&lt;/h2&gt;
+
+&lt;p&gt;ユーザが「Alexa, ask ○○○」と話しかけることで処理が始まります。○○○の部分はスキル名となります。
+今回の場合は「Color Expert」 なので、下記のようになります。なお、このスキル名はAlexaが持っている全てのスキルを通じてユニークである必要があります。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;ユーザ:&lt;/strong&gt;「Alexa, ask color expert」&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Alexaがリクエスト①の音声をテキストに変換し、該当するスキルの起動リクエスト②がLambdaに送られます。その後、起動メッセージを含んだレスポンス③がAlexaに返り、Alexaがその起動メーセージを音声に変換し下記の応答④が返ります。
+この一連の流れでColor expertのスキルが起動します。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Alexa:&lt;/strong&gt; 「Welcome to the Alexa Skills Kit sample. Please tell me your favorite color by saying, my favorite color is red」&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;mycolorisintent-⑤-⑧&#34;&gt;MyColorIsIntent （⑤〜⑧）&lt;/h2&gt;
+
+&lt;p&gt;次にAlexaの言うとおり下記のように話しかけてみます（⑤）。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;ユーザ:&lt;/strong&gt; 「My favorite color is blue」&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;このとき予め設定されているどの Intent かを判断し、入力である「blue」を slots にセットします。この情報はJsonに変換され、Lambda にリクエスト⑥がされることになります。ちなみに、slots にセットされる情報は音声入力の精度を高めるために Custom Slot Types で定義した情報が参照されて決まります。
+Lambdaリクエスト⑥は具体的に下記のようになります。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json:lambda_request&#34;&gt;{
+  &amp;quot;session&amp;quot;: {
+    &amp;quot;sessionId&amp;quot;: &amp;quot;SessionId.xxx&amp;quot;,
+    &amp;quot;application&amp;quot;: {
+      &amp;quot;applicationId&amp;quot;: &amp;quot;amzn1.ask.skill.xxx&amp;quot;
+    },
+    &amp;quot;attributes&amp;quot;: {},
+    &amp;quot;user&amp;quot;: {
+      &amp;quot;userId&amp;quot;: &amp;quot;amzn1.ask.account.xxx&amp;quot;
+    },
+    &amp;quot;new&amp;quot;: false
+  },
+  &amp;quot;request&amp;quot;: {
+    &amp;quot;type&amp;quot;: &amp;quot;IntentRequest&amp;quot;,
+    &amp;quot;requestId&amp;quot;: &amp;quot;EdwRequestId.xxx&amp;quot;,
+    &amp;quot;locale&amp;quot;: &amp;quot;en-US&amp;quot;,
+    &amp;quot;timestamp&amp;quot;: &amp;quot;2016-09-10T10:30:30Z&amp;quot;,
+    &amp;quot;intent&amp;quot;: {
+      &amp;quot;name&amp;quot;: &amp;quot;MyColorIsIntent&amp;quot;,
+      &amp;quot;slots&amp;quot;: {
+        &amp;quot;Color&amp;quot;: {
+          &amp;quot;name&amp;quot;: &amp;quot;Color&amp;quot;,
+          &amp;quot;value&amp;quot;: &amp;quot;blue&amp;quot;
+        }
+      }
+    }
+  },
+  &amp;quot;version&amp;quot;: &amp;quot;1.0&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Lambdaは上記リクエスト⑥を受け取り、予めNode.jsなどのソースコードで定義されている処理を動かします。ソースコードの一部を見てみると、下記で「MyColorIsIntent」を判別し、 &lt;code&gt;setColorInSession()&lt;/code&gt; で処理がされることになります。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript:function_onIntent&#34;&gt;function onIntent(intentRequest, session, callback) {
+    console.log(&amp;quot;onIntent requestId=&amp;quot; + intentRequest.requestId +
+        &amp;quot;, sessionId=&amp;quot; + session.sessionId);
+
+    var intent = intentRequest.intent,
+        intentName = intentRequest.intent.name;
+
+    if (&amp;quot;MyColorIsIntent&amp;quot; === intentName) {
+        setColorInSession(intent, session, callback);
+    } else if (&amp;quot;WhatsMyColorIntent&amp;quot; === intentName) {
+        getColorFromSession(intent, session, callback);
+    } else if (&amp;quot;AMAZON.HelpIntent&amp;quot; === intentName) {
+        getWelcomeResponse(callback);
+    } else if (&amp;quot;AMAZON.StopIntent&amp;quot; === intentName || &amp;quot;AMAZON.CancelIntent&amp;quot; === intentName) {
+        handleSessionEndRequest(callback);
+    } else {
+        throw &amp;quot;Invalid intent&amp;quot;;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;setColorInSession()&lt;/code&gt;のソースコードも見てみます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript:function_setColorInSession&#34;&gt;function setColorInSession(intent, session, callback) {
+    var cardTitle = intent.name;
+    var favoriteColorSlot = intent.slots.Color;
+    var repromptText = &amp;quot;&amp;quot;;
+    var sessionAttributes = {};
+    var shouldEndSession = false;
+    var speechOutput = &amp;quot;&amp;quot;;
+
+    if (favoriteColorSlot) {
+        var favoriteColor = favoriteColorSlot.value;
+        sessionAttributes = createFavoriteColorAttributes(favoriteColor);
+        speechOutput = &amp;quot;I now know your favorite color is &amp;quot; + favoriteColor + &amp;quot;. You can ask me &amp;quot; +
+            &amp;quot;your favorite color by saying, what&#39;s my favorite color?&amp;quot;;
+        repromptText = &amp;quot;You can ask me your favorite color by saying, what&#39;s my favorite color?&amp;quot;;
+    } else {
+        speechOutput = &amp;quot;I&#39;m not sure what your favorite color is. Please try again&amp;quot;;
+        repromptText = &amp;quot;I&#39;m not sure what your favorite color is. You can tell me your &amp;quot; +
+            &amp;quot;favorite color by saying, my favorite color is red&amp;quot;;
+    }
+
+    callback(sessionAttributes,
+         buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;sessionAttributes&lt;/code&gt; に &lt;code&gt;favoriteColor&lt;/code&gt; をセットし、ここで書かれているレスポンスの文言などはJsonに変換されて⑦としてAlexaに返されることになります。
+その後、Alexaがこのレスポンス⑦を受取り、下記のように返答⑧が返ります。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;入力を正しく受け取れた場合&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Alexa:&lt;/strong&gt; 「I now know your favorite color is red. You can ask me. your favorite color by saying, what&amp;rsquo;s my favorite color?」&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;入力を正しく受け取れなかった場合&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Alexa:&lt;/strong&gt; 「I&amp;rsquo;m not sure what your favorite color is. Please try again」&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;ちなみに、正しく受け取れた場合のレスポンス⑦の内容は下記になります。入力を正しく受け取れた場合は⑨の流れに進みます。正しく受け取れなかった場合は⑤のもう一度好きな色を教える流れになります。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json:lambda_response&#34;&gt;{
+  &amp;quot;version&amp;quot;: &amp;quot;1.0&amp;quot;,
+  &amp;quot;response&amp;quot;: {
+    &amp;quot;outputSpeech&amp;quot;: {
+      &amp;quot;type&amp;quot;: &amp;quot;PlainText&amp;quot;,
+      &amp;quot;text&amp;quot;: &amp;quot;I now know your favorite color is blue. You can ask me your favorite color by saying, what&#39;s my favorite color?&amp;quot;
+    },
+    &amp;quot;card&amp;quot;: {
+      &amp;quot;content&amp;quot;: &amp;quot;SessionSpeechlet - I now know your favorite color is blue. You can ask me your favorite color by saying, what&#39;s my favorite color?&amp;quot;,
+      &amp;quot;title&amp;quot;: &amp;quot;SessionSpeechlet - MyColorIsIntent&amp;quot;,
+      &amp;quot;type&amp;quot;: &amp;quot;Simple&amp;quot;
+    },
+    &amp;quot;reprompt&amp;quot;: {
+      &amp;quot;outputSpeech&amp;quot;: {
+        &amp;quot;type&amp;quot;: &amp;quot;PlainText&amp;quot;,
+        &amp;quot;text&amp;quot;: &amp;quot;You can ask me your favorite color by saying, what&#39;s my favorite color?&amp;quot;
+      }
+    },
+    &amp;quot;shouldEndSession&amp;quot;: false
+  },
+  &amp;quot;sessionAttributes&amp;quot;: {
+    &amp;quot;favoriteColor&amp;quot;: &amp;quot;blue&amp;quot;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;whatsmycolorintent-⑨-⑫&#34;&gt;WhatsMyColorIntent (⑨〜⑫)&lt;/h2&gt;
+
+&lt;p&gt;ここもIntentの処理になるので、⑤〜⑧と処理の流れは同じになります(リクエストとレスポンスの具体的な内容は割愛)。ここでもAlexaの言うとおり下記のように話しかけてみます(⑨)。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;ユーザ:&lt;/strong&gt;「What&amp;rsquo;s my favorite color?」&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;そうすると⑥と同様にどのIntentかを判断し、WhatsMyColorIntentのLambdaリクエスト⑩が送られます。
+⑦と同様に &lt;code&gt;onIntent()&lt;/code&gt; の判別処理がされ、今度は &lt;code&gt;getColorFromSession()&lt;/code&gt; に進みます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript:function_getColorFromSession&#34;&gt;function getColorFromSession(intent, session, callback) {
+    var favoriteColor;
+    var repromptText = null;
+    var sessionAttributes = {};
+    var shouldEndSession = false;
+    var speechOutput = &amp;quot;&amp;quot;;
+
+    if (session.attributes) {
+        favoriteColor = session.attributes.favoriteColor;
+    }
+
+    if (favoriteColor) {
+        speechOutput = &amp;quot;Your favorite color is &amp;quot; + favoriteColor + &amp;quot;. Goodbye.&amp;quot;;
+        shouldEndSession = true;
+    } else {
+        speechOutput = &amp;quot;I&#39;m not sure what your favorite color is, you can say, my favorite color &amp;quot; +
+            &amp;quot; is red&amp;quot;;
+    }
+
+    callback(sessionAttributes,
+         buildSpeechletResponse(intent.name, speechOutput, repromptText, shouldEndSession));
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;favoriteColor&lt;/code&gt; がセット済みであればそれを含んだメッセージを作り、なければ再度好きな色を聞くメッセージを返すという流れになります。⑪としてレスポンスを返し、Alexaが音声化して下記のように応答⑫をします。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;好きな色がセットされている場合&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Alexa:&lt;/strong&gt; 「Your favorite color is blue. Goodbyde.」&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;好きな色がセットされてない場合&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Alexa:&lt;/strong&gt; 「I&amp;rsquo;m not sure what your favorite color is, you can say, my favorite color is red」&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;なお、正常系の場合、ソースコードにあるように &lt;code&gt;shouldEndSession&lt;/code&gt; を &lt;code&gt;true&lt;/code&gt; としているので、ここでセッションを終了し Color expert のスキルは終了となります。&lt;/p&gt;
+
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;概念図とソースコードを交えてAlexaスキルとLambdaファンクションがどのように機能しているかを説明しました。&lt;/li&gt;
+&lt;li&gt;AlexaスキルではユーザからのメッセージとIntentとの対応付けを制御し、Lambdaファンクションの方で各Intentの処理をする仕組みになっているのが分かりました。&lt;/li&gt;
+&lt;li&gt;それでは、次回オリジナルのスキルを作ってみようと思います。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>重み付き有限状態トランスデューサ (WFST) をOpenFstで作成する</title>
@@ -2134,147 +2376,6 @@ $ mvn exec:exec
 
 &lt;p&gt;見慣れない用語が幾つか出てきましたが、調べれば理解出来る内容だと考え、上記課題としました。&lt;br /&gt;
 次回はその内容についてお届けします。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>TorchをAWSのGPUインスタンス (Ubuntu 14.04) で動かす</title>
-      <link>http://blog.algolab.jp/post/2016/08/03/torch-aws-gpu-ubuntu/</link>
-      <pubDate>Wed, 03 Aug 2016 17:12:34 +0900</pubDate>
-      
-      <guid>http://blog.algolab.jp/post/2016/08/03/torch-aws-gpu-ubuntu/</guid>
-      <description>
-
-&lt;p&gt;TorchをAWSのGPUインスタンス (Ubuntu 14.04) で動かす手順をまとめます。&lt;br /&gt;
-環境は以下の通りです。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Ubuntu Server 14.04 LTS&lt;/li&gt;
-&lt;li&gt;CUDA7.5&lt;/li&gt;
-&lt;li&gt;CuDNN v5&lt;/li&gt;
-&lt;li&gt;Torch7&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;インスタンスを起動&#34;&gt;インスタンスを起動&lt;/h2&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/03/torch-aws-gpu-ubuntu//ubuntu.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;Ubuntu Server 14.04 LTS (HVM), SSD Volume Type - ami-2d39803a をベースに構築します。&lt;br /&gt;
-インスタンスタイプはg2.2xlargeを用いました。&lt;br /&gt;
-ストレージ容量はデフォルトの8GBでは不足するので、16GBとします。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/03/torch-aws-gpu-ubuntu//storage.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;h2 id=&#34;パッケージ更新&#34;&gt;パッケージ更新&lt;/h2&gt;
-
-&lt;p&gt;インスタンスが起動したら、SSHでログインのうえ、まずパッケージを更新します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get update
-$ sudo apt-get upgrade -y
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;cudaインストール&#34;&gt;CUDAインストール&lt;/h2&gt;
-
-&lt;p&gt;CUDAのインストールはハマりどころが多いですが、先人の知恵にならって進めます。&lt;br /&gt;
-&lt;a href=&#34;https://gist.github.com/erikbern/78ba519b97b440e10640&#34;&gt;https://gist.github.com/erikbern/78ba519b97b440e10640&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;既存のドライバ (Noveau) を無効にします。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ echo -e &amp;quot;blacklist nouveau\nblacklist lbm-nouveau\noptions nouveau modeset=0\nalias nouveau off\nalias lbm-nouveau off\n&amp;quot; | sudo tee /etc/modprobe.d/blacklist-nouveau.conf
-echo options nouveau modeset=0 | sudo tee -a /etc/modprobe.d/nouveau-kms.conf
-sudo update-initramfs -u
-sudo reboot
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;必要なカーネルモジュールをインストールします。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install -y linux-image-extra-virtual
-$ sudo reboot
-$ sudo apt-get install -y linux-source linux-headers-`uname -r`
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;CUDA7.5をインストールします。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ wget http://developer.download.nvidia.com/compute/cuda/7.5/Prod/local_installers/cuda_7.5.18_linux.run
-$ chmod +x cuda_7.5.18_linux.run
-$ ./cuda_7.5.18_linux.run -extract=`pwd`/nvidia_installers
-$ cd nvidia_installers
-$ sudo ./NVIDIA-Linux-x86_64-352.39.run
-$ sudo modprobe nvidia
-$ sudo ./cuda-linux64-rel-7.5.18-19867135.run
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;途中でシンボリックリンクを作成するか聞かれますが、yesを選択します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;Would you like to create a symbolic link /usr/local/cuda pointing to /usr/local/cuda-7.5? ((y)es/(n)o/(a)bort) [ default is yes ]: y
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;CUDAのパスを環境変数に追加します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ echo -e &amp;quot;export PATH=/usr/local/cuda/bin:\$PATH\nexport LD_LIBRARY_PATH=/usr/local/cuda/lib64:\$LD_LIBRARY_PATH&amp;quot; | tee -a ~/.bashrc
-$ source ~/.bashrc
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;cudnnインストール&#34;&gt;CUDNNインストール&lt;/h2&gt;
-
-&lt;p&gt;まず、下記のサイトからアカウントを登録します。&lt;br /&gt;
-&lt;a href=&#34;https://developer.nvidia.com/cudnn&#34;&gt;https://developer.nvidia.com/cudnn&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;アカウント登録後、ダウンロードページから、cuDNN v5 Library for Linuxをダウンロードします。
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/03/torch-aws-gpu-ubuntu//cudnn.png&#34;/&gt;
-  
-&lt;/figure&gt;
-&lt;/p&gt;
-
-&lt;p&gt;ダウンロードしたファイルをサーバへ転送後、サーバ上で展開します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ tar -xzf cudnn-7.5-linux-x64-v5.0-ga.tgz
-$ sudo cp cuda/lib64/libcudnn* /usr/local/cuda-7.5/lib64
-$ sudo cp cuda/include/cudnn.h /usr/local/cuda/include
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;torchインストール&#34;&gt;Torchインストール&lt;/h2&gt;
-
-&lt;p&gt;公式に従って、インストールします。&lt;br /&gt;
-&lt;a href=&#34;http://torch.ch/docs/getting-started.html&#34;&gt;http://torch.ch/docs/getting-started.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install -y git
-$ git clone https://github.com/torch/distro.git ~/torch --recursive
-$ cd ~/torch; bash install-deps;
-$ ./install.sh
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;環境変数を.bashrcに書き込むか聞かれますが、yesを選択します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;Do you want to automatically prepend the Torch install location
-to PATH and LD_LIBRARY_PATH in your /home/ubuntu/.bashrc? (yes/no)
-[yes] &amp;gt;&amp;gt;&amp;gt; 
-yes
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;環境変数を反映します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ source ~/.bashrc
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;最後に、CUDAおよびcuDNNを使うためのLuaライブラリをインストールします。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ luarocks install cutorch
-$ luarocks install cunn
-$ luarocks install cunnx
-$ luarocks install https://raw.githubusercontent.com/soumith/cudnn.torch/master/cudnn-scm-1.rockspec
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;以上で環境構築は完了です。&lt;/p&gt;
 </description>
     </item>
     
