@@ -101,7 +101,7 @@
 
 <p>筆者の機械学習系のPython開発環境は、<a href="https://www.vagrantup.com/">Vagrant</a> を用いた <a href="https://atlas.hashicorp.com/bento/boxes/ubuntu-16.04">Ubuntu (16.04 LTS)</a> 上に構築しています。<br />
 ここでは、画像認識、音声認識、自然言語処理などに必要な環境をオールインワンで構築する手順をまとめます。<br />
-(最終更新日: 2016/09/10)</p>
+(最終更新日: 2016/11/11)</p>
 
 <h2 id="osバージョン">OSバージョン</h2>
 
@@ -130,7 +130,7 @@ pyenvやAnacondaの概要やメリットについては、下記の記事に詳�
 
 <p>まず、必要なパッケージをインストールします。</p>
 
-<pre><code class="language-sh">$ sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev
+<pre><code class="language-sh">$ sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev libpng-dev
 </code></pre>
 
 <h3 id="pyenvのインストール">pyenvのインストール</h3>
@@ -224,7 +224,7 @@ $ pip install --upgrade pip
 
 <p>画像処理ライブラリ。<code>conda</code>経由で本体もまとめてインストールします。</p>
 
-<pre><code class="language-sh">$ conda install -y -c kalefranz imagemagick
+<pre><code class="language-sh">$ conda install -y -c vdbwrair imagemagick
 </code></pre>
 
 <h3 id="opencv">OpenCV</h3>
@@ -383,6 +383,8 @@ $ pip install mecab-python3
     <h3>最新記事</h3>
     <ul>
       
+        <li><a href="http://blog.algolab.jp/post/2016/11/11/neuralart/">TensorFlowで画風変換を試す </a></li>
+      
         <li><a href="http://blog.algolab.jp/post/2016/09/28/alexa-color-expert/">AlexaスキルとLambdaファンクションはどのように連携しているか </a></li>
       
         <li><a href="http://blog.algolab.jp/post/2016/09/13/openfst/">重み付き有限状態トランスデューサ (WFST) をOpenFstで作成する </a></li>
@@ -390,8 +392,6 @@ $ pip install mecab-python3
         <li><a href="http://blog.algolab.jp/post/2016/09/08/dslt/">データサイエンスLT祭り 資料まとめ </a></li>
       
         <li><a href="http://blog.algolab.jp/post/2016/09/07/duns/">無料で最速にD-U-N-S® Numberを取得する 〜東京商工リサーチで照会〜 </a></li>
-      
-        <li><a href="http://blog.algolab.jp/post/2016/08/31/kaldi/">Kaldiで音声を学習させる 〜ディープラーニングを用いた音声認識ツールキット〜 </a></li>
       
     <ul>
   </div>
@@ -437,6 +437,12 @@ $ pip install mecab-python3
      </li>
    
      <li>
+       <a href="/tags/image-recognition">
+         画像認識 (3)
+       </a>
+     </li>
+   
+     <li>
        <a href="/tags/study-session">
          勉強会 (3)
        </a>
@@ -449,12 +455,6 @@ $ pip install mecab-python3
      </li>
    
      <li>
-       <a href="/tags/image-recognition">
-         画像認識 (2)
-       </a>
-     </li>
-   
-     <li>
        <a href="/tags/ios">
          iOS (2)
        </a>
@@ -463,6 +463,12 @@ $ pip install mecab-python3
      <li>
        <a href="/tags/product">
          プロダクト (2)
+       </a>
+     </li>
+   
+     <li>
+       <a href="/tags/tensorflow">
+         TensorFlow (2)
        </a>
      </li>
    
@@ -565,12 +571,6 @@ $ pip install mecab-python3
      <li>
        <a href="/tags/sota">
          Sota (1)
-       </a>
-     </li>
-   
-     <li>
-       <a href="/tags/tensorflow">
-         TensorFlow (1)
        </a>
      </li>
    

@@ -6,8 +6,71 @@
     <description>Recent content in Tensorflow on ALGO GEEKS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 01 Aug 2016 22:06:25 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 11 Nov 2016 18:47:53 +0900</lastBuildDate>
     <atom:link href="http://blog.algolab.jp/tags/tensorflow/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>TensorFlowで画風変換を試す</title>
+      <link>http://blog.algolab.jp/post/2016/11/11/neuralart/</link>
+      <pubDate>Fri, 11 Nov 2016 18:47:53 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/11/11/neuralart/</guid>
+      <description>
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/11/11/neuralart//animation.gif&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;TensorFlowを用いて画風変換を試してみました。上記画像は学習過程となります。&lt;br /&gt;
+GitHubで「neuralart」と検索すると実装例がいくつか出てきますので、そのうちの一つを動作させてみます。&lt;br /&gt;
+&lt;a href=&#34;https://github.com/ckmarkoh/neuralart_tensorflow&#34;&gt;https://github.com/ckmarkoh/neuralart_tensorflow&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;ソースコードをダウンロード&#34;&gt;ソースコードをダウンロード&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ git clone https://github.com/ckmarkoh/neuralart_tensorflow.git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;訓練済み画像認識モデルをダウンロード&#34;&gt;訓練済み画像認識モデルをダウンロード&lt;/h2&gt;
+
+&lt;p&gt;下記URLからVGG-19モデルをダウンロードし、&lt;code&gt;neuralart_tensorflow&lt;/code&gt;直下に配置します。
+&lt;a href=&#34;https://drive.google.com/file/d/0B8QJdgMvQDrVU2cyZjFKU1RrLUU/view&#34;&gt;https://drive.google.com/file/d/0B8QJdgMvQDrVU2cyZjFKU1RrLUU/view&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;画風変換&#34;&gt;画風変換&lt;/h2&gt;
+
+&lt;p&gt;以下で画風変換のイテレーションが始まります。元画像とスタイル画像は下記の通りとなります。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ python main.py
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;元画像
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/11/11/neuralart//Taipei101.jpg&#34;/&gt;
+  
+&lt;/figure&gt;
+&lt;/p&gt;
+
+&lt;p&gt;スタイル画像
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/11/11/neuralart//StarryNight.jpg&#34;/&gt;
+  
+&lt;/figure&gt;
+&lt;/p&gt;
+
+&lt;p&gt;結果は&lt;code&gt;results&lt;/code&gt;フォルダに格納されていきます。&lt;br /&gt;
+なお、筆者の環境では、CPUマシンで100イテレーションあたり1時間弱かかりました。&lt;/p&gt;
+
+&lt;h2 id=&#34;学習過程を可視化&#34;&gt;学習過程を可視化&lt;/h2&gt;
+
+&lt;p&gt;900イテレーションまでの結果画像をImageMagickを用いてアニメーションGIFにしてみます。&lt;br /&gt;
+（冒頭で紹介した画像となります）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd results
+$ convert -delay 50 -loop 0 0*00.png animation.gif
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜導入編〜</title>

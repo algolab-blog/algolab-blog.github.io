@@ -6,8 +6,71 @@
     <description>Recent content in Kawahito on ALGO GEEKS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 28 Sep 2016 16:26:57 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 11 Nov 2016 18:47:53 +0900</lastBuildDate>
     <atom:link href="http://blog.algolab.jp/authors/kawahito/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>TensorFlowで画風変換を試す</title>
+      <link>http://blog.algolab.jp/post/2016/11/11/neuralart/</link>
+      <pubDate>Fri, 11 Nov 2016 18:47:53 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/11/11/neuralart/</guid>
+      <description>
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/11/11/neuralart//animation.gif&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;TensorFlowを用いて画風変換を試してみました。上記画像は学習過程となります。&lt;br /&gt;
+GitHubで「neuralart」と検索すると実装例がいくつか出てきますので、そのうちの一つを動作させてみます。&lt;br /&gt;
+&lt;a href=&#34;https://github.com/ckmarkoh/neuralart_tensorflow&#34;&gt;https://github.com/ckmarkoh/neuralart_tensorflow&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;ソースコードをダウンロード&#34;&gt;ソースコードをダウンロード&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ git clone https://github.com/ckmarkoh/neuralart_tensorflow.git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;訓練済み画像認識モデルをダウンロード&#34;&gt;訓練済み画像認識モデルをダウンロード&lt;/h2&gt;
+
+&lt;p&gt;下記URLからVGG-19モデルをダウンロードし、&lt;code&gt;neuralart_tensorflow&lt;/code&gt;直下に配置します。
+&lt;a href=&#34;https://drive.google.com/file/d/0B8QJdgMvQDrVU2cyZjFKU1RrLUU/view&#34;&gt;https://drive.google.com/file/d/0B8QJdgMvQDrVU2cyZjFKU1RrLUU/view&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;画風変換&#34;&gt;画風変換&lt;/h2&gt;
+
+&lt;p&gt;以下で画風変換のイテレーションが始まります。元画像とスタイル画像は下記の通りとなります。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ python main.py
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;元画像
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/11/11/neuralart//Taipei101.jpg&#34;/&gt;
+  
+&lt;/figure&gt;
+&lt;/p&gt;
+
+&lt;p&gt;スタイル画像
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/11/11/neuralart//StarryNight.jpg&#34;/&gt;
+  
+&lt;/figure&gt;
+&lt;/p&gt;
+
+&lt;p&gt;結果は&lt;code&gt;results&lt;/code&gt;フォルダに格納されていきます。&lt;br /&gt;
+なお、筆者の環境では、CPUマシンで100イテレーションあたり1時間弱かかりました。&lt;/p&gt;
+
+&lt;h2 id=&#34;学習過程を可視化&#34;&gt;学習過程を可視化&lt;/h2&gt;
+
+&lt;p&gt;900イテレーションまでの結果画像をImageMagickを用いてアニメーションGIFにしてみます。&lt;br /&gt;
+（冒頭で紹介した画像となります）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd results
+$ convert -delay 50 -loop 0 0*00.png animation.gif
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>AlexaスキルとLambdaファンクションはどのように連携しているか</title>
@@ -1607,7 +1670,7 @@ $ sudo systemctl enable vncserver@1.service
 
 &lt;p&gt;筆者の機械学習系のPython開発環境は、&lt;a href=&#34;https://www.vagrantup.com/&#34;&gt;Vagrant&lt;/a&gt; を用いた &lt;a href=&#34;https://atlas.hashicorp.com/bento/boxes/ubuntu-16.04&#34;&gt;Ubuntu (16.04 LTS)&lt;/a&gt; 上に構築しています。&lt;br /&gt;
 ここでは、画像認識、音声認識、自然言語処理などに必要な環境をオールインワンで構築する手順をまとめます。&lt;br /&gt;
-(最終更新日: 2016/09/10)&lt;/p&gt;
+(最終更新日: 2016/11/11)&lt;/p&gt;
 
 &lt;h2 id=&#34;osバージョン&#34;&gt;OSバージョン&lt;/h2&gt;
 
@@ -1636,7 +1699,7 @@ pyenvやAnacondaの概要やメリットについては、下記の記事に詳�
 
 &lt;p&gt;まず、必要なパッケージをインストールします。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev libpng-dev
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;pyenvのインストール&#34;&gt;pyenvのインストール&lt;/h3&gt;
@@ -1730,7 +1793,7 @@ $ pip install --upgrade pip
 
 &lt;p&gt;画像処理ライブラリ。&lt;code&gt;conda&lt;/code&gt;経由で本体もまとめてインストールします。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ conda install -y -c kalefranz imagemagick
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ conda install -y -c vdbwrair imagemagick
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;opencv&#34;&gt;OpenCV&lt;/h3&gt;
@@ -2274,113 +2337,6 @@ $ mvn exec:exec
 
 &lt;p&gt;次回はAlexa Skillsを登録して使ってみようと思います。乞うご期待。Don&amp;rsquo;t miss out!&lt;br /&gt;
 (2016/08/25 公開しました &amp;rarr; &lt;a href=&#34;http://blog.algolab.jp/post/2016/08/29/alexa-skills-kit/&#34;&gt;Alexa Skills KitをAWS Lamdaから使う&lt;/a&gt;)&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>ディープラーニング徹底入門 〜AIトレーニング第1回〜</title>
-      <link>http://blog.algolab.jp/post/2016/08/07/deep-learning-introduction/</link>
-      <pubDate>Sun, 07 Aug 2016 15:46:48 +0900</pubDate>
-      
-      <guid>http://blog.algolab.jp/post/2016/08/07/deep-learning-introduction/</guid>
-      <description>
-
-&lt;p&gt;弊社で実施している &lt;a href=&#34;http://blog.algolab.jp/post/2016/07/25/ai-training/&#34;&gt;AIトレーニング&lt;/a&gt; の実況中継シリーズです。&lt;br /&gt;
-前回の内容は &lt;a href=&#34;http://blog.algolab.jp/post/2016/08/01/ai-training-kick-off/&#34;&gt;AIトレーニングキックオフ 〜ハムケツを認識したい〜&lt;/a&gt; をご覧ください。&lt;br /&gt;
-今回は、ディープラーニングのイメージを掴んでもらうためにAさんにお話した内容をお届けします。&lt;/p&gt;
-
-&lt;h2 id=&#34;画像認識とは&#34;&gt;画像認識とは？&lt;/h2&gt;
-
-&lt;p&gt;さて、突然ですが、皆さんに問題です。&lt;br /&gt;
-以下のようにグループが分かれているものとします。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/07/deep-learning-introduction//group_1.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;このとき、下の画像はどちらのグループになるでしょうか？&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/07/deep-learning-introduction//square_red.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;正解は「B」です。正解者の皆さんおめでとうございます！&lt;br /&gt;
-ではなぜ「B」なのか。おそらくこう考えたはずです。&lt;/p&gt;
-
-&lt;p&gt;「色がポイントだ。青ければグループA、赤ければグループB。だから、この画像はグループBだろう。」&lt;/p&gt;
-
-&lt;p&gt;図式化すると、下記のような形かと思います。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/07/deep-learning-introduction//image_recognition_1.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;これが画像を見分けるメカニズムで、これを機械に代替させようというのが機械学習における画像認識の分野です。&lt;br /&gt;
-そして、機械学習の文脈では、前半を「特徴抽出」、後半を「分類」と呼びます。&lt;/p&gt;
-
-&lt;h2 id=&#34;画像認識の難しさ&#34;&gt;画像認識の難しさ&lt;/h2&gt;
-
-&lt;p&gt;さて、冒頭に出した問題ですが、以下のようなグループ分けだったらどうでしょう。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/07/deep-learning-introduction//group_2.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;先ほどは「色」に注目しましたが、今度は「形」に注目して判定する必要がありそうです。&lt;br /&gt;
-図を再掲すると以下のようになります。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/07/deep-learning-introduction//image_recognition_2.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;このように、注目するポイントは問題設定によって異なります。&lt;br /&gt;
-そして、この注目する部分を決める「特徴抽出」の設計は、人間が行う必要があり、大変でした。&lt;/p&gt;
-
-&lt;h2 id=&#34;ディープラーニングとは&#34;&gt;ディープラーニングとは？&lt;/h2&gt;
-
-&lt;p&gt;これらの作業を機械が自動的に行ってくれるのがディープラーニングです。&lt;br /&gt;
-具体的には、この画像はグループA、この画像はグループBといったように大量の画像を機械に覚えさせるだけで良い、というイメージです。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/07/deep-learning-introduction//deep_learning.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;つまり、これまでよりも簡単に画像認識ができるようになったということです。しかも、より高い精度が出るようになったということで、ディープラーニングは爆発的に広まりました。&lt;/p&gt;
-
-&lt;h2 id=&#34;畳み込みニューラルネットワーク-cnn&#34;&gt;畳み込みニューラルネットワーク (CNN)&lt;/h2&gt;
-
-&lt;p&gt;画像認識におけるディープラーニングでは、畳み込みニューラルネットワークが用いられるのが一般的です。&lt;br /&gt;
-教科書などでは、よく下記のような図が用いられていると思います。
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/07/deep-learning-introduction//dnn.png&#34;/&gt;
-  
-&lt;/figure&gt;
-&lt;/p&gt;
-
-&lt;p&gt;縦に並んだ丸の列が「層」を表しており、上記の図は4層のニューラルネットワークを表現しています。&lt;br /&gt;
-大雑把にいうと、最後の層の前までで「特徴抽出」を行い、最後の層で「分類」を行っていると考えてください。&lt;br /&gt;
-本当はそれぞれの層に意味がありますが、現段階では上記の理解で十分かと思います。&lt;/p&gt;
-
-&lt;h2 id=&#34;次回予告&#34;&gt;次回予告&lt;/h2&gt;
-
-&lt;p&gt;ディープラーニング（畳み込みニューラルネットワーク）のイメージを掴んでいただいた上で、Aさんに課題を設定しました。&lt;/p&gt;
-
-&lt;p&gt;「学習済みモデルを用いて、画像の特徴抽出を行い、次元削減を行った上で可視化せよ」&lt;/p&gt;
-
-&lt;p&gt;見慣れない用語が幾つか出てきましたが、調べれば理解出来る内容だと考え、上記課題としました。&lt;br /&gt;
-次回はその内容についてお届けします。&lt;/p&gt;
 </description>
     </item>
     

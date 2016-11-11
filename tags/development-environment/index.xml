@@ -307,7 +307,7 @@ $ sudo systemctl enable vncserver@1.service
 
 &lt;p&gt;筆者の機械学習系のPython開発環境は、&lt;a href=&#34;https://www.vagrantup.com/&#34;&gt;Vagrant&lt;/a&gt; を用いた &lt;a href=&#34;https://atlas.hashicorp.com/bento/boxes/ubuntu-16.04&#34;&gt;Ubuntu (16.04 LTS)&lt;/a&gt; 上に構築しています。&lt;br /&gt;
 ここでは、画像認識、音声認識、自然言語処理などに必要な環境をオールインワンで構築する手順をまとめます。&lt;br /&gt;
-(最終更新日: 2016/09/10)&lt;/p&gt;
+(最終更新日: 2016/11/11)&lt;/p&gt;
 
 &lt;h2 id=&#34;osバージョン&#34;&gt;OSバージョン&lt;/h2&gt;
 
@@ -336,7 +336,7 @@ pyenvやAnacondaの概要やメリットについては、下記の記事に詳�
 
 &lt;p&gt;まず、必要なパッケージをインストールします。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev libpng-dev
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;pyenvのインストール&#34;&gt;pyenvのインストール&lt;/h3&gt;
@@ -430,7 +430,7 @@ $ pip install --upgrade pip
 
 &lt;p&gt;画像処理ライブラリ。&lt;code&gt;conda&lt;/code&gt;経由で本体もまとめてインストールします。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ conda install -y -c kalefranz imagemagick
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ conda install -y -c vdbwrair imagemagick
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;opencv&#34;&gt;OpenCV&lt;/h3&gt;
