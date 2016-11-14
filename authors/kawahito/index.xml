@@ -27,6 +27,9 @@
 GitHubで「neuralart」と検索すると実装例がいくつか出てきますので、そのうちの一つを動作させてみます。&lt;br /&gt;
 &lt;a href=&#34;https://github.com/ckmarkoh/neuralart_tensorflow&#34;&gt;https://github.com/ckmarkoh/neuralart_tensorflow&lt;/a&gt;&lt;/p&gt;
 
+&lt;p&gt;なお、環境構築については下記の記事をご参照ください。Python2系での動作を確認しています。&lt;br /&gt;
+&lt;a href=&#34;{{ref &amp;quot;post/2016/08/21/pyenv-anaconda-ubuntu.md&amp;quot;}}&#34;&gt;【随時更新】pyenv + Anaconda (Ubuntu 16.04 LTS) で機械学習のPython開発環境をオールインワンで整える&lt;/a&gt;&lt;/p&gt;
+
 &lt;h2 id=&#34;ソースコードをダウンロード&#34;&gt;ソースコードをダウンロード&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ git clone https://github.com/ckmarkoh/neuralart_tensorflow.git
@@ -69,6 +72,11 @@ GitHubで「neuralart」と検索すると実装例がいくつか出てきま�
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd results
 $ convert -delay 50 -loop 0 0*00.png animation.gif
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;論文&#34;&gt;論文&lt;/h2&gt;
+
+&lt;p&gt;画風変換の元となる論文はこちらです。&lt;br /&gt;
+&lt;a href=&#34;https://arxiv.org/abs/1508.06576&#34;&gt;A Neural Algorithm of Artistic Style&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -1661,7 +1669,7 @@ $ sudo systemctl enable vncserver@1.service
     </item>
     
     <item>
-      <title>pyenv &#43; Anaconda (Ubuntu 16.04 LTS) で機械学習のPython開発環境をオールインワンで整える【随時更新】</title>
+      <title>【随時更新】pyenv &#43; Anaconda (Ubuntu 16.04 LTS) で機械学習のPython開発環境をオールインワンで整える</title>
       <link>http://blog.algolab.jp/post/2016/08/21/pyenv-anaconda-ubuntu/</link>
       <pubDate>Sun, 21 Aug 2016 17:22:48 +0900</pubDate>
       
@@ -1670,7 +1678,7 @@ $ sudo systemctl enable vncserver@1.service
 
 &lt;p&gt;筆者の機械学習系のPython開発環境は、&lt;a href=&#34;https://www.vagrantup.com/&#34;&gt;Vagrant&lt;/a&gt; を用いた &lt;a href=&#34;https://atlas.hashicorp.com/bento/boxes/ubuntu-16.04&#34;&gt;Ubuntu (16.04 LTS)&lt;/a&gt; 上に構築しています。&lt;br /&gt;
 ここでは、画像認識、音声認識、自然言語処理などに必要な環境をオールインワンで構築する手順をまとめます。&lt;br /&gt;
-(最終更新日: 2016/11/11)&lt;/p&gt;
+(最終更新日: 2016/11/14)&lt;/p&gt;
 
 &lt;h2 id=&#34;osバージョン&#34;&gt;OSバージョン&lt;/h2&gt;
 
@@ -1716,7 +1724,7 @@ $ source ~/.bashrc
 
 &lt;h3 id=&#34;anacondaのインストール&#34;&gt;Anacondaのインストール&lt;/h3&gt;
 
-&lt;p&gt;まず、最新のAnaconda (Python 3系) のバージョンを確認します。&lt;/p&gt;
+&lt;p&gt;まず、最新のAnaconda (Python3系) のバージョンを確認します。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pyenv install -l | grep anaconda3
   anaconda3-2.0.0
@@ -1743,6 +1751,24 @@ $ source ~/.bashrc
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ python --version
 Python 3.5.1 :: Anaconda 4.1.0 (64-bit)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;python2系の導入&#34;&gt;Python2系の導入&lt;/h2&gt;
+
+&lt;p&gt;ここまでで、Python3系の環境が構築できました。&lt;br /&gt;
+場合によって、Python2系の環境が必要になることもあるので、導入しておきます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ conda create -n py27con python=2.7 anaconda
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上記環境に切り替えるには以下のコマンドを叩きます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ source activate py27
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;なお、下記で環境を抜けることができます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ source deacivate
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;pythonライブラリのインストール&#34;&gt;Pythonライブラリのインストール&lt;/h2&gt;

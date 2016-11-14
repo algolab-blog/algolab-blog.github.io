@@ -27,6 +27,9 @@
 GitHubで「neuralart」と検索すると実装例がいくつか出てきますので、そのうちの一つを動作させてみます。&lt;br /&gt;
 &lt;a href=&#34;https://github.com/ckmarkoh/neuralart_tensorflow&#34;&gt;https://github.com/ckmarkoh/neuralart_tensorflow&lt;/a&gt;&lt;/p&gt;
 
+&lt;p&gt;なお、環境構築については下記の記事をご参照ください。Python2系での動作を確認しています。&lt;br /&gt;
+&lt;a href=&#34;{{ref &amp;quot;post/2016/08/21/pyenv-anaconda-ubuntu.md&amp;quot;}}&#34;&gt;【随時更新】pyenv + Anaconda (Ubuntu 16.04 LTS) で機械学習のPython開発環境をオールインワンで整える&lt;/a&gt;&lt;/p&gt;
+
 &lt;h2 id=&#34;ソースコードをダウンロード&#34;&gt;ソースコードをダウンロード&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ git clone https://github.com/ckmarkoh/neuralart_tensorflow.git
@@ -69,6 +72,11 @@ GitHubで「neuralart」と検索すると実装例がいくつか出てきま�
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd results
 $ convert -delay 50 -loop 0 0*00.png animation.gif
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;論文&#34;&gt;論文&lt;/h2&gt;
+
+&lt;p&gt;画風変換の元となる論文はこちらです。&lt;br /&gt;
+&lt;a href=&#34;https://arxiv.org/abs/1508.06576&#34;&gt;A Neural Algorithm of Artistic Style&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
