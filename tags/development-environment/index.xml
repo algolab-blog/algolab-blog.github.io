@@ -392,7 +392,13 @@ Python 3.5.1 :: Anaconda 4.1.0 (64-bit)
 
 &lt;p&gt;上記環境に切り替えるには以下のコマンドを叩きます。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ source activate py27
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ source activate py27con
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Python環境が切り替わっていることを確認します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ python --version
+Python 2.7.12 :: Anaconda 4.1.0 (64-bit)
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;なお、下記で環境を抜けることができます。&lt;/p&gt;
