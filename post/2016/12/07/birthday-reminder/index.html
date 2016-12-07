@@ -5,14 +5,14 @@
   <title>
     
     
-      VPNサーバのパブリックIPをDNSに登録する 〜Raspberry Pi上で定期実行〜
+       Alexa Skill (Amazon Echo) を公開したので開発上のポイントをまとめてみる 〜Birthday Reminder〜
     
     &nbsp;|&nbsp;ALGO GEEKS
   </title>
 
   <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1" />
   <meta name="google-site-verification" content="DmTgCYn-qNNekSNxji7FGHMXvq3_4vrKm3pkvI9llLo" />
-  <link rel="canonical" href="http://blog.algolab.jp/post/2016/08/24/vpn-dns/"/>
+  <link rel="canonical" href="http://blog.algolab.jp/post/2016/12/07/birthday-reminder/"/>
 
   <link rel="stylesheet" href="/css/sanitize.css" />
   <link rel="stylesheet" href="/css/responsive.css" />
@@ -60,19 +60,19 @@
   
   <main id="single" role="main">
     <div class="article-header">
-      <h1>VPNサーバのパブリックIPをDNSに登録する 〜Raspberry Pi上で定期実行〜</h1>
+      <h1> Alexa Skill (Amazon Echo) を公開したので開発上のポイントをまとめてみる 〜Birthday Reminder〜</h1>
       
 
 <div class="meta">
   
-    <span>2016/08/24</span>
+    <span>2016/12/07</span>
   
   
     <span>|</span>
     
-      <a href="/tags/development-environment">#環境構築</a>&nbsp;
+      <a href="/tags/speech-recognition">#音声認識</a>&nbsp;
     
-      <a href="/tags/raspberry-pi">#Raspberry Pi</a>&nbsp;
+      <a href="/tags/amazon-echo">#Amazon Echo</a>&nbsp;
     
   
   
@@ -99,98 +99,140 @@
 
       
 
-<p>弊社オフィスではVPN環境を構築していますが、固定IPを取得していないため、パブリックIPが変わるたびにVPNの接続先を変更しなければならず面倒です。</p>
+<p>こちらの記事の続きとなります。<br />
+<a href="http://blog.algolab.jp/post/2016/09/28/alexa-color-expert/">AlexaスキルとLambdaファンクションはどのように連携しているか</a></p>
 
-<p>そこで、定期的にIPアドレスを取得し、DNSに登録するようにしています。<br />
-ここでは、Raspberry Pi 上でAWS SDK for Python (Boto 3) を用いて定期実行させる手順をまとめます。</p>
+<p>今回は、オリジナルのスキルを作って公開しました。その中で色々分かったことを、まとめてみます。</p>
 
-<h2 id="aws-sdk-for-python-のインストールおよび設定">AWS SDK for Python のインストールおよび設定</h2>
+<h2 id="開発上の制約">開発上の制約</h2>
 
-<p>DNSはAWSのRoute53で管理しており、その操作のためにSDKを導入します。<br />
-なお、Raspberry PiにはPython (2.7系) がデフォルトでインストールされているため、そのまま用います。</p>
+<h3 id="自由な文章の認識は難しい">自由な文章の認識は難しい</h3>
 
-<pre><code class="language-sh">$ sudo pip install boto3
+<p>これが一番困った点でした。基本的には、テンプレートのような形であらかじめ登録しておいた文章や単語しか認識がうまくいかないため、今のところ、限定的な用途でしか利用できなさそう、という印象です。</p>
+
+<p>ただ、人名や都市名など、ある程度想定できる単語を認識する枠組み (Slot Type) は用意されています。</p>
+
+<pre><code class="language-sh">例) AMAZON.US_FIRST_NAME, AMAZON.US_CITY, AMAZON.DATE
 </code></pre>
 
-<p>続いて、Credentialを設定します。<code>YOUR_KEY</code>および<code>YOUR_SECRET</code>は環境に合わせて設定してください。<br />
-(Route53へのアクセス権限があれば問題ありません)</p>
+<p>ですので、これらを利用するシチュエーションでは比較的柔軟なスキルを作成することができそうです。</p>
 
-<pre><code class="language-sh">$ vi ~/.aws/credentials
-</code></pre>
+<h3 id="データの永続化には別途仕組みが必要">データの永続化には別途仕組みが必要</h3>
 
-<pre><code class="language-sh">[default]
-aws_access_key_id = YOUR_KEY
-aws_secret_access_key = YOUR_SECRET
-</code></pre>
+<p>Alexa Skillを起動している最中（セッション内) ではデータ保持ができますが、セッションをまたいでデータを保持するには、自前で永続化する機構を作らないといけません。</p>
 
-<h2 id="dns更新">DNS更新</h2>
+<h3 id="使用できる言語は-英語およびドイツ語のみ">使用できる言語は、英語およびドイツ語のみ</h3>
 
-<p>DNS更新には<code>change_resource_record_sets</code>メソッドを使用します。<br />
-詳細は、<a href="http://boto3.readthedocs.io/en/latest/reference/services/route53.html#Route53.Client.change_resource_record_sets">公式ドキュメント</a> を参照してください。</p>
+<p>他の言語はまだサポートされていません。</p>
 
-<h2 id="パブリックipの取得">パブリックIPの取得</h2>
+<p>これらの制約や仕様がある中で、作りたいスキルをどう実現できそうか考えることがまず必要です。</p>
 
-<p>パブリックIPは、<a href="http://httpbin.org">httpbin.org</a> にアクセスして取得します。<br />
-レスポンスとしては以下のようなものが返ってきます。</p>
+<h2 id="birthday-reminder">Birthday Reminder</h2>
 
-<pre><code class="language-sh">$ curl http://httpbin.org/ip
+<figure>
+  <img src="/images//post/2016/12/07/birthday-reminder//birthday-reminder.png"/>
+  
+</figure>
+
+
+<p>当初、記憶させたことをなんでも取り出せるスキルを作ろうと考えていましたが、上記のように難しいことがわかったため、今回は誕生日に限定して、記憶や取り出しのできるスキルを作ることにしました。</p>
+
+<p><a href="http://alexa.amazon.com/spa/index.html#skills/dp/B01N8USH7G/?ref=skill_dsk_skb_sr_0">こちら</a> からインストール可能です。</p>
+
+<p>本スキルでは、以下のようなやり取りをすることができます。</p>
+
+<h3 id="誕生日を登録する">誕生日を登録する</h3>
+
+<blockquote>
+<p>User: &ldquo;Tom&rsquo;s birthday is July seven.&rdquo;<br />
+Skill: &ldquo;I now know Tom&rsquo;s birthday is July seven.&rdquo;</p>
+</blockquote>
+
+<h3 id="登録した人の誕生日を調べる">登録した人の誕生日を調べる</h3>
+
+<blockquote>
+<p>User: &ldquo;When was Tom born on?&rdquo;<br />
+Skill: &ldquo;Tom&rsquo;s birthday is Jul seven.&rdquo;</p>
+</blockquote>
+
+<h3 id="登録した誕生日に生まれた人を調べる">登録した誕生日に生まれた人を調べる</h3>
+
+<blockquote>
+<p>User: &ldquo;Who were born on July seven?&rdquo;<br />
+Skill: &ldquo;Tom were born on Jul seven.&rdquo;</p>
+</blockquote>
+
+<p>人名と誕生日の認識には、Slot Typeの枠組みを利用しました。人名には <code>AMAZON.US_FIRST_NAME</code> を使用し、人名だけでなく母親や兄弟の誕生日も登録できるように<code>my mother</code>, <code>my brother</code>なども <code>AMAZON.US_FIRST_NAME</code> を拡張して利用できるようにしました。誕生日の日付の認識では <code>AMAZON.DATE</code> を使用しています。</p>
+
+<h2 id="データの永続化">データの永続化</h2>
+
+<p>今回のスキルでは、誕生日というデータを永続化して次回のセッションでも取り出すことができるようにする必要がありました。 単純に同一セッションの保存であれば、前回の記事でも紹介したように、<code>sessionAttributes</code>を利用することができます。ただし、次回以降のセッションでも利用しようとするには何かしらのDBへの保存が必要です。</p>
+
+<p>今回は「人」に対する「誕生日」という Key-Value のような特定のデータの引き方になることから、DynamoDBを選択しました。</p>
+
+<h2 id="保存するデータ">保存するデータ</h2>
+
+<p>今回のスキルでは、以下のようなデータを保持しています。</p>
+
+<pre><code class="language-json">{
+	&quot;user_id&quot;: &quot;amzn1.ask.account.XXX...&quot;,
+ 	&quot;person&quot;: &quot;Tom&quot;,
+ 	&quot;birthday&quot;: &quot;Jul 07&quot;,
+},
 {
-    &quot;origin&quot;: &quot;xxx.xxx.xxx.xxx&quot;
+	&quot;user_id&quot;: &quot;amzn1.ask.account.XXX...&quot;,
+ 	&quot;person&quot;: &quot;Peter&quot;,
+ 	&quot;birthday&quot;: &quot;Dec 04&quot;,
 }
 </code></pre>
 
-<h2 id="スクリプト">スクリプト</h2>
+<p><code>user_id</code>はユーザのAmazonアカウントに紐づくIDです。<code>person</code>は登録した人の名前、<code>birthday</code>は登録した人の誕生日です。</p>
 
-<p>以上を踏まえて、スクリプトを書いていきます。<br />
-<code>DOMAIN</code>および<code>HOST</code>は環境に合わせて書き換えてください。下記では<code>hoge.example.com</code>を登録する例としています。</p>
+<h2 id="dynamodbのスキーマ構造">DynamoDBのスキーマ構造</h2>
 
-<pre><code class="language-python"># -*- coding: utf-8 -*-
+<p>上記データを、具体的には次のようなスキーマ構造としてDynamoDBに格納しています。</p>
 
-import json
-import urllib2
+<ul>
+<li>プライマリーキー
 
-import boto3
+<ul>
+<li>パーティションキー: <code>user_id</code></li>
+<li>ソートキー: <code>person</code></li>
+</ul></li>
+<li>その他属性
 
-DOMAIN = 'hoge'
-HOST = 'example.com'
-TTL = 300
+<ul>
+<li><code>birthday</code></li>
+</ul></li>
+<li>セカンダリインデックス
 
-# パブリックIPアドレスの取得
-response = urllib2.urlopen('http://httpbin.org/ip')
-ip_address = json.loads(response.read())['origin']
+<ul>
+<li>パーティションキー: <code>user_id</code></li>
+<li>ソートキー: <code>birthday</code></li>
+</ul></li>
+</ul>
 
-# AWS SDK Client
-client = boto3.client('route53')
+<p><code>user_id</code>と<code>person</code>をプライマリーキーにすることで、登録した人の名前から誕生日を参照できるようにし、<code>user_id</code>と<code>birthday</code>をセカンダリインデックスとすることで、誕生日から人を参照できるようにしています。</p>
 
-# hosted_zone_idの取得
-hosted_zones = client.list_hosted_zones()['HostedZones']
-hosted_zone_id = filter(lambda h: h['Name'] == HOST + '.', hosted_zones)[0]['Id']
+<h2 id="スキルの申請と審査">スキルの申請と審査</h2>
 
-# 更新内容
-change_batch = {
-    'Changes': [
-        {
-            'Action': 'UPSERT',
-            'ResourceRecordSet': {
-                'Name': DOMAIN + '.' + HOST + '.',
-                'Type': 'A',
-                'TTL': TTL,
-                'ResourceRecords': [
-                    {'Value': ip_address}
-                ]
-            }
-        }
-    ]
-}
+<p>スキルを作り終わったら、あとは公開に必要なスキルの説明やスキルのアイコン画像、Privacy Policyの準備になります。</p>
 
-# 更新
-client.change_resource_record_sets(
-    HostedZoneId = hosted_zone_id,
-    ChangeBatch = change_batch
-)
-</code></pre>
+<figure>
+  <img src="/images//post/2016/12/07/birthday-reminder//publishing-information.png"/>
+  
+</figure>
 
-<p>あとは、上記のスクリプトを<code>cron</code>に登録するなどして、定期実行させれば完了です。</p>
+
+<p>申請をすると、2営業日ほどで結果が返ってきました。公式ドキュメントの <a href="https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/submission-testing-walk-through-tide-pooler-skill">こちら</a> にあるようなテスト項目を結構細かく実際に試してテストしている印象でした。指摘された箇所を修正して再申請して審査が通りました。</p>
+
+<h2 id="まとめ">まとめ</h2>
+
+<p>今回、Alexa Skillを作るにあたっての制約や設計で工夫した点、審査の過程などを紹介しました。基本的にはDBの設計周りは一般的なアプリケーションの設計と大きく変わらないと思います。</p>
+
+<p>Alexa Skillのドキュメントは結構ありますが、細かいページへのサイトマップなどは用意されてないので、検索して見つけるか関連するページのフッター付近のリンクから辿るしかなかったのが若干厄介でした。今後、整備されることに期待です。</p>
+
+<p>先日、テキストを音声で読み上げる <a href="https://aws.amazon.com/polly/">Amazon Polly</a> が発表されましたが、こちらにも期待です。</p>
 
       
   <div id="share-this">
@@ -239,10 +281,8 @@ client.change_resource_record_sets(
   
   <nav class="pagination-single">
     
-      <span class="previous">&larr; <a href="http://blog.algolab.jp/post/2016/08/22/ubuntu-tightvnc-server/" rel="prev">Ubuntu 16.04 LTSにXcfe (or LXDE) とTightVNC Serverでリモートデスクトップ環境を構築する</a></span>
+      <span class="previous">&larr; <a href="http://blog.algolab.jp/post/2016/11/11/neuralart/" rel="prev">TensorFlowで画風変換を試す</a></span>
     
-    
-      <span class="next"><a href="http://blog.algolab.jp/post/2016/08/25/mahjong-camera-introduction/" rel="next">麻雀カメラプロジェクト再始動？ 〜【導入編】テンプレートマッチングによる麻雀牌判定〜</a> &rarr;</span>
     
   </nav>
   
@@ -505,7 +545,7 @@ client.change_resource_record_sets(
     
       
       
-        _lgy_lt('set', 'category', '環境構築');
+        _lgy_lt('set', 'category', '音声認識');
       
     
     _lgy_lt('send', 'pageview');

@@ -6,8 +6,153 @@
     <description>Recent content in Kawahito on ALGO GEEKS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Fri, 11 Nov 2016 18:47:53 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 07 Dec 2016 18:15:27 +0900</lastBuildDate>
     <atom:link href="http://blog.algolab.jp/authors/kawahito/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title> Alexa Skill (Amazon Echo) を公開したので開発上のポイントをまとめてみる 〜Birthday Reminder〜</title>
+      <link>http://blog.algolab.jp/post/2016/12/07/birthday-reminder/</link>
+      <pubDate>Wed, 07 Dec 2016 18:15:27 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/12/07/birthday-reminder/</guid>
+      <description>
+
+&lt;p&gt;こちらの記事の続きとなります。&lt;br /&gt;
+&lt;a href=&#34;http://blog.algolab.jp/post/2016/09/28/alexa-color-expert/&#34;&gt;AlexaスキルとLambdaファンクションはどのように連携しているか&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;今回は、オリジナルのスキルを作って公開しました。その中で色々分かったことを、まとめてみます。&lt;/p&gt;
+
+&lt;h2 id=&#34;開発上の制約&#34;&gt;開発上の制約&lt;/h2&gt;
+
+&lt;h3 id=&#34;自由な文章の認識は難しい&#34;&gt;自由な文章の認識は難しい&lt;/h3&gt;
+
+&lt;p&gt;これが一番困った点でした。基本的には、テンプレートのような形であらかじめ登録しておいた文章や単語しか認識がうまくいかないため、今のところ、限定的な用途でしか利用できなさそう、という印象です。&lt;/p&gt;
+
+&lt;p&gt;ただ、人名や都市名など、ある程度想定できる単語を認識する枠組み (Slot Type) は用意されています。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;例) AMAZON.US_FIRST_NAME, AMAZON.US_CITY, AMAZON.DATE
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ですので、これらを利用するシチュエーションでは比較的柔軟なスキルを作成することができそうです。&lt;/p&gt;
+
+&lt;h3 id=&#34;データの永続化には別途仕組みが必要&#34;&gt;データの永続化には別途仕組みが必要&lt;/h3&gt;
+
+&lt;p&gt;Alexa Skillを起動している最中（セッション内) ではデータ保持ができますが、セッションをまたいでデータを保持するには、自前で永続化する機構を作らないといけません。&lt;/p&gt;
+
+&lt;h3 id=&#34;使用できる言語は-英語およびドイツ語のみ&#34;&gt;使用できる言語は、英語およびドイツ語のみ&lt;/h3&gt;
+
+&lt;p&gt;他の言語はまだサポートされていません。&lt;/p&gt;
+
+&lt;p&gt;これらの制約や仕様がある中で、作りたいスキルをどう実現できそうか考えることがまず必要です。&lt;/p&gt;
+
+&lt;h2 id=&#34;birthday-reminder&#34;&gt;Birthday Reminder&lt;/h2&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/12/07/birthday-reminder//birthday-reminder.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;当初、記憶させたことをなんでも取り出せるスキルを作ろうと考えていましたが、上記のように難しいことがわかったため、今回は誕生日に限定して、記憶や取り出しのできるスキルを作ることにしました。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://alexa.amazon.com/spa/index.html#skills/dp/B01N8USH7G/?ref=skill_dsk_skb_sr_0&#34;&gt;こちら&lt;/a&gt; からインストール可能です。&lt;/p&gt;
+
+&lt;p&gt;本スキルでは、以下のようなやり取りをすることができます。&lt;/p&gt;
+
+&lt;h3 id=&#34;誕生日を登録する&#34;&gt;誕生日を登録する&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;User: &amp;ldquo;Tom&amp;rsquo;s birthday is July seven.&amp;rdquo;&lt;br /&gt;
+Skill: &amp;ldquo;I now know Tom&amp;rsquo;s birthday is July seven.&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;登録した人の誕生日を調べる&#34;&gt;登録した人の誕生日を調べる&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;User: &amp;ldquo;When was Tom born on?&amp;rdquo;&lt;br /&gt;
+Skill: &amp;ldquo;Tom&amp;rsquo;s birthday is Jul seven.&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;登録した誕生日に生まれた人を調べる&#34;&gt;登録した誕生日に生まれた人を調べる&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;User: &amp;ldquo;Who were born on July seven?&amp;rdquo;&lt;br /&gt;
+Skill: &amp;ldquo;Tom were born on Jul seven.&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;人名と誕生日の認識には、Slot Typeの枠組みを利用しました。人名には &lt;code&gt;AMAZON.US_FIRST_NAME&lt;/code&gt; を使用し、人名だけでなく母親や兄弟の誕生日も登録できるように&lt;code&gt;my mother&lt;/code&gt;, &lt;code&gt;my brother&lt;/code&gt;なども &lt;code&gt;AMAZON.US_FIRST_NAME&lt;/code&gt; を拡張して利用できるようにしました。誕生日の日付の認識では &lt;code&gt;AMAZON.DATE&lt;/code&gt; を使用しています。&lt;/p&gt;
+
+&lt;h2 id=&#34;データの永続化&#34;&gt;データの永続化&lt;/h2&gt;
+
+&lt;p&gt;今回のスキルでは、誕生日というデータを永続化して次回のセッションでも取り出すことができるようにする必要がありました。 単純に同一セッションの保存であれば、前回の記事でも紹介したように、&lt;code&gt;sessionAttributes&lt;/code&gt;を利用することができます。ただし、次回以降のセッションでも利用しようとするには何かしらのDBへの保存が必要です。&lt;/p&gt;
+
+&lt;p&gt;今回は「人」に対する「誕生日」という Key-Value のような特定のデータの引き方になることから、DynamoDBを選択しました。&lt;/p&gt;
+
+&lt;h2 id=&#34;保存するデータ&#34;&gt;保存するデータ&lt;/h2&gt;
+
+&lt;p&gt;今回のスキルでは、以下のようなデータを保持しています。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+	&amp;quot;user_id&amp;quot;: &amp;quot;amzn1.ask.account.XXX...&amp;quot;,
+ 	&amp;quot;person&amp;quot;: &amp;quot;Tom&amp;quot;,
+ 	&amp;quot;birthday&amp;quot;: &amp;quot;Jul 07&amp;quot;,
+},
+{
+	&amp;quot;user_id&amp;quot;: &amp;quot;amzn1.ask.account.XXX...&amp;quot;,
+ 	&amp;quot;person&amp;quot;: &amp;quot;Peter&amp;quot;,
+ 	&amp;quot;birthday&amp;quot;: &amp;quot;Dec 04&amp;quot;,
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;user_id&lt;/code&gt;はユーザのAmazonアカウントに紐づくIDです。&lt;code&gt;person&lt;/code&gt;は登録した人の名前、&lt;code&gt;birthday&lt;/code&gt;は登録した人の誕生日です。&lt;/p&gt;
+
+&lt;h2 id=&#34;dynamodbのスキーマ構造&#34;&gt;DynamoDBのスキーマ構造&lt;/h2&gt;
+
+&lt;p&gt;上記データを、具体的には次のようなスキーマ構造としてDynamoDBに格納しています。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;プライマリーキー
+
+&lt;ul&gt;
+&lt;li&gt;パーティションキー: &lt;code&gt;user_id&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;ソートキー: &lt;code&gt;person&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;その他属性
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;birthday&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;セカンダリインデックス
+
+&lt;ul&gt;
+&lt;li&gt;パーティションキー: &lt;code&gt;user_id&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;ソートキー: &lt;code&gt;birthday&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code&gt;user_id&lt;/code&gt;と&lt;code&gt;person&lt;/code&gt;をプライマリーキーにすることで、登録した人の名前から誕生日を参照できるようにし、&lt;code&gt;user_id&lt;/code&gt;と&lt;code&gt;birthday&lt;/code&gt;をセカンダリインデックスとすることで、誕生日から人を参照できるようにしています。&lt;/p&gt;
+
+&lt;h2 id=&#34;スキルの申請と審査&#34;&gt;スキルの申請と審査&lt;/h2&gt;
+
+&lt;p&gt;スキルを作り終わったら、あとは公開に必要なスキルの説明やスキルのアイコン画像、Privacy Policyの準備になります。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/12/07/birthday-reminder//publishing-information.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;申請をすると、2営業日ほどで結果が返ってきました。公式ドキュメントの &lt;a href=&#34;https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/submission-testing-walk-through-tide-pooler-skill&#34;&gt;こちら&lt;/a&gt; にあるようなテスト項目を結構細かく実際に試してテストしている印象でした。指摘された箇所を修正して再申請して審査が通りました。&lt;/p&gt;
+
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
+
+&lt;p&gt;今回、Alexa Skillを作るにあたっての制約や設計で工夫した点、審査の過程などを紹介しました。基本的にはDBの設計周りは一般的なアプリケーションの設計と大きく変わらないと思います。&lt;/p&gt;
+
+&lt;p&gt;Alexa Skillのドキュメントは結構ありますが、細かいページへのサイトマップなどは用意されてないので、検索して見つけるか関連するページのフッター付近のリンクから辿るしかなかったのが若干厄介でした。今後、整備されることに期待です。&lt;/p&gt;
+
+&lt;p&gt;先日、テキストを音声で読み上げる &lt;a href=&#34;https://aws.amazon.com/polly/&#34;&gt;Amazon Polly&lt;/a&gt; が発表されましたが、こちらにも期待です。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>TensorFlowで画風変換を試す</title>
@@ -2170,205 +2315,6 @@ Slack上で「ok board」と打ち込むと、FAQからSlackに質問だけが�
 
 &lt;p&gt;時間の使い方を可視化してみると色々な気づきがあります。是非試してみてください！&lt;br /&gt;
 &lt;a href=&#34;http://tools.algolab.jp/calendar_reports&#34;&gt;http://tools.algolab.jp/calendar_reports&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Amazon Echoを6,000円で自作する 〜Raspberry Pi 3 &#43; Alexa Voice Services (AVS)〜</title>
-      <link>http://blog.algolab.jp/post/2016/08/11/raspberry-pi-alexa/</link>
-      <pubDate>Thu, 11 Aug 2016 19:08:44 +0900</pubDate>
-      
-      <guid>http://blog.algolab.jp/post/2016/08/11/raspberry-pi-alexa/</guid>
-      <description>
-
-&lt;p&gt;&lt;a href=&#34;http://blog.algolab.jp/post/2016/07/29/mary-meeker-2016/&#34;&gt;音声は新しいパラダイムシフトになる 〜2016年度版メアリー・ミーカー氏レポートまとめ〜&lt;/a&gt; でも触れたように、次世代デバイスとしてAmazon Echoは注目するべき存在です。&lt;/p&gt;
-
-&lt;p&gt;しかしながら、日本では技適の関係で未だ使用できません。&lt;br /&gt;
-ただ、Alexa Voice Services (AVS) というものが公開されており、Amazon Echoを様々なデバイスで動作させることが可能です。&lt;/p&gt;
-
-&lt;p&gt;今回は、Raspberry Pi 3からAVSを利用できるようにしました。&lt;br /&gt;
-セットアップについては下記にある通りですが、低予算での最低限の手順をまとめてみます。
-&lt;a href=&#34;https://github.com/amzn/alexa-avs-raspberry-pi&#34;&gt;https://github.com/amzn/alexa-avs-raspberry-pi&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;完成したもの&#34;&gt;完成したもの&lt;/h2&gt;
-
-&lt;p&gt;いきなり動画ですが、こんな感じで動きます。英語で話かけると、リクエストを解釈して実行してくれたり、音声で応答してくれて面白いです。
-
-&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
-  &lt;iframe src=&#34;//www.youtube.com/embed/fWubPL5_YaU&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; allowfullscreen frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
- &lt;/div&gt;
-&lt;/p&gt;
-
-&lt;h2 id=&#34;用意したもの&#34;&gt;用意したもの&lt;/h2&gt;
-
-&lt;p&gt;音声入力にUSBマイクロフォンが必要なので、Raspberry Pi 3と併せて購入。他はありあわせで用意しました。&lt;br /&gt;
-Raspberry Pi用のディスプレイを用意してもよいですが、今回はVNC server (Linux版リモートデスクトップ) を使います。&lt;/p&gt;
-
-&lt;h3 id=&#34;買ったもの&#34;&gt;買ったもの&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Raspberry Pi 3 (4,800円)
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/gp/product/B01D1FR2WE/&#34;&gt;https://www.amazon.co.jp/gp/product/B01D1FR2WE/&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;USBマイクロフォン (1,600円)
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/gp/product/B0027WPY82&#34;&gt;https://www.amazon.co.jp/gp/product/B0027WPY82&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;ありあわせ&#34;&gt;ありあわせ&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Micro SDカード
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/dp/B00CDJNOX6/&#34;&gt;https://www.amazon.co.jp/dp/B00CDJNOX6/&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Micro-USB (A-MicroB) ケーブル&lt;/li&gt;
-&lt;li&gt;スピーカー&lt;/li&gt;
-&lt;li&gt;LANケーブル&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;raspberry-pi-を起動する&#34;&gt;Raspberry Pi を起動する&lt;/h2&gt;
-
-&lt;h3 id=&#34;osイメージの準備&#34;&gt;OSイメージの準備&lt;/h3&gt;
-
-&lt;p&gt;以下の記事を参考に進めました。&lt;br /&gt;
-&lt;a href=&#34;http://qiita.com/onlyindreams/items/acc70807b69b43e176bf&#34;&gt;Raspberry Pi 3にRaspbianをインストール(Mac OS X を使用)&lt;/a&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Rasbian Jessie は &lt;code&gt;2016-05-27&lt;/code&gt; リリースのものを用いました&lt;/li&gt;
-&lt;li&gt;ddコマンドのオプションで、ブロックサイズは大文字 (&lt;code&gt;bs=1M&lt;/code&gt;) で指定しました&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;起動手順&#34;&gt;起動手順&lt;/h3&gt;
-
-&lt;ol&gt;
-&lt;li&gt;MicroSD、LAN、 USBマイクロフォン、スピーカーを接続しておきます。&lt;/li&gt;
-&lt;li&gt;電源用としてUSBケーブルを挿すとBIOSが起動します。今回はOSであるRaspbian Jessieも自動で起動しました。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&#34;必要なアカウント-ライブラリの準備&#34;&gt;必要なアカウント・ライブラリの準備&lt;/h2&gt;
-
-&lt;p&gt;AVSを利用するために必要なものを諸々準備します。&lt;/p&gt;
-
-&lt;h3 id=&#34;amazon-developer-アカウントの登録&#34;&gt;Amazon Developer アカウントの登録&lt;/h3&gt;
-
-&lt;p&gt;下記よりアカウントを登録します。登録済みであれば不要です。&lt;br /&gt;
-&lt;a href=&#34;https://developer.amazon.com/login.html&#34;&gt;https://developer.amazon.com/login.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;サンプルアプリのダウンロード&#34;&gt;サンプルアプリのダウンロード&lt;/h3&gt;
-
-&lt;p&gt;公式のGithub上にある &lt;a href=&#34;https://github.com/amzn/alexa-avs-raspberry-pi/archive/master.zip&#34;&gt;Sample app&lt;/a&gt; をダウンロード&amp;amp;解凍して下記のようにデスクトップなどのパスに保存します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;/home/pi/Desktop/alexa-avs-raspberry-pi-master/
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;vnc-serverのインストール&#34;&gt;VNC Serverのインストール&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# install
-$ sudo apt-get install tightvncserver
-# run
-$ tightvncserver
-# auto run setup
-$ vi /home/pi/.config/tightvnc.desktop
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;tightvnc.desktop&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;[Desktop Entry]
-Type=Application
-Name=TightVNC
-Exec=vncserver :1
-StartupNotify=false
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;vncでraspberry-piへアクセス&#34;&gt;VNCでRaspberry Piへアクセス&lt;/h3&gt;
-
-&lt;p&gt;Macからアクセスする手順は &lt;a href=&#34;http://blog.algolab.jp/post/2016/08/22/ubuntu-tightvnc-server/#アクセス&#34;&gt;こちら&lt;/a&gt; をご参照ください。&lt;/p&gt;
-
-&lt;h3 id=&#34;vlcのインストール&#34;&gt;VLCのインストール&lt;/h3&gt;
-
-&lt;p&gt;VLC media playerをインストールします。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# install
-$ sudo apt-get install vlc-nox vlc-data
-# add env vars
-$ echo &amp;quot;export LD_LIBRARY_PATH=/usr/lib/vlc:$LD_LIBRARY_PATH&amp;quot; &amp;gt;&amp;gt; ~/.bashrc
-$ echo &amp;quot;export VLC_PLUGIN_PATH=/usr/lib/vlc/plugins&amp;quot; &amp;gt;&amp;gt; ~/.bashrc
-$ soure ~/.bashrc
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;nodeとnpmのインストール&#34;&gt;NodeとNPMのインストール&lt;/h3&gt;
-
-&lt;p&gt;後に出てくるサーバーの起動に必要なNodeとNPMをインストールします。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# apt-get update &amp;amp; upgrade. It takes about 15 min.
-$ sudo apt-get update &amp;amp;&amp;amp; sudo apt-get upgrade
-# install nodejs
-$ curl -sL https://deb.nodesource.com/setup | sudo bash -
-$ sudo apt-get install nodejs
-$ cd /home/pi/Desktop/alexa-avs-raspberry-pi-master/samples/companionService
-$ npm install
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;jdkとmavenのインストール&#34;&gt;JDKとMavenのインストール&lt;/h3&gt;
-
-&lt;p&gt;公式DocはMavenの環境変数は &lt;code&gt;/etc/profile.d/maven.sh&lt;/code&gt; に追加する方法ですが、うまくいかなかったので手っ取り早く &lt;code&gt;bashrc&lt;/code&gt; に追加して進めました。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# java
-$ cd /home/pi/Desktop/alexa-avs-raspberry-pi-master/samples/javaclient
-$ ./install-java8.sh
-# maven
-$ wget http://apache.osuosl.org/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
-$ sudo tar xvf apache-maven-3.3.9-bin.tar.gz  -C /opt
-# add maven_vars
-$ echo &amp;quot;export M2_HOME=/opt/apache-maven-3.3.9&amp;quot; &amp;gt;&amp;gt; ~/.bashrc
-$ echo &amp;quot;export PATH=$PATH:$M2_HOME/bin&amp;quot; &amp;gt;&amp;gt; ~/.bashrc
-$ source ~/.bashrc
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;証明書生成スクリプトを実行&#34;&gt;証明書生成スクリプトを実行&lt;/h3&gt;
-
-&lt;p&gt;プロダクトID、シリアル番号、パスワードの3つを入力します。今回はパスワードは空のままで進めます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ /home/pi/Desktop/alexa-avs-raspberry-pi-master/samples/javaclient/generate.sh
-&amp;gt; product ID: my_device
-&amp;gt; Serial Number: 123456
-&amp;gt; Password: [blank]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;クライアントidとclientsecretを発行&#34;&gt;クライアントIDとClientSecretを発行&lt;/h3&gt;
-
-&lt;p&gt;ここは &lt;a href=&#34;https://github.com/amzn/alexa-avs-raspberry-pi#user-content-6---getting-started-with-alexa-voice-service&#34;&gt;公式Doc&lt;/a&gt; の画像のとおり進めればよいです。&lt;/p&gt;
-
-&lt;h3 id=&#34;サーバとクライアントを起動&#34;&gt;サーバとクライアントを起動&lt;/h3&gt;
-
-&lt;p&gt;下記のとおりサーバを起動します。 &lt;code&gt;config.js&lt;/code&gt; には先ほど発行したクライアントIDとClientSecretを入力しておきます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# setup clientId and ClientSecret
-$ vi /home/pi/Desktop/alexa-avs-raspberry-pi-master/samples/companionService/config.js
-$ cd /home/pi/Desktop/alexa-avs-raspberry-pi-master/samples/companionService
-$ npm start
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;続いてクライアントも起動します。起動するとGUIも一緒に立ち上がります。 &lt;code&gt;DISPLAY=:1.0&lt;/code&gt; はVNC経由の場合の指定です。外部ディスプレイを使う場合は &lt;code&gt;DISPLAY=:0.0&lt;/code&gt; です。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd /home/pi/Desktop/alexa-avs-raspberry-pi-master/samples/javaclient
-$ mvn install
-$ export DISPLAY=:1.0
-$ mvn exec:exec
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;GUIに出てくるURLにアクセスしてデバイスの登録になります。ここも &lt;a href=&#34;https://github.com/amzn/alexa-avs-raspberry-pi#user-content-10---obtain-authorsization-from-login-with-amazon&#34;&gt;公式Doc&lt;/a&gt; の画像のとおりです。以上が終わると、AVSを利用できます。&lt;/p&gt;
-
-&lt;h2 id=&#34;次回予告&#34;&gt;次回予告&lt;/h2&gt;
-
-&lt;p&gt;次回はAlexa Skillsを登録して使ってみようと思います。乞うご期待。Don&amp;rsquo;t miss out!&lt;br /&gt;
-(2016/08/25 公開しました &amp;rarr; &lt;a href=&#34;http://blog.algolab.jp/post/2016/08/29/alexa-skills-kit/&#34;&gt;Alexa Skills KitをAWS Lamdaから使う&lt;/a&gt;)&lt;/p&gt;
 </description>
     </item>
     

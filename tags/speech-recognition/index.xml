@@ -6,8 +6,153 @@
     <description>Recent content in Speech Recognition on ALGO GEEKS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 28 Sep 2016 16:26:57 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 07 Dec 2016 18:15:27 +0900</lastBuildDate>
     <atom:link href="http://blog.algolab.jp/tags/speech-recognition/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title> Alexa Skill (Amazon Echo) を公開したので開発上のポイントをまとめてみる 〜Birthday Reminder〜</title>
+      <link>http://blog.algolab.jp/post/2016/12/07/birthday-reminder/</link>
+      <pubDate>Wed, 07 Dec 2016 18:15:27 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/12/07/birthday-reminder/</guid>
+      <description>
+
+&lt;p&gt;こちらの記事の続きとなります。&lt;br /&gt;
+&lt;a href=&#34;http://blog.algolab.jp/post/2016/09/28/alexa-color-expert/&#34;&gt;AlexaスキルとLambdaファンクションはどのように連携しているか&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;今回は、オリジナルのスキルを作って公開しました。その中で色々分かったことを、まとめてみます。&lt;/p&gt;
+
+&lt;h2 id=&#34;開発上の制約&#34;&gt;開発上の制約&lt;/h2&gt;
+
+&lt;h3 id=&#34;自由な文章の認識は難しい&#34;&gt;自由な文章の認識は難しい&lt;/h3&gt;
+
+&lt;p&gt;これが一番困った点でした。基本的には、テンプレートのような形であらかじめ登録しておいた文章や単語しか認識がうまくいかないため、今のところ、限定的な用途でしか利用できなさそう、という印象です。&lt;/p&gt;
+
+&lt;p&gt;ただ、人名や都市名など、ある程度想定できる単語を認識する枠組み (Slot Type) は用意されています。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;例) AMAZON.US_FIRST_NAME, AMAZON.US_CITY, AMAZON.DATE
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ですので、これらを利用するシチュエーションでは比較的柔軟なスキルを作成することができそうです。&lt;/p&gt;
+
+&lt;h3 id=&#34;データの永続化には別途仕組みが必要&#34;&gt;データの永続化には別途仕組みが必要&lt;/h3&gt;
+
+&lt;p&gt;Alexa Skillを起動している最中（セッション内) ではデータ保持ができますが、セッションをまたいでデータを保持するには、自前で永続化する機構を作らないといけません。&lt;/p&gt;
+
+&lt;h3 id=&#34;使用できる言語は-英語およびドイツ語のみ&#34;&gt;使用できる言語は、英語およびドイツ語のみ&lt;/h3&gt;
+
+&lt;p&gt;他の言語はまだサポートされていません。&lt;/p&gt;
+
+&lt;p&gt;これらの制約や仕様がある中で、作りたいスキルをどう実現できそうか考えることがまず必要です。&lt;/p&gt;
+
+&lt;h2 id=&#34;birthday-reminder&#34;&gt;Birthday Reminder&lt;/h2&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/12/07/birthday-reminder//birthday-reminder.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;当初、記憶させたことをなんでも取り出せるスキルを作ろうと考えていましたが、上記のように難しいことがわかったため、今回は誕生日に限定して、記憶や取り出しのできるスキルを作ることにしました。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://alexa.amazon.com/spa/index.html#skills/dp/B01N8USH7G/?ref=skill_dsk_skb_sr_0&#34;&gt;こちら&lt;/a&gt; からインストール可能です。&lt;/p&gt;
+
+&lt;p&gt;本スキルでは、以下のようなやり取りをすることができます。&lt;/p&gt;
+
+&lt;h3 id=&#34;誕生日を登録する&#34;&gt;誕生日を登録する&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;User: &amp;ldquo;Tom&amp;rsquo;s birthday is July seven.&amp;rdquo;&lt;br /&gt;
+Skill: &amp;ldquo;I now know Tom&amp;rsquo;s birthday is July seven.&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;登録した人の誕生日を調べる&#34;&gt;登録した人の誕生日を調べる&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;User: &amp;ldquo;When was Tom born on?&amp;rdquo;&lt;br /&gt;
+Skill: &amp;ldquo;Tom&amp;rsquo;s birthday is Jul seven.&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;登録した誕生日に生まれた人を調べる&#34;&gt;登録した誕生日に生まれた人を調べる&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;User: &amp;ldquo;Who were born on July seven?&amp;rdquo;&lt;br /&gt;
+Skill: &amp;ldquo;Tom were born on Jul seven.&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;人名と誕生日の認識には、Slot Typeの枠組みを利用しました。人名には &lt;code&gt;AMAZON.US_FIRST_NAME&lt;/code&gt; を使用し、人名だけでなく母親や兄弟の誕生日も登録できるように&lt;code&gt;my mother&lt;/code&gt;, &lt;code&gt;my brother&lt;/code&gt;なども &lt;code&gt;AMAZON.US_FIRST_NAME&lt;/code&gt; を拡張して利用できるようにしました。誕生日の日付の認識では &lt;code&gt;AMAZON.DATE&lt;/code&gt; を使用しています。&lt;/p&gt;
+
+&lt;h2 id=&#34;データの永続化&#34;&gt;データの永続化&lt;/h2&gt;
+
+&lt;p&gt;今回のスキルでは、誕生日というデータを永続化して次回のセッションでも取り出すことができるようにする必要がありました。 単純に同一セッションの保存であれば、前回の記事でも紹介したように、&lt;code&gt;sessionAttributes&lt;/code&gt;を利用することができます。ただし、次回以降のセッションでも利用しようとするには何かしらのDBへの保存が必要です。&lt;/p&gt;
+
+&lt;p&gt;今回は「人」に対する「誕生日」という Key-Value のような特定のデータの引き方になることから、DynamoDBを選択しました。&lt;/p&gt;
+
+&lt;h2 id=&#34;保存するデータ&#34;&gt;保存するデータ&lt;/h2&gt;
+
+&lt;p&gt;今回のスキルでは、以下のようなデータを保持しています。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+	&amp;quot;user_id&amp;quot;: &amp;quot;amzn1.ask.account.XXX...&amp;quot;,
+ 	&amp;quot;person&amp;quot;: &amp;quot;Tom&amp;quot;,
+ 	&amp;quot;birthday&amp;quot;: &amp;quot;Jul 07&amp;quot;,
+},
+{
+	&amp;quot;user_id&amp;quot;: &amp;quot;amzn1.ask.account.XXX...&amp;quot;,
+ 	&amp;quot;person&amp;quot;: &amp;quot;Peter&amp;quot;,
+ 	&amp;quot;birthday&amp;quot;: &amp;quot;Dec 04&amp;quot;,
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;user_id&lt;/code&gt;はユーザのAmazonアカウントに紐づくIDです。&lt;code&gt;person&lt;/code&gt;は登録した人の名前、&lt;code&gt;birthday&lt;/code&gt;は登録した人の誕生日です。&lt;/p&gt;
+
+&lt;h2 id=&#34;dynamodbのスキーマ構造&#34;&gt;DynamoDBのスキーマ構造&lt;/h2&gt;
+
+&lt;p&gt;上記データを、具体的には次のようなスキーマ構造としてDynamoDBに格納しています。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;プライマリーキー
+
+&lt;ul&gt;
+&lt;li&gt;パーティションキー: &lt;code&gt;user_id&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;ソートキー: &lt;code&gt;person&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;その他属性
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;birthday&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;セカンダリインデックス
+
+&lt;ul&gt;
+&lt;li&gt;パーティションキー: &lt;code&gt;user_id&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;ソートキー: &lt;code&gt;birthday&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code&gt;user_id&lt;/code&gt;と&lt;code&gt;person&lt;/code&gt;をプライマリーキーにすることで、登録した人の名前から誕生日を参照できるようにし、&lt;code&gt;user_id&lt;/code&gt;と&lt;code&gt;birthday&lt;/code&gt;をセカンダリインデックスとすることで、誕生日から人を参照できるようにしています。&lt;/p&gt;
+
+&lt;h2 id=&#34;スキルの申請と審査&#34;&gt;スキルの申請と審査&lt;/h2&gt;
+
+&lt;p&gt;スキルを作り終わったら、あとは公開に必要なスキルの説明やスキルのアイコン画像、Privacy Policyの準備になります。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/12/07/birthday-reminder//publishing-information.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;申請をすると、2営業日ほどで結果が返ってきました。公式ドキュメントの &lt;a href=&#34;https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/submission-testing-walk-through-tide-pooler-skill&#34;&gt;こちら&lt;/a&gt; にあるようなテスト項目を結構細かく実際に試してテストしている印象でした。指摘された箇所を修正して再申請して審査が通りました。&lt;/p&gt;
+
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
+
+&lt;p&gt;今回、Alexa Skillを作るにあたっての制約や設計で工夫した点、審査の過程などを紹介しました。基本的にはDBの設計周りは一般的なアプリケーションの設計と大きく変わらないと思います。&lt;/p&gt;
+
+&lt;p&gt;Alexa Skillのドキュメントは結構ありますが、細かいページへのサイトマップなどは用意されてないので、検索して見つけるか関連するページのフッター付近のリンクから辿るしかなかったのが若干厄介でした。今後、整備されることに期待です。&lt;/p&gt;
+
+&lt;p&gt;先日、テキストを音声で読み上げる &lt;a href=&#34;https://aws.amazon.com/polly/&#34;&gt;Amazon Polly&lt;/a&gt; が発表されましたが、こちらにも期待です。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>AlexaスキルとLambdaファンクションはどのように連携しているか</title>
