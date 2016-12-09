@@ -6,8 +6,80 @@
     <description>Recent content on ALGO GEEKS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 07 Dec 2016 18:15:27 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 09 Dec 2016 15:03:23 +0900</lastBuildDate>
     <atom:link href="http://blog.algolab.jp/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>PhantomJSでPromiseが使えない場合の対処法 〜Can&#39;t find variable: Promise〜</title>
+      <link>http://blog.algolab.jp/post/2016/12/09/phantomjs-promise/</link>
+      <pubDate>Fri, 09 Dec 2016 15:03:23 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/12/09/phantomjs-promise/</guid>
+      <description>
+
+&lt;p&gt;Selenium + PhantomJS でDjangoアプリケーションのテストをしていたのですが、なぜか上手く動作しない箇所がありました。&lt;/p&gt;
+
+&lt;p&gt;原因としては、外部ライブラリが &lt;a href=&#34;https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Promise&#34;&gt;Promise&lt;/a&gt; を用いており、PhantomJSがサポートしていないためで、&lt;a href=&#34;https://github.com/stefanpenner/es6-promise&#34;&gt;es6-promise&lt;/a&gt; を明示的に読み込ませることで解決しました。&lt;/p&gt;
+
+&lt;p&gt;以下に再現のためのサンプルコードを書いてみます。&lt;/p&gt;
+
+&lt;h2 id=&#34;サンプルコード&#34;&gt;サンプルコード&lt;/h2&gt;
+
+&lt;p&gt;以下の2つのファイルを用意します。&lt;code&gt;test.html&lt;/code&gt;は&lt;code&gt;http://localhost/test.html&lt;/code&gt;で読み込めることを前提としています。&lt;/p&gt;
+
+&lt;p&gt;test.html&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;!DOCTYPE html&amp;gt;
+&amp;lt;script&amp;gt;
+  var hoge = 1;
+  console.log(Promise);
+  var hoge = 2;
+&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;test.py&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;from selenium import webdriver
+
+driver = webdriver.PhantomJS()
+driver.get(&#39;http://localhost/test.html&#39;)
+hoge = driver.execute_script(&#39;return hoge&#39;)
+print(hoge)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;test.py&lt;/code&gt;を実行します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ python test.py
+1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;hoge&lt;/code&gt;の値が&lt;code&gt;1&lt;/code&gt;であり、&lt;code&gt;console.log(Promise);&lt;/code&gt;以降処理が行われていないことがわかります。&lt;br /&gt;
+&lt;code&gt;ghostdriver.log&lt;/code&gt;にログが出力されるので、みてみると下記のエラーが出力されていました。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[ERROR - 2016-12-09T05:54:22.556Z] Session [eee84f50-bdd3-11e6-87a5-f36dec782eab] - page.onError - msg: ReferenceError: Can&#39;t find variable: Promise
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;続いて、&lt;code&gt;test.html&lt;/code&gt;で&lt;code&gt;es6-promise&lt;/code&gt;を明示的に読み込ませるように修正します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;!DOCTYPE html&amp;gt;
+&amp;lt;script src=&amp;quot;https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.0.5/es6-promise.auto.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script&amp;gt;
+  var hoge = 1;
+  console.log(Promise);
+  var hoge = 2;
+&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;$ python test.py
+2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;きちんと処理が行われるようになりました。&lt;/p&gt;
+
+&lt;p&gt;GitHub上でも下記の議論が行われており、&lt;code&gt;ES6&lt;/code&gt; のサポートが本体に導入されることを待つばかりです。&lt;br /&gt;
+&lt;a href=&#34;https://github.com/ariya/phantomjs/issues/12401&#34;&gt;https://github.com/ariya/phantomjs/issues/12401&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title> Alexa Skill (Amazon Echo) を公開したので開発上のポイントをまとめてみる 〜Birthday Reminder〜</title>
@@ -2230,91 +2302,6 @@ Slack上で「ok board」と打ち込むと、FAQからSlackに質問だけが�
 &lt;h2 id=&#34;次回予告&#34;&gt;次回予告&lt;/h2&gt;
 
 &lt;p&gt;次回はサンプルコードの中身を追ってみようと思います。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Googleカレンダー解析ツール作りました 〜時間の使い方チェッカー〜</title>
-      <link>http://blog.algolab.jp/post/2016/08/16/calendar-report/</link>
-      <pubDate>Tue, 16 Aug 2016 17:34:11 +0900</pubDate>
-      
-      <guid>http://blog.algolab.jp/post/2016/08/16/calendar-report/</guid>
-      <description>
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/16/calendar-report//demo.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;タイトルの通りですが、時間の使い方チェッカーというツールを作りました (だいぶ前に作っていました)。&lt;br /&gt;
-&lt;a href=&#34;http://tools.algolab.jp/calendar_reports&#34;&gt;http://tools.algolab.jp/calendar_reports&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;ソースコードはGitHubに公開しています。&lt;br /&gt;
-&lt;a href=&#34;https://github.com/algolab-inc/algo-tools/&#34;&gt;https://github.com/algolab-inc/algo-tools/&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;時間の使い方チェッカーとは&#34;&gt;時間の使い方チェッカーとは？&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Googleカレンダーを解析して可視化するツールです&lt;/li&gt;
-&lt;li&gt;タイトルを括弧で囲っているイベントのみを解析対象としています
-
-&lt;ul&gt;
-&lt;li&gt;(例) [仕事]&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;括弧を連続することで階層を表現することができます
-
-&lt;ul&gt;
-&lt;li&gt;(例) [仕事][営業]&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;データは一切保存しません (&amp;larr;大事)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;開発のきっかけ&#34;&gt;開発のきっかけ&lt;/h2&gt;
-
-&lt;p&gt;弊社では、仕事を(準)委任契約でいただくことがあり、作業時間ログをGoogleカレンダー上で管理していました。&lt;br /&gt;
-そして、月末に集計を手作業で行っていましたが、それを自動化したい、というのがきっかけです。&lt;/p&gt;
-
-&lt;h2 id=&#34;実際に使ってみて&#34;&gt;実際に使ってみて&lt;/h2&gt;
-
-&lt;p&gt;せっかくなので、全ての作業時間ログをGoogleカレンダー上で管理するということを数ヶ月間行ってみています。&lt;/p&gt;
-
-&lt;p&gt;作業時間ログを都度つける行動は習慣化しているため (常にカレンダーを立ち上げています) 入力作業に負担はなく、後から時間の使い方を振り返ることができるのでなかなか良い感じです。&lt;/p&gt;
-
-&lt;p&gt;具体的には、以下のような階層構造で管理を行っています。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;受託
-
-&lt;ul&gt;
-&lt;li&gt;プロジェクト1&lt;/li&gt;
-&lt;li&gt;プロジェクト2&lt;/li&gt;
-&lt;li&gt;&amp;hellip;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;自社
-
-&lt;ul&gt;
-&lt;li&gt;サービスA&lt;/li&gt;
-&lt;li&gt;サービスB&lt;/li&gt;
-&lt;li&gt;&amp;hellip;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;経営
-
-&lt;ul&gt;
-&lt;li&gt;経営計画&lt;/li&gt;
-&lt;li&gt;財務&lt;/li&gt;
-&lt;li&gt;&amp;hellip;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;弊社は受託事業を行いながら自社サービスを開発しており、また筆者は代表を務めているので、時間の使い方としては、大きく「受託」「自社」「経営」の3つに分かれます。&lt;/p&gt;
-
-&lt;p&gt;その下にも幾つか階層を設けていますが、基本的にはこの3つの時間比率を毎月振り返るようにしています。&lt;/p&gt;
-
-&lt;h2 id=&#34;おわりに&#34;&gt;おわりに&lt;/h2&gt;
-
-&lt;p&gt;時間の使い方を可視化してみると色々な気づきがあります。是非試してみてください！&lt;br /&gt;
-&lt;a href=&#34;http://tools.algolab.jp/calendar_reports&#34;&gt;http://tools.algolab.jp/calendar_reports&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     

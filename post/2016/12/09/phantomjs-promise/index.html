@@ -5,14 +5,14 @@
   <title>
     
     
-      麻雀カメラプロジェクト再始動？ 〜【導入編】テンプレートマッチングによる麻雀牌判定〜
+      PhantomJSでPromiseが使えない場合の対処法 〜Can&#39;t find variable: Promise〜
     
     &nbsp;|&nbsp;ALGO GEEKS
   </title>
 
   <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1" />
   <meta name="google-site-verification" content="DmTgCYn-qNNekSNxji7FGHMXvq3_4vrKm3pkvI9llLo" />
-  <link rel="canonical" href="http://blog.algolab.jp/post/2016/08/25/mahjong-camera-introduction/"/>
+  <link rel="canonical" href="http://blog.algolab.jp/post/2016/12/09/phantomjs-promise/"/>
 
   <link rel="stylesheet" href="/css/sanitize.css" />
   <link rel="stylesheet" href="/css/responsive.css" />
@@ -60,19 +60,17 @@
   
   <main id="single" role="main">
     <div class="article-header">
-      <h1>麻雀カメラプロジェクト再始動？ 〜【導入編】テンプレートマッチングによる麻雀牌判定〜</h1>
+      <h1>PhantomJSでPromiseが使えない場合の対処法 〜Can&#39;t find variable: Promise〜</h1>
       
 
 <div class="meta">
   
-    <span>2016/08/25</span>
+    <span>2016/12/09</span>
   
   
     <span>|</span>
     
-      <a href="/tags/mahjong-camera">#麻雀カメラ</a>&nbsp;
-    
-      <a href="/tags/image-recognition">#画像認識</a>&nbsp;
+      <a href="/tags/tips">#Tips</a>&nbsp;
     
   
   
@@ -99,142 +97,67 @@
 
       
 
-<p>2014年の終わり頃に「麻雀カメラ」というiPhoneアプリを作っていました。<br />
-カメラをかざすだけで麻雀の得点計算を行ってくれるアプリです。</p>
+<p>Selenium + PhantomJS でDjangoアプリケーションのテストをしていたのですが、なぜか上手く動作しない箇所がありました。</p>
 
+<p>原因としては、外部ライブラリが <a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a> を用いており、PhantomJSがサポートしていないためで、<a href="https://github.com/stefanpenner/es6-promise">es6-promise</a> を明示的に読み込ませることで解決しました。</p>
 
-<div style="position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;">
-  <iframe src="//www.youtube.com/embed/livDDcygEDU" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" allowfullscreen frameborder="0"></iframe>
- </div>
+<p>以下に再現のためのサンプルコードを書いてみます。</p>
 
+<h2 id="サンプルコード">サンプルコード</h2>
 
-<p>動画を見ていただければ一目瞭然ですが、さすがに実用では使えない、ということでお蔵入りしました&hellip;。<br />
-(時間がかかるだけでなく、精度もあまり良くありませんでした。)</p>
+<p>以下の2つのファイルを用意します。<code>test.html</code>は<code>http://localhost/test.html</code>で読み込めることを前提としています。</p>
 
-<p>あれから一年半、技術の進歩は目覚ましく、いまならば良いものが作れるのでは？と思い立ち、再挑戦してみることにしました。</p>
+<p>test.html</p>
 
-<p>今回は、導入編として、当時用いていた手法 (テンプレートマッチング) について説明します。</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;script&gt;
+  var hoge = 1;
+  console.log(Promise);
+  var hoge = 2;
+&lt;/script&gt;
+</code></pre>
 
-<h2 id="画像判定プロセス">画像判定プロセス</h2>
+<p>test.py</p>
 
-<p>画像に何が写っているか判定するためには、大きく「検出 (Detection)」と「認識 (Recognition)」というプロセスに分かれます。</p>
+<pre><code>from selenium import webdriver
 
-<h3 id="検出">検出</h3>
+driver = webdriver.PhantomJS()
+driver.get('http://localhost/test.html')
+hoge = driver.execute_script('return hoge')
+print(hoge)
+</code></pre>
 
-<p>物体が画像内のどこにあるかを判定するプロセス。<br />
-下記の画像でいうと、赤枠をつけていくイメージです。</p>
+<p><code>test.py</code>を実行します。</p>
 
-<figure>
-  <img src="/images//post/2016/08/25/mahjong-camera-introduction//detection_1.png"/>
-  
-</figure>
+<pre><code>$ python test.py
+1
+</code></pre>
 
+<p><code>hoge</code>の値が<code>1</code>であり、<code>console.log(Promise);</code>以降処理が行われていないことがわかります。<br />
+<code>ghostdriver.log</code>にログが出力されるので、みてみると下記のエラーが出力されていました。</p>
 
-<h3 id="認識">認識</h3>
+<pre><code>[ERROR - 2016-12-09T05:54:22.556Z] Session [eee84f50-bdd3-11e6-87a5-f36dec782eab] - page.onError - msg: ReferenceError: Can't find variable: Promise
+</code></pre>
 
-<p>検出された領域に写っている物体が何であるかを判定するプロセス。<br />
-具体的には、下記の物体が「五萬」である、と識別することを言います。</p>
+<p>続いて、<code>test.html</code>で<code>es6-promise</code>を明示的に読み込ませるように修正します。</p>
 
-<figure>
-  <img src="/images//post/2016/08/25/mahjong-camera-introduction//5m.png"/>
-  
-</figure>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.0.5/es6-promise.auto.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+  var hoge = 1;
+  console.log(Promise);
+  var hoge = 2;
+&lt;/script&gt;
+</code></pre>
 
+<pre><code>$ python test.py
+2
+</code></pre>
 
-<h2 id="検出の難しさ">検出の難しさ</h2>
+<p>きちんと処理が行われるようになりました。</p>
 
-<p>麻雀牌判定においては、特に「検出」のプロセスが困難です。<br />
-横並びの複数牌に対し、どこが牌の境界かを判断することが非常に難しいのです。<br />
-例えば、下記の画像を考えてみましょう。</p>
-
-<figure>
-  <img src="/images//post/2016/08/25/mahjong-camera-introduction//detection_2.png"/>
-  
-</figure>
-
-
-<p>人間の目には、3つの牌の境界を判断することはできますが、<br />
-機械では、下記の赤枠の部分を1つの牌として検出してしまう、ということが起こり得てしまいます。</p>
-
-<figure>
-  <img src="/images//post/2016/08/25/mahjong-camera-introduction//detection_3.png"/>
-  
-</figure>
-
-
-<p>牌の境界には溝らしきものが存在するので、画像処理で溝を判定し境界とみなす、というような実装も考えられますが、光の具合や撮影角度などによって溝が見えなくなってしまうこともあるため、このような特定のルールを設ける方法では一筋縄ではいきません。</p>
-
-<h2 id="当時用いていたアルゴリズム">当時用いていたアルゴリズム</h2>
-
-<p>当時はどのように判定していたかというと、前処理を加えた画像に対し、テンプレートマッチングという手法を用いていました。(古くからある手法です)</p>
-
-<h2 id="前処理">前処理</h2>
-
-<p>前処理として、画像全体から牌が写っている全体領域を切り出します。<br />
-牌の全体領域と背景には明らかに差が見て取れるので、これは比較的容易に行うことができます。</p>
-
-<figure>
-  <img src="/images//post/2016/08/25/mahjong-camera-introduction//detection_4.png"/>
-  
-</figure>
-
-
-<p>具体的には、二値化画像に対し輪郭抽出を行い、頂点数や面積が一定以上のものの外接矩形を牌の全体領域としてみなす、という処理をしています。</p>
-
-<p>処理後の画像はこのような形となります。</p>
-
-<figure>
-  <img src="/images//post/2016/08/25/mahjong-camera-introduction//template_matching_1.png"/>
-  
-</figure>
-
-
-<h2 id="テンプレートマッチング">テンプレートマッチング</h2>
-
-<p>前処理を行った画像に対し、テンプレートマッチングを用いて牌を判定していきます。</p>
-
-<p>テンプレートマッチングとは、テンプレート画像を少しずつ端から端までずらしていって、その類似度を計算していく、という手法です。</p>
-
-<p>例えばテンプレート画像に「五萬」を用いるとしましょう。<br />
-下記のように、少しずつずらして類似度を計算していき、その値を保持しておきます。</p>
-
-<figure>
-  <img src="/images//post/2016/08/25/mahjong-camera-introduction//template_matching_2.png"/>
-  
-</figure>
-
-
-<p>そして、一番類似度が高い領域を個別牌領域としてみなします。</p>
-
-<figure>
-  <img src="/images//post/2016/08/25/mahjong-camera-introduction//template_matching_3.png"/>
-  
-</figure>
-
-
-<p>実際には、テンプレート画像には、麻雀牌の種類 (34) x 上下左右の方向 (4) の合計136個を用い、一番類似度の高かったものを採用しています。</p>
-
-<p>そして、確定した領域を除いた残りの領域に対して更にテンプレートマッチングを繰り返していくことで牌の判定を行っていました。</p>
-
-<h2 id="問題点">問題点</h2>
-
-<p>テンプレートマッチングは、いわば総当たり作戦で「検出」と「認識」を一度に行ってしまおうというものです。<br />
-ご想像の通り、非常に効率が悪く、判定に時間がかかってしまいます。</p>
-
-<p>またテンプレート画像は上下左右の4方向しか用意していないため、例えば下記の中だと「六萬」の判定がうまくいきません。
-<figure>
-  <img src="/images//post/2016/08/25/mahjong-camera-introduction//template_matching_4.png"/>
-  
-</figure>
-</p>
-
-<p>単純に考えると、テンプレートを増やせば良さそうですが、速度とのトレードオフなので現実的ではありません。</p>
-
-<h2 id="次回予告">次回予告</h2>
-
-<p>このように、テンプレートマッチングを用いる手法では、限られた条件下 (横並びに綺麗に牌が並んでいる) ではそれなりに精度は出るものの、条件から外れると精度が落ち、また判定に時間もかかってしまいました。</p>
-
-<p>次回以降、これらの問題点を解決すべく、いろいろな手法を試していきたいと思います。</p>
+<p>GitHub上でも下記の議論が行われており、<code>ES6</code> のサポートが本体に導入されることを待つばかりです。<br />
+<a href="https://github.com/ariya/phantomjs/issues/12401">https://github.com/ariya/phantomjs/issues/12401</a></p>
 
       
   <div id="share-this">
@@ -283,10 +206,8 @@
   
   <nav class="pagination-single">
     
-      <span class="previous">&larr; <a href="http://blog.algolab.jp/post/2016/08/24/vpn-dns/" rel="prev">VPNサーバのパブリックIPをDNSに登録する 〜Raspberry Pi上で定期実行〜</a></span>
+      <span class="previous">&larr; <a href="http://blog.algolab.jp/post/2016/12/07/birthday-reminder/" rel="prev"> Alexa Skill (Amazon Echo) を公開したので開発上のポイントをまとめてみる 〜Birthday Reminder〜</a></span>
     
-    
-      <span class="next"><a href="http://blog.algolab.jp/post/2016/08/29/alexa-skills-kit/" rel="next">Alexa Skills KitをAWS Lamdaから使う</a> &rarr;</span>
     
   </nav>
   
@@ -555,7 +476,7 @@
     
       
       
-        _lgy_lt('set', 'category', '麻雀カメラ');
+        _lgy_lt('set', 'category', 'Tips');
       
     
     _lgy_lt('send', 'pageview');
