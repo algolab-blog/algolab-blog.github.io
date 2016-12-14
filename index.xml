@@ -89,9 +89,6 @@ print(hoge)
       <guid>http://blog.algolab.jp/post/2016/12/07/birthday-reminder/</guid>
       <description>
 
-&lt;p&gt;こちらの記事の続きとなります。&lt;br /&gt;
-&lt;a href=&#34;http://blog.algolab.jp/post/2016/09/28/alexa-color-expert/&#34;&gt;AlexaスキルとLambdaファンクションはどのように連携しているか&lt;/a&gt;&lt;/p&gt;
-
 &lt;p&gt;今回は、オリジナルのスキルを作ってマーケットに公開したので、その中で色々分かったことをまとめてみます。&lt;/p&gt;
 
 &lt;h2 id=&#34;開発上の制約&#34;&gt;開発上の制約&lt;/h2&gt;
@@ -304,9 +301,6 @@ $ convert -delay 50 -loop 0 0*00.png animation.gif
       
       <guid>http://blog.algolab.jp/post/2016/09/28/alexa-color-expert/</guid>
       <description>
-
-&lt;p&gt;こちらの記事の続きとなります。&lt;br /&gt;
-&lt;a href=&#34;http://blog.algolab.jp/post/2016/08/29/alexa-skills-kit/&#34;&gt;Alexa Skills KitをAWS Lamdaから使う&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;前回はサンプルとして用意されている「Color Expert」のAlexaスキルをLambdaファンクションを利用して動かしてみました。&lt;br /&gt;
 今回は「Color Expert」を例としてAlexaスキルとLambdaファンクションがどのように連携しているか説明したいと思います。&lt;/p&gt;
@@ -1209,9 +1203,6 @@ $ sh run.sh
       <guid>http://blog.algolab.jp/post/2016/08/29/alexa-skills-kit/</guid>
       <description>
 
-&lt;p&gt;こちらの記事の続きとなります。&lt;br /&gt;
-&lt;a href=&#34;http://blog.algolab.jp/post/2016/08/11/raspberry-pi-alexa/&#34;&gt;Amazon Echoを6,000円で自作する 〜Raspberry Pi 3 + Alexa Voice Services (AVS)〜&lt;/a&gt;&lt;/p&gt;
-
 &lt;p&gt;前回はRaspberry PiからAVS (Alexa Voice Services) を使ってみましたが、今回は、Alexa Skills Kitを使ってみたいと思います。&lt;/p&gt;
 
 &lt;h2 id=&#34;完成したもの&#34;&gt;完成したもの&lt;/h2&gt;
@@ -1445,8 +1436,7 @@ MyColorIsIntent my favorite color is {Color}
 
 &lt;h2 id=&#34;次回予告&#34;&gt;次回予告&lt;/h2&gt;
 
-&lt;p&gt;次回はソースコードの中身を見てみます。&lt;br /&gt;
-(2016/09/28 公開しました &amp;rarr; &lt;a href=&#34;http://blog.algolab.jp/post/2016/09/28/alexa-color-expert/&#34;&gt;AlexaスキルとLambdaファンクションはどのように連携しているか&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;次回はソースコードの中身を見てみます。&lt;/p&gt;
 </description>
     </item>
     
