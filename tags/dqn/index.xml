@@ -48,7 +48,7 @@ DQNについては、下記の記事によくまとめられており、実装�
 
 &lt;h3 id=&#34;概要&#34;&gt;概要&lt;/h3&gt;
 
-&lt;p&gt;具体的には、上図のように上から落ちてくるボールをキャッチする、というタスクを学習させます。&lt;br /&gt;
+&lt;p&gt;具体的には、上図のように上から落ちてくるボールをキャッチする、というゲームを学習させます。&lt;br /&gt;
 TensorFlowで実装しており、ソースコードは下記に公開しています。&lt;br /&gt;
 &lt;a href=&#34;https://github.com/algolab-inc/tf-dqn-simple&#34;&gt;https://github.com/algolab-inc/tf-dqn-simple&lt;/a&gt;&lt;/p&gt;
 

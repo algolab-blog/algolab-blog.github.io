@@ -29,7 +29,7 @@
 
 &lt;p&gt;test.html&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;&amp;lt;!DOCTYPE html&amp;gt;
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;!DOCTYPE html&amp;gt;
 &amp;lt;script&amp;gt;
   var hoge = 1;
   console.log(Promise);
