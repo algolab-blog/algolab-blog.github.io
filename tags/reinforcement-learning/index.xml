@@ -6,8 +6,146 @@
     <description>Recent content in Reinforcement Learning on ALGO GEEKS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 01 Aug 2016 22:06:25 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 17 Dec 2016 17:02:04 +0900</lastBuildDate>
     <atom:link href="http://blog.algolab.jp/tags/reinforcement-learning/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜実装編①  ゲームを作る〜</title>
+      <link>http://blog.algolab.jp/post/2016/12/17/tf-dqn-simple-2/</link>
+      <pubDate>Sat, 17 Dec 2016 17:02:04 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/12/17/tf-dqn-simple-2/</guid>
+      <description>
+
+&lt;p&gt;今回から、実装編についてお届けします。&lt;br /&gt;
+本記事では、学習させるゲームの部分について、重要な箇所を抜粋して解説します。&lt;/p&gt;
+
+&lt;p&gt;対象とするソースコードは下記となります。&lt;br /&gt;
+&lt;a href=&#34;https://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py&#34;&gt;https://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;それでは早速いってみましょう。&lt;/p&gt;
+
+&lt;h2 id=&#34;ゲームの概要&#34;&gt;ゲームの概要&lt;/h2&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/12/17/tf-dqn-simple-2//demo-catch_ball.gif&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;おさらいになりますが、ゲームの概要としては、上図のように上から落ちてくるボールをキャッチする、というものになります。キャッチできれば&lt;code&gt;+1点&lt;/code&gt;、キャッチできなければ&lt;code&gt;-1点&lt;/code&gt;というルールで高得点を目指します。&lt;/p&gt;
+
+&lt;h2 id=&#34;データの持ち方&#34;&gt;データの持ち方&lt;/h2&gt;
+
+&lt;p&gt;ゲーム盤は下図のように 8 x 8 の2次元配列で表現しており、「ボール」および「プレイヤー」を&lt;code&gt;1&lt;/code&gt;で、背景を&lt;code&gt;0&lt;/code&gt;の値として格納しています。
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/12/17/tf-dqn-simple-2//catch_ball.png&#34;/&gt;
+  
+&lt;/figure&gt;
+&lt;/p&gt;
+
+&lt;p&gt;上記の状態の場合、各種インスタンス変数の値は下記となります。&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;変数名&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;値&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;説明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;screen_n_rows&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;8&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;ゲーム盤の方向の長さ&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;screen_n_cols&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;8&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;ゲーム盤の横方向の長さ&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;ball_row&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;ボールの縦方向の位置&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;ball_col&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;6&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;ボールの横方向の位置&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;player_row&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;プレイヤーの左端の横方向の位置&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;player_length&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;プレイヤーの横方向の長さ&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&#34;ゲームの更新処理&#34;&gt;ゲームの更新処理&lt;/h2&gt;
+
+&lt;p&gt;続いて、ゲームの更新処理を行う&lt;code&gt;update&lt;/code&gt;メソッドを見ていきましょう。&lt;/p&gt;
+
+&lt;h3 id=&#34;引数&#34;&gt;引数&lt;/h3&gt;
+
+&lt;p&gt;
+
+
+
+&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=17:24&#34;&gt;&lt;/script&gt;
+
+&lt;code&gt;update&lt;/code&gt;メソッドは引数として&lt;code&gt;action&lt;/code&gt;を受け取ります。&lt;code&gt;action&lt;/code&gt;はプレイヤーの行動を表すもので、&lt;code&gt;0,1,2&lt;/code&gt;のいずれかの数値で表現しており、それぞれ「何もしない」「左に動く」「右に動く」ことを示します。&lt;/p&gt;
+
+&lt;h3 id=&#34;プレイヤーの位置の更新&#34;&gt;プレイヤーの位置の更新&lt;/h3&gt;
+
+
+
+
+
+&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=25:35&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;プレイヤーの位置を更新しています。ゲーム盤からはみ出さないように制御しているのがポイントです。&lt;/p&gt;
+
+&lt;h3 id=&#34;ボールの位置の更新&#34;&gt;ボールの位置の更新&lt;/h3&gt;
+
+
+
+
+
+&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=36:37&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;こちらは単純に、下に1つずらすという処理をしています。&lt;/p&gt;
+
+&lt;h3 id=&#34;得点判定&#34;&gt;得点判定&lt;/h3&gt;
+
+
+
+
+
+&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=41:49&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;ボールがゲーム盤の下端に来た時に、ゲーム終了フラグをセット (&lt;code&gt;self.terminal = True&lt;/code&gt;) した上で、得点判定処理を行います。プレイヤーの範囲内にボールがあればキャッチできたとみなし &lt;code&gt;+1点&lt;/code&gt; (&lt;code&gt;self.reward = 1&lt;/code&gt;)、そうでなければキャッチできなかったとして、&lt;code&gt;-1点&lt;/code&gt; (&lt;code&gt;self.reward = -1&lt;/code&gt;)、としています。&lt;/p&gt;
+
+&lt;h2 id=&#34;次回予告&#34;&gt;次回予告&lt;/h2&gt;
+
+&lt;p&gt;次回は、ゲームを学習する部分（エージェント）について解説します。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜導入編〜</title>

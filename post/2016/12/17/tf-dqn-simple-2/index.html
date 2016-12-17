@@ -5,14 +5,14 @@
   <title>
     
     
-      AIトレーニングキックオフ 〜ハムケツを認識したい〜
+      超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜実装編①  ゲームを作る〜
     
     &nbsp;|&nbsp;ALGO GEEKS
   </title>
 
   <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1" />
   <meta name="google-site-verification" content="DmTgCYn-qNNekSNxji7FGHMXvq3_4vrKm3pkvI9llLo" />
-  <link rel="canonical" href="http://blog.algolab.jp/post/2016/08/01/ai-training-kick-off/"/>
+  <link rel="canonical" href="http://blog.algolab.jp/post/2016/12/17/tf-dqn-simple-2/"/>
 
   <link rel="stylesheet" href="/css/sanitize.css" />
   <link rel="stylesheet" href="/css/responsive.css" />
@@ -60,17 +60,21 @@
   
   <main id="single" role="main">
     <div class="article-header">
-      <h1>AIトレーニングキックオフ 〜ハムケツを認識したい〜</h1>
+      <h1>超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜実装編①  ゲームを作る〜</h1>
       
 
 <div class="meta">
   
-    <span>2016/08/01</span>
+    <span>2016/12/17</span>
   
   
     <span>|</span>
     
-      <a href="/tags/ai-training">#AIトレーニング</a>&nbsp;
+      <a href="/tags/reinforcement-learning">#強化学習</a>&nbsp;
+    
+      <a href="/tags/dqn">#DQN</a>&nbsp;
+    
+      <a href="/tags/tensorflow">#TensorFlow</a>&nbsp;
     
   
   
@@ -103,19 +107,13 @@
     
       <li>
         
-          <a href=http://blog.algolab.jp/post/2016/08/07/deep-learning-introduction/>ディープラーニング徹底入門 〜AIトレーニング第1回〜</a>
+          超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜実装編①  ゲームを作る〜
         
       </li>
     
       <li>
         
-          AIトレーニングキックオフ 〜ハムケツを認識したい〜
-        
-      </li>
-    
-      <li>
-        
-          <a href=http://blog.algolab.jp/post/2016/07/25/ai-training/>AIトレーニングはじめました</a>
+          <a href=http://blog.algolab.jp/post/2016/08/01/tf-dqn-simple-1/>超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜導入編〜</a>
         
       </li>
     
@@ -125,54 +123,133 @@
 
       
 
-<p>今回は、Aさんのキックオフの内容についてお届けします。</p>
+<p>今回から、実装編についてお届けします。<br />
+本記事では、学習させるゲームの部分について、重要な箇所を抜粋して解説します。</p>
 
-<h2 id="ハムケツ">ハムケツ</h2>
+<p>対象とするソースコードは下記となります。<br />
+<a href="https://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py">https://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py</a></p>
 
-<p>「あの・・ですね。その・・・。ハムケツを認識したいんです。」</p>
+<p>それでは早速いってみましょう。</p>
 
-<p>トレーニングの最初にゴールを設定するのですが、その際、Aさんから出たひと言目がこれでした。</p>
+<h2 id="ゲームの概要">ゲームの概要</h2>
 
 <figure>
-  <img src="/images//post/2016/08/01/ai-training-kick-off//hamuketu.jpg"/>
-  
-  <figcaption><p>http://hamuketu.blog.jp/archives/51191945.html</p></figcaption>
+  <img src="/images//post/2016/12/17/tf-dqn-simple-2//demo-catch_ball.gif"/>
   
 </figure>
 
 
-<p>ハムケツとは最近ネットや書籍で話題になったハムスターのおしりのことで、
-独特の可愛さで評判となったので目にされた方もいらっしゃるのではないでしょうか。</p>
+<p>おさらいになりますが、ゲームの概要としては、上図のように上から落ちてくるボールをキャッチする、というものになります。キャッチできれば<code>+1点</code>、キャッチできなければ<code>-1点</code>というルールで高得点を目指します。</p>
 
-<p>Aさんの話を詳しくうかがってみると、妻がハムケツの得も言われぬ可愛さに身もだえていた時に「ハムケツ画像が自動的に送られてくるアプリがあったらな」と思ったとのことです。</p>
+<h2 id="データの持ち方">データの持ち方</h2>
 
-<p>素晴らしい！ではハムケツでいきましょう、と速攻でテーマが決まり、その後は大の男二人で「ハムケツの特徴」や「こっちがハムケツ、こっちはハムケツじゃない」などと熱い議論を交わしつつ成果物のイメージをより具体的に話し合いました。</p>
+<p>ゲーム盤は下図のように 8 x 8 の2次元配列で表現しており、「ボール」および「プレイヤー」を<code>1</code>で、背景を<code>0</code>の値として格納しています。
+<figure>
+  <img src="/images//post/2016/12/17/tf-dqn-simple-2//catch_ball.png"/>
+  
+</figure>
+</p>
 
-<p>実際にアプリを作るとなると様々な工程がありますが、ハムケツ画像を集める段階で人工知能がハムケツを認識してくれれば、ハムケツであるかどうかの判定を人間が行わなくてよくなります。</p>
+<p>上記の状態の場合、各種インスタンス変数の値は下記となります。</p>
 
-<p>この認識して判定するフェーズを今回のトレーニングで取り扱い、出来上がったモデルを誰にでも触ってもらえる形にしようということで、</p>
+<table>
+<thead>
+<tr>
+<th align="left">変数名</th>
+<th align="left">値</th>
+<th align="left">説明</th>
+</tr>
+</thead>
 
-<p>「ハムケツ画像を入力すると認識結果のテキストを出力で得られるWebアプリを作る」</p>
+<tbody>
+<tr>
+<td align="left">screen_n_rows</td>
+<td align="left">8</td>
+<td align="left">ゲーム盤の方向の長さ</td>
+</tr>
 
-<p>をゴールとすることになりました。</p>
+<tr>
+<td align="left">screen_n_cols</td>
+<td align="left">8</td>
+<td align="left">ゲーム盤の横方向の長さ</td>
+</tr>
 
-<h2 id="現状を把握する">現状を把握する</h2>
+<tr>
+<td align="left">ball_row</td>
+<td align="left">0</td>
+<td align="left">ボールの縦方向の位置</td>
+</tr>
 
-<p>ゴールが決まったところで、Aさんの現状のスキルをヒアリングしていきます。</p>
+<tr>
+<td align="left">ball_col</td>
+<td align="left">6</td>
+<td align="left">ボールの横方向の位置</td>
+</tr>
 
-<ul>
-<li>Webサービスや業務システムの設計、開発、運用を10年</li>
-<li>開発言語はJava、Ruby、Python、PHP</li>
-</ul>
+<tr>
+<td align="left">player_row</td>
+<td align="left">4</td>
+<td align="left">プレイヤーの左端の横方向の位置</td>
+</tr>
 
-<p>受講者のトレーニング開始時ベンチマークとしてご参考にしていただければと思います。</p>
+<tr>
+<td align="left">player_length</td>
+<td align="left">3</td>
+<td align="left">プレイヤーの横方向の長さ</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="ゲームの更新処理">ゲームの更新処理</h2>
+
+<p>続いて、ゲームの更新処理を行う<code>update</code>メソッドを見ていきましょう。</p>
+
+<h3 id="引数">引数</h3>
+
+<p>
+
+
+
+<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=17:24"></script>
+
+<code>update</code>メソッドは引数として<code>action</code>を受け取ります。<code>action</code>はプレイヤーの行動を表すもので、<code>0,1,2</code>のいずれかの数値で表現しており、それぞれ「何もしない」「左に動く」「右に動く」ことを示します。</p>
+
+<h3 id="プレイヤーの位置の更新">プレイヤーの位置の更新</h3>
+
+
+
+
+
+<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=25:35"></script>
+
+
+<p>プレイヤーの位置を更新しています。ゲーム盤からはみ出さないように制御しているのがポイントです。</p>
+
+<h3 id="ボールの位置の更新">ボールの位置の更新</h3>
+
+
+
+
+
+<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=36:37"></script>
+
+
+<p>こちらは単純に、下に1つずらすという処理をしています。</p>
+
+<h3 id="得点判定">得点判定</h3>
+
+
+
+
+
+<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=41:49"></script>
+
+
+<p>ボールがゲーム盤の下端に来た時に、ゲーム終了フラグをセット (<code>self.terminal = True</code>) した上で、得点判定処理を行います。プレイヤーの範囲内にボールがあればキャッチできたとみなし <code>+1点</code> (<code>self.reward = 1</code>)、そうでなければキャッチできなかったとして、<code>-1点</code> (<code>self.reward = -1</code>)、としています。</p>
 
 <h2 id="次回予告">次回予告</h2>
 
-<p>Aさんはだいぶ基礎がありそうなので、ディープラーニングのイメージを掴んでいただいた上で、成果物完成までのステップを提示し、それをこなしてもらう、というスタイルでトレーニングを開始することにしました。<br />
-なお、仕組みを理解いただくため、少し遠回りなステップを提示させていただいています。</p>
-
-<p>次回は、ディープラーニングのイメージを掴んでもらうためにお話した内容についてお届けします。</p>
+<p>次回は、ゲームを学習する部分（エージェント）について解説します。</p>
 
       
   <div id="share-this">
@@ -194,19 +271,13 @@
     
       <li>
         
-          <a href=http://blog.algolab.jp/post/2016/08/07/deep-learning-introduction/>ディープラーニング徹底入門 〜AIトレーニング第1回〜</a>
+          超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜実装編①  ゲームを作る〜
         
       </li>
     
       <li>
         
-          AIトレーニングキックオフ 〜ハムケツを認識したい〜
-        
-      </li>
-    
-      <li>
-        
-          <a href=http://blog.algolab.jp/post/2016/07/25/ai-training/>AIトレーニングはじめました</a>
+          <a href=http://blog.algolab.jp/post/2016/08/01/tf-dqn-simple-1/>超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜導入編〜</a>
         
       </li>
     
@@ -254,10 +325,8 @@
   
   <nav class="pagination-single">
     
-      <span class="previous">&larr; <a href="http://blog.algolab.jp/post/2016/07/30/seq2seq-chatbot/" rel="prev">Seq2Seqモデルを用いたチャットボット作成 〜英会話のサンプルをTorchで動かす〜</a></span>
+      <span class="previous">&larr; <a href="http://blog.algolab.jp/post/2016/12/09/phantomjs-promise/" rel="prev">PhantomJSでPromiseが使えない場合の対処法 〜Can&#39;t find variable: Promise〜</a></span>
     
-    
-      <span class="next"><a href="http://blog.algolab.jp/post/2016/08/01/tf-dqn-simple-1/" rel="next">超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜導入編〜</a> &rarr;</span>
     
   </nav>
   
@@ -526,7 +595,7 @@
     
       
       
-        _lgy_lt('set', 'category', 'AIトレーニング');
+        _lgy_lt('set', 'category', '強化学習');
       
     
     _lgy_lt('send', 'pageview');
