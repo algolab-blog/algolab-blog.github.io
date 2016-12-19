@@ -10,7 +10,7 @@
     <atom:link href="http://blog.algolab.jp/post/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜実装編②  学習の流れを理解する〜</title>
+      <title>超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜解説編②  学習の流れを理解する〜</title>
       <link>http://blog.algolab.jp/post/2016/12/19/tf-dqn-simple-3/</link>
       <pubDate>Mon, 19 Dec 2016 18:33:39 +0900</pubDate>
       
