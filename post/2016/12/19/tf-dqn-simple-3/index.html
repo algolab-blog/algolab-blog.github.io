@@ -5,14 +5,14 @@
   <title>
     
     
-      Googleカレンダー解析ツール作りました 〜時間の使い方チェッカー〜
+      超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜実装編②  学習の流れを理解する〜
     
     &nbsp;|&nbsp;ALGO GEEKS
   </title>
 
   <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1" />
   <meta name="google-site-verification" content="DmTgCYn-qNNekSNxji7FGHMXvq3_4vrKm3pkvI9llLo" />
-  <link rel="canonical" href="http://blog.algolab.jp/post/2016/08/16/calendar-report/"/>
+  <link rel="canonical" href="http://blog.algolab.jp/post/2016/12/19/tf-dqn-simple-3/"/>
 
   <link rel="stylesheet" href="/css/sanitize.css" />
   <link rel="stylesheet" href="/css/responsive.css" />
@@ -60,17 +60,21 @@
   
   <main id="single" role="main">
     <div class="article-header">
-      <h1>Googleカレンダー解析ツール作りました 〜時間の使い方チェッカー〜</h1>
+      <h1>超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜実装編②  学習の流れを理解する〜</h1>
       
 
 <div class="meta">
   
-    <span>2016/08/16</span>
+    <span>2016/12/19</span>
   
   
     <span>|</span>
     
-      <a href="/tags/product">#プロダクト</a>&nbsp;
+      <a href="/tags/reinforcement-learning">#強化学習</a>&nbsp;
+    
+      <a href="/tags/dqn">#DQN</a>&nbsp;
+    
+      <a href="/tags/tensorflow">#TensorFlow</a>&nbsp;
     
   
   
@@ -97,83 +101,131 @@
 
       
 
+  <div class="series">
+    
+    <ol reversed data-header="連載記事">
+    
+      <li>
+        
+          超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜実装編②  学習の流れを理解する〜
+        
+      </li>
+    
+      <li>
+        
+          <a href=http://blog.algolab.jp/post/2016/12/17/tf-dqn-simple-2/>超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜解説編①  ゲーム (環境) の実装を理解する〜</a>
+        
+      </li>
+    
+      <li>
+        
+          <a href=http://blog.algolab.jp/post/2016/08/01/tf-dqn-simple-1/>超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜導入編〜</a>
+        
+      </li>
+    
+    </ol>
+  </div>
+
 
       
 
+<p>今回は、学習の流れについて解説します。</p>
+
+<p>対象とするソースコードは下記となります。<br />
+<a href="https://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py">https://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py</a></p>
+
+<h2 id="学習の流れ">学習の流れ</h2>
+
+
+
+
+
+
+
+<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=25%3a40&footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204"></script>
+
+
+<p>学習の肝となるのは、上記のコードとなります。<br />
+フロー図で示したものが下記となります。
+登場人物として、ゲームを学習する本体 (エージェント) と、ゲーム (環境) があります。</p>
+
 <figure>
-  <img src="/images//post/2016/08/16/calendar-report//demo.png"/>
+  <img src="/images//post/2016/12/19/tf-dqn-simple-3//flow.png"/>
   
 </figure>
 
 
-<p>タイトルの通りですが、時間の使い方チェッカーというツールを作りました (だいぶ前に作っていました)。<br />
-<a href="http://tools.algolab.jp/calendar_reports">http://tools.algolab.jp/calendar_reports</a></p>
+<p>それでは、順を追って見ていきましょう。</p>
 
-<p>ソースコードはGitHubに公開しています。<br />
-<a href="https://github.com/algolab-inc/algo-tools/">https://github.com/algolab-inc/algo-tools/</a></p>
+<h2 id="①-アクションを選択">① アクションを選択</h2>
 
-<h2 id="時間の使い方チェッカーとは">時間の使い方チェッカーとは？</h2>
 
-<ul>
-<li>Googleカレンダーを解析して可視化するツールです</li>
-<li>タイトルを括弧で囲っているイベントのみを解析対象としています
 
-<ul>
-<li>(例) [仕事]</li>
-</ul></li>
-<li>括弧を連続することで階層を表現することができます
 
-<ul>
-<li>(例) [仕事][営業]</li>
-</ul></li>
-<li>データは一切保存しません (&larr;大事)</li>
-</ul>
 
-<h2 id="開発のきっかけ">開発のきっかけ</h2>
 
-<p>弊社では、仕事を(準)委任契約でいただくことがあり、作業時間ログをGoogleカレンダー上で管理していました。<br />
-そして、月末に集計を手作業で行っていましたが、それを自動化したい、というのがきっかけです。</p>
 
-<h2 id="実際に使ってみて">実際に使ってみて</h2>
+<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=29%3a30&footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204"></script>
 
-<p>せっかくなので、全ての作業時間ログをGoogleカレンダー上で管理するということを数ヶ月間行ってみています。</p>
 
-<p>作業時間ログを都度つける行動は習慣化しているため (常にカレンダーを立ち上げています) 入力作業に負担はなく、後から時間の使い方を振り返ることができるのでなかなか良い感じです。</p>
+<p>エージェントは、時刻tにおけるゲームの状態 (<code>state_t</code>) を受け取って、アクションを選択します。詳細は後述しますが、一定割合 (<code>self.exploration</code>) ではランダム選択、残りの割合では学習結果から最適なものを選択、という処理をしています。</p>
 
-<p>具体的には、以下のような階層構造で管理を行っています。</p>
+<h2 id="②-アクションを実行">② アクションを実行</h2>
 
-<ul>
-<li>受託
 
-<ul>
-<li>プロジェクト1</li>
-<li>プロジェクト2</li>
-<li>&hellip;</li>
-</ul></li>
-<li>自社
 
-<ul>
-<li>サービスA</li>
-<li>サービスB</li>
-<li>&hellip;</li>
-</ul></li>
-<li>経営
 
-<ul>
-<li>経営計画</li>
-<li>財務</li>
-<li>&hellip;</li>
-</ul></li>
-</ul>
 
-<p>弊社は受託事業を行いながら自社サービスを開発しており、また筆者は代表を務めているので、時間の使い方としては、大きく「受託」「自社」「経営」の3つに分かれます。</p>
 
-<p>その下にも幾つか階層を設けていますが、基本的にはこの3つの時間比率を毎月振り返るようにしています。</p>
 
-<h2 id="おわりに">おわりに</h2>
+<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=30%3a31&footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204"></script>
 
-<p>時間の使い方を可視化してみると色々な気づきがあります。是非試してみてください！<br />
-<a href="http://tools.algolab.jp/calendar_reports">http://tools.algolab.jp/calendar_reports</a></p>
+
+<p>選択されたアクションを、ゲームで実行します。</p>
+
+<h2 id="③-観察">③  観察</h2>
+
+
+
+
+
+
+
+<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=33%3a34&footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204"></script>
+
+
+<p>アクションが実行された結果を観察します。具体的には、次 (時刻t1) の状態 (<code>state_t_1</code>)、報酬 (<code>reward_t</code>)、終了フラグ (<code>terminal</code>) を受け取ります。</p>
+
+<h2 id="④-経験を蓄積">④  経験を蓄積</h2>
+
+
+
+
+
+
+
+<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=36%3a37&footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204"></script>
+
+
+<p>エージェントは、学習を行うための経験を蓄積します。具体的には、ある状態 (<code>state_t</code>) に対して、あるアクション (<code>action_t</code>) を行なった結果、どのような状態になったか(<code>state_t_1</code>)、報酬はいくらか (<code>reward_t</code>)、ゲームの終了フラグ(<code>terminal</code>) を保持して、学習に活かします。</p>
+
+<h2 id="⑤-経験再生">⑤  経験再生</h2>
+
+
+
+
+
+
+
+<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=39%3a40&footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204"></script>
+
+
+<p>これまで蓄積した経験をもとに学習を行います。こちらについても詳細は後述します。</p>
+
+<h2 id="まとめ">まとめ</h2>
+
+<p>今回は学習の流れについて解説しました。<br />
+次回はエージェントの中身について見ていきます。(最終回となる予定です)</p>
 
       
   <div id="share-this">
@@ -188,6 +240,31 @@
 
 
       
+
+  <div class="series">
+    
+    <ol reversed data-header="連載記事">
+    
+      <li>
+        
+          超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜実装編②  学習の流れを理解する〜
+        
+      </li>
+    
+      <li>
+        
+          <a href=http://blog.algolab.jp/post/2016/12/17/tf-dqn-simple-2/>超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜解説編①  ゲーム (環境) の実装を理解する〜</a>
+        
+      </li>
+    
+      <li>
+        
+          <a href=http://blog.algolab.jp/post/2016/08/01/tf-dqn-simple-1/>超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜導入編〜</a>
+        
+      </li>
+    
+    </ol>
+  </div>
 
 
       
@@ -230,10 +307,8 @@
   
   <nav class="pagination-single">
     
-      <span class="previous">&larr; <a href="http://blog.algolab.jp/post/2016/08/11/raspberry-pi-alexa/" rel="prev">Amazon Echoを6,000円で自作する 〜Raspberry Pi 3 &#43; Alexa Voice Services (AVS)〜</a></span>
+      <span class="previous">&larr; <a href="http://blog.algolab.jp/post/2016/12/17/tf-dqn-simple-2/" rel="prev">超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜解説編①  ゲーム (環境) の実装を理解する〜</a></span>
     
-    
-      <span class="next"><a href="http://blog.algolab.jp/post/2016/08/16/speech-framework/" rel="next">iOSで音声認識 〜Speech Frameworkを試す〜</a> &rarr;</span>
     
   </nav>
   
@@ -502,7 +577,7 @@
     
       
       
-        _lgy_lt('set', 'category', 'プロダクト');
+        _lgy_lt('set', 'category', '強化学習');
       
     
     _lgy_lt('send', 'pageview');

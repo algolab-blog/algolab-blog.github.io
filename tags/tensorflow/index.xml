@@ -6,11 +6,119 @@
     <description>Recent content in Tensorflow on ALGO GEEKS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 17 Dec 2016 17:02:04 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 19 Dec 2016 18:33:39 +0900</lastBuildDate>
     <atom:link href="http://blog.algolab.jp/tags/tensorflow/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜実装編①  ゲーム (環境) を作る〜</title>
+      <title>超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜実装編②  学習の流れを理解する〜</title>
+      <link>http://blog.algolab.jp/post/2016/12/19/tf-dqn-simple-3/</link>
+      <pubDate>Mon, 19 Dec 2016 18:33:39 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/12/19/tf-dqn-simple-3/</guid>
+      <description>
+
+&lt;p&gt;今回は、学習の流れについて解説します。&lt;/p&gt;
+
+&lt;p&gt;対象とするソースコードは下記となります。&lt;br /&gt;
+&lt;a href=&#34;https://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py&#34;&gt;https://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;学習の流れ&#34;&gt;学習の流れ&lt;/h2&gt;
+
+
+
+
+
+
+
+&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=25%3a40&amp;footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;学習の肝となるのは、上記のコードとなります。&lt;br /&gt;
+フロー図で示したものが下記となります。
+登場人物として、ゲームを学習する本体 (エージェント) と、ゲーム (環境) があります。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/12/19/tf-dqn-simple-3//flow.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;それでは、順を追って見ていきましょう。&lt;/p&gt;
+
+&lt;h2 id=&#34;①-アクションを選択&#34;&gt;① アクションを選択&lt;/h2&gt;
+
+
+
+
+
+
+
+&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=29%3a30&amp;footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;エージェントは、時刻tにおけるゲームの状態 (&lt;code&gt;state_t&lt;/code&gt;) を受け取って、アクションを選択します。詳細は後述しますが、一定割合 (&lt;code&gt;self.exploration&lt;/code&gt;) ではランダム選択、残りの割合では学習結果から最適なものを選択、という処理をしています。&lt;/p&gt;
+
+&lt;h2 id=&#34;②-アクションを実行&#34;&gt;② アクションを実行&lt;/h2&gt;
+
+
+
+
+
+
+
+&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=30%3a31&amp;footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;選択されたアクションを、ゲームで実行します。&lt;/p&gt;
+
+&lt;h2 id=&#34;③-観察&#34;&gt;③  観察&lt;/h2&gt;
+
+
+
+
+
+
+
+&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=33%3a34&amp;footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;アクションが実行された結果を観察します。具体的には、次 (時刻t1) の状態 (&lt;code&gt;state_t_1&lt;/code&gt;)、報酬 (&lt;code&gt;reward_t&lt;/code&gt;)、終了フラグ (&lt;code&gt;terminal&lt;/code&gt;) を受け取ります。&lt;/p&gt;
+
+&lt;h2 id=&#34;④-経験を蓄積&#34;&gt;④  経験を蓄積&lt;/h2&gt;
+
+
+
+
+
+
+
+&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=36%3a37&amp;footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;エージェントは、学習を行うための経験を蓄積します。具体的には、ある状態 (&lt;code&gt;state_t&lt;/code&gt;) に対して、あるアクション (&lt;code&gt;action_t&lt;/code&gt;) を行なった結果、どのような状態になったか(&lt;code&gt;state_t_1&lt;/code&gt;)、報酬はいくらか (&lt;code&gt;reward_t&lt;/code&gt;)、ゲームの終了フラグ(&lt;code&gt;terminal&lt;/code&gt;) を保持して、学習に活かします。&lt;/p&gt;
+
+&lt;h2 id=&#34;⑤-経験再生&#34;&gt;⑤  経験再生&lt;/h2&gt;
+
+
+
+
+
+
+
+&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=39%3a40&amp;footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;これまで蓄積した経験をもとに学習を行います。こちらについても詳細は後述します。&lt;/p&gt;
+
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
+
+&lt;p&gt;今回は学習の流れについて解説しました。&lt;br /&gt;
+次回はエージェントの中身について見ていきます。(最終回となる予定です)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜解説編①  ゲーム (環境) の実装を理解する〜</title>
       <link>http://blog.algolab.jp/post/2016/12/17/tf-dqn-simple-2/</link>
       <pubDate>Sat, 17 Dec 2016 17:02:04 +0900</pubDate>
       
@@ -18,7 +126,7 @@
       <description>
 
 &lt;p&gt;今回から、実装編についてお届けします。&lt;br /&gt;
-本記事では、学習させるゲーム (環境) の部分について、重要な箇所を抜粋して解説します。&lt;/p&gt;
+本記事では、学習させるゲーム (環境) の部分について、解説します。&lt;/p&gt;
 
 &lt;p&gt;対象とするソースコードは下記となります。&lt;br /&gt;
 &lt;a href=&#34;https://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py&#34;&gt;https://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py&lt;/a&gt;&lt;/p&gt;
@@ -104,7 +212,9 @@
 
 
 
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=17:24&#34;&gt;&lt;/script&gt;
+
+
+&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=17%3a24&amp;footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204&#34;&gt;&lt;/script&gt;
 
 &lt;code&gt;update&lt;/code&gt;メソッドは引数として&lt;code&gt;action&lt;/code&gt;を受け取ります。&lt;code&gt;action&lt;/code&gt;はプレイヤーの行動を表すもので、&lt;code&gt;0,1,2&lt;/code&gt;のいずれかの数値で表現しており、それぞれ「何もしない」「左に動く」「右に動く」ことを示します。&lt;/p&gt;
 
@@ -114,7 +224,9 @@
 
 
 
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=25:35&#34;&gt;&lt;/script&gt;
+
+
+&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=25%3a35&amp;footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;プレイヤーの位置を更新しています。ゲーム盤からはみ出さないように制御しているのがポイントです。&lt;/p&gt;
@@ -125,7 +237,9 @@
 
 
 
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=36:37&#34;&gt;&lt;/script&gt;
+
+
+&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=36%3a37&amp;footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;こちらは単純に、下に1つずらすという処理をしています。&lt;/p&gt;
@@ -136,14 +250,17 @@
 
 
 
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=41:49&#34;&gt;&lt;/script&gt;
+
+
+&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=41%3a49&amp;footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;ボールがゲーム盤の下端に来た時に、ゲーム終了フラグをセット (&lt;code&gt;self.terminal = True&lt;/code&gt;) した上で、得点判定処理を行います。プレイヤーの範囲内にボールがあればキャッチできたとみなし &lt;code&gt;+1点&lt;/code&gt; (&lt;code&gt;self.reward = 1&lt;/code&gt;)、そうでなければキャッチできなかったとして、&lt;code&gt;-1点&lt;/code&gt; (&lt;code&gt;self.reward = -1&lt;/code&gt;)、としています。&lt;/p&gt;
 
-&lt;h2 id=&#34;次回予告&#34;&gt;次回予告&lt;/h2&gt;
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
 
-&lt;p&gt;次回は、ゲームを学習する部分（エージェント）について解説します。&lt;/p&gt;
+&lt;p&gt;今回は、ゲーム (環境) の部分について、重要な箇所を抜粋して解説しました。&lt;br /&gt;
+次回は、ゲームを学習する流れについて見ていきます。&lt;/p&gt;
 </description>
     </item>
     
@@ -311,7 +428,7 @@ WIN: 002/002 (100.0%)&lt;br /&gt;
 きちんと動作しましたでしょうか？&lt;br /&gt;
 学習がうまくいっていれば、おそらく100%でキャッチできていると思います。&lt;/p&gt;
 
-&lt;p&gt;次回は、実装編についてお届けします。&lt;/p&gt;
+&lt;p&gt;次回は、解説編についてお届けします。&lt;/p&gt;
 </description>
     </item>
     

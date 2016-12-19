@@ -59,22 +59,22 @@
 &lt;h3 id=&#34;誕生日を登録する&#34;&gt;誕生日を登録する&lt;/h3&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;User: &amp;ldquo;Tom&amp;rsquo;s birthday is July seven.&amp;rdquo;&lt;br /&gt;
-Skill: &amp;ldquo;I now know Tom&amp;rsquo;s birthday is July seven.&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;User:&lt;/strong&gt; &amp;ldquo;Tom&amp;rsquo;s birthday is July seven.&amp;rdquo;&lt;br /&gt;
+&lt;strong&gt;Skill:&lt;/strong&gt; &amp;ldquo;I now know Tom&amp;rsquo;s birthday is July seven.&amp;rdquo;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h3 id=&#34;登録した人の誕生日を調べる&#34;&gt;登録した人の誕生日を調べる&lt;/h3&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;User: &amp;ldquo;When was Tom born on?&amp;rdquo;&lt;br /&gt;
-Skill: &amp;ldquo;Tom&amp;rsquo;s birthday is Jul seven.&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;User:&lt;/strong&gt; &amp;ldquo;When was Tom born on?&amp;rdquo;&lt;br /&gt;
+&lt;strong&gt;Skill:&lt;/strong&gt; &amp;ldquo;Tom&amp;rsquo;s birthday is Jul seven.&amp;rdquo;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h3 id=&#34;登録した誕生日に生まれた人を調べる&#34;&gt;登録した誕生日に生まれた人を調べる&lt;/h3&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;User: &amp;ldquo;Who were born on July seven?&amp;rdquo;&lt;br /&gt;
-Skill: &amp;ldquo;Tom were born on Jul seven.&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;User:&lt;/strong&gt; &amp;ldquo;Who were born on July seven?&amp;rdquo;&lt;br /&gt;
+&lt;strong&gt;Skill:&lt;/strong&gt; &amp;ldquo;Tom were born on Jul seven.&amp;rdquo;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;人名と誕生日の認識には、Slot Typeの枠組みを利用しました。人名には &lt;code&gt;AMAZON.US_FIRST_NAME&lt;/code&gt; を使用し、人名だけでなく母親や兄弟の誕生日も登録できるように&lt;code&gt;my mother&lt;/code&gt;, &lt;code&gt;my brother&lt;/code&gt;なども &lt;code&gt;AMAZON.US_FIRST_NAME&lt;/code&gt; を拡張して利用できるようにしました。誕生日の日付の認識では &lt;code&gt;AMAZON.DATE&lt;/code&gt; を使用しています。&lt;/p&gt;

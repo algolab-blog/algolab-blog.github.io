@@ -6,11 +6,119 @@
     <description>Recent content in Posts on ALGO GEEKS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 17 Dec 2016 17:02:04 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 19 Dec 2016 18:33:39 +0900</lastBuildDate>
     <atom:link href="http://blog.algolab.jp/post/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜実装編①  ゲーム (環境) を作る〜</title>
+      <title>超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜実装編②  学習の流れを理解する〜</title>
+      <link>http://blog.algolab.jp/post/2016/12/19/tf-dqn-simple-3/</link>
+      <pubDate>Mon, 19 Dec 2016 18:33:39 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/12/19/tf-dqn-simple-3/</guid>
+      <description>
+
+&lt;p&gt;今回は、学習の流れについて解説します。&lt;/p&gt;
+
+&lt;p&gt;対象とするソースコードは下記となります。&lt;br /&gt;
+&lt;a href=&#34;https://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py&#34;&gt;https://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;学習の流れ&#34;&gt;学習の流れ&lt;/h2&gt;
+
+
+
+
+
+
+
+&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=25%3a40&amp;footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;学習の肝となるのは、上記のコードとなります。&lt;br /&gt;
+フロー図で示したものが下記となります。
+登場人物として、ゲームを学習する本体 (エージェント) と、ゲーム (環境) があります。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/12/19/tf-dqn-simple-3//flow.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;それでは、順を追って見ていきましょう。&lt;/p&gt;
+
+&lt;h2 id=&#34;①-アクションを選択&#34;&gt;① アクションを選択&lt;/h2&gt;
+
+
+
+
+
+
+
+&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=29%3a30&amp;footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;エージェントは、時刻tにおけるゲームの状態 (&lt;code&gt;state_t&lt;/code&gt;) を受け取って、アクションを選択します。詳細は後述しますが、一定割合 (&lt;code&gt;self.exploration&lt;/code&gt;) ではランダム選択、残りの割合では学習結果から最適なものを選択、という処理をしています。&lt;/p&gt;
+
+&lt;h2 id=&#34;②-アクションを実行&#34;&gt;② アクションを実行&lt;/h2&gt;
+
+
+
+
+
+
+
+&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=30%3a31&amp;footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;選択されたアクションを、ゲームで実行します。&lt;/p&gt;
+
+&lt;h2 id=&#34;③-観察&#34;&gt;③  観察&lt;/h2&gt;
+
+
+
+
+
+
+
+&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=33%3a34&amp;footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;アクションが実行された結果を観察します。具体的には、次 (時刻t1) の状態 (&lt;code&gt;state_t_1&lt;/code&gt;)、報酬 (&lt;code&gt;reward_t&lt;/code&gt;)、終了フラグ (&lt;code&gt;terminal&lt;/code&gt;) を受け取ります。&lt;/p&gt;
+
+&lt;h2 id=&#34;④-経験を蓄積&#34;&gt;④  経験を蓄積&lt;/h2&gt;
+
+
+
+
+
+
+
+&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=36%3a37&amp;footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;エージェントは、学習を行うための経験を蓄積します。具体的には、ある状態 (&lt;code&gt;state_t&lt;/code&gt;) に対して、あるアクション (&lt;code&gt;action_t&lt;/code&gt;) を行なった結果、どのような状態になったか(&lt;code&gt;state_t_1&lt;/code&gt;)、報酬はいくらか (&lt;code&gt;reward_t&lt;/code&gt;)、ゲームの終了フラグ(&lt;code&gt;terminal&lt;/code&gt;) を保持して、学習に活かします。&lt;/p&gt;
+
+&lt;h2 id=&#34;⑤-経験再生&#34;&gt;⑤  経験再生&lt;/h2&gt;
+
+
+
+
+
+
+
+&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=39%3a40&amp;footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;これまで蓄積した経験をもとに学習を行います。こちらについても詳細は後述します。&lt;/p&gt;
+
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
+
+&lt;p&gt;今回は学習の流れについて解説しました。&lt;br /&gt;
+次回はエージェントの中身について見ていきます。(最終回となる予定です)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜解説編①  ゲーム (環境) の実装を理解する〜</title>
       <link>http://blog.algolab.jp/post/2016/12/17/tf-dqn-simple-2/</link>
       <pubDate>Sat, 17 Dec 2016 17:02:04 +0900</pubDate>
       
@@ -18,7 +126,7 @@
       <description>
 
 &lt;p&gt;今回から、実装編についてお届けします。&lt;br /&gt;
-本記事では、学習させるゲーム (環境) の部分について、重要な箇所を抜粋して解説します。&lt;/p&gt;
+本記事では、学習させるゲーム (環境) の部分について、解説します。&lt;/p&gt;
 
 &lt;p&gt;対象とするソースコードは下記となります。&lt;br /&gt;
 &lt;a href=&#34;https://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py&#34;&gt;https://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py&lt;/a&gt;&lt;/p&gt;
@@ -104,7 +212,9 @@
 
 
 
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=17:24&#34;&gt;&lt;/script&gt;
+
+
+&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=17%3a24&amp;footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204&#34;&gt;&lt;/script&gt;
 
 &lt;code&gt;update&lt;/code&gt;メソッドは引数として&lt;code&gt;action&lt;/code&gt;を受け取ります。&lt;code&gt;action&lt;/code&gt;はプレイヤーの行動を表すもので、&lt;code&gt;0,1,2&lt;/code&gt;のいずれかの数値で表現しており、それぞれ「何もしない」「左に動く」「右に動く」ことを示します。&lt;/p&gt;
 
@@ -114,7 +224,9 @@
 
 
 
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=25:35&#34;&gt;&lt;/script&gt;
+
+
+&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=25%3a35&amp;footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;プレイヤーの位置を更新しています。ゲーム盤からはみ出さないように制御しているのがポイントです。&lt;/p&gt;
@@ -125,7 +237,9 @@
 
 
 
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=36:37&#34;&gt;&lt;/script&gt;
+
+
+&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=36%3a37&amp;footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;こちらは単純に、下に1つずらすという処理をしています。&lt;/p&gt;
@@ -136,14 +250,17 @@
 
 
 
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=41:49&#34;&gt;&lt;/script&gt;
+
+
+&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=41%3a49&amp;footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;ボールがゲーム盤の下端に来た時に、ゲーム終了フラグをセット (&lt;code&gt;self.terminal = True&lt;/code&gt;) した上で、得点判定処理を行います。プレイヤーの範囲内にボールがあればキャッチできたとみなし &lt;code&gt;+1点&lt;/code&gt; (&lt;code&gt;self.reward = 1&lt;/code&gt;)、そうでなければキャッチできなかったとして、&lt;code&gt;-1点&lt;/code&gt; (&lt;code&gt;self.reward = -1&lt;/code&gt;)、としています。&lt;/p&gt;
 
-&lt;h2 id=&#34;次回予告&#34;&gt;次回予告&lt;/h2&gt;
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
 
-&lt;p&gt;次回は、ゲームを学習する部分（エージェント）について解説します。&lt;/p&gt;
+&lt;p&gt;今回は、ゲーム (環境) の部分について、重要な箇所を抜粋して解説しました。&lt;br /&gt;
+次回は、ゲームを学習する流れについて見ていきます。&lt;/p&gt;
 </description>
     </item>
     
@@ -269,22 +386,22 @@ print(hoge)
 &lt;h3 id=&#34;誕生日を登録する&#34;&gt;誕生日を登録する&lt;/h3&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;User: &amp;ldquo;Tom&amp;rsquo;s birthday is July seven.&amp;rdquo;&lt;br /&gt;
-Skill: &amp;ldquo;I now know Tom&amp;rsquo;s birthday is July seven.&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;User:&lt;/strong&gt; &amp;ldquo;Tom&amp;rsquo;s birthday is July seven.&amp;rdquo;&lt;br /&gt;
+&lt;strong&gt;Skill:&lt;/strong&gt; &amp;ldquo;I now know Tom&amp;rsquo;s birthday is July seven.&amp;rdquo;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h3 id=&#34;登録した人の誕生日を調べる&#34;&gt;登録した人の誕生日を調べる&lt;/h3&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;User: &amp;ldquo;When was Tom born on?&amp;rdquo;&lt;br /&gt;
-Skill: &amp;ldquo;Tom&amp;rsquo;s birthday is Jul seven.&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;User:&lt;/strong&gt; &amp;ldquo;When was Tom born on?&amp;rdquo;&lt;br /&gt;
+&lt;strong&gt;Skill:&lt;/strong&gt; &amp;ldquo;Tom&amp;rsquo;s birthday is Jul seven.&amp;rdquo;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h3 id=&#34;登録した誕生日に生まれた人を調べる&#34;&gt;登録した誕生日に生まれた人を調べる&lt;/h3&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;User: &amp;ldquo;Who were born on July seven?&amp;rdquo;&lt;br /&gt;
-Skill: &amp;ldquo;Tom were born on Jul seven.&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;User:&lt;/strong&gt; &amp;ldquo;Who were born on July seven?&amp;rdquo;&lt;br /&gt;
+&lt;strong&gt;Skill:&lt;/strong&gt; &amp;ldquo;Tom were born on Jul seven.&amp;rdquo;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;人名と誕生日の認識には、Slot Typeの枠組みを利用しました。人名には &lt;code&gt;AMAZON.US_FIRST_NAME&lt;/code&gt; を使用し、人名だけでなく母親や兄弟の誕生日も登録できるように&lt;code&gt;my mother&lt;/code&gt;, &lt;code&gt;my brother&lt;/code&gt;なども &lt;code&gt;AMAZON.US_FIRST_NAME&lt;/code&gt; を拡張して利用できるようにしました。誕生日の日付の認識では &lt;code&gt;AMAZON.DATE&lt;/code&gt; を使用しています。&lt;/p&gt;
@@ -2268,95 +2385,6 @@ $ pip install mecab-python3
 
 &lt;p&gt;リモートデスクトップ環境。下記の記事を参照してください。&lt;br /&gt;
 &lt;a href=&#34;http://blog.algolab.jp/post/2016/08/22/ubuntu-tightvnc-server/&#34;&gt;Ubuntu 16.04 LTSにXcfeとTightVNC Serverでリモートデスクトップ環境を構築する&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>テレアポ模擬トレーニングBot 〜コミュニケーション教育ツールとしてのチャットボットの活用可能性〜</title>
-      <link>http://blog.algolab.jp/post/2016/08/18/telephone-appointment-simulation-bot/</link>
-      <pubDate>Thu, 18 Aug 2016 15:20:16 +0900</pubDate>
-      
-      <guid>http://blog.algolab.jp/post/2016/08/18/telephone-appointment-simulation-bot/</guid>
-      <description>
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/18/telephone-appointment-simulation-bot//cover.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;LINEがBOT API、FacebookがMessenger Platformを発表してから数ヶ月たちました。&lt;br /&gt;
-これまでに数々のチャットボットがリリースされていますが、まだ活用方法を模索している段階かと思います。&lt;/p&gt;
-
-&lt;p&gt;その中で、コミュニケーション教育ツールとしての活用可能性があるのではないかと考え、実験的に「テレアポ模擬トレーニングBot」を &lt;a href=&#34;http://www.torix-corp.com/&#34;&gt;TORiX&lt;/a&gt; さんと共同開発させていただきました。&lt;/p&gt;
-
-&lt;p&gt;今回は、このBotの概要と、開発に至った経緯について書きたいと思います。&lt;/p&gt;
-
-&lt;h2 id=&#34;テレアポ模擬トレーニングbotとは&#34;&gt;テレアポ模擬トレーニングBotとは&lt;/h2&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/18/telephone-appointment-simulation-bot//story.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;ストーリー形式で、テレアポを擬似体験することのできるコンテンツです。下記ボタンから体験できます。&lt;/p&gt;
-
-&lt;script&gt;
-window.fbAsyncInit = function() {
-  FB.init({
-    appId: &#34;131078513971096&#34;,
-    xfbml: true,
-    version: &#34;v2.6&#34;
-  });
-};
-
-(function(d, s, id){
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) { return; }
-  js = d.createElement(s); js.id = id;
-  js.src = &#34;//connect.facebook.net/ja_JP/sdk.js&#34;;
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, &#39;script&#39;, &#39;facebook-jssdk&#39;));
-&lt;/script&gt;
-
-&lt;div class=&#34;fb-messengermessageus&#34;
-  messenger_app_id=&#34;131078513971096&#34;
-  page_id=&#34;1771482106414711&#34;&gt;
-&lt;/div&gt;
-
-
-&lt;p&gt;ボタンが動作しない場合は、下記ページからメッセージを送ってみてください。&lt;br /&gt;
-&lt;a href=&#34;https://www.facebook.com/1771482106414711/&#34;&gt;https://www.facebook.com/1771482106414711/&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;開発の経緯&#34;&gt;開発の経緯&lt;/h2&gt;
-
-&lt;p&gt;コミュニケーション領域の教育においては、擬似的にでも経験を積むことが一番スキルが身につく手段であると考えていますが、
-書籍や動画等のコンテンツではそれを体験することが困難です。&lt;/p&gt;
-
-&lt;p&gt;その中で、チャットボットを用いれば容易に実現できるのではないか、と考えたのが開発のきっかけです。&lt;/p&gt;
-
-&lt;p&gt;実際に、テレアポ模擬トレーニングBotは1日もかからず実装することができました。&lt;br /&gt;
-(ストーリー作成には別途1日かかりました。)&lt;/p&gt;
-
-&lt;h2 id=&#34;コミュニケーション教育ツールとしての可能性&#34;&gt;コミュニケーション教育ツールとしての可能性&lt;/h2&gt;
-
-&lt;p&gt;今回は題材としてテレアポを取り上げましたが、他にも応用可能性はあると考えています。&lt;/p&gt;
-
-&lt;p&gt;例えば、&lt;a href=&#34;https://the-board.jp/&#34;&gt;board&lt;/a&gt; を展開する &lt;a href=&#34;http://www.velc.co.jp/about/&#34;&gt;VELC&lt;/a&gt; さんは、カスタマーサポートの教育にBotを用いていると語っています。&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;そこで重要になってくるのが教育です。それに使っているのが、チャットツールである「Slack（スラック）」のbotです。&lt;br /&gt;
-Slack上で「ok board」と打ち込むと、FAQからSlackに質問だけがランダムに飛んでくるようになっています。スタッフには空き時間にそれを使って回答文を作成する練習をしてもらい、後で僕がレビューをする。&lt;/p&gt;
-
-&lt;p&gt;引用元: &lt;a href=&#34;https://seleck.cc/article/475&#34;&gt;「カスタマーサクセス」を意識したことはない。自然に神対応を実現した、CSの理想形&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&#34;おわりに&#34;&gt;おわりに&lt;/h2&gt;
-
-&lt;p&gt;今回は、チャットボットを「チャットUIを用いたインタラクティブなアプリを簡単に作れるツール」として捉え、コミュニケーション教育ツールとしての活用可能性についてお届けしました。&lt;/p&gt;
-
-&lt;p&gt;チャットボットはまだまだ可能性を秘めていると思いますので、今後も注目していきたいと思います。&lt;/p&gt;
 </description>
     </item>
     

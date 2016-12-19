@@ -5,7 +5,7 @@
   <title>
     
     
-      超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜実装編①  ゲーム (環境) を作る〜
+      超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜解説編①  ゲーム (環境) の実装を理解する〜
     
     &nbsp;|&nbsp;ALGO GEEKS
   </title>
@@ -60,7 +60,7 @@
   
   <main id="single" role="main">
     <div class="article-header">
-      <h1>超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜実装編①  ゲーム (環境) を作る〜</h1>
+      <h1>超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜解説編①  ゲーム (環境) の実装を理解する〜</h1>
       
 
 <div class="meta">
@@ -107,7 +107,13 @@
     
       <li>
         
-          超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜実装編①  ゲーム (環境) を作る〜
+          <a href=http://blog.algolab.jp/post/2016/12/19/tf-dqn-simple-3/>超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜実装編②  学習の流れを理解する〜</a>
+        
+      </li>
+    
+      <li>
+        
+          超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜解説編①  ゲーム (環境) の実装を理解する〜
         
       </li>
     
@@ -124,7 +130,7 @@
       
 
 <p>今回から、実装編についてお届けします。<br />
-本記事では、学習させるゲーム (環境) の部分について、重要な箇所を抜粋して解説します。</p>
+本記事では、学習させるゲーム (環境) の部分について、解説します。</p>
 
 <p>対象とするソースコードは下記となります。<br />
 <a href="https://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py">https://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py</a></p>
@@ -210,7 +216,9 @@
 
 
 
-<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=17:24"></script>
+
+
+<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=17%3a24&footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204"></script>
 
 <code>update</code>メソッドは引数として<code>action</code>を受け取ります。<code>action</code>はプレイヤーの行動を表すもので、<code>0,1,2</code>のいずれかの数値で表現しており、それぞれ「何もしない」「左に動く」「右に動く」ことを示します。</p>
 
@@ -220,7 +228,9 @@
 
 
 
-<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=25:35"></script>
+
+
+<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=25%3a35&footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204"></script>
 
 
 <p>プレイヤーの位置を更新しています。ゲーム盤からはみ出さないように制御しているのがポイントです。</p>
@@ -231,7 +241,9 @@
 
 
 
-<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=36:37"></script>
+
+
+<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=36%3a37&footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204"></script>
 
 
 <p>こちらは単純に、下に1つずらすという処理をしています。</p>
@@ -242,14 +254,17 @@
 
 
 
-<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=41:49"></script>
+
+
+<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=41%3a49&footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204"></script>
 
 
 <p>ボールがゲーム盤の下端に来た時に、ゲーム終了フラグをセット (<code>self.terminal = True</code>) した上で、得点判定処理を行います。プレイヤーの範囲内にボールがあればキャッチできたとみなし <code>+1点</code> (<code>self.reward = 1</code>)、そうでなければキャッチできなかったとして、<code>-1点</code> (<code>self.reward = -1</code>)、としています。</p>
 
-<h2 id="次回予告">次回予告</h2>
+<h2 id="まとめ">まとめ</h2>
 
-<p>次回は、ゲームを学習する部分（エージェント）について解説します。</p>
+<p>今回は、ゲーム (環境) の部分について、重要な箇所を抜粋して解説しました。<br />
+次回は、ゲームを学習する流れについて見ていきます。</p>
 
       
   <div id="share-this">
@@ -271,7 +286,13 @@
     
       <li>
         
-          超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜実装編①  ゲーム (環境) を作る〜
+          <a href=http://blog.algolab.jp/post/2016/12/19/tf-dqn-simple-3/>超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜実装編②  学習の流れを理解する〜</a>
+        
+      </li>
+    
+      <li>
+        
+          超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜解説編①  ゲーム (環境) の実装を理解する〜
         
       </li>
     
@@ -328,6 +349,8 @@
       <span class="previous">&larr; <a href="http://blog.algolab.jp/post/2016/12/09/phantomjs-promise/" rel="prev">PhantomJSでPromiseが使えない場合の対処法 〜Can&#39;t find variable: Promise〜</a></span>
     
     
+      <span class="next"><a href="http://blog.algolab.jp/post/2016/12/19/tf-dqn-simple-3/" rel="next">超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜実装編②  学習の流れを理解する〜</a> &rarr;</span>
+    
   </nav>
   
 
@@ -336,15 +359,15 @@
     <h3>最新記事</h3>
     <ul>
       
-        <li><a href="http://blog.algolab.jp/post/2016/12/17/tf-dqn-simple-2/">超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜実装編①  ゲーム (環境) を作る〜 </a></li>
+        <li><a href="http://blog.algolab.jp/post/2016/12/19/tf-dqn-simple-3/">超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜実装編②  学習の流れを理解する〜 </a></li>
+      
+        <li><a href="http://blog.algolab.jp/post/2016/12/17/tf-dqn-simple-2/">超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜解説編①  ゲーム (環境) の実装を理解する〜 </a></li>
       
         <li><a href="http://blog.algolab.jp/post/2016/12/09/phantomjs-promise/">PhantomJSでPromiseが使えない場合の対処法 〜Can&#39;t find variable: Promise〜 </a></li>
       
         <li><a href="http://blog.algolab.jp/post/2016/12/07/birthday-reminder/"> Alexa Skill (Amazon Echo) を公開したので開発上のポイントをまとめてみる 〜Birthday Reminder〜 </a></li>
       
         <li><a href="http://blog.algolab.jp/post/2016/11/11/neuralart/">TensorFlowで画風変換を試す </a></li>
-      
-        <li><a href="http://blog.algolab.jp/post/2016/09/28/alexa-color-expert/">AlexaスキルとLambdaファンクションはどのように連携しているか </a></li>
       
     <ul>
   </div>
@@ -378,6 +401,12 @@
      </li>
    
      <li>
+       <a href="/tags/tensorflow">
+         TensorFlow (4)
+       </a>
+     </li>
+   
+     <li>
        <a href="/tags/ubuntu">
          Ubuntu (4)
        </a>
@@ -390,8 +419,20 @@
      </li>
    
      <li>
+       <a href="/tags/dqn">
+         DQN (3)
+       </a>
+     </li>
+   
+     <li>
        <a href="/tags/image-recognition">
          画像認識 (3)
+       </a>
+     </li>
+   
+     <li>
+       <a href="/tags/reinforcement-learning">
+         強化学習 (3)
        </a>
      </li>
    
@@ -402,20 +443,8 @@
      </li>
    
      <li>
-       <a href="/tags/tensorflow">
-         TensorFlow (3)
-       </a>
-     </li>
-   
-     <li>
        <a href="/tags/chat-bot">
          チャットボット (2)
-       </a>
-     </li>
-   
-     <li>
-       <a href="/tags/dqn">
-         DQN (2)
        </a>
      </li>
    
@@ -428,12 +457,6 @@
      <li>
        <a href="/tags/product">
          プロダクト (2)
-       </a>
-     </li>
-   
-     <li>
-       <a href="/tags/reinforcement-learning">
-         強化学習 (2)
        </a>
      </li>
    
