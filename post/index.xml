@@ -10,7 +10,7 @@
     <atom:link href="http://blog.algolab.jp/post/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜実装編①  ゲームを作る〜</title>
+      <title>超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜実装編①  ゲーム (環境) を作る〜</title>
       <link>http://blog.algolab.jp/post/2016/12/17/tf-dqn-simple-2/</link>
       <pubDate>Sat, 17 Dec 2016 17:02:04 +0900</pubDate>
       
@@ -18,7 +18,7 @@
       <description>
 
 &lt;p&gt;今回から、実装編についてお届けします。&lt;br /&gt;
-本記事では、学習させるゲームの部分について、重要な箇所を抜粋して解説します。&lt;/p&gt;
+本記事では、学習させるゲーム (環境) の部分について、重要な箇所を抜粋して解説します。&lt;/p&gt;
 
 &lt;p&gt;対象とするソースコードは下記となります。&lt;br /&gt;
 &lt;a href=&#34;https://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py&#34;&gt;https://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py&lt;/a&gt;&lt;/p&gt;
