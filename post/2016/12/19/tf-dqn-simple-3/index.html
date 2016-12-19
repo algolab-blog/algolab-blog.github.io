@@ -141,8 +141,7 @@
 
 
 
-
-<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=25%3a40&footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204"></script>
+<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=25%3a40"></script>
 
 
 <p>学習の肝となるのは、上記のコードとなります。<br />
@@ -164,8 +163,7 @@
 
 
 
-
-<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=29%3a30&footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204"></script>
+<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=29%3a30"></script>
 
 
 <p>エージェントは、時刻tにおけるゲームの状態 (<code>state_t</code>) を受け取って、アクションを選択します。詳細は後述しますが、一定割合 (<code>self.exploration</code>) ではランダム選択、残りの割合では学習結果から最適なものを選択、という処理をしています。</p>
@@ -177,8 +175,7 @@
 
 
 
-
-<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=30%3a31&footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204"></script>
+<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=30%3a31"></script>
 
 
 <p>選択されたアクションを、ゲームで実行します。</p>
@@ -190,8 +187,7 @@
 
 
 
-
-<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=33%3a34&footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204"></script>
+<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=33%3a34"></script>
 
 
 <p>アクションが実行された結果を観察します。具体的には、次 (時刻t1) の状態 (<code>state_t_1</code>)、報酬 (<code>reward_t</code>)、終了フラグ (<code>terminal</code>) を受け取ります。</p>
@@ -203,8 +199,7 @@
 
 
 
-
-<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=36%3a37&footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204"></script>
+<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=36%3a37"></script>
 
 
 <p>エージェントは、学習を行うための経験を蓄積します。具体的には、ある状態 (<code>state_t</code>) に対して、あるアクション (<code>action_t</code>) を行なった結果、どのような状態になったか(<code>state_t_1</code>)、報酬はいくらか (<code>reward_t</code>)、ゲームの終了フラグ(<code>terminal</code>) を保持して、学習に活かします。</p>
@@ -216,8 +211,7 @@
 
 
 
-
-<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=39%3a40&footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204"></script>
+<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=39%3a40"></script>
 
 
 <p>これまで蓄積した経験をもとに学習を行います。こちらについても詳細は後述します。</p>

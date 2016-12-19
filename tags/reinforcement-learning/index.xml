@@ -29,8 +29,7 @@
 
 
 
-
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=25%3a40&amp;footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=25%3a40&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;学習の肝となるのは、上記のコードとなります。&lt;br /&gt;
@@ -52,8 +51,7 @@
 
 
 
-
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=29%3a30&amp;footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=29%3a30&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;エージェントは、時刻tにおけるゲームの状態 (&lt;code&gt;state_t&lt;/code&gt;) を受け取って、アクションを選択します。詳細は後述しますが、一定割合 (&lt;code&gt;self.exploration&lt;/code&gt;) ではランダム選択、残りの割合では学習結果から最適なものを選択、という処理をしています。&lt;/p&gt;
@@ -65,8 +63,7 @@
 
 
 
-
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=30%3a31&amp;footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=30%3a31&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;選択されたアクションを、ゲームで実行します。&lt;/p&gt;
@@ -78,8 +75,7 @@
 
 
 
-
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=33%3a34&amp;footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=33%3a34&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;アクションが実行された結果を観察します。具体的には、次 (時刻t1) の状態 (&lt;code&gt;state_t_1&lt;/code&gt;)、報酬 (&lt;code&gt;reward_t&lt;/code&gt;)、終了フラグ (&lt;code&gt;terminal&lt;/code&gt;) を受け取ります。&lt;/p&gt;
@@ -91,8 +87,7 @@
 
 
 
-
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=36%3a37&amp;footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=36%3a37&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;エージェントは、学習を行うための経験を蓄積します。具体的には、ある状態 (&lt;code&gt;state_t&lt;/code&gt;) に対して、あるアクション (&lt;code&gt;action_t&lt;/code&gt;) を行なった結果、どのような状態になったか(&lt;code&gt;state_t_1&lt;/code&gt;)、報酬はいくらか (&lt;code&gt;reward_t&lt;/code&gt;)、ゲームの終了フラグ(&lt;code&gt;terminal&lt;/code&gt;) を保持して、学習に活かします。&lt;/p&gt;
@@ -104,8 +99,7 @@
 
 
 
-
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=39%3a40&amp;footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=39%3a40&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;これまで蓄積した経験をもとに学習を行います。こちらについても詳細は後述します。&lt;/p&gt;
@@ -213,8 +207,7 @@
 
 
 
-
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=17%3a24&amp;footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=17%3a24&#34;&gt;&lt;/script&gt;
 
 &lt;code&gt;update&lt;/code&gt;メソッドは引数として&lt;code&gt;action&lt;/code&gt;を受け取ります。&lt;code&gt;action&lt;/code&gt;はプレイヤーの行動を表すもので、&lt;code&gt;0,1,2&lt;/code&gt;のいずれかの数値で表現しており、それぞれ「何もしない」「左に動く」「右に動く」ことを示します。&lt;/p&gt;
 
@@ -225,8 +218,7 @@
 
 
 
-
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=25%3a35&amp;footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=25%3a35&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;プレイヤーの位置を更新しています。ゲーム盤からはみ出さないように制御しているのがポイントです。&lt;/p&gt;
@@ -238,8 +230,7 @@
 
 
 
-
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=36%3a37&amp;footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=36%3a37&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;こちらは単純に、下に1つずらすという処理をしています。&lt;/p&gt;
@@ -251,8 +242,7 @@
 
 
 
-
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=41%3a49&amp;footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=41%3a49&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;ボールがゲーム盤の下端に来た時に、ゲーム終了フラグをセット (&lt;code&gt;self.terminal = True&lt;/code&gt;) した上で、得点判定処理を行います。プレイヤーの範囲内にボールがあればキャッチできたとみなし &lt;code&gt;+1点&lt;/code&gt; (&lt;code&gt;self.reward = 1&lt;/code&gt;)、そうでなければキャッチできなかったとして、&lt;code&gt;-1点&lt;/code&gt; (&lt;code&gt;self.reward = -1&lt;/code&gt;)、としています。&lt;/p&gt;

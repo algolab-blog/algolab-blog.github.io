@@ -217,8 +217,7 @@
 
 
 
-
-<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=17%3a24&footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204"></script>
+<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=17%3a24"></script>
 
 <code>update</code>メソッドは引数として<code>action</code>を受け取ります。<code>action</code>はプレイヤーの行動を表すもので、<code>0,1,2</code>のいずれかの数値で表現しており、それぞれ「何もしない」「左に動く」「右に動く」ことを示します。</p>
 
@@ -229,8 +228,7 @@
 
 
 
-
-<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=25%3a35&footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204"></script>
+<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=25%3a35"></script>
 
 
 <p>プレイヤーの位置を更新しています。ゲーム盤からはみ出さないように制御しているのがポイントです。</p>
@@ -242,8 +240,7 @@
 
 
 
-
-<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=36%3a37&footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204"></script>
+<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=36%3a37"></script>
 
 
 <p>こちらは単純に、下に1つずらすという処理をしています。</p>
@@ -255,8 +252,7 @@
 
 
 
-
-<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=41%3a49&footer=error%3a%20index%20out%20of%20range%20for%20positional%20param%20at%20position%204"></script>
+<script src="http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=41%3a49"></script>
 
 
 <p>ボールがゲーム盤の下端に来た時に、ゲーム終了フラグをセット (<code>self.terminal = True</code>) した上で、得点判定処理を行います。プレイヤーの範囲内にボールがあればキャッチできたとみなし <code>+1点</code> (<code>self.reward = 1</code>)、そうでなければキャッチできなかったとして、<code>-1点</code> (<code>self.reward = -1</code>)、としています。</p>
