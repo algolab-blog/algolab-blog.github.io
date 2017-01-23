@@ -6,8 +6,102 @@
     <description>Recent content in Posts on ALGO GEEKS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 19 Dec 2016 18:33:39 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 23 Jan 2017 17:32:10 +0900</lastBuildDate>
     <atom:link href="http://blog.algolab.jp/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>FetchRSS &#43; Slack で快適な情報収集ライフを送る</title>
+      <link>http://blog.algolab.jp/post/2017/01/23/fetchrss-slack/</link>
+      <pubDate>Mon, 23 Jan 2017 17:32:10 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2017/01/23/fetchrss-slack/</guid>
+      <description>
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-top.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;弊社では、Slackの&lt;code&gt;/feed&lt;/code&gt;コマンドを用いて、ニュースなどの情報を一元化していますが、媒体によってはRSSフィードが提供されていないものもあります。 今回は、そんな場合に役に立つ &lt;a href=&#34;http://fetchrss.com&#34;&gt;FetchRSS&lt;/a&gt; を紹介します。&lt;/p&gt;
+
+&lt;h2 id=&#34;気になるお値段&#34;&gt;気になるお値段&lt;/h2&gt;
+
+&lt;p&gt;基本的には有料プランでないと恩恵を受けられません (無料版では作成したRSSが7日間で消えてしまうため)。ただ、ほとんどのケースにおいて$9.95内に収まると思いますので、情報収集が楽になることを考えると安いものでしょう。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-price.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;h2 id=&#34;使い方&#34;&gt;使い方&lt;/h2&gt;
+
+&lt;h3 id=&#34;会員登録&#34;&gt;会員登録&lt;/h3&gt;
+
+&lt;p&gt;無料プランの場合も会員登録が必要になるので、登録しておきます。&lt;/p&gt;
+
+&lt;h3 id=&#34;url入力&#34;&gt;URL入力&lt;/h3&gt;
+
+&lt;p&gt;以降、当ブログのRSSを取得するとして進めていきます。
+まず、トップページから取得したいページのURLを入力します。 新着記事が一覧で並んでいるページが望ましいです。当ブログの場合は下記URLとなります。
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-1.png&#34;/&gt;
+  
+&lt;/figure&gt;
+&lt;/p&gt;
+
+&lt;p&gt;すると、以下のようなページに遷移すると思います。このページでは取得するコンテンツを指定していきます。最低限「News Item」「Headline」「Content」の3つを指定する必要があります。
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-2.png&#34;/&gt;
+  
+&lt;/figure&gt;
+&lt;/p&gt;
+
+&lt;h3 id=&#34;news-item-選択&#34;&gt;News Item 選択&lt;/h3&gt;
+
+&lt;p&gt;「News Item」では、下図の青色の線のように、記事を構成する要素の一番外側を選択します。
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-3.png&#34;/&gt;
+  
+&lt;/figure&gt;
+&lt;/p&gt;
+
+&lt;h3 id=&#34;headline-選択&#34;&gt;Headline 選択&lt;/h3&gt;
+
+&lt;p&gt;「Headline」ではタイトル部分を選択します(緑色の枠)。
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-4.png&#34;/&gt;
+  
+&lt;/figure&gt;
+&lt;/p&gt;
+
+&lt;h3 id=&#34;content-選択&#34;&gt;Content 選択&lt;/h3&gt;
+
+&lt;p&gt;「Content」では文章部分を選択します（赤色の枠）。文章部分がない場合は、「Headline」と同じ領域で構いません。
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-5.png&#34;/&gt;
+  
+&lt;/figure&gt;
+&lt;/p&gt;
+
+&lt;h2 id=&#34;rss生成&#34;&gt;RSS生成&lt;/h2&gt;
+
+&lt;p&gt;「Content」まで正しく選択できると、画面右側に下図のようなプレビューが生成されると思います。内容が問題なければ、「Generate RSS」を押してRSSを生成します。
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-6.png&#34;/&gt;
+  
+&lt;/figure&gt;
+&lt;/p&gt;
+
+&lt;p&gt;うまくRSSが生成できました。それでは快適な情報収集ライフを！
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-7.png&#34;/&gt;
+  
+&lt;/figure&gt;
+&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜解説編②  学習の流れを理解する〜</title>
@@ -2117,264 +2211,6 @@ $ sudo systemctl enable vncserver@1.service
   
 &lt;/figure&gt;
 
-</description>
-    </item>
-    
-    <item>
-      <title>【随時更新】pyenv &#43; Anaconda (Ubuntu 16.04 LTS) で機械学習のPython開発環境をオールインワンで整える</title>
-      <link>http://blog.algolab.jp/post/2016/08/21/pyenv-anaconda-ubuntu/</link>
-      <pubDate>Sun, 21 Aug 2016 17:22:48 +0900</pubDate>
-      
-      <guid>http://blog.algolab.jp/post/2016/08/21/pyenv-anaconda-ubuntu/</guid>
-      <description>
-
-&lt;p&gt;筆者の機械学習系のPython開発環境は、&lt;a href=&#34;https://www.vagrantup.com/&#34;&gt;Vagrant&lt;/a&gt; を用いた &lt;a href=&#34;https://atlas.hashicorp.com/bento/boxes/ubuntu-16.04&#34;&gt;Ubuntu (16.04 LTS)&lt;/a&gt; 上に構築しています。&lt;br /&gt;
-ここでは、画像認識、音声認識、自然言語処理などに必要な環境をオールインワンで構築する手順をまとめます。&lt;br /&gt;
-(最終更新日: 2016/11/14)&lt;/p&gt;
-
-&lt;h2 id=&#34;osバージョン&#34;&gt;OSバージョン&lt;/h2&gt;
-
-&lt;p&gt;OSバージョンは下記の通りです。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh hljs bash&#34;&gt;$ cat /etc/lsb-release
-DISTRIB_ID=Ubuntu
-DISTRIB_RELEASE=&lt;span class=&#34;hljs-number&#34;&gt;16.04&lt;/span&gt;
-DISTRIB_CODENAME=xenial
-DISTRIB_DESCRIPTION=&lt;span class=&#34;hljs-string&#34;&gt;&#34;Ubuntu 16.04.1 LTS&#34;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code class=&#34;language-sh hljs bash&#34;&gt;$ uname &lt;span class=&#34;hljs-operator&#34;&gt;-a&lt;/span&gt;
-Linux vagrant &lt;span class=&#34;hljs-number&#34;&gt;4.4&lt;/span&gt;.&lt;span class=&#34;hljs-number&#34;&gt;0&lt;/span&gt;-&lt;span class=&#34;hljs-number&#34;&gt;31&lt;/span&gt;-generic &lt;span class=&#34;hljs-comment&#34;&gt;#50-Ubuntu SMP Wed Jul 13 00:07:12 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-
-&lt;h2 id=&#34;pyenv-anaconda-の環境を構築&#34;&gt;pyenv + Anaconda の環境を構築&lt;/h2&gt;
-
-&lt;p&gt;Python環境は、pyenv + Anacodaを用いて構築します。&lt;br /&gt;
-pyenvやAnacondaの概要やメリットについては、下記の記事に詳しくまとまっています。&lt;br /&gt;
-&lt;a href=&#34;http://qiita.com/y__sama/items/5b62d31cb7e6ed50f02c&#34;&gt;データサイエンティストを目指す人のpython環境構築 2016&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;上記の記事にあるように、ここでもpyenvはAnacondaのインストーラとしてのみ使用し、Python環境の切り替えはAnacondaで行うこととします。&lt;/p&gt;
-
-&lt;h3 id=&#34;必要なパッケージのインストール&#34;&gt;必要なパッケージのインストール&lt;/h3&gt;
-
-&lt;p&gt;まず、必要なパッケージをインストールします。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev libpng-dev
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;pyenvのインストール&#34;&gt;pyenvのインストール&lt;/h3&gt;
-
-&lt;p&gt;pyenvおよびプラグインをインストールし、環境を整えます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ git clone git://github.com/yyuu/pyenv.git ~/.pyenv
-$ git clone https://github.com/yyuu/pyenv-pip-rehash.git ~/.pyenv/plugins/pyenv-pip-rehash
-$ echo &#39;export PYENV_ROOT=&amp;quot;$HOME/.pyenv&amp;quot;&#39; &amp;gt;&amp;gt; ~/.bashrc
-$ echo &#39;export PATH=&amp;quot;$PYENV_ROOT/bin:$PATH&amp;quot;&#39; &amp;gt;&amp;gt; ~/.bashrc
-$ echo &#39;eval &amp;quot;$(pyenv init -)&amp;quot;&#39; &amp;gt;&amp;gt; ~/.bashrc
-$ source ~/.bashrc
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;anacondaのインストール&#34;&gt;Anacondaのインストール&lt;/h3&gt;
-
-&lt;p&gt;まず、最新のAnaconda (Python3系) のバージョンを確認します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pyenv install -l | grep anaconda3
-  anaconda3-2.0.0
-  anaconda3-2.0.1
-  anaconda3-2.1.0
-  anaconda3-2.2.0
-  anaconda3-2.3.0
-  anaconda3-2.4.0
-  anaconda3-2.4.1
-  anaconda3-2.5.0
-  anaconda3-4.0.0
-  anaconda3-4.1.0
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;最新のAnaconda (ここでは4.1.0) をインストールし、デフォルトとして設定します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pyenv install anaconda3-4.1.0
-$ pyenv global anaconda3-4.1.0
-$ echo &#39;export PATH=&amp;quot;$PYENV_ROOT/versions/anaconda3-4.1.0/bin:$PATH&amp;quot;&#39; &amp;gt;&amp;gt; ~/.bashrc
-$ source ~/.bashrc
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Pythonの環境を確認します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ python --version
-Python 3.5.1 :: Anaconda 4.1.0 (64-bit)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;python2系の導入&#34;&gt;Python2系の導入&lt;/h2&gt;
-
-&lt;p&gt;ここまでで、Python3系の環境が構築できました。&lt;br /&gt;
-場合によって、Python2系の環境が必要になることもあるので、導入しておきます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ conda create -n py27con python=2.7 anaconda
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;上記環境に切り替えるには以下のコマンドを叩きます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ source activate py27con
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Python環境が切り替わっていることを確認します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ python --version
-Python 2.7.12 :: Anaconda 4.1.0 (64-bit)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;なお、下記で環境を抜けることができます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ source deacivate
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;pythonライブラリのインストール&#34;&gt;Pythonライブラリのインストール&lt;/h2&gt;
-
-&lt;p&gt;以下、用途に応じて必要なPythonライブラリ (+ 本体) をインストールしていきます。&lt;br /&gt;
-&lt;code&gt;conda&lt;/code&gt;経由が便利なものは&lt;code&gt;conda&lt;/code&gt;で、それ以外は&lt;code&gt;pip&lt;/code&gt;で行います。&lt;/p&gt;
-
-&lt;p&gt;諸々インストールする前に自身を更新しておきます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ conda update -y conda
-$ pip install --upgrade pip
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;深層学習ライブラリ&#34;&gt;深層学習ライブラリ&lt;/h2&gt;
-
-&lt;h3 id=&#34;tensorflow&#34;&gt;TensorFlow&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://www.tensorflow.org/&#34;&gt;https://www.tensorflow.org/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Googleの深層学習ライブラリ。&lt;code&gt;conda&lt;/code&gt;経由で最新バージョンを一発でインストールします。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ conda install -y -c jjhelmus tensorflow
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;chainer&#34;&gt;Chainer&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://chainer.org/&#34;&gt;http://chainer.org/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;PFNの深層学習ライブラリ。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pip install chainer
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;keras&#34;&gt;Keras&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://keras.io/&#34;&gt;https://keras.io/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;TensorFlowおよびTheanoのラッパー。同時にTheanoも入ります。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pip install keras
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;画像認識&#34;&gt;画像認識&lt;/h2&gt;
-
-&lt;h3 id=&#34;imagemagick&#34;&gt;ImageMagick&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://imagemagick.org/script/index.php&#34;&gt;http://imagemagick.org/script/index.php&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;画像処理ライブラリ。&lt;code&gt;conda&lt;/code&gt;経由で本体もまとめてインストールします。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ conda install -y -c vdbwrair imagemagick
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;opencv&#34;&gt;OpenCV&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://opencv.org/&#34;&gt;http://opencv.org/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;コンピュータビジョンライブラリ。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ conda install -y -c menpo opencv3
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;dlib&#34;&gt;Dlib&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://dlib.net/&#34;&gt;http://dlib.net/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;画像処理系が充実している機械学習ライブラリ。&lt;code&gt;cmake&lt;/code&gt;と&lt;code&gt;boost-python&lt;/code&gt;も同時にインストールします。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get -y install libboost-python-dev cmake
-$ conda install -y -c wordsforthewise dlib
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;selective-search&#34;&gt;Selective Search&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/AlpacaDB/selectivesearch&#34;&gt;https://github.com/AlpacaDB/selectivesearch&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Alpacaが提供しているSelectiveSearchに特化したライブラリ。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pip install selectivesearch
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;音声認識&#34;&gt;音声認識&lt;/h2&gt;
-
-&lt;h3 id=&#34;kaldi&#34;&gt;Kaldi&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://kaldi-asr.org/&#34;&gt;http://kaldi-asr.org/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;深層学習を用いた音声認識ツールキット。下記の記事を参照してください。&lt;br /&gt;
-&lt;a href=&#34;http://blog.algolab.jp/post/2016/08/31/kaldi/&#34;&gt;Kaldiで音声を学習させる 〜ディープラーニングを用いた音声認識ツールキット〜&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;ffmpeg&#34;&gt;FFmpeg&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://ffmpeg.org/&#34;&gt;https://ffmpeg.org/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;音声・動画処理ライブラリ。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ conda install -y -c conda-forge ffmpeg
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;librosa&#34;&gt;librosa&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/librosa/librosa&#34;&gt;https://github.com/librosa/librosa&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;音声・音楽解析ライブラリ。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ conda install -y -c conda-forge librosa
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;自然言語処理&#34;&gt;自然言語処理&lt;/h2&gt;
-
-&lt;h3 id=&#34;mecab&#34;&gt;MeCab&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://taku910.github.io/mecab/&#34;&gt;http://taku910.github.io/mecab/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;形態素解析エンジン。本体は&lt;code&gt;apt-get&lt;/code&gt;でインストールします。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get -y install libmecab-dev mecab mecab-ipadic mecab-ipadic-utf8
-$ pip install mecab-python3
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;gensim&#34;&gt;gensim&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://radimrehurek.com/gensim/&#34;&gt;https://radimrehurek.com/gensim/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;トピックモデルのライブラリ。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pip install gensim
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;強化学習&#34;&gt;強化学習&lt;/h2&gt;
-
-&lt;h3 id=&#34;openai-gym&#34;&gt;OpenAI Gym&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://gym.openai.com/&#34;&gt;https://gym.openai.com/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;強化学習のトレーニング環境。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pip install gym
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;その他便利ツール&#34;&gt;その他便利ツール&lt;/h2&gt;
-
-&lt;h3 id=&#34;tightvnc-server&#34;&gt;TightVNC Server&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://www.tightvnc.com/&#34;&gt;http://www.tightvnc.com/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;リモートデスクトップ環境。下記の記事を参照してください。&lt;br /&gt;
-&lt;a href=&#34;http://blog.algolab.jp/post/2016/08/22/ubuntu-tightvnc-server/&#34;&gt;Ubuntu 16.04 LTSにXcfeとTightVNC Serverでリモートデスクトップ環境を構築する&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     

@@ -5,14 +5,14 @@
   <title>
     
     
-      重み付き有限状態トランスデューサ (WFST) をOpenFstで作成する
+      FetchRSS &#43; Slack で快適な情報収集ライフを送る
     
     &nbsp;|&nbsp;ALGO GEEKS
   </title>
 
   <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1" />
   <meta name="google-site-verification" content="DmTgCYn-qNNekSNxji7FGHMXvq3_4vrKm3pkvI9llLo" />
-  <link rel="canonical" href="http://blog.algolab.jp/post/2016/09/13/openfst/"/>
+  <link rel="canonical" href="http://blog.algolab.jp/post/2017/01/23/fetchrss-slack/"/>
 
   <link rel="stylesheet" href="/css/sanitize.css" />
   <link rel="stylesheet" href="/css/responsive.css" />
@@ -60,19 +60,17 @@
   
   <main id="single" role="main">
     <div class="article-header">
-      <h1>重み付き有限状態トランスデューサ (WFST) をOpenFstで作成する</h1>
+      <h1>FetchRSS &#43; Slack で快適な情報収集ライフを送る</h1>
       
 
 <div class="meta">
   
-    <span>2016/09/13</span>
+    <span>2017/01/23</span>
   
   
     <span>|</span>
     
-      <a href="/tags/speech-recognition">#音声認識</a>&nbsp;
-    
-      <a href="/tags/openfst">#OpenFst</a>&nbsp;
+      <a href="/tags/tips">#Tips</a>&nbsp;
     
   
   
@@ -102,168 +100,89 @@
 
       
 
-<p>音声認識などの分野では、重み付き有限状態トランスデューサ (WFST) が今でも広く用いられています。<br />
-ここではOpenFstを用いて簡単なサンプルを作成してみます。<br />
-<a href="http://www.openfst.org">http://www.openfst.org</a></p>
-
-<h2 id="有限状態トランスデューサ-fst-finite-state-transducer">有限状態トランスデューサ (FST: Finite-State Transducer)</h2>
-
-<p>FSTとは、簡単に言えば、入力記号列に対して出力記号列を返す変換器です。<br />
-一番単純な例からみてみましょう。下図をご覧ください。</p>
-
 <figure>
-  <img src="/images//post/2016/09/13/openfst//fst_1.png"/>
+  <img src="/images//post/2017/01/23/fetchrss-slack//fetchrss-top.png"/>
   
 </figure>
 
 
-<p>これは<code>a</code>の入力に対して<code>A</code>を返すFSTです。詳しく見ていきます。</p>
+<p>弊社では、Slackの<code>/feed</code>コマンドを用いて、ニュースなどの情報を一元化していますが、媒体によってはRSSフィードが提供されていないものもあります。 今回は、そんな場合に役に立つ <a href="http://fetchrss.com">FetchRSS</a> を紹介します。</p>
+
+<h2 id="気になるお値段">気になるお値段</h2>
+
+<p>基本的には有料プランでないと恩恵を受けられません (無料版では作成したRSSが7日間で消えてしまうため)。ただ、ほとんどのケースにおいて$9.95内に収まると思いますので、情報収集が楽になることを考えると安いものでしょう。</p>
 
 <figure>
-  <img src="/images//post/2016/09/13/openfst//fst_2.png"/>
+  <img src="/images//post/2017/01/23/fetchrss-slack//fetchrss-price.png"/>
   
 </figure>
 
 
-<p>FSTには、初期状態から始まり最終状態に遷移できたもののみ出力を行う、という制約があります。<br />
-そして、遷移の条件が<code>入力:出力</code>という形で表現されます。<br />
-ですので、上記の例では<code>a</code>以外の入力は受け付けないことになります。</p>
+<h2 id="使い方">使い方</h2>
 
-<p>少し複雑になった例をみてみましょう。</p>
+<h3 id="会員登録">会員登録</h3>
 
+<p>無料プランの場合も会員登録が必要になるので、登録しておきます。</p>
+
+<h3 id="url入力">URL入力</h3>
+
+<p>以降、当ブログのRSSを取得するとして進めていきます。
+まず、トップページから取得したいページのURLを入力します。 新着記事が一覧で並んでいるページが望ましいです。当ブログの場合は下記URLとなります。
 <figure>
-  <img src="/images//post/2016/09/13/openfst//fst_3.png"/>
-  
-</figure>
-
-
-<p>これは<code>ab</code>の入力に対して<code>AB</code>を、<code>ba</code>の入力に対して<code>BA</code>を出力します。<br />
-例えば、<code>ab</code>の入力に対しては、<code>0</code> &rarr; <code>1</code> &rarr; <code>2</code> と遷移できるので、<code>AB</code>を出力することになります。</p>
-
-<h2 id="重み付き有限状態トランスデューサ-wfst-weighted-finite-state-transducer">重み付き有限状態トランスデューサ (WFST: Weighted Finite-State Transducer)</h2>
-
-<p>FSTに重みを加えたものがWFSTとなります。</p>
-
-<figure>
-  <img src="/images//post/2016/09/13/openfst//wfst.png"/>
-  
-</figure>
-
-
-<p><code>/</code>以下の数値が重みを表し、WFSTは記号列と重みを出力します。<br />
-例えば<code>ab</code>の入力に対しては、<code>AB</code>とともに重み<code>4.5 (= 0.5 + 1.5 + 3.0)</code>を出力することになります。</p>
-
-<h2 id="openfst">OpenFst</h2>
-
-<p>それではOpenFstを用いて実際にWFSTを作成してみましょう。</p>
-
-<h3 id="インストール">インストール</h3>
-
-<p>ダウンロード及びインストール方法については下記の公式ドキュメントをご参照ください。<br />
-<a href="http://www.openfst.org/twiki/bin/view/FST/FstDownload">http://www.openfst.org/twiki/bin/view/FST/FstDownload</a></p>
-
-<p>筆者の環境では、Kaldiの導入時に同時にインストールを行いました。<br />
-<a href="http://blog.algolab.jp/post/2016/08/31/kaldi/">Kaldiで音声を学習させる 〜ディープラーニングを用いた音声認識ツールキット〜</a></p>
-
-<p>以下のコマンドが叩ければ、WFST作成に進むことができます。</p>
-
-<pre><code class="language-sh">$ fstcompile --help
-</code></pre>
-
-<h3 id="wfst作成">WFST作成</h3>
-
-<p>ここからは下記のリンクを参考に進めます。<br />
-<a href="http://www.openfst.org/twiki/bin/view/FST/FstQuickTour">http://www.openfst.org/twiki/bin/view/FST/FstQuickTour</a><br />
-<a href="http://kaldi-asr.org/doc/tutorial_looking.html">http://kaldi-asr.org/doc/tutorial_looking.html</a></p>
-
-<p>具体的には下図に示すWFSTを作成していきます。</p>
-
-<figure>
-  <img src="/images//post/2016/09/13/openfst//binary.png"/>
-  
-</figure>
-
-
-<p>FSTファイルはテキストで表現できます。下記のように定義していきます。</p>
-
-<pre><code class="language-sh"># arc format: src dest ilabel olabel [weight]
-# final state format: state [weight]
-# lines may occur in any order except initial state must be first line
-# unspecified weights default to 0.0 (for the library-default Weight type)
-$ cat &gt;text.fst &lt;&lt;EOF
-0 1 a x .5
-0 1 b y 1.5
-1 2 c z 2.5
-2 3.5
-EOF
-</code></pre>
-
-<p>入力記号列は内部的には数値で表現するため、その定義を行います。<code>&lt;eps&gt;</code>は空を表します。</p>
-
-<pre><code class="language-sh">$ cat &gt;isyms.txt &lt;&lt;EOF
-&lt;eps&gt; 0
-a 1
-b 2
-c 3
-EOF
-</code></pre>
-
-<p>同様に出力記号列の定義も行います。</p>
-
-<pre><code class="language-sh">$ cat &gt;osyms.txt &lt;&lt;EOF
-&lt;eps&gt; 0
-x 1
-y 2
-z 3
-EOF
-</code></pre>
-
-<p>バイナリ形式にコンパイルします。</p>
-
-<pre><code class="language-sh">$ fstcompile --isymbols=isyms.txt --osymbols=osyms.txt text.fst binary.fst
-</code></pre>
-
-<p>これでWFSTが作成できました。</p>
-
-<h3 id="wfstの演算">WFSTの演算</h3>
-
-<p>上記は簡単な例ですが、様々なモデルをWFSTで表現することができます。<br />
-そして、WFST形式で表現すると、各種演算が可能になるというメリットがあります。</p>
-
-<p>簡単な演算をしてみましょう。2つのWFSTを合成する演算してみます。</p>
-
-<pre><code class="language-sh">$ fstcompose binary.fst binary.fst binary2.fst
-</code></pre>
-
-<p>テキスト形式で確認してみます。</p>
-
-<pre><code class="language-sh">$ fstprint --isymbols=isyms.txt --osymbols=osyms.txt binary2.fst
-0 1 a x 1
-0 1 b y 3
-1 2 c z 5
-2 7
-</code></pre>
-
-<p>元に比べて重みが倍になっていることがわかります。<br />
-また、<a href="http://www.graphviz.org">Graphviz</a> で操作可能なdot形式で出力することもできます。</p>
-
-<pre><code class="language-sh">$ fstdraw --isymbols=isyms.txt --osymbols=osyms.txt binary2.fst binary2.dot
-</code></pre>
-
-<p>Graphvizがインストールされている場合は、下記コマンドでpngに形式に出力することができます。</p>
-
-<pre><code class="language-sh">$ dot -Tpng binary2.dot &gt; binary2.png
-</code></pre>
-
-<p>以下の画像が出力されました。
-<figure>
-  <img src="/images//post/2016/09/13/openfst//binary2.png"/>
+  <img src="/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-1.png"/>
   
 </figure>
 </p>
 
-<p>その他詳しい操作については公式ドキュメントをご参照ください。<br />
-<a href="http://www.openfst.org/">http://www.openfst.org/</a></p>
+<p>すると、以下のようなページに遷移すると思います。このページでは取得するコンテンツを指定していきます。最低限「News Item」「Headline」「Content」の3つを指定する必要があります。
+<figure>
+  <img src="/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-2.png"/>
+  
+</figure>
+</p>
+
+<h3 id="news-item-選択">News Item 選択</h3>
+
+<p>「News Item」では、下図の青色の線のように、記事を構成する要素の一番外側を選択します。
+<figure>
+  <img src="/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-3.png"/>
+  
+</figure>
+</p>
+
+<h3 id="headline-選択">Headline 選択</h3>
+
+<p>「Headline」ではタイトル部分を選択します(緑色の枠)。
+<figure>
+  <img src="/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-4.png"/>
+  
+</figure>
+</p>
+
+<h3 id="content-選択">Content 選択</h3>
+
+<p>「Content」では文章部分を選択します（赤色の枠）。文章部分がない場合は、「Headline」と同じ領域で構いません。
+<figure>
+  <img src="/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-5.png"/>
+  
+</figure>
+</p>
+
+<h2 id="rss生成">RSS生成</h2>
+
+<p>「Content」まで正しく選択できると、画面右側に下図のようなプレビューが生成されると思います。内容が問題なければ、「Generate RSS」を押してRSSを生成します。
+<figure>
+  <img src="/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-6.png"/>
+  
+</figure>
+</p>
+
+<p>うまくRSSが生成できました。それでは快適な情報収集ライフを！
+<figure>
+  <img src="/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-7.png"/>
+  
+</figure>
+</p>
 
       
   <div id="share-this">
@@ -332,10 +251,8 @@ EOF
   
   <nav class="pagination-single">
     
-      <span class="previous">&larr; <a href="http://blog.algolab.jp/post/2016/09/08/dslt/" rel="prev">データサイエンスLT祭り 資料まとめ</a></span>
+      <span class="previous">&larr; <a href="http://blog.algolab.jp/post/2016/12/19/tf-dqn-simple-3/" rel="prev">超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜解説編②  学習の流れを理解する〜</a></span>
     
-    
-      <span class="next"><a href="http://blog.algolab.jp/post/2016/09/28/alexa-color-expert/" rel="next">AlexaスキルとLambdaファンクションはどのように連携しているか</a> &rarr;</span>
     
   </nav>
   
@@ -610,7 +527,7 @@ EOF
     
       
       
-        _lgy_lt('set', 'category', '音声認識');
+        _lgy_lt('set', 'category', 'Tips');
       
     
     _lgy_lt('send', 'pageview');

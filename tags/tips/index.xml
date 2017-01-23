@@ -6,8 +6,102 @@
     <description>Recent content in Tips on ALGO GEEKS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Fri, 09 Dec 2016 15:03:23 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 23 Jan 2017 17:32:10 +0900</lastBuildDate>
     <atom:link href="http://blog.algolab.jp/tags/tips/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>FetchRSS &#43; Slack で快適な情報収集ライフを送る</title>
+      <link>http://blog.algolab.jp/post/2017/01/23/fetchrss-slack/</link>
+      <pubDate>Mon, 23 Jan 2017 17:32:10 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2017/01/23/fetchrss-slack/</guid>
+      <description>
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-top.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;p&gt;弊社では、Slackの&lt;code&gt;/feed&lt;/code&gt;コマンドを用いて、ニュースなどの情報を一元化していますが、媒体によってはRSSフィードが提供されていないものもあります。 今回は、そんな場合に役に立つ &lt;a href=&#34;http://fetchrss.com&#34;&gt;FetchRSS&lt;/a&gt; を紹介します。&lt;/p&gt;
+
+&lt;h2 id=&#34;気になるお値段&#34;&gt;気になるお値段&lt;/h2&gt;
+
+&lt;p&gt;基本的には有料プランでないと恩恵を受けられません (無料版では作成したRSSが7日間で消えてしまうため)。ただ、ほとんどのケースにおいて$9.95内に収まると思いますので、情報収集が楽になることを考えると安いものでしょう。&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-price.png&#34;/&gt;
+  
+&lt;/figure&gt;
+
+
+&lt;h2 id=&#34;使い方&#34;&gt;使い方&lt;/h2&gt;
+
+&lt;h3 id=&#34;会員登録&#34;&gt;会員登録&lt;/h3&gt;
+
+&lt;p&gt;無料プランの場合も会員登録が必要になるので、登録しておきます。&lt;/p&gt;
+
+&lt;h3 id=&#34;url入力&#34;&gt;URL入力&lt;/h3&gt;
+
+&lt;p&gt;以降、当ブログのRSSを取得するとして進めていきます。
+まず、トップページから取得したいページのURLを入力します。 新着記事が一覧で並んでいるページが望ましいです。当ブログの場合は下記URLとなります。
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-1.png&#34;/&gt;
+  
+&lt;/figure&gt;
+&lt;/p&gt;
+
+&lt;p&gt;すると、以下のようなページに遷移すると思います。このページでは取得するコンテンツを指定していきます。最低限「News Item」「Headline」「Content」の3つを指定する必要があります。
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-2.png&#34;/&gt;
+  
+&lt;/figure&gt;
+&lt;/p&gt;
+
+&lt;h3 id=&#34;news-item-選択&#34;&gt;News Item 選択&lt;/h3&gt;
+
+&lt;p&gt;「News Item」では、下図の青色の線のように、記事を構成する要素の一番外側を選択します。
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-3.png&#34;/&gt;
+  
+&lt;/figure&gt;
+&lt;/p&gt;
+
+&lt;h3 id=&#34;headline-選択&#34;&gt;Headline 選択&lt;/h3&gt;
+
+&lt;p&gt;「Headline」ではタイトル部分を選択します(緑色の枠)。
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-4.png&#34;/&gt;
+  
+&lt;/figure&gt;
+&lt;/p&gt;
+
+&lt;h3 id=&#34;content-選択&#34;&gt;Content 選択&lt;/h3&gt;
+
+&lt;p&gt;「Content」では文章部分を選択します（赤色の枠）。文章部分がない場合は、「Headline」と同じ領域で構いません。
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-5.png&#34;/&gt;
+  
+&lt;/figure&gt;
+&lt;/p&gt;
+
+&lt;h2 id=&#34;rss生成&#34;&gt;RSS生成&lt;/h2&gt;
+
+&lt;p&gt;「Content」まで正しく選択できると、画面右側に下図のようなプレビューが生成されると思います。内容が問題なければ、「Generate RSS」を押してRSSを生成します。
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-6.png&#34;/&gt;
+  
+&lt;/figure&gt;
+&lt;/p&gt;
+
+&lt;p&gt;うまくRSSが生成できました。それでは快適な情報収集ライフを！
+&lt;figure&gt;
+  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-7.png&#34;/&gt;
+  
+&lt;/figure&gt;
+&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>PhantomJSでPromiseが使えない場合の対処法 〜Can&#39;t find variable: Promise〜</title>
