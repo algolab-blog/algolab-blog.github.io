@@ -292,13 +292,25 @@ Adrew Ng氏は、2020年には検索の半分以上が音声か画像になる�
   <div id="author-header">
     著者紹介
   </div>
-  <div>
-    <img src="/images/authors/kawahito.png" id="avater" class="col" />
+  <div id="author-content">
+    <img src="/images/authors/kawahito.png" id="avater" />
     <div>
       <div id="name"><a href="/authors/kawahito">Shinpei Kawahito</a></div>
       <div>阪神タイガースと天下一品が好きなエンジニア。
 </div>
     </div>
+  </div>
+  <div id="author-footer">
+    
+      <a href="https://twitter.com/kawan_chu" fa-ignore="true">
+        <img src="/images/icons/twitter.png" />
+      </a>
+    
+    
+      <a href="https://facebook.com/kawahito.shinpei" fa-ignore="true">
+        <img src="/images/icons/facebook.png" />
+      </a>
+    
   </div>
 </div>
 
@@ -560,7 +572,13 @@ Adrew Ng氏は、2020年には検索の半分以上が音声か画像になる�
 </script>
 
 <script>
-  $("a[href^='http']").not('[href*="'+location.hostname+'"]').attr("target","_blank").after('&nbsp;<i class="fa fa-external-link"></i>');
+  var externalLinks = $("a[href^='http']").not('[href*="'+location.hostname+'"]');
+  externalLinks.each(function() {
+    $(this).attr("target","_blank");
+    if (!$(this).attr("fa-ignore")) {
+      $(this).after('&nbsp;<i class="fa fa-external-link"></i>');
+    }
+  });
 </script>
 
 <script src="/js/highlight.pack.js"></script>
