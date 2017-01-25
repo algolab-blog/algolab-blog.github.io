@@ -23,7 +23,7 @@
 &lt;/figure&gt;
 
 
-&lt;p&gt;弊社では、Slackの&lt;code&gt;/feed&lt;/code&gt;コマンドを用いて、ニュースなどの情報を一元化していますが、媒体によってはRSSフィードが提供されていないものもあります。 今回は、そんな場合に役に立つ &lt;a href=&#34;http://fetchrss.com&#34;&gt;FetchRSS&lt;/a&gt; を紹介します。&lt;/p&gt;
+&lt;p&gt;弊社では、Slackの&lt;code&gt;/feed&lt;/code&gt;コマンドを用いて、ニュースなどのRSSを取得し、一元化していますが、媒体によってはRSSが提供されていないものもあります。 今回は、そんな場合に役に立つ &lt;a href=&#34;http://fetchrss.com&#34;&gt;FetchRSS&lt;/a&gt; を紹介します。&lt;/p&gt;
 
 &lt;h2 id=&#34;気になるお値段&#34;&gt;気になるお値段&lt;/h2&gt;
 
@@ -43,7 +43,7 @@
 
 &lt;h3 id=&#34;url入力&#34;&gt;URL入力&lt;/h3&gt;
 
-&lt;p&gt;以降、当ブログのRSSフィードを生成するとして進めていきます。
+&lt;p&gt;以降、当ブログのRSSを生成するとして進めていきます。
 まず、トップページから取得したいページのURLを入力します。 新着記事が一覧で並んでいるページが望ましいです。当ブログの場合は下記URLとなります。
 &lt;figure&gt;
   &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-1.png&#34;/&gt;
@@ -94,7 +94,7 @@
 &lt;/figure&gt;
 &lt;/p&gt;
 
-&lt;p&gt;うまくRSSフィードが生成できました。
+&lt;p&gt;うまくRSSが生成できました。
 &lt;figure&gt;
   &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-7.png&#34;/&gt;
   
