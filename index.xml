@@ -6,8 +6,20 @@
     <description>Recent content on ALGO GEEKS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 23 Jan 2017 17:32:10 +0900</lastBuildDate>
-    <atom:link href="http://blog.algolab.jp/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>© 2016 Algo Lab Inc.</copyright>
+    <lastBuildDate>Tue, 17 Oct 2017 20:10:51 +0900</lastBuildDate>
+    
+	<atom:link href="http://blog.algolab.jp/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>開発プロセスの一部を公開することでシステム開発受発注を円滑にする試みをはじめます</title>
+      <link>http://blog.algolab.jp/post/2017/10/17/open-estimate-overview/</link>
+      <pubDate>Tue, 17 Oct 2017 20:10:51 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2017/10/17/open-estimate-overview/</guid>
+      <description>弊社では、システム開発の受発注における課題を解決するために「システム開発の見積書を公開する」という取り組みをいたします。また同時に「システム</description>
+    </item>
     
     <item>
       <title>FetchRSS &#43; Slack で快適な情報収集ライフを送る</title>
@@ -15,94 +27,7 @@
       <pubDate>Mon, 23 Jan 2017 17:32:10 +0900</pubDate>
       
       <guid>http://blog.algolab.jp/post/2017/01/23/fetchrss-slack/</guid>
-      <description>
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-top.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;弊社では、Slackの&lt;code&gt;/feed&lt;/code&gt;コマンドを用いて、ニュースなどのRSSを取得し、一元化していますが、媒体によってはRSSが提供されていないものもあります。 今回は、そんな場合に役に立つ &lt;a href=&#34;http://fetchrss.com&#34;&gt;FetchRSS&lt;/a&gt; を紹介します。&lt;/p&gt;
-
-&lt;h2 id=&#34;気になるお値段&#34;&gt;気になるお値段&lt;/h2&gt;
-
-&lt;p&gt;基本的には有料プランでないと恩恵を受けられません (無料版では作成したRSSが7日間で消えてしまうため)。ただ、ほとんどのケースにおいて$9.95内に収まると思いますので、情報収集が楽になることを考えると安いものでしょう。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-price.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;h2 id=&#34;使い方&#34;&gt;使い方&lt;/h2&gt;
-
-&lt;h3 id=&#34;会員登録&#34;&gt;会員登録&lt;/h3&gt;
-
-&lt;p&gt;無料プランの場合も会員登録が必要になるので、登録しておきます。&lt;/p&gt;
-
-&lt;h3 id=&#34;url入力&#34;&gt;URL入力&lt;/h3&gt;
-
-&lt;p&gt;以降、当ブログのRSSを生成するとして進めていきます。
-まず、トップページから取得したいページのURLを入力します。 新着記事が一覧で並んでいるページが望ましいです。当ブログの場合は下記URLとなります。
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-1.png&#34;/&gt;
-  
-&lt;/figure&gt;
-&lt;/p&gt;
-
-&lt;p&gt;すると、以下のようなページに遷移すると思います。このページでは取得するコンテンツを指定していきます。最低限「News Item」「Headline」「Content」の3つを指定する必要があります。
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-2.png&#34;/&gt;
-  
-&lt;/figure&gt;
-&lt;/p&gt;
-
-&lt;h3 id=&#34;news-item-選択&#34;&gt;News Item 選択&lt;/h3&gt;
-
-&lt;p&gt;「News Item」では、下図の青色の線のように、記事を構成する要素の一番外側を選択します。
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-3.png&#34;/&gt;
-  
-&lt;/figure&gt;
-&lt;/p&gt;
-
-&lt;h3 id=&#34;headline-選択&#34;&gt;Headline 選択&lt;/h3&gt;
-
-&lt;p&gt;「Headline」ではタイトル部分を選択します(緑色の枠)。
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-4.png&#34;/&gt;
-  
-&lt;/figure&gt;
-&lt;/p&gt;
-
-&lt;h3 id=&#34;content-選択&#34;&gt;Content 選択&lt;/h3&gt;
-
-&lt;p&gt;「Content」では文章部分を選択します（赤色の枠）。文章部分がない場合は、「Headline」と同じ領域で構いません。
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-5.png&#34;/&gt;
-  
-&lt;/figure&gt;
-&lt;/p&gt;
-
-&lt;h2 id=&#34;rss生成&#34;&gt;RSS生成&lt;/h2&gt;
-
-&lt;p&gt;「Content」まで正しく選択できると、画面右側に下図のようなプレビューが生成されると思います。内容が問題なければ、「Generate RSS」を押してRSSを生成します。
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-6.png&#34;/&gt;
-  
-&lt;/figure&gt;
-&lt;/p&gt;
-
-&lt;p&gt;うまくRSSが生成できました。
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-7.png&#34;/&gt;
-  
-&lt;/figure&gt;
-&lt;/p&gt;
-
-&lt;p&gt;それでは快適な情報収集ライフを！&lt;/p&gt;
-</description>
+      <description>弊社では、Slackの/feedコマンドを用いて、ニュースなどのRSSを取得し、一元化していますが、媒体によってはRSSが提供されていないも</description>
     </item>
     
     <item>
@@ -111,100 +36,7 @@
       <pubDate>Mon, 19 Dec 2016 18:33:39 +0900</pubDate>
       
       <guid>http://blog.algolab.jp/post/2016/12/19/tf-dqn-simple-3/</guid>
-      <description>
-
-&lt;p&gt;今回は、学習の流れについて解説します。&lt;/p&gt;
-
-&lt;p&gt;対象とするソースコードは下記となります。&lt;br /&gt;
-&lt;a href=&#34;https://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py&#34;&gt;https://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;学習の流れ&#34;&gt;学習の流れ&lt;/h2&gt;
-
-
-
-
-
-
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=25%3a40&#34;&gt;&lt;/script&gt;
-
-
-&lt;p&gt;学習の肝となるのは、上記のコードとなります。&lt;br /&gt;
-フロー図で示したものが下記となります。
-登場人物として、プレイヤーを操作するエージェント と、ゲーム (環境) があります。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/12/19/tf-dqn-simple-3//flow.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;それでは、順を追って見ていきましょう。&lt;/p&gt;
-
-&lt;h2 id=&#34;①-アクションを選択&#34;&gt;① アクションを選択&lt;/h2&gt;
-
-
-
-
-
-
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=29%3a30&#34;&gt;&lt;/script&gt;
-
-
-&lt;p&gt;エージェントは、時刻tにおけるゲームの状態 (&lt;code&gt;state_t&lt;/code&gt;) を受け取って、アクションを選択します。詳細は後述しますが、一定割合 (&lt;code&gt;self.exploration&lt;/code&gt;) ではランダム選択、残りの割合では学習結果から最適なものを選択、という処理をしています。&lt;/p&gt;
-
-&lt;h2 id=&#34;②-アクションを実行&#34;&gt;② アクションを実行&lt;/h2&gt;
-
-
-
-
-
-
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=30%3a31&#34;&gt;&lt;/script&gt;
-
-
-&lt;p&gt;選択されたアクションを、ゲームで実行します。&lt;/p&gt;
-
-&lt;h2 id=&#34;③-観察&#34;&gt;③  観察&lt;/h2&gt;
-
-
-
-
-
-
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=33%3a34&#34;&gt;&lt;/script&gt;
-
-
-&lt;p&gt;アクションが実行された結果を観察します。具体的には、次 (時刻t1) の状態 (&lt;code&gt;state_t_1&lt;/code&gt;)、報酬 (&lt;code&gt;reward_t&lt;/code&gt;)、終了フラグ (&lt;code&gt;terminal&lt;/code&gt;) を受け取ります。&lt;/p&gt;
-
-&lt;h2 id=&#34;④-経験を蓄積&#34;&gt;④  経験を蓄積&lt;/h2&gt;
-
-
-
-
-
-
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=36%3a37&#34;&gt;&lt;/script&gt;
-
-
-&lt;p&gt;エージェントは、学習を行うための経験を蓄積します。具体的には、ある状態 (&lt;code&gt;state_t&lt;/code&gt;) に対して、あるアクション (&lt;code&gt;action_t&lt;/code&gt;) を行なった結果、どのような状態になったか(&lt;code&gt;state_t_1&lt;/code&gt;)、報酬はいくらか (&lt;code&gt;reward_t&lt;/code&gt;)、ゲームの終了フラグ(&lt;code&gt;terminal&lt;/code&gt;) を保持して、学習に活かします。&lt;/p&gt;
-
-&lt;h2 id=&#34;⑤-経験再生&#34;&gt;⑤  経験再生&lt;/h2&gt;
-
-
-
-
-
-
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=39%3a40&#34;&gt;&lt;/script&gt;
-
-
-&lt;p&gt;これまで蓄積した経験をもとに学習を行います。こちらについても詳細は後述します。&lt;/p&gt;
-
-&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
-
-&lt;p&gt;今回は学習の流れについて解説しました。&lt;br /&gt;
-次回はエージェントの中身について見ていきます。(最終回となる予定です)&lt;/p&gt;
-</description>
+      <description>今回は、学習の流れについて解説します。 対象とするソースコードは下記となります。 https://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py 学習の流れ 学習の肝となるのは、上記のコードとなります。 フロー</description>
     </item>
     
     <item>
@@ -213,141 +45,7 @@
       <pubDate>Sat, 17 Dec 2016 17:02:04 +0900</pubDate>
       
       <guid>http://blog.algolab.jp/post/2016/12/17/tf-dqn-simple-2/</guid>
-      <description>
-
-&lt;p&gt;今回から、実装編についてお届けします。&lt;br /&gt;
-本記事では、学習させるゲーム (環境) の部分について、解説します。&lt;/p&gt;
-
-&lt;p&gt;対象とするソースコードは下記となります。&lt;br /&gt;
-&lt;a href=&#34;https://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py&#34;&gt;https://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;それでは早速いってみましょう。&lt;/p&gt;
-
-&lt;h2 id=&#34;ゲームの概要&#34;&gt;ゲームの概要&lt;/h2&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/12/17/tf-dqn-simple-2//demo-catch_ball.gif&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;おさらいになりますが、ゲームの概要としては、上図のように上から落ちてくるボールをキャッチする、というものになります。キャッチできれば&lt;code&gt;+1点&lt;/code&gt;、キャッチできなければ&lt;code&gt;-1点&lt;/code&gt;というルールで高得点を目指します。&lt;/p&gt;
-
-&lt;h2 id=&#34;データの持ち方&#34;&gt;データの持ち方&lt;/h2&gt;
-
-&lt;p&gt;ゲーム盤は下図のように 8 x 8 の2次元配列で表現しており、「ボール」および「プレイヤー」を&lt;code&gt;1&lt;/code&gt;で、背景を&lt;code&gt;0&lt;/code&gt;の値として格納しています。
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/12/17/tf-dqn-simple-2//catch_ball.png&#34;/&gt;
-  
-&lt;/figure&gt;
-&lt;/p&gt;
-
-&lt;p&gt;上記の状態の場合、各種インスタンス変数の値は下記となります。&lt;/p&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th align=&#34;left&#34;&gt;変数名&lt;/th&gt;
-&lt;th align=&#34;left&#34;&gt;値&lt;/th&gt;
-&lt;th align=&#34;left&#34;&gt;説明&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;screen_n_rows&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;8&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;ゲーム盤の方向の長さ&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;screen_n_cols&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;8&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;ゲーム盤の横方向の長さ&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;ball_row&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;0&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;ボールの縦方向の位置&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;ball_col&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;6&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;ボールの横方向の位置&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;player_row&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;4&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;プレイヤーの左端の横方向の位置&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;player_length&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;3&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;プレイヤーの横方向の長さ&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&#34;ゲームの更新処理&#34;&gt;ゲームの更新処理&lt;/h2&gt;
-
-&lt;p&gt;続いて、ゲームの更新処理を行う&lt;code&gt;update&lt;/code&gt;メソッドを見ていきましょう。&lt;/p&gt;
-
-&lt;h3 id=&#34;引数&#34;&gt;引数&lt;/h3&gt;
-
-&lt;p&gt;
-
-
-
-
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=17%3a24&#34;&gt;&lt;/script&gt;
-
-&lt;code&gt;update&lt;/code&gt;メソッドは引数として&lt;code&gt;action&lt;/code&gt;を受け取ります。&lt;code&gt;action&lt;/code&gt;はプレイヤーの行動を表すもので、&lt;code&gt;0,1,2&lt;/code&gt;のいずれかの数値で表現しており、それぞれ「何もしない」「左に動く」「右に動く」ことを示します。&lt;/p&gt;
-
-&lt;h3 id=&#34;プレイヤーの位置の更新&#34;&gt;プレイヤーの位置の更新&lt;/h3&gt;
-
-
-
-
-
-
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=25%3a35&#34;&gt;&lt;/script&gt;
-
-
-&lt;p&gt;プレイヤーの位置を更新しています。ゲーム盤からはみ出さないように制御しているのがポイントです。&lt;/p&gt;
-
-&lt;h3 id=&#34;ボールの位置の更新&#34;&gt;ボールの位置の更新&lt;/h3&gt;
-
-
-
-
-
-
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=36%3a37&#34;&gt;&lt;/script&gt;
-
-
-&lt;p&gt;こちらは単純に、下に1つずらすという処理をしています。&lt;/p&gt;
-
-&lt;h3 id=&#34;得点判定&#34;&gt;得点判定&lt;/h3&gt;
-
-
-
-
-
-
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=41%3a49&#34;&gt;&lt;/script&gt;
-
-
-&lt;p&gt;ボールがゲーム盤の下端に来た時に、ゲーム終了フラグをセット (&lt;code&gt;self.terminal = True&lt;/code&gt;) した上で、得点判定処理を行います。プレイヤーの範囲内にボールがあればキャッチできたとみなし &lt;code&gt;+1点&lt;/code&gt; (&lt;code&gt;self.reward = 1&lt;/code&gt;)、そうでなければキャッチできなかったとして、&lt;code&gt;-1点&lt;/code&gt; (&lt;code&gt;self.reward = -1&lt;/code&gt;)、としています。&lt;/p&gt;
-
-&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
-
-&lt;p&gt;今回は、ゲーム (環境) の部分について、重要な箇所を抜粋して解説しました。&lt;br /&gt;
-次回は、ゲームを学習する流れについて見ていきます。&lt;/p&gt;
-</description>
+      <description>今回から、実装編についてお届けします。 本記事では、学習させるゲーム (環境) の部分について、解説します。 対象とするソースコードは下記となります</description>
     </item>
     
     <item>
@@ -356,70 +54,7 @@
       <pubDate>Fri, 09 Dec 2016 15:03:23 +0900</pubDate>
       
       <guid>http://blog.algolab.jp/post/2016/12/09/phantomjs-promise/</guid>
-      <description>
-
-&lt;p&gt;Selenium + PhantomJS でDjangoアプリケーションのテストをしていたのですが、なぜか上手く動作しない箇所がありました。&lt;/p&gt;
-
-&lt;p&gt;原因としては、外部ライブラリが &lt;a href=&#34;https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Promise&#34;&gt;Promise&lt;/a&gt; を用いており、PhantomJSがサポートしていないためで、&lt;a href=&#34;https://github.com/stefanpenner/es6-promise&#34;&gt;es6-promise&lt;/a&gt; を明示的に読み込ませることで解決しました。&lt;/p&gt;
-
-&lt;p&gt;以下に再現のためのサンプルコードを書いてみます。&lt;/p&gt;
-
-&lt;h2 id=&#34;サンプルコード&#34;&gt;サンプルコード&lt;/h2&gt;
-
-&lt;p&gt;以下の2つのファイルを用意します。&lt;code&gt;test.html&lt;/code&gt;は&lt;code&gt;http://localhost/test.html&lt;/code&gt;で読み込めることを前提としています。&lt;/p&gt;
-
-&lt;p&gt;test.html&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;!DOCTYPE html&amp;gt;
-&amp;lt;script&amp;gt;
-  var hoge = 1;
-  console.log(Promise);
-  var hoge = 2;
-&amp;lt;/script&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;test.py&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;from selenium import webdriver
-
-driver = webdriver.PhantomJS()
-driver.get(&#39;http://localhost/test.html&#39;)
-hoge = driver.execute_script(&#39;return hoge&#39;)
-print(hoge)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;test.py&lt;/code&gt;を実行します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ python test.py
-1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;hoge&lt;/code&gt;の値が&lt;code&gt;1&lt;/code&gt;であり、&lt;code&gt;console.log(Promise);&lt;/code&gt;以降処理が行われていないことがわかります。&lt;br /&gt;
-&lt;code&gt;ghostdriver.log&lt;/code&gt;にログが出力されるので、みてみると下記のエラーが出力されていました。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[ERROR - 2016-12-09T05:54:22.556Z] Session [eee84f50-bdd3-11e6-87a5-f36dec782eab] - page.onError - msg: ReferenceError: Can&#39;t find variable: Promise
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;続いて、&lt;code&gt;test.html&lt;/code&gt;で&lt;code&gt;es6-promise&lt;/code&gt;を明示的に読み込ませるように修正します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;!DOCTYPE html&amp;gt;
-&amp;lt;script src=&amp;quot;https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.0.5/es6-promise.auto.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-&amp;lt;script&amp;gt;
-  var hoge = 1;
-  console.log(Promise);
-  var hoge = 2;
-&amp;lt;/script&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;$ python test.py
-2
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;きちんと処理が行われるようになりました。&lt;/p&gt;
-
-&lt;p&gt;GitHub上でも下記の議論が行われており、&lt;code&gt;ES6&lt;/code&gt; のサポートが本体に導入されることを待つばかりです。&lt;br /&gt;
-&lt;a href=&#34;https://github.com/ariya/phantomjs/issues/12401&#34;&gt;https://github.com/ariya/phantomjs/issues/12401&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>Selenium + PhantomJS でDjangoアプリケーションのテストをしていたのですが、なぜか上手く動作しない箇所がありました。 原因としては、外部ライブラリが Promise を用</description>
     </item>
     
     <item>
@@ -428,140 +63,7 @@ print(hoge)
       <pubDate>Wed, 07 Dec 2016 18:15:27 +0900</pubDate>
       
       <guid>http://blog.algolab.jp/post/2016/12/07/birthday-reminder/</guid>
-      <description>
-
-&lt;p&gt;今回は、オリジナルのスキルを作ってマーケットに公開したので、その中で色々分かったことをまとめてみます。&lt;/p&gt;
-
-&lt;h2 id=&#34;開発上の制約&#34;&gt;開発上の制約&lt;/h2&gt;
-
-&lt;h3 id=&#34;自由な文章の認識は難しい&#34;&gt;自由な文章の認識は難しい&lt;/h3&gt;
-
-&lt;p&gt;これが一番困った点でした。基本的には、テンプレートのような形であらかじめ登録しておいた文章や単語しか認識がうまくいかないため、今のところ、限定的な用途でしか利用できなさそう、という印象です。&lt;/p&gt;
-
-&lt;p&gt;ただ、人名や都市名など、ある程度想定できる単語を認識する枠組み (Slot Type) は用意されています。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;例) AMAZON.US_FIRST_NAME, AMAZON.US_CITY, AMAZON.DATE
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;ですので、これらを利用するシチュエーションでは比較的柔軟なスキルを作成することができそうです。&lt;/p&gt;
-
-&lt;h3 id=&#34;データの永続化には別途仕組みが必要&#34;&gt;データの永続化には別途仕組みが必要&lt;/h3&gt;
-
-&lt;p&gt;Alexa Skillを起動している最中（セッション内) ではデータ保持ができますが、セッションをまたいでデータを保持するには、自前で永続化する機構を作らないといけません。&lt;/p&gt;
-
-&lt;h3 id=&#34;使用できる言語は-英語およびドイツ語のみ&#34;&gt;使用できる言語は、英語およびドイツ語のみ&lt;/h3&gt;
-
-&lt;p&gt;他の言語はまだサポートされていません。&lt;/p&gt;
-
-&lt;p&gt;これらの制約や仕様がある中で、作りたいスキルをどう実現できそうか考えることがまず必要です。&lt;/p&gt;
-
-&lt;h2 id=&#34;birthday-reminder&#34;&gt;Birthday Reminder&lt;/h2&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/12/07/birthday-reminder//birthday-reminder.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;当初、記憶させたことをなんでも取り出せるスキルを作ろうと考えていましたが、上記のように難しいことがわかったため、今回は誕生日に限定して、記憶や取り出しのできるスキルを作ることにしました。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://alexa.amazon.com/spa/index.html#skills/dp/B01N8USH7G/?ref=skill_dsk_skb_sr_0&#34;&gt;こちら&lt;/a&gt; からインストール可能です。&lt;/p&gt;
-
-&lt;p&gt;本スキルでは、以下のようなやり取りをすることができます。&lt;/p&gt;
-
-&lt;h3 id=&#34;誕生日を登録する&#34;&gt;誕生日を登録する&lt;/h3&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;User:&lt;/strong&gt; &amp;ldquo;Tom&amp;rsquo;s birthday is July seven.&amp;rdquo;&lt;br /&gt;
-&lt;strong&gt;Skill:&lt;/strong&gt; &amp;ldquo;I now know Tom&amp;rsquo;s birthday is July seven.&amp;rdquo;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&#34;登録した人の誕生日を調べる&#34;&gt;登録した人の誕生日を調べる&lt;/h3&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;User:&lt;/strong&gt; &amp;ldquo;When was Tom born on?&amp;rdquo;&lt;br /&gt;
-&lt;strong&gt;Skill:&lt;/strong&gt; &amp;ldquo;Tom&amp;rsquo;s birthday is Jul seven.&amp;rdquo;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&#34;登録した誕生日に生まれた人を調べる&#34;&gt;登録した誕生日に生まれた人を調べる&lt;/h3&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;User:&lt;/strong&gt; &amp;ldquo;Who were born on July seven?&amp;rdquo;&lt;br /&gt;
-&lt;strong&gt;Skill:&lt;/strong&gt; &amp;ldquo;Tom were born on Jul seven.&amp;rdquo;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;人名と誕生日の認識には、Slot Typeの枠組みを利用しました。人名には &lt;code&gt;AMAZON.US_FIRST_NAME&lt;/code&gt; を使用し、人名だけでなく母親や兄弟の誕生日も登録できるように&lt;code&gt;my mother&lt;/code&gt;, &lt;code&gt;my brother&lt;/code&gt;なども &lt;code&gt;AMAZON.US_FIRST_NAME&lt;/code&gt; を拡張して利用できるようにしました。誕生日の日付の認識では &lt;code&gt;AMAZON.DATE&lt;/code&gt; を使用しています。&lt;/p&gt;
-
-&lt;h2 id=&#34;データの永続化&#34;&gt;データの永続化&lt;/h2&gt;
-
-&lt;p&gt;今回のスキルでは、誕生日というデータを永続化して次回のセッションでも取り出すことができるようにする必要がありました。 単純に同一セッションの保存であれば、前回の記事でも紹介したように、&lt;code&gt;sessionAttributes&lt;/code&gt;を利用することができます。ただし、次回以降のセッションでも利用しようとするには何かしらのDBへの保存が必要です。&lt;/p&gt;
-
-&lt;p&gt;今回は「人」に対する「誕生日」という Key-Value のような特定のデータの引き方になることから、DynamoDBを選択しました。&lt;/p&gt;
-
-&lt;h2 id=&#34;保存するデータ&#34;&gt;保存するデータ&lt;/h2&gt;
-
-&lt;p&gt;今回のスキルでは、以下のようなデータを保持しています。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
-	&amp;quot;user_id&amp;quot;: &amp;quot;amzn1.ask.account.XXX...&amp;quot;,
- 	&amp;quot;person&amp;quot;: &amp;quot;Tom&amp;quot;,
- 	&amp;quot;birthday&amp;quot;: &amp;quot;Jul 07&amp;quot;,
-},
-{
-	&amp;quot;user_id&amp;quot;: &amp;quot;amzn1.ask.account.XXX...&amp;quot;,
- 	&amp;quot;person&amp;quot;: &amp;quot;Peter&amp;quot;,
- 	&amp;quot;birthday&amp;quot;: &amp;quot;Dec 04&amp;quot;,
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;user_id&lt;/code&gt;はユーザのAmazonアカウントに紐づくIDです。&lt;code&gt;person&lt;/code&gt;は登録した人の名前、&lt;code&gt;birthday&lt;/code&gt;は登録した人の誕生日です。&lt;/p&gt;
-
-&lt;h2 id=&#34;dynamodbのスキーマ構造&#34;&gt;DynamoDBのスキーマ構造&lt;/h2&gt;
-
-&lt;p&gt;上記データを、具体的には次のようなスキーマ構造としてDynamoDBに格納しています。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;プライマリーキー
-
-&lt;ul&gt;
-&lt;li&gt;パーティションキー: &lt;code&gt;user_id&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;ソートキー: &lt;code&gt;person&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;その他属性
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;birthday&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;セカンダリインデックス
-
-&lt;ul&gt;
-&lt;li&gt;パーティションキー: &lt;code&gt;user_id&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;ソートキー: &lt;code&gt;birthday&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;code&gt;user_id&lt;/code&gt;と&lt;code&gt;person&lt;/code&gt;をプライマリーキーにすることで、登録した人の名前から誕生日を参照できるようにし、&lt;code&gt;user_id&lt;/code&gt;と&lt;code&gt;birthday&lt;/code&gt;をセカンダリインデックスとすることで、誕生日から人を参照できるようにしています。&lt;/p&gt;
-
-&lt;h2 id=&#34;スキルの申請と審査&#34;&gt;スキルの申請と審査&lt;/h2&gt;
-
-&lt;p&gt;スキルを作り終わったら、あとは公開に必要なスキルの説明やスキルのアイコン画像、Privacy Policyの準備になります。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/12/07/birthday-reminder//publishing-information.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;申請をすると、2営業日ほどで結果が返ってきました。公式ドキュメントの &lt;a href=&#34;https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/submission-testing-walk-through-tide-pooler-skill&#34;&gt;こちら&lt;/a&gt; にあるようなテスト項目を結構細かく実際に試してテストしている印象でした。指摘された箇所を修正して再申請して審査が通りました。&lt;/p&gt;
-
-&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
-
-&lt;p&gt;今回、Alexa Skillを作るにあたっての制約や設計で工夫した点、審査の過程などを紹介しました。基本的にはDBの設計周りは一般的なアプリケーションの設計と大きく変わらないと思います。&lt;/p&gt;
-
-&lt;p&gt;Alexa Skillのドキュメントは結構ありますが、細かいページへのサイトマップなどは用意されてないので、検索して見つけるか関連するページのフッター付近のリンクから辿るしかなかったのが若干厄介でした。今後、整備されることに期待です。&lt;/p&gt;
-
-&lt;p&gt;先日、テキストを音声で読み上げる &lt;a href=&#34;https://aws.amazon.com/polly/&#34;&gt;Amazon Polly&lt;/a&gt; が発表されましたが、こちらにも期待です。&lt;/p&gt;
-</description>
+      <description>今回は、オリジナルのスキルを作ってマーケットに公開したので、その中で色々分かったことをまとめてみます。 開発上の制約 自由な文章の認識は難しい こ</description>
     </item>
     
     <item>
@@ -570,69 +72,7 @@ print(hoge)
       <pubDate>Fri, 11 Nov 2016 18:47:53 +0900</pubDate>
       
       <guid>http://blog.algolab.jp/post/2016/11/11/neuralart/</guid>
-      <description>
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/11/11/neuralart//animation.gif&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;TensorFlowを用いて画風変換を試してみました。上記画像は学習過程となります。&lt;br /&gt;
-GitHubで「neuralart」と検索すると実装例がいくつか出てきますので、そのうちの一つを動作させてみます。&lt;br /&gt;
-&lt;a href=&#34;https://github.com/ckmarkoh/neuralart_tensorflow&#34;&gt;https://github.com/ckmarkoh/neuralart_tensorflow&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;なお、環境構築については下記の記事をご参照ください。Python2系での動作を確認しています。&lt;br /&gt;
-&lt;a href=&#34;{{ref &amp;quot;post/2016/08/21/pyenv-anaconda-ubuntu.md&amp;quot;}}&#34;&gt;【随時更新】pyenv + Anaconda (Ubuntu 16.04 LTS) で機械学習のPython開発環境をオールインワンで整える&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;ソースコードをダウンロード&#34;&gt;ソースコードをダウンロード&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ git clone https://github.com/ckmarkoh/neuralart_tensorflow.git
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;訓練済み画像認識モデルをダウンロード&#34;&gt;訓練済み画像認識モデルをダウンロード&lt;/h2&gt;
-
-&lt;p&gt;下記URLからVGG-19モデルをダウンロードし、&lt;code&gt;neuralart_tensorflow&lt;/code&gt;直下に配置します。
-&lt;a href=&#34;https://drive.google.com/file/d/0B8QJdgMvQDrVU2cyZjFKU1RrLUU/view&#34;&gt;https://drive.google.com/file/d/0B8QJdgMvQDrVU2cyZjFKU1RrLUU/view&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;画風変換&#34;&gt;画風変換&lt;/h2&gt;
-
-&lt;p&gt;以下で画風変換のイテレーションが始まります。元画像とスタイル画像は下記の通りとなります。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ python main.py
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;元画像
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/11/11/neuralart//Taipei101.jpg&#34;/&gt;
-  
-&lt;/figure&gt;
-&lt;/p&gt;
-
-&lt;p&gt;スタイル画像
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/11/11/neuralart//StarryNight.jpg&#34;/&gt;
-  
-&lt;/figure&gt;
-&lt;/p&gt;
-
-&lt;p&gt;結果は&lt;code&gt;results&lt;/code&gt;フォルダに格納されていきます。&lt;br /&gt;
-なお、筆者の環境では、CPUマシンで100イテレーションあたり1時間弱かかりました。&lt;/p&gt;
-
-&lt;h2 id=&#34;学習過程を可視化&#34;&gt;学習過程を可視化&lt;/h2&gt;
-
-&lt;p&gt;900イテレーションまでの結果画像をImageMagickを用いてアニメーションGIFにしてみます。&lt;br /&gt;
-（冒頭で紹介した画像となります）&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd results
-$ convert -delay 50 -loop 0 0*00.png animation.gif
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;論文&#34;&gt;論文&lt;/h2&gt;
-
-&lt;p&gt;画風変換の元となる論文はこちらです。&lt;br /&gt;
-&lt;a href=&#34;https://arxiv.org/abs/1508.06576&#34;&gt;A Neural Algorithm of Artistic Style&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>TensorFlowを用いて画風変換を試してみました。上記画像は学習過程となります。 GitHubで「neuralart」と検索すると実装例が</description>
     </item>
     
     <item>
@@ -641,237 +81,7 @@ $ convert -delay 50 -loop 0 0*00.png animation.gif
       <pubDate>Wed, 28 Sep 2016 16:26:57 +0900</pubDate>
       
       <guid>http://blog.algolab.jp/post/2016/09/28/alexa-color-expert/</guid>
-      <description>
-
-&lt;p&gt;前回はサンプルとして用意されている「Color Expert」のAlexaスキルをLambdaファンクションを利用して動かしてみました。&lt;br /&gt;
-今回は「Color Expert」を例としてAlexaスキルとLambdaファンクションがどのように連携しているか説明したいと思います。&lt;/p&gt;
-
-&lt;h2 id=&#34;概念図&#34;&gt;概念図&lt;/h2&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/09/28/alexa-color-expert//flow.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;&amp;nbsp;&lt;/p&gt;
-
-&lt;p&gt;まず、スキルの起動から一連のやり取り（正常系）を表した図が上記のようになります。&lt;/p&gt;
-
-&lt;p&gt;大きな構造として、Alexaの中にスキル (青色) がいくつもあるイメージをしてください。各スキルで実行できる処理はIntent (赤色) として定義されます。&lt;/p&gt;
-
-&lt;p&gt;それでは順を追って、スキル起動 （①〜④）、MyColorIsIntent （⑤〜⑧）、WhatsMyColorIntent （⑨〜⑫）の3つに分けて説明していきます。&lt;/p&gt;
-
-&lt;h2 id=&#34;スキル起動-①-④&#34;&gt;スキル起動 （①〜④）&lt;/h2&gt;
-
-&lt;p&gt;ユーザが「Alexa, ask ○○○」と話しかけることで処理が始まります。○○○の部分はスキル名となります。
-今回の場合は「Color Expert」 なので、下記のようになります。なお、このスキル名はAlexaが持っている全てのスキルを通じてユニークである必要があります。&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;ユーザ:&lt;/strong&gt;「Alexa, ask color expert」&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Alexaがリクエスト①の音声をテキストに変換し、該当するスキルの起動リクエスト②がLambdaに送られます。その後、起動メッセージを含んだレスポンス③がAlexaに返り、Alexaがその起動メーセージを音声に変換し下記の応答④が返ります。
-この一連の流れでColor expertのスキルが起動します。&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Alexa:&lt;/strong&gt; 「Welcome to the Alexa Skills Kit sample. Please tell me your favorite color by saying, my favorite color is red」&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&#34;mycolorisintent-⑤-⑧&#34;&gt;MyColorIsIntent （⑤〜⑧）&lt;/h2&gt;
-
-&lt;p&gt;次にAlexaの言うとおり下記のように話しかけてみます（⑤）。&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;ユーザ:&lt;/strong&gt; 「My favorite color is blue」&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;このとき予め設定されているどの Intent かを判断し、入力である「blue」を slots にセットします。この情報はJsonに変換され、Lambda にリクエスト⑥がされることになります。ちなみに、slots にセットされる情報は音声入力の精度を高めるために Custom Slot Types で定義した情報が参照されて決まります。
-Lambdaリクエスト⑥は具体的に下記のようになります。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-json:lambda_request&#34;&gt;{
-  &amp;quot;session&amp;quot;: {
-    &amp;quot;sessionId&amp;quot;: &amp;quot;SessionId.xxx&amp;quot;,
-    &amp;quot;application&amp;quot;: {
-      &amp;quot;applicationId&amp;quot;: &amp;quot;amzn1.ask.skill.xxx&amp;quot;
-    },
-    &amp;quot;attributes&amp;quot;: {},
-    &amp;quot;user&amp;quot;: {
-      &amp;quot;userId&amp;quot;: &amp;quot;amzn1.ask.account.xxx&amp;quot;
-    },
-    &amp;quot;new&amp;quot;: false
-  },
-  &amp;quot;request&amp;quot;: {
-    &amp;quot;type&amp;quot;: &amp;quot;IntentRequest&amp;quot;,
-    &amp;quot;requestId&amp;quot;: &amp;quot;EdwRequestId.xxx&amp;quot;,
-    &amp;quot;locale&amp;quot;: &amp;quot;en-US&amp;quot;,
-    &amp;quot;timestamp&amp;quot;: &amp;quot;2016-09-10T10:30:30Z&amp;quot;,
-    &amp;quot;intent&amp;quot;: {
-      &amp;quot;name&amp;quot;: &amp;quot;MyColorIsIntent&amp;quot;,
-      &amp;quot;slots&amp;quot;: {
-        &amp;quot;Color&amp;quot;: {
-          &amp;quot;name&amp;quot;: &amp;quot;Color&amp;quot;,
-          &amp;quot;value&amp;quot;: &amp;quot;blue&amp;quot;
-        }
-      }
-    }
-  },
-  &amp;quot;version&amp;quot;: &amp;quot;1.0&amp;quot;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Lambdaは上記リクエスト⑥を受け取り、予めNode.jsなどのソースコードで定義されている処理を動かします。ソースコードの一部を見てみると、下記で「MyColorIsIntent」を判別し、 &lt;code&gt;setColorInSession()&lt;/code&gt; で処理がされることになります。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript:function_onIntent&#34;&gt;function onIntent(intentRequest, session, callback) {
-    console.log(&amp;quot;onIntent requestId=&amp;quot; + intentRequest.requestId +
-        &amp;quot;, sessionId=&amp;quot; + session.sessionId);
-
-    var intent = intentRequest.intent,
-        intentName = intentRequest.intent.name;
-
-    if (&amp;quot;MyColorIsIntent&amp;quot; === intentName) {
-        setColorInSession(intent, session, callback);
-    } else if (&amp;quot;WhatsMyColorIntent&amp;quot; === intentName) {
-        getColorFromSession(intent, session, callback);
-    } else if (&amp;quot;AMAZON.HelpIntent&amp;quot; === intentName) {
-        getWelcomeResponse(callback);
-    } else if (&amp;quot;AMAZON.StopIntent&amp;quot; === intentName || &amp;quot;AMAZON.CancelIntent&amp;quot; === intentName) {
-        handleSessionEndRequest(callback);
-    } else {
-        throw &amp;quot;Invalid intent&amp;quot;;
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;setColorInSession()&lt;/code&gt;のソースコードも見てみます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript:function_setColorInSession&#34;&gt;function setColorInSession(intent, session, callback) {
-    var cardTitle = intent.name;
-    var favoriteColorSlot = intent.slots.Color;
-    var repromptText = &amp;quot;&amp;quot;;
-    var sessionAttributes = {};
-    var shouldEndSession = false;
-    var speechOutput = &amp;quot;&amp;quot;;
-
-    if (favoriteColorSlot) {
-        var favoriteColor = favoriteColorSlot.value;
-        sessionAttributes = createFavoriteColorAttributes(favoriteColor);
-        speechOutput = &amp;quot;I now know your favorite color is &amp;quot; + favoriteColor + &amp;quot;. You can ask me &amp;quot; +
-            &amp;quot;your favorite color by saying, what&#39;s my favorite color?&amp;quot;;
-        repromptText = &amp;quot;You can ask me your favorite color by saying, what&#39;s my favorite color?&amp;quot;;
-    } else {
-        speechOutput = &amp;quot;I&#39;m not sure what your favorite color is. Please try again&amp;quot;;
-        repromptText = &amp;quot;I&#39;m not sure what your favorite color is. You can tell me your &amp;quot; +
-            &amp;quot;favorite color by saying, my favorite color is red&amp;quot;;
-    }
-
-    callback(sessionAttributes,
-         buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;sessionAttributes&lt;/code&gt; に &lt;code&gt;favoriteColor&lt;/code&gt; をセットし、ここで書かれているレスポンスの文言などはJsonに変換されて⑦としてAlexaに返されることになります。
-その後、Alexaがこのレスポンス⑦を受取り、下記のように返答⑧が返ります。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;入力を正しく受け取れた場合&lt;/strong&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Alexa:&lt;/strong&gt; 「I now know your favorite color is red. You can ask me. your favorite color by saying, what&amp;rsquo;s my favorite color?」&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;strong&gt;入力を正しく受け取れなかった場合&lt;/strong&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Alexa:&lt;/strong&gt; 「I&amp;rsquo;m not sure what your favorite color is. Please try again」&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;ちなみに、正しく受け取れた場合のレスポンス⑦の内容は下記になります。入力を正しく受け取れた場合は⑨の流れに進みます。正しく受け取れなかった場合は⑤のもう一度好きな色を教える流れになります。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-json:lambda_response&#34;&gt;{
-  &amp;quot;version&amp;quot;: &amp;quot;1.0&amp;quot;,
-  &amp;quot;response&amp;quot;: {
-    &amp;quot;outputSpeech&amp;quot;: {
-      &amp;quot;type&amp;quot;: &amp;quot;PlainText&amp;quot;,
-      &amp;quot;text&amp;quot;: &amp;quot;I now know your favorite color is blue. You can ask me your favorite color by saying, what&#39;s my favorite color?&amp;quot;
-    },
-    &amp;quot;card&amp;quot;: {
-      &amp;quot;content&amp;quot;: &amp;quot;SessionSpeechlet - I now know your favorite color is blue. You can ask me your favorite color by saying, what&#39;s my favorite color?&amp;quot;,
-      &amp;quot;title&amp;quot;: &amp;quot;SessionSpeechlet - MyColorIsIntent&amp;quot;,
-      &amp;quot;type&amp;quot;: &amp;quot;Simple&amp;quot;
-    },
-    &amp;quot;reprompt&amp;quot;: {
-      &amp;quot;outputSpeech&amp;quot;: {
-        &amp;quot;type&amp;quot;: &amp;quot;PlainText&amp;quot;,
-        &amp;quot;text&amp;quot;: &amp;quot;You can ask me your favorite color by saying, what&#39;s my favorite color?&amp;quot;
-      }
-    },
-    &amp;quot;shouldEndSession&amp;quot;: false
-  },
-  &amp;quot;sessionAttributes&amp;quot;: {
-    &amp;quot;favoriteColor&amp;quot;: &amp;quot;blue&amp;quot;
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;whatsmycolorintent-⑨-⑫&#34;&gt;WhatsMyColorIntent (⑨〜⑫)&lt;/h2&gt;
-
-&lt;p&gt;ここもIntentの処理になるので、⑤〜⑧と処理の流れは同じになります(リクエストとレスポンスの具体的な内容は割愛)。ここでもAlexaの言うとおり下記のように話しかけてみます(⑨)。&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;ユーザ:&lt;/strong&gt;「What&amp;rsquo;s my favorite color?」&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;そうすると⑥と同様にどのIntentかを判断し、WhatsMyColorIntentのLambdaリクエスト⑩が送られます。
-⑦と同様に &lt;code&gt;onIntent()&lt;/code&gt; の判別処理がされ、今度は &lt;code&gt;getColorFromSession()&lt;/code&gt; に進みます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript:function_getColorFromSession&#34;&gt;function getColorFromSession(intent, session, callback) {
-    var favoriteColor;
-    var repromptText = null;
-    var sessionAttributes = {};
-    var shouldEndSession = false;
-    var speechOutput = &amp;quot;&amp;quot;;
-
-    if (session.attributes) {
-        favoriteColor = session.attributes.favoriteColor;
-    }
-
-    if (favoriteColor) {
-        speechOutput = &amp;quot;Your favorite color is &amp;quot; + favoriteColor + &amp;quot;. Goodbye.&amp;quot;;
-        shouldEndSession = true;
-    } else {
-        speechOutput = &amp;quot;I&#39;m not sure what your favorite color is, you can say, my favorite color &amp;quot; +
-            &amp;quot; is red&amp;quot;;
-    }
-
-    callback(sessionAttributes,
-         buildSpeechletResponse(intent.name, speechOutput, repromptText, shouldEndSession));
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;favoriteColor&lt;/code&gt; がセット済みであればそれを含んだメッセージを作り、なければ再度好きな色を聞くメッセージを返すという流れになります。⑪としてレスポンスを返し、Alexaが音声化して下記のように応答⑫をします。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;好きな色がセットされている場合&lt;/strong&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Alexa:&lt;/strong&gt; 「Your favorite color is blue. Goodbyde.」&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;strong&gt;好きな色がセットされてない場合&lt;/strong&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Alexa:&lt;/strong&gt; 「I&amp;rsquo;m not sure what your favorite color is, you can say, my favorite color is red」&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;なお、正常系の場合、ソースコードにあるように &lt;code&gt;shouldEndSession&lt;/code&gt; を &lt;code&gt;true&lt;/code&gt; としているので、ここでセッションを終了し Color expert のスキルは終了となります。&lt;/p&gt;
-
-&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;概念図とソースコードを交えてAlexaスキルとLambdaファンクションがどのように機能しているかを説明しました。&lt;/li&gt;
-&lt;li&gt;AlexaスキルではユーザからのメッセージとIntentとの対応付けを制御し、Lambdaファンクションの方で各Intentの処理をする仕組みになっているのが分かりました。&lt;/li&gt;
-&lt;li&gt;それでは、次回オリジナルのスキルを作ってみようと思います。&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>前回はサンプルとして用意されている「Color Expert」のAlexaスキルをLambdaファンクションを利用して動かしてみました。 今回は</description>
     </item>
     
     <item>
@@ -880,171 +90,7 @@ Lambdaリクエスト⑥は具体的に下記のようになります。&lt;/p&g
       <pubDate>Tue, 13 Sep 2016 20:00:03 +0900</pubDate>
       
       <guid>http://blog.algolab.jp/post/2016/09/13/openfst/</guid>
-      <description>
-
-&lt;p&gt;音声認識などの分野では、重み付き有限状態トランスデューサ (WFST) が今でも広く用いられています。&lt;br /&gt;
-ここではOpenFstを用いて簡単なサンプルを作成してみます。&lt;br /&gt;
-&lt;a href=&#34;http://www.openfst.org&#34;&gt;http://www.openfst.org&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;有限状態トランスデューサ-fst-finite-state-transducer&#34;&gt;有限状態トランスデューサ (FST: Finite-State Transducer)&lt;/h2&gt;
-
-&lt;p&gt;FSTとは、簡単に言えば、入力記号列に対して出力記号列を返す変換器です。&lt;br /&gt;
-一番単純な例からみてみましょう。下図をご覧ください。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/09/13/openfst//fst_1.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;これは&lt;code&gt;a&lt;/code&gt;の入力に対して&lt;code&gt;A&lt;/code&gt;を返すFSTです。詳しく見ていきます。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/09/13/openfst//fst_2.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;FSTには、初期状態から始まり最終状態に遷移できたもののみ出力を行う、という制約があります。&lt;br /&gt;
-そして、遷移の条件が&lt;code&gt;入力:出力&lt;/code&gt;という形で表現されます。&lt;br /&gt;
-ですので、上記の例では&lt;code&gt;a&lt;/code&gt;以外の入力は受け付けないことになります。&lt;/p&gt;
-
-&lt;p&gt;少し複雑になった例をみてみましょう。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/09/13/openfst//fst_3.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;これは&lt;code&gt;ab&lt;/code&gt;の入力に対して&lt;code&gt;AB&lt;/code&gt;を、&lt;code&gt;ba&lt;/code&gt;の入力に対して&lt;code&gt;BA&lt;/code&gt;を出力します。&lt;br /&gt;
-例えば、&lt;code&gt;ab&lt;/code&gt;の入力に対しては、&lt;code&gt;0&lt;/code&gt; &amp;rarr; &lt;code&gt;1&lt;/code&gt; &amp;rarr; &lt;code&gt;2&lt;/code&gt; と遷移できるので、&lt;code&gt;AB&lt;/code&gt;を出力することになります。&lt;/p&gt;
-
-&lt;h2 id=&#34;重み付き有限状態トランスデューサ-wfst-weighted-finite-state-transducer&#34;&gt;重み付き有限状態トランスデューサ (WFST: Weighted Finite-State Transducer)&lt;/h2&gt;
-
-&lt;p&gt;FSTに重みを加えたものがWFSTとなります。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/09/13/openfst//wfst.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;&lt;code&gt;/&lt;/code&gt;以下の数値が重みを表し、WFSTは記号列と重みを出力します。&lt;br /&gt;
-例えば&lt;code&gt;ab&lt;/code&gt;の入力に対しては、&lt;code&gt;AB&lt;/code&gt;とともに重み&lt;code&gt;4.5 (= 0.5 + 1.5 + 3.0)&lt;/code&gt;を出力することになります。&lt;/p&gt;
-
-&lt;h2 id=&#34;openfst&#34;&gt;OpenFst&lt;/h2&gt;
-
-&lt;p&gt;それではOpenFstを用いて実際にWFSTを作成してみましょう。&lt;/p&gt;
-
-&lt;h3 id=&#34;インストール&#34;&gt;インストール&lt;/h3&gt;
-
-&lt;p&gt;ダウンロード及びインストール方法については下記の公式ドキュメントをご参照ください。&lt;br /&gt;
-&lt;a href=&#34;http://www.openfst.org/twiki/bin/view/FST/FstDownload&#34;&gt;http://www.openfst.org/twiki/bin/view/FST/FstDownload&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;筆者の環境では、Kaldiの導入時に同時にインストールを行いました。&lt;br /&gt;
-&lt;a href=&#34;http://blog.algolab.jp/post/2016/08/31/kaldi/&#34;&gt;Kaldiで音声を学習させる 〜ディープラーニングを用いた音声認識ツールキット〜&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;以下のコマンドが叩ければ、WFST作成に進むことができます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ fstcompile --help
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;wfst作成&#34;&gt;WFST作成&lt;/h3&gt;
-
-&lt;p&gt;ここからは下記のリンクを参考に進めます。&lt;br /&gt;
-&lt;a href=&#34;http://www.openfst.org/twiki/bin/view/FST/FstQuickTour&#34;&gt;http://www.openfst.org/twiki/bin/view/FST/FstQuickTour&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&#34;http://kaldi-asr.org/doc/tutorial_looking.html&#34;&gt;http://kaldi-asr.org/doc/tutorial_looking.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;具体的には下図に示すWFSTを作成していきます。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/09/13/openfst//binary.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;FSTファイルはテキストで表現できます。下記のように定義していきます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# arc format: src dest ilabel olabel [weight]
-# final state format: state [weight]
-# lines may occur in any order except initial state must be first line
-# unspecified weights default to 0.0 (for the library-default Weight type)
-$ cat &amp;gt;text.fst &amp;lt;&amp;lt;EOF
-0 1 a x .5
-0 1 b y 1.5
-1 2 c z 2.5
-2 3.5
-EOF
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;入力記号列は内部的には数値で表現するため、その定義を行います。&lt;code&gt;&amp;lt;eps&amp;gt;&lt;/code&gt;は空を表します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cat &amp;gt;isyms.txt &amp;lt;&amp;lt;EOF
-&amp;lt;eps&amp;gt; 0
-a 1
-b 2
-c 3
-EOF
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;同様に出力記号列の定義も行います。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cat &amp;gt;osyms.txt &amp;lt;&amp;lt;EOF
-&amp;lt;eps&amp;gt; 0
-x 1
-y 2
-z 3
-EOF
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;バイナリ形式にコンパイルします。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ fstcompile --isymbols=isyms.txt --osymbols=osyms.txt text.fst binary.fst
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これでWFSTが作成できました。&lt;/p&gt;
-
-&lt;h3 id=&#34;wfstの演算&#34;&gt;WFSTの演算&lt;/h3&gt;
-
-&lt;p&gt;上記は簡単な例ですが、様々なモデルをWFSTで表現することができます。&lt;br /&gt;
-そして、WFST形式で表現すると、各種演算が可能になるというメリットがあります。&lt;/p&gt;
-
-&lt;p&gt;簡単な演算をしてみましょう。2つのWFSTを合成する演算してみます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ fstcompose binary.fst binary.fst binary2.fst
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;テキスト形式で確認してみます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ fstprint --isymbols=isyms.txt --osymbols=osyms.txt binary2.fst
-0 1 a x 1
-0 1 b y 3
-1 2 c z 5
-2 7
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;元に比べて重みが倍になっていることがわかります。&lt;br /&gt;
-また、&lt;a href=&#34;http://www.graphviz.org&#34;&gt;Graphviz&lt;/a&gt; で操作可能なdot形式で出力することもできます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ fstdraw --isymbols=isyms.txt --osymbols=osyms.txt binary2.fst binary2.dot
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Graphvizがインストールされている場合は、下記コマンドでpngに形式に出力することができます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ dot -Tpng binary2.dot &amp;gt; binary2.png
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;以下の画像が出力されました。
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/09/13/openfst//binary2.png&#34;/&gt;
-  
-&lt;/figure&gt;
-&lt;/p&gt;
-
-&lt;p&gt;その他詳しい操作については公式ドキュメントをご参照ください。&lt;br /&gt;
-&lt;a href=&#34;http://www.openfst.org/&#34;&gt;http://www.openfst.org/&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>音声認識などの分野では、重み付き有限状態トランスデューサ (WFST) が今でも広く用いられています。 ここではOpenFstを用いて簡単なサンプルを作成し</description>
     </item>
     
     <item>
@@ -1053,133 +99,7 @@ EOF
       <pubDate>Thu, 08 Sep 2016 17:58:07 +0900</pubDate>
       
       <guid>http://blog.algolab.jp/post/2016/09/08/dslt/</guid>
-      <description>
-
-&lt;p&gt;「データサイエンスLT祭り」の資料を確認できたものから随時まとめていきます。&lt;br /&gt;
-&lt;a href=&#34;http://data-science-lt.connpass.com/event/35289/&#34;&gt;http://data-science-lt.connpass.com/event/35289/&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&#34;http://data-science-lt.connpass.com/event/35412/&#34;&gt;http://data-science-lt.connpass.com/event/35412/&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;rise-jupyter-notebookでお手軽スライド作成-hugoshortcode-1&#34;&gt;RISE: Jupyter Notebookでお手軽スライド作成 / &lt;a href=&#34;https://twitter.com/sfchaos&#34;&gt;@sfchaos&lt;/a&gt;
-&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/sfchaos/dslt20160907&#34;&gt;https://github.com/sfchaos/dslt20160907&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;low-bias-high-varianceとfilter-bubbleな私-hugoshortcode-2&#34;&gt;Low Bias High VarianceとFilter Bubbleな私 / &lt;a href=&#34;https://twitter.com/tetsuroito&#34;&gt;@tetsuroito&lt;/a&gt;
-&lt;/h2&gt;
-
-&lt;script async class=&#39;speakerdeck-embed&#39; data-id=&#39;050358760ef54eaea5de43bde2dd18c8&#39; data-ratio=&#39;1.33333333333333&#39; src=&#39;//speakerdeck.com/assets/embed.js&#39;&gt;&lt;/script&gt;
-
-&lt;h2 id=&#34;実務家のためのデータサイエンス速習法-hugoshortcode-4&#34;&gt;実務家のためのデータサイエンス速習法 / &lt;a href=&#34;https://twitter.com/shakezo_&#34;&gt;@shakezo_&lt;/a&gt;
-&lt;/h2&gt;
-
-&lt;h2 id=&#34;面倒くさいこと考えたくないあなたへ-tpotと機械学習-hugoshortcode-5&#34;&gt;面倒くさいこと考えたくないあなたへ〜TPOTと機械学習〜 / &lt;a href=&#34;https://twitter.com/tereka114&#34;&gt;@tereka114&lt;/a&gt;
-&lt;/h2&gt;
-
-&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/xKDz487fnppbKk&#34; class=&#34;slideshare&#34; width=&#34;595&#34; height=&#34;485&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt;
-
-
-&lt;h2 id=&#34;ご注文はスパムですか-hugoshortcode-7&#34;&gt;ご注文はスパムですか / &lt;a href=&#34;https://twitter.com/k66dango&#34;&gt;@k66dango&lt;/a&gt;
-&lt;/h2&gt;
-
-&lt;h2 id=&#34;データ分析者だけどリアルタイム分析がしたい-hugoshortcode-8&#34;&gt;データ分析者だけどリアルタイム分析がしたい / &lt;a href=&#34;https://twitter.com/kos59125&#34;&gt;@kos59125&lt;/a&gt;
-&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://docs.com/kos59125/2122?c=Tqf7Mh&#34;&gt;https://docs.com/kos59125/2122?c=Tqf7Mh&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;チャンプがやまかすを一撃する方法-hugoshortcode-9&#34;&gt;チャンプがやまかすを一撃する方法 / &lt;a href=&#34;https://twitter.com/millionsmile&#34;&gt;@millionsmile&lt;/a&gt;
-&lt;/h2&gt;
-
-&lt;h2 id=&#34;階層ベイズモデルで割安mobile-pcを探す-hugoshortcode-10&#34;&gt;階層ベイズモデルで割安mobile PCを探す / &lt;a href=&#34;https://twitter.com/berobero11&#34;&gt;@berobero11&lt;/a&gt;
-&lt;/h2&gt;
-
-&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/kOMYOJ6KywOYC8&#34; class=&#34;slideshare&#34; width=&#34;595&#34; height=&#34;485&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt;
-
-
-&lt;h2 id=&#34;サラリーマンのための計算社会科学-hugoshortcode-12&#34;&gt;サラリーマンのための計算社会科学 / &lt;a href=&#34;https://twitter.com/mtknnktm&#34;&gt;@mtknnktm&lt;/a&gt;
-&lt;/h2&gt;
-
-&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/41adcDWlVcTicj&#34; class=&#34;slideshare&#34; width=&#34;595&#34; height=&#34;485&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt;
-
-
-&lt;h2 id=&#34;aucが0-01改善したってどういうことですか-hugoshortcode-14&#34;&gt;AUCが0.01改善したってどういうことですか？ / &lt;a href=&#34;https://twitter.com/Kenmatsu4&#34;&gt;@Kenmatsu4&lt;/a&gt;
-&lt;/h2&gt;
-
-&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/8zufiekGQcGspR&#34; class=&#34;slideshare&#34; width=&#34;595&#34; height=&#34;485&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt;
-
-
-&lt;h2 id=&#34;特徴量抽出するつもりが-夜な夜なクリーチャーを生み出してしまっている話-hugoshortcode-16&#34;&gt;特徴量抽出するつもりが、夜な夜なクリーチャーを生み出してしまっている話 / &lt;a href=&#34;https://twitter.com/Ryosuke0624&#34;&gt;@Ryosuke0624&lt;/a&gt;
-&lt;/h2&gt;
-
-&lt;h2 id=&#34;初心者向けに機械学習のハンズオンセミナーをしてみてわかったこと-hugoshortcode-17&#34;&gt;初心者向けに機械学習のハンズオンセミナーをしてみてわかったこと / &lt;a href=&#34;https://twitter.com/__john__smith__&#34;&gt;@__john__smith__&lt;/a&gt;
-&lt;/h2&gt;
-
-&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/ji3tlWlYjusRKp&#34; class=&#34;slideshare&#34; width=&#34;595&#34; height=&#34;485&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt;
-
-
-&lt;h2 id=&#34;reproducebility-100倍-dockerマン-hugoshortcode-19&#34;&gt;Reproducebility 100倍 Dockerマン / &lt;a href=&#34;https://twitter.com/teramonagi&#34;&gt;@teramonagi&lt;/a&gt;
-&lt;/h2&gt;
-
-&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/lopySOx7zWRxHf&#34; class=&#34;slideshare&#34; width=&#34;595&#34; height=&#34;485&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt;
-
-
-&lt;h2 id=&#34;時と場所で選ぶ機械学習-hugoshortcode-21&#34;&gt;時と場所で選ぶ機械学習 / &lt;a href=&#34;https://twitter.com/vaaaaanquish&#34;&gt;@vaaaaanquish&lt;/a&gt;
-&lt;/h2&gt;
-
-&lt;h2 id=&#34;鋼鉄の錬金術師あらため出会い系錬金術師による-マリオａｉから分かる人生をクリアするのに大事なn個の共有-hugoshortcode-22&#34;&gt;鋼鉄の錬金術師あらため出会い系錬金術師による、マリオＡＩから分かる人生をクリアするのに大事なn個の共有 / &lt;a href=&#34;https://twitter.com/tomomoto_LV3&#34;&gt;@tomomoto_LV3&lt;/a&gt;
-&lt;/h2&gt;
-
-&lt;h2 id=&#34;1回くらいやってみよう-kaggle初挑戦-hugoshortcode-23&#34;&gt;1回くらいやってみよう: Kaggle初挑戦 / &lt;a href=&#34;https://twitter.com/siero5335&#34;&gt;@siero5335&lt;/a&gt;
-&lt;/h2&gt;
-
-&lt;p&gt;&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/E0IEcrUIu8pAJt&#34; class=&#34;slideshare&#34; width=&#34;595&#34; height=&#34;485&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt;
-
-&lt;a href=&#34;http://statchiraura.blog.fc2.com/blog-entry-31.html&#34;&gt;http://statchiraura.blog.fc2.com/blog-entry-31.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;俺たちの戦いはこれからだ-hugoshortcode-25&#34;&gt;俺たちの戦いはこれからだ / &lt;a href=&#34;https://twitter.com/gepuro&#34;&gt;@gepuro&lt;/a&gt;
-&lt;/h2&gt;
-
-&lt;p&gt;&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/cBPffWqv3tp1zJ&#34; class=&#34;slideshare&#34; width=&#34;595&#34; height=&#34;485&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt;
-
-&lt;a href=&#34;http://blog.gepuro.net/archives/159&#34;&gt;http://blog.gepuro.net/archives/159&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;グラフ作成-3分クッキング-hugoshortcode-27&#34;&gt;グラフ作成 3分クッキング / &lt;a href=&#34;https://twitter.com/wn_seko&#34;&gt;@wn_seko&lt;/a&gt;
-&lt;/h2&gt;
-
-&lt;h2 id=&#34;gbdtを使ったfeature-transformationの適用例-hugoshortcode-28&#34;&gt;GBDTを使ったfeature transformationの適用例 / &lt;a href=&#34;https://twitter.com/Quasi_quant2010&#34;&gt;@Quasi_quant2010&lt;/a&gt;
-&lt;/h2&gt;
-
-&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/7PBZv0Enkb05Gg&#34; class=&#34;slideshare&#34; width=&#34;595&#34; height=&#34;485&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt;
-
-
-&lt;h2 id=&#34;機械学習するな機会学習しろ-hugoshortcode-30&#34;&gt;機械学習するな機会学習しろ / &lt;a href=&#34;https://twitter.com/wonder_zone&#34;&gt;@wonder_zone&lt;/a&gt;
-&lt;/h2&gt;
-
-&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/mPSXhvjQW6QQba&#34; class=&#34;slideshare&#34; width=&#34;595&#34; height=&#34;485&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt;
-
-
-&lt;h2 id=&#34;cdtv-o2o最前線情報をお伝えします-hugoshortcode-32&#34;&gt;CDTV『O2O最前線情報をお伝えします』/ &lt;a href=&#34;https://github.com/yumebayashi&#34;&gt;@yumebayashi&lt;/a&gt;
-&lt;/h2&gt;
-
-&lt;h2 id=&#34;データサイエンティストの憂鬱-hugoshortcode-33&#34;&gt;データサイエンティストの憂鬱 / &lt;a href=&#34;https://twitter.com/shoe116&#34;&gt;@shoe116&lt;/a&gt;
-&lt;/h2&gt;
-
-&lt;p&gt;&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/4oyoc61JGEaqbl&#34; class=&#34;slideshare&#34; width=&#34;595&#34; height=&#34;485&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt;
-
-&lt;a href=&#34;http://shoe116.hatenablog.com/entry/2016/04/04/084113&#34;&gt;http://shoe116.hatenablog.com/entry/2016/04/04/084113&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;otonaの夏休み課題-hugoshortcode-35&#34;&gt;Otonaの夏休み課題 / &lt;a href=&#34;https://twitter.com/u_ribo&#34;&gt;@u_ribo&lt;/a&gt;
-&lt;/h2&gt;
-
-&lt;h2 id=&#34;rcpp-が支えるパッケージ-hugoshortcode-36&#34;&gt;{Rcpp}が支えるパッケージ / &lt;a href=&#34;https://twitter.com/yamano357&#34;&gt;@yamano357&lt;/a&gt;
-&lt;/h2&gt;
-
-&lt;p&gt;&lt;script async class=&#39;speakerdeck-embed&#39; data-id=&#39;9278831c5202498d935eab1dd403845c&#39; data-ratio=&#39;1.33333333333333&#39; src=&#39;//speakerdeck.com/assets/embed.js&#39;&gt;&lt;/script&gt;
-&lt;a href=&#34;http://qiita.com/yamano357/items/9846adac05b0c11f5cac&#34;&gt;http://qiita.com/yamano357/items/9846adac05b0c11f5cac&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&#34;http://rpubs.com/yamano357/202054&#34;&gt;http://rpubs.com/yamano357/202054&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;最後に喋るのはこの俺だ-hugoshortcode-38&#34;&gt;最後に喋るのはこの俺だ / &lt;a href=&#34;https://twitter.com/yamakatu&#34;&gt;@yamakatu&lt;/a&gt;
-&lt;/h2&gt;
-</description>
+      <description>「データサイエンスLT祭り」の資料を確認できたものから随時まとめていきます。 http://data-science-lt.connpass.com/event/35289/ http://data-science-lt.connpass.com/event/35412/ RISE: Jupyter Notebookでお手軽スライド作成 / @sfchaos https://github.com/sfchaos/dslt20160907 Low Bias High Vari</description>
     </item>
     
     <item>
@@ -1188,68 +108,7 @@ EOF
       <pubDate>Wed, 07 Sep 2016 16:52:58 +0900</pubDate>
       
       <guid>http://blog.algolab.jp/post/2016/09/07/duns/</guid>
-      <description>
-
-&lt;p&gt;Apple Developer Program の法人登録の際に D-U-N-S® Number が必要になりますが、&lt;a href=&#34;https://developer.apple.com/support/D-U-N-S/&#34;&gt;公式&lt;/a&gt; が紹介している方法だと時間がかかり、かつ、やり取りが英語のため面倒です。&lt;/p&gt;
-
-&lt;p&gt;国内企業であれば、東京商工リサーチ経由で、無料、かつ、最速で当日中に取得することができます。&lt;/p&gt;
-
-&lt;p&gt;ここではその手順をまとめます。&lt;/p&gt;
-
-&lt;h2 id=&#34;アクセス&#34;&gt;アクセス&lt;/h2&gt;
-
-&lt;p&gt;下記のページへアクセスし、&lt;code&gt;D-U-N-S® Number検索&lt;/code&gt;をクリックします。&lt;br /&gt;
-&lt;a href=&#34;https://duns-number-jp.dnb.com/search/jpn/login.asp&#34;&gt;https://duns-number-jp.dnb.com/search/jpn/login.asp&lt;/a&gt;&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/09/07/duns//duns_1.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;h2 id=&#34;検索&#34;&gt;検索&lt;/h2&gt;
-
-&lt;p&gt;企業名（日本語）に自社の名前を入れて&lt;code&gt;検索&lt;/code&gt;をクリックします。&lt;br /&gt;
-注意書にもあるように、株式会社等の法人格は除いて入力する必要があります。&lt;br /&gt;
-また、商号変更を行っている際は、最初に登記した時点での名前を入力してください。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/09/07/duns//duns_2.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;h2 id=&#34;検索結果&#34;&gt;検索結果&lt;/h2&gt;
-
-&lt;p&gt;検索で見つかったら、青色の&lt;code&gt;DUNS&lt;/code&gt;ボタンをクリックします。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/09/07/duns//duns_3.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;h2 id=&#34;使用許諾&#34;&gt;使用許諾&lt;/h2&gt;
-
-&lt;p&gt;使用許諾書に同意します。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/09/07/duns//duns_4.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;h2 id=&#34;照会申し込みフォーム&#34;&gt;照会申し込みフォーム&lt;/h2&gt;
-
-&lt;p&gt;申し込みフォームへ必要事項を記入のうえ、&lt;code&gt;確認&lt;/code&gt;-&amp;gt;&lt;code&gt;送信&lt;/code&gt;をクリックすれば完了です。&lt;br /&gt;
-筆者の場合は数時間以内にメールにて回答いただきました。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/09/07/duns//duns_5.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-</description>
+      <description>Apple Developer Program の法人登録の際に D-U-N-S® Number が必要になりますが、公式 が紹介している方法だと時間がかかり、かつ、やり取りが英語のため面倒です。 国内</description>
     </item>
     
     <item>
@@ -1258,282 +117,7 @@ EOF
       <pubDate>Wed, 31 Aug 2016 14:39:10 +0900</pubDate>
       
       <guid>http://blog.algolab.jp/post/2016/08/31/kaldi/</guid>
-      <description>
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/31/kaldi//kaldi_text_and_logo.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;h2 id=&#34;kaldiとは&#34;&gt;Kaldiとは&lt;/h2&gt;
-
-&lt;p&gt;C++で書かれた音声認識ツールキットで、Apache Licence 2.0で公開されています。&lt;br /&gt;
-音響モデルにDNN (Deep Neural Network) を用いているのが特長です。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://kaldi-asr.org/&#34;&gt;http://kaldi-asr.org/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;今回はKaldiを動作させ、yesかnoの音声を判別するモデルを学習させてみます。&lt;/p&gt;
-
-&lt;h2 id=&#34;環境&#34;&gt;環境&lt;/h2&gt;
-
-&lt;p&gt;Vagrant上のUbuntu 16.04 LTSを用いています。
-&lt;pre&gt;&lt;code class=&#34;language-sh hljs bash&#34;&gt;$ cat /etc/lsb-release
-DISTRIB_ID=Ubuntu
-DISTRIB_RELEASE=&lt;span class=&#34;hljs-number&#34;&gt;16.04&lt;/span&gt;
-DISTRIB_CODENAME=xenial
-DISTRIB_DESCRIPTION=&lt;span class=&#34;hljs-string&#34;&gt;&#34;Ubuntu 16.04.1 LTS&#34;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code class=&#34;language-sh hljs bash&#34;&gt;$ uname &lt;span class=&#34;hljs-operator&#34;&gt;-a&lt;/span&gt;
-Linux vagrant &lt;span class=&#34;hljs-number&#34;&gt;4.4&lt;/span&gt;.&lt;span class=&#34;hljs-number&#34;&gt;0&lt;/span&gt;-&lt;span class=&#34;hljs-number&#34;&gt;31&lt;/span&gt;-generic &lt;span class=&#34;hljs-comment&#34;&gt;#50-Ubuntu SMP Wed Jul 13 00:07:12 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/p&gt;
-
-&lt;h2 id=&#34;kaldiのダウンロード&#34;&gt;Kaldiのダウンロード&lt;/h2&gt;
-
-&lt;p&gt;Githubよりダウンロードします。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ git clone https://github.com/kaldi-asr/kaldi.git
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;インストール&#34;&gt;インストール&lt;/h2&gt;
-
-&lt;p&gt;インストール方法は&lt;code&gt;INSTALL&lt;/code&gt;ファイルに最新情報が記載されているので、それに従います。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd kaldi
-$ cat INSTALL
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;This is the official Kaldi INSTALL. Look also at INSTALL.md for the git mirror installation.&lt;br /&gt;
-[for native Windows install, see windows/INSTALL]&lt;/p&gt;
-
-&lt;p&gt;(1)&lt;br /&gt;
-go to tools/  and follow INSTALL instructions there.&lt;/p&gt;
-
-&lt;p&gt;(2)&lt;br /&gt;
-go to src/ and follow INSTALL instructions there.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;code&gt;tools&lt;/code&gt;および&lt;code&gt;src&lt;/code&gt;フォルダの&lt;code&gt;INSTALL&lt;/code&gt;を見れば良いようなので、まず&lt;code&gt;tools&lt;/code&gt;から確認していきます。&lt;/p&gt;
-
-&lt;h2 id=&#34;toolsのインストール&#34;&gt;toolsのインストール&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd tools
-$ cat INSTALL
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;To install the most important prerequisites for Kaldi:&lt;/p&gt;
-
-&lt;p&gt;&amp;nbsp;first do&lt;/p&gt;
-
-&lt;p&gt;&amp;nbsp;&amp;nbsp;extras/check_dependencies.sh&lt;/p&gt;
-
-&lt;p&gt;to see if there are any system-level installations or modifications you need to do.&lt;br /&gt;
-Check the output carefully: there are some things that will make your life a lot&lt;br /&gt;
-easier if you fix them at this stage.&lt;/p&gt;
-
-&lt;p&gt;Then run&lt;/p&gt;
-
-&lt;p&gt;&amp;nbsp;make&lt;/p&gt;
-
-&lt;p&gt;If you have multiple CPUs and want to speed things up, you can do a parallel&lt;br /&gt;
-build by supplying the &amp;ldquo;-j&amp;rdquo; option to make, e.g. to use 4 CPUs:&lt;/p&gt;
-
-&lt;p&gt;&amp;nbsp;&amp;nbsp;make -j 4&lt;/p&gt;
-
-&lt;p&gt;By default, Kaldi builds against OpenFst-1.3.4. If you want to build against&lt;br /&gt;
-OpenFst-1.4, edit the Makefile in this folder. Note that this change requires&lt;br /&gt;
-a relatively new compiler with C++11 support, e.g. gcc &amp;gt;= 4.6, clang &amp;gt;= 3.0.&lt;/p&gt;
-
-&lt;p&gt;In extras/, there are also various scripts to install extra bits and pieces that&lt;br /&gt;
-are used by individual example scripts.  If an example script needs you to run&lt;br /&gt;
-one of those scripts, it will tell you what to do.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;概要は以下の通りです。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;extras/check_dependencies.sh&lt;/code&gt;で依存関係をチェックする&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;make&lt;/code&gt;コマンドでインストールを行う
-
-&lt;ul&gt;
-&lt;li&gt;マルチコアのCPUの場合は&lt;code&gt;j&lt;/code&gt;オプションをつけることでインストールが並列化できる (早くなる)&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;依存関係のチェック&#34;&gt;依存関係のチェック&lt;/h3&gt;
-
-&lt;p&gt;スクリプトを用いて依存関係をチェックします。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ extras/check_dependencies.sh
-
-extras/check_dependencies.sh: automake is not installed.
-extras/check_dependencies.sh: autoconf is not installed.
-extras/check_dependencies.sh: neither libtoolize nor glibtoolize is installed
-extras/check_dependencies.sh: subversion is not installed
-extras/check_dependencies.sh: default or create an bash alias for kaldi scripts to run correctly
-extras/check_dependencies.sh: we recommend that you run (our best guess):
- sudo apt-get install  automake autoconf libtool subversion
-You should probably do:
- sudo apt-get install libatlas3-base
-/bin/sh is linked to dash, and currently some of the scripts will not run
-properly.  We recommend to run:
- sudo ln -s -f bash /bin/sh
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;サジェストされた通りに進めます。&lt;br /&gt;
-(環境によって出てくるメッセージが異なるのでご注意下さい)&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install automake autoconf libtool subversion
-$ sudo apt-get install -y libatlas3-base
-$ sudo ln -s -f bash /bin/sh
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;再度依存関係をチェックすると、OKとなりました。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ extras/check_dependencies.sh
-extras/check_dependencies.sh: all OK.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;インストール-1&#34;&gt;インストール&lt;/h3&gt;
-
-&lt;p&gt;まず、手元の環境のCPUコア数を調べます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ nproc
-4
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;筆者の環境は4コアだったので、&lt;code&gt;j&lt;/code&gt;オプションを用いて並列インストールを行います。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo make -j 4
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;以下のライブラリがインストールされます。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;OpenFst
-
-&lt;ul&gt;
-&lt;li&gt;重み付き有限状態トランスデューサー (WFST) を扱うライブラリ&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;sph2pipe
-
-&lt;ul&gt;
-&lt;li&gt;SPHEREファイルのコンバータ&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;sclite
-
-&lt;ul&gt;
-&lt;li&gt;音声認識結果をスコアリングするためのライブラリ&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;ATLAS
-
-&lt;ul&gt;
-&lt;li&gt;線形代数ライブラリ&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;CLAPACK
-
-&lt;ul&gt;
-&lt;li&gt;線形代数ライブラリ&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;オプション-言語モデルツールキットのインストール&#34;&gt;(オプション) 言語モデルツールキットのインストール&lt;/h3&gt;
-
-&lt;p&gt;また、言語モデルのツールキット (IRSTLM や SRILM) を使用する場合は追加でインストールします。&lt;/p&gt;
-
-&lt;h4 id=&#34;irstlm&#34;&gt;IRSTLM&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ extras/install_irstlm.sh
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;srlm&#34;&gt;SRLM&lt;/h4&gt;
-
-&lt;p&gt;下記からファイルをダウンロードし、&lt;code&gt;srilm.tgz&lt;/code&gt;というファイル名にした上で、&lt;code&gt;tools/&lt;/code&gt;直下に配置します。&lt;br /&gt;
-&lt;a href=&#34;http://www.speech.sri.com/projects/srilm/download.html&#34;&gt;http://www.speech.sri.com/projects/srilm/download.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;また、インストールにはGNU awkが必要なので導入します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install -y gawk
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;本体をインストールします。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ extras/install_srilm.sh
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;srcのインストール&#34;&gt;srcのインストール&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd ../src
-$ cat INSTALL
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;These instructions are valid for UNIX-like systems (these steps have&lt;br /&gt;
-been run on various Linux distributions; Darwin; Cygwin).  For native Windows&lt;br /&gt;
-compilation, see ../windows/INSTALL.&lt;/p&gt;
-
-&lt;p&gt;You must first have completed the installation steps in ../tools/INSTALL&lt;br /&gt;
-(compiling OpenFst; getting ATLAS and CLAPACK headers).&lt;/p&gt;
-
-&lt;p&gt;The installation instructions are:&lt;br /&gt;
-./configure&lt;br /&gt;
-make depend&lt;br /&gt;
-make&lt;/p&gt;
-
-&lt;p&gt;Note that &amp;ldquo;make&amp;rdquo; takes a long time; you can speed it up by running make&lt;br /&gt;
-in parallel if you have multiple CPUs, for instance&lt;br /&gt;
- make depend -j 8&lt;br /&gt;
- make -j 8&lt;br /&gt;
-For more information, see documentation at &lt;a href=&#34;http://kaldi-asr.org/doc/&#34;&gt;http://kaldi-asr.org/doc/&lt;/a&gt;&lt;br /&gt;
-and click on &amp;ldquo;The build process (how Kaldi is compiled)&amp;rdquo;.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;以下の3つのコマンドを叩けば良いようなので、一つずつ叩いていきます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ./configure
-$ sudo make depend -j 4
-$ sudo make -j 4
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;サンプルの動作確認&#34;&gt;サンプルの動作確認&lt;/h2&gt;
-
-&lt;p&gt;&lt;code&gt;egs&lt;/code&gt;以下にサンプルが公開されています。&lt;br /&gt;
-ここでは、&lt;code&gt;yes&lt;/code&gt;と&lt;code&gt;no&lt;/code&gt;を判別する非常に小さなタスクを学習させてみます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;cd ../egs/yesno
-cat README.txt
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;The &amp;ldquo;yesno&amp;rdquo; corpus is a very small dataset of recordings of one individual&lt;br /&gt;
-saying yes or no multiple times per recording, in Hebrew.  It is available from&lt;br /&gt;
-&lt;a href=&#34;http://www.openslr.org/1&#34;&gt;http://www.openslr.org/1&lt;/a&gt;.&lt;br /&gt;
-It is mainly included here as an easy way to test out the Kaldi scripts.&lt;/p&gt;
-
-&lt;p&gt;The test set is perfectly recognized at the monophone stage, so the dataset is&lt;br /&gt;
-not exactly challenging.&lt;/p&gt;
-
-&lt;p&gt;The scripts are in s5/.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;ヘブライ語で&lt;code&gt;yes&lt;/code&gt;と&lt;code&gt;no&lt;/code&gt;を喋っているコーパスを学習データとして用いるようです。&lt;br /&gt;
-&lt;code&gt;s5&lt;/code&gt;フォルダに動作用のスクリプトがあるので、動かしてみます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd s5
-$ sh run.sh
-...
-%WER 0.00 [ 0 / 232, 0 ins, 0 del, 0 sub ] exp/mono0a/decode_test_yesno/wer_10
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;WER (単語誤り率) が 0% という結果となりました。&lt;/p&gt;
-
-&lt;h2 id=&#34;次回予告&#34;&gt;次回予告&lt;/h2&gt;
-
-&lt;p&gt;次回はサンプルのソースコードを追ってみたいと思います。&lt;/p&gt;
-</description>
+      <description>Kaldiとは C++で書かれた音声認識ツールキットで、Apache Licence 2.0で公開されています。 音響モデルにDNN (Deep Neural Network) を用いているのが特長で</description>
     </item>
     
     <item>
@@ -1542,243 +126,7 @@ $ sh run.sh
       <pubDate>Mon, 29 Aug 2016 16:10:04 +0900</pubDate>
       
       <guid>http://blog.algolab.jp/post/2016/08/29/alexa-skills-kit/</guid>
-      <description>
-
-&lt;p&gt;前回はRaspberry PiからAVS (Alexa Voice Services) を使ってみましたが、今回は、Alexa Skills Kitを使ってみたいと思います。&lt;/p&gt;
-
-&lt;h2 id=&#34;完成したもの&#34;&gt;完成したもの&lt;/h2&gt;
-
-&lt;p&gt;Alexaが自分の好みの色を覚えてくれるようになりました。
-
-&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
-  &lt;iframe src=&#34;//www.youtube.com/embed/HAOPIuFDdik&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; allowfullscreen frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
- &lt;/div&gt;
-&lt;/p&gt;
-
-&lt;h2 id=&#34;alexa-skill-kitとは&#34;&gt;Alexa Skill Kitとは&lt;/h2&gt;
-
-&lt;p&gt;AVSには好みの機能を追加できるSkillという機能があり、「カスタムスキル」と「スマートホームスキル」の2種類を登録することができます。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/understanding-the-different-types-of-skills&#34;&gt;https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/understanding-the-different-types-of-skills&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;カスタムスキル&#34;&gt;カスタムスキル&lt;/h3&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/29/alexa-skills-kit//custom-skill.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;ul&gt;
-&lt;li&gt;ピザを注文したり、タクシーを呼んだり色々なことができる&lt;/li&gt;
-&lt;li&gt;Invocation Name (スキルの呼び名) で呼び出す&lt;/li&gt;
-&lt;li&gt;リクエストは「intent」としてマッピングされる
-
-&lt;ul&gt;
-&lt;li&gt;ピザの注文 &amp;rarr; OrderPizza intent&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;スマートホームスキル&#34;&gt;スマートホームスキル&lt;/h3&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/29/alexa-skills-kit//smart-home-skill.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;ul&gt;
-&lt;li&gt;Smart home device (灯りやエアコンなど) を操作できる&lt;/li&gt;
-&lt;li&gt;Invocation Nameで呼び出すのは不要&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;今回作るもの&#34;&gt;今回作るもの&lt;/h2&gt;
-
-&lt;p&gt;公式の &lt;a href=&#34;https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit/docs/developing-an-alexa-skill-as-a-lambda-function&#34;&gt;ドキュメント&lt;/a&gt; と &lt;a href=&#34;https://developer.amazon.com/public/community/post/TxDJWS16KUPVKO/New-Alexa-Skills-Kit-Template-Build-a-Trivia-Skill-in-under-an-Hour&#34;&gt;ポスト&lt;/a&gt; を参考に、今回は「Color Expert」のSkillを使ってみます。&lt;br /&gt;
-Alexa SkillsはLambdaファンクション上で実行されるので、AWS LambdaとAlexa Skillsの設定が必要になります。&lt;/p&gt;
-
-&lt;h2 id=&#34;aws-lambdaの作成&#34;&gt;AWS Lambdaの作成&lt;/h2&gt;
-
-&lt;p&gt;AWSマネジメントコンソールにログインし、&lt;a href=&#34;https://console.aws.amazon.com/lambda/home&#34;&gt;Lambda&lt;/a&gt; のページを開きます。&lt;/p&gt;
-
-&lt;p&gt;リージョンがバージニア北部(US East (N. Virginia))になっていることを確認し、なっていなければ変更します。Lambdaファンクションを利用してAlexa Skillsを使うのに、現在他のリージョンはサポートされていません。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-1.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;&lt;code&gt;Create a Lambda function&lt;/code&gt;をクリックするとBlueprint一覧画面になります。ここから&lt;code&gt;alexa-skills-kit-color-expert&lt;/code&gt;を選択します。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-2.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;Lambdaファンクションを呼び出すトリガーの選択画面になるので、灰色の点線のボックスをクリックし、&lt;code&gt;Alexa Skills Kit&lt;/code&gt;を選び&lt;code&gt;Next&lt;/code&gt;をクリックします。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-3.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;Lambdaファンクションの構成画面になります。Nameには「colorExpertTest」などと入力します。&lt;/p&gt;
-
-&lt;p&gt;RoleにはLambdaを使うのが初めてであれば、&lt;code&gt;Create new role from template(s)&lt;/code&gt;から新しくRoleを作成し、Role Nameには「lambda_basic_execution」などと入力します。&lt;/p&gt;
-
-&lt;p&gt;Policy templatesには&lt;code&gt;AMI read-only permissions&lt;/code&gt;などを選択すればOKです。&lt;/p&gt;
-
-&lt;p&gt;Lambda function codeなど他の項目はデフォルトのままでも問題ありません。&lt;/p&gt;
-
-&lt;p&gt;一通り入力・変更が終わったら&lt;code&gt;Next&lt;/code&gt;をクリックします。&lt;/p&gt;
-
-&lt;p&gt;そうすると、下記のような確認画面になります。問題なければ&lt;code&gt;Create function&lt;/code&gt;をクリックします。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-4.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;トリガーのテスト画面になります。
-&lt;code&gt;Test&lt;/code&gt;をクリック &amp;rarr; &lt;code&gt;Alexa Start Session&lt;/code&gt;を選択 &amp;rarr; &lt;code&gt;save and test&lt;/code&gt;をクリックと進むとTestが走ります。
-実行結果がSuceededとなること、ログ出力に先ほどのLambda function codeの出力結果が表示されていればOKです。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-5.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;これで作成は完了です。最後にLambdaファンクションの呼び出し先となるARNをメモしておきます。上記スクリーンショットで右上の一部灰色でマスクしている文字列です。&lt;/p&gt;
-
-&lt;h2 id=&#34;alexa-skillの作成&#34;&gt;Alexa Skillの作成&lt;/h2&gt;
-
-&lt;p&gt;Raspberry Piが登録されているアカウントでAmazon Developer Consoleにログインし、&lt;a href=&#34;https://developer.amazon.com/edw/home.html&#34;&gt;Alexa&lt;/a&gt; のページに進みます。&lt;/p&gt;
-
-&lt;p&gt;Alexa Skills Kitの&lt;code&gt;Get Started&lt;/code&gt;をクリックします。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-6.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;&lt;code&gt;Add a New Skill&lt;/code&gt;から新規にSkillを登録します。実際に話しかけて呼び出すときの名前となるInvocation Nameには「color expert」と入力して、&lt;code&gt;Next&lt;/code&gt;をクリックします。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-7.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;Interaction Modelの定義画面になります。これがAlexaに話しかけてやり取りをする内容になります。今回は&lt;a href=&#34;https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit/docs/developing-an-alexa-skill-as-a-lambda-function&#34;&gt;公式ドキュメント&lt;/a&gt;のとおりにIntent Schame, Custom Slot Types, Sample Utterancesを下記のようにします。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-8.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;Intent_Schema&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
-  &amp;quot;intents&amp;quot;: [
-    {
-      &amp;quot;intent&amp;quot;: &amp;quot;MyColorIsIntent&amp;quot;,
-      &amp;quot;slots&amp;quot;: [
-        {
-          &amp;quot;name&amp;quot;: &amp;quot;Color&amp;quot;,
-          &amp;quot;type&amp;quot;: &amp;quot;LIST_OF_COLORS&amp;quot;
-        }
-      ]
-    },
-    {
-      &amp;quot;intent&amp;quot;: &amp;quot;WhatsMyColorIntent&amp;quot;
-    },
-    {
-      &amp;quot;intent&amp;quot;: &amp;quot;AMAZON.HelpIntent&amp;quot;
-    }
-  ]
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Custom_Slot_Type&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;LIST_OF_COLORS
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Custom_Slot_Type_Values&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;green
-red
-blue
-orange
-gold
-silver
-yellow
-black
-white
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Sample_Utterances&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;WhatsMyColorIntent what&#39;s my favorite color
-WhatsMyColorIntent what is my favorite color
-WhatsMyColorIntent what&#39;s my color
-WhatsMyColorIntent what is my color
-WhatsMyColorIntent my color
-WhatsMyColorIntent my favorite color
-WhatsMyColorIntent get my color
-WhatsMyColorIntent get my favorite color
-WhatsMyColorIntent give me my favorite color
-WhatsMyColorIntent give me my color
-WhatsMyColorIntent what my color is
-WhatsMyColorIntent what my favorite color is
-WhatsMyColorIntent yes
-WhatsMyColorIntent yup
-WhatsMyColorIntent sure
-WhatsMyColorIntent yes please
-MyColorIsIntent my favorite color is {Color}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;次にEndpointなどの設定画面になります。先ほどメモしておいたARNを入力します。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-9.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;次にTest画面になります。Enter Utteranceに先ほどSample Utteranceに定義した文章を入力して&lt;code&gt;Ask color expert&lt;/code&gt;をクリックします。するとLambdaで処理が実行されて返答される文章などを含んだレスポンスが返ってきます。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-10.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;残りの設定項目に Publishing infomation, Privacy &amp;amp; Compliance がありますが、これらはAlexa Skillをpubulishingするときに必要で、手元の実機での実行には必要ないので今回は割愛します。&lt;/p&gt;
-
-&lt;h2 id=&#34;動作確認&#34;&gt;動作確認&lt;/h2&gt;
-
-&lt;p&gt;まずAmazon Developer Consoleと同じアカウントでAmazon Alexaにログインして&lt;a href=&#34;http://alexa.amazon.com/spa/index.html#skills/your-skills&#34;&gt;Skill一覧画面&lt;/a&gt;から先ほど作成したSkillがあることを確認します。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/29/alexa-skills-kit//alexa-skills-kit-11.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;あとは冒頭の動画のように話しかけて動作するか確認します。&lt;/p&gt;
-
-&lt;h2 id=&#34;次回予告&#34;&gt;次回予告&lt;/h2&gt;
-
-&lt;p&gt;次回はソースコードの中身を見てみます。&lt;/p&gt;
-</description>
+      <description>前回はRaspberry PiからAVS (Alexa Voice Services) を使ってみましたが、今回は、Alexa Skills Kitを使ってみたいと思います。 完成したもの Alexaが</description>
     </item>
     
     <item>
@@ -1787,145 +135,7 @@ MyColorIsIntent my favorite color is {Color}
       <pubDate>Thu, 25 Aug 2016 16:28:18 +0900</pubDate>
       
       <guid>http://blog.algolab.jp/post/2016/08/25/mahjong-camera-introduction/</guid>
-      <description>
-
-&lt;p&gt;2014年の終わり頃に「麻雀カメラ」というiPhoneアプリを作っていました。&lt;br /&gt;
-カメラをかざすだけで麻雀の得点計算を行ってくれるアプリです。&lt;/p&gt;
-
-
-&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
-  &lt;iframe src=&#34;//www.youtube.com/embed/livDDcygEDU&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; allowfullscreen frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
- &lt;/div&gt;
-
-
-&lt;p&gt;動画を見ていただければ一目瞭然ですが、さすがに実用では使えない、ということでお蔵入りしました&amp;hellip;。&lt;br /&gt;
-(時間がかかるだけでなく、精度もあまり良くありませんでした。)&lt;/p&gt;
-
-&lt;p&gt;あれから一年半、技術の進歩は目覚ましく、いまならば良いものが作れるのでは？と思い立ち、再挑戦してみることにしました。&lt;/p&gt;
-
-&lt;p&gt;今回は、導入編として、当時用いていた手法 (テンプレートマッチング) について説明します。&lt;/p&gt;
-
-&lt;h2 id=&#34;画像判定プロセス&#34;&gt;画像判定プロセス&lt;/h2&gt;
-
-&lt;p&gt;画像に何が写っているか判定するためには、大きく「検出 (Detection)」と「認識 (Recognition)」というプロセスに分かれます。&lt;/p&gt;
-
-&lt;h3 id=&#34;検出&#34;&gt;検出&lt;/h3&gt;
-
-&lt;p&gt;物体が画像内のどこにあるかを判定するプロセス。&lt;br /&gt;
-下記の画像でいうと、赤枠をつけていくイメージです。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/25/mahjong-camera-introduction//detection_1.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;h3 id=&#34;認識&#34;&gt;認識&lt;/h3&gt;
-
-&lt;p&gt;検出された領域に写っている物体が何であるかを判定するプロセス。&lt;br /&gt;
-具体的には、下記の物体が「五萬」である、と識別することを言います。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/25/mahjong-camera-introduction//5m.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;h2 id=&#34;検出の難しさ&#34;&gt;検出の難しさ&lt;/h2&gt;
-
-&lt;p&gt;麻雀牌判定においては、特に「検出」のプロセスが困難です。&lt;br /&gt;
-横並びの複数牌に対し、どこが牌の境界かを判断することが非常に難しいのです。&lt;br /&gt;
-例えば、下記の画像を考えてみましょう。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/25/mahjong-camera-introduction//detection_2.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;人間の目には、3つの牌の境界を判断することはできますが、&lt;br /&gt;
-機械では、下記の赤枠の部分を1つの牌として検出してしまう、ということが起こり得てしまいます。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/25/mahjong-camera-introduction//detection_3.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;牌の境界には溝らしきものが存在するので、画像処理で溝を判定し境界とみなす、というような実装も考えられますが、光の具合や撮影角度などによって溝が見えなくなってしまうこともあるため、このような特定のルールを設ける方法では一筋縄ではいきません。&lt;/p&gt;
-
-&lt;h2 id=&#34;当時用いていたアルゴリズム&#34;&gt;当時用いていたアルゴリズム&lt;/h2&gt;
-
-&lt;p&gt;当時はどのように判定していたかというと、前処理を加えた画像に対し、テンプレートマッチングという手法を用いていました。(古くからある手法です)&lt;/p&gt;
-
-&lt;h2 id=&#34;前処理&#34;&gt;前処理&lt;/h2&gt;
-
-&lt;p&gt;前処理として、画像全体から牌が写っている全体領域を切り出します。&lt;br /&gt;
-牌の全体領域と背景には明らかに差が見て取れるので、これは比較的容易に行うことができます。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/25/mahjong-camera-introduction//detection_4.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;具体的には、二値化画像に対し輪郭抽出を行い、頂点数や面積が一定以上のものの外接矩形を牌の全体領域としてみなす、という処理をしています。&lt;/p&gt;
-
-&lt;p&gt;処理後の画像はこのような形となります。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/25/mahjong-camera-introduction//template_matching_1.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;h2 id=&#34;テンプレートマッチング&#34;&gt;テンプレートマッチング&lt;/h2&gt;
-
-&lt;p&gt;前処理を行った画像に対し、テンプレートマッチングを用いて牌を判定していきます。&lt;/p&gt;
-
-&lt;p&gt;テンプレートマッチングとは、テンプレート画像を少しずつ端から端までずらしていって、その類似度を計算していく、という手法です。&lt;/p&gt;
-
-&lt;p&gt;例えばテンプレート画像に「五萬」を用いるとしましょう。&lt;br /&gt;
-下記のように、少しずつずらして類似度を計算していき、その値を保持しておきます。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/25/mahjong-camera-introduction//template_matching_2.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;そして、一番類似度が高い領域を個別牌領域としてみなします。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/25/mahjong-camera-introduction//template_matching_3.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;実際には、テンプレート画像には、麻雀牌の種類 (34) x 上下左右の方向 (4) の合計136個を用い、一番類似度の高かったものを採用しています。&lt;/p&gt;
-
-&lt;p&gt;そして、確定した領域を除いた残りの領域に対して更にテンプレートマッチングを繰り返していくことで牌の判定を行っていました。&lt;/p&gt;
-
-&lt;h2 id=&#34;問題点&#34;&gt;問題点&lt;/h2&gt;
-
-&lt;p&gt;テンプレートマッチングは、いわば総当たり作戦で「検出」と「認識」を一度に行ってしまおうというものです。&lt;br /&gt;
-ご想像の通り、非常に効率が悪く、判定に時間がかかってしまいます。&lt;/p&gt;
-
-&lt;p&gt;またテンプレート画像は上下左右の4方向しか用意していないため、例えば下記の中だと「六萬」の判定がうまくいきません。
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/25/mahjong-camera-introduction//template_matching_4.png&#34;/&gt;
-  
-&lt;/figure&gt;
-&lt;/p&gt;
-
-&lt;p&gt;単純に考えると、テンプレートを増やせば良さそうですが、速度とのトレードオフなので現実的ではありません。&lt;/p&gt;
-
-&lt;h2 id=&#34;次回予告&#34;&gt;次回予告&lt;/h2&gt;
-
-&lt;p&gt;このように、テンプレートマッチングを用いる手法では、限られた条件下 (横並びに綺麗に牌が並んでいる) ではそれなりに精度は出るものの、条件から外れると精度が落ち、また判定に時間もかかってしまいました。&lt;/p&gt;
-
-&lt;p&gt;次回以降、これらの問題点を解決すべく、いろいろな手法を試していきたいと思います。&lt;/p&gt;
-</description>
+      <description>2014年の終わり頃に「麻雀カメラ」というiPhoneアプリを作っていました。 カメラをかざすだけで麻雀の得点計算を行ってくれるアプリです。 動</description>
     </item>
     
     <item>
@@ -1934,101 +144,7 @@ MyColorIsIntent my favorite color is {Color}
       <pubDate>Wed, 24 Aug 2016 15:48:58 +0900</pubDate>
       
       <guid>http://blog.algolab.jp/post/2016/08/24/vpn-dns/</guid>
-      <description>
-
-&lt;p&gt;弊社オフィスではVPN環境を構築していますが、固定IPを取得していないため、パブリックIPが変わるたびにVPNの接続先を変更しなければならず面倒です。&lt;/p&gt;
-
-&lt;p&gt;そこで、定期的にIPアドレスを取得し、DNSに登録するようにしています。&lt;br /&gt;
-ここでは、Raspberry Pi 上でAWS SDK for Python (Boto 3) を用いて定期実行させる手順をまとめます。&lt;/p&gt;
-
-&lt;h2 id=&#34;aws-sdk-for-python-のインストールおよび設定&#34;&gt;AWS SDK for Python のインストールおよび設定&lt;/h2&gt;
-
-&lt;p&gt;DNSはAWSのRoute53で管理しており、その操作のためにSDKを導入します。&lt;br /&gt;
-なお、Raspberry PiにはPython (2.7系) がデフォルトでインストールされているため、そのまま用います。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo pip install boto3
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;続いて、Credentialを設定します。&lt;code&gt;YOUR_KEY&lt;/code&gt;および&lt;code&gt;YOUR_SECRET&lt;/code&gt;は環境に合わせて設定してください。&lt;br /&gt;
-(Route53へのアクセス権限があれば問題ありません)&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vi ~/.aws/credentials
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;[default]
-aws_access_key_id = YOUR_KEY
-aws_secret_access_key = YOUR_SECRET
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;dns更新&#34;&gt;DNS更新&lt;/h2&gt;
-
-&lt;p&gt;DNS更新には&lt;code&gt;change_resource_record_sets&lt;/code&gt;メソッドを使用します。&lt;br /&gt;
-詳細は、&lt;a href=&#34;http://boto3.readthedocs.io/en/latest/reference/services/route53.html#Route53.Client.change_resource_record_sets&#34;&gt;公式ドキュメント&lt;/a&gt; を参照してください。&lt;/p&gt;
-
-&lt;h2 id=&#34;パブリックipの取得&#34;&gt;パブリックIPの取得&lt;/h2&gt;
-
-&lt;p&gt;パブリックIPは、&lt;a href=&#34;http://httpbin.org&#34;&gt;httpbin.org&lt;/a&gt; にアクセスして取得します。&lt;br /&gt;
-レスポンスとしては以下のようなものが返ってきます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ curl http://httpbin.org/ip
-{
-    &amp;quot;origin&amp;quot;: &amp;quot;xxx.xxx.xxx.xxx&amp;quot;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;スクリプト&#34;&gt;スクリプト&lt;/h2&gt;
-
-&lt;p&gt;以上を踏まえて、スクリプトを書いていきます。&lt;br /&gt;
-&lt;code&gt;DOMAIN&lt;/code&gt;および&lt;code&gt;HOST&lt;/code&gt;は環境に合わせて書き換えてください。下記では&lt;code&gt;hoge.example.com&lt;/code&gt;を登録する例としています。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# -*- coding: utf-8 -*-
-
-import json
-import urllib2
-
-import boto3
-
-DOMAIN = &#39;hoge&#39;
-HOST = &#39;example.com&#39;
-TTL = 300
-
-# パブリックIPアドレスの取得
-response = urllib2.urlopen(&#39;http://httpbin.org/ip&#39;)
-ip_address = json.loads(response.read())[&#39;origin&#39;]
-
-# AWS SDK Client
-client = boto3.client(&#39;route53&#39;)
-
-# hosted_zone_idの取得
-hosted_zones = client.list_hosted_zones()[&#39;HostedZones&#39;]
-hosted_zone_id = filter(lambda h: h[&#39;Name&#39;] == HOST + &#39;.&#39;, hosted_zones)[0][&#39;Id&#39;]
-
-# 更新内容
-change_batch = {
-    &#39;Changes&#39;: [
-        {
-            &#39;Action&#39;: &#39;UPSERT&#39;,
-            &#39;ResourceRecordSet&#39;: {
-                &#39;Name&#39;: DOMAIN + &#39;.&#39; + HOST + &#39;.&#39;,
-                &#39;Type&#39;: &#39;A&#39;,
-                &#39;TTL&#39;: TTL,
-                &#39;ResourceRecords&#39;: [
-                    {&#39;Value&#39;: ip_address}
-                ]
-            }
-        }
-    ]
-}
-
-# 更新
-client.change_resource_record_sets(
-    HostedZoneId = hosted_zone_id,
-    ChangeBatch = change_batch
-)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;あとは、上記のスクリプトを&lt;code&gt;cron&lt;/code&gt;に登録するなどして、定期実行させれば完了です。&lt;/p&gt;
-</description>
+      <description>弊社オフィスではVPN環境を構築していますが、固定IPを取得していないため、パブリックIPが変わるたびにVPNの接続先を変更しなければならず</description>
     </item>
     
     <item>
@@ -2037,183 +153,142 @@ client.change_resource_record_sets(
       <pubDate>Mon, 22 Aug 2016 17:53:57 +0900</pubDate>
       
       <guid>http://blog.algolab.jp/post/2016/08/22/ubuntu-tightvnc-server/</guid>
-      <description>
-
-&lt;p&gt;MacからUbuntu (16.04 LTS) へリモートデスクトップでアクセスする手順をまとめます。&lt;/p&gt;
-
-&lt;h2 id=&#34;デスクトップ環境のインストール&#34;&gt;デスクトップ環境のインストール&lt;/h2&gt;
-
-&lt;p&gt;デスクトップ環境には高速な軽量なXfceもしくはLXDEを最小限の構成でインストールします。&lt;br /&gt;
-(お好みに合わせてください)&lt;/p&gt;
-
-&lt;h3 id=&#34;xfceの場合&#34;&gt;Xfceの場合&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://www.xfce.org/&#34;&gt;https://www.xfce.org/&lt;/a&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install -y xfce4 xfce4-goodies
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;lxdeの場合&#34;&gt;LXDEの場合&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://lxde.org/&#34;&gt;http://lxde.org/&lt;/a&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install -y lxde-core
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;tightvnc-serverのセットアップ&#34;&gt;TightVNC Serverのセットアップ&lt;/h2&gt;
-
-&lt;p&gt;リモートデスクトップを使用するため、TightVNCを用いてVNCサーバーを立てます。&lt;br /&gt;
-&lt;a href=&#34;http://www.tightvnc.com/&#34;&gt;http://www.tightvnc.com/&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;インストール&#34;&gt;インストール&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install tightvncserver
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;初回起動&#34;&gt;初回起動&lt;/h3&gt;
-
-&lt;p&gt;諸々設定ファイルを作成するため、一度起動します。&lt;br /&gt;
-初回起動時には、アクセスする際のパスワードが求められるので入力します。&lt;br /&gt;
-view-only のパスワードは特に必要ないので、&lt;code&gt;n&lt;/code&gt;を選択しました。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vncserver
-
-You will require a password to access your desktops.
-
-Password:
-Verify:
-Would you like to enter a view-only password (y/n)? n
-...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;以下のような起動メッセージが出ると思います。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;New &#39;X&#39; desktop is hostname:1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;最後の数字 (ここでは1) がデスクトップ番号となるので覚えておきます。&lt;/p&gt;
-
-&lt;h3 id=&#34;停止&#34;&gt;停止&lt;/h3&gt;
-
-&lt;p&gt;以下のコマンドで停止します。&lt;br /&gt;
-最後にデスクトップ番号を指定します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vncserver -kill :1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;起動設定&#34;&gt;起動設定&lt;/h3&gt;
-
-&lt;p&gt;VNCサーバーからデスクトップを起動するように設定を行います。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vi ~/.vnc/xstartup
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;xfceの場合-1&#34;&gt;Xfceの場合&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;#!/bin/bash
-xrdb $HOME/.Xresources
-startxfce4 &amp;amp;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;lxdeの場合-1&#34;&gt;LXDEの場合&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;#!/bin/bash
-xrdb $HOME/.Xresources
-lxsession -s LXDE &amp;amp;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;再度起動&#34;&gt;再度起動&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vncserver
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;アクセス&#34;&gt;アクセス&lt;/h3&gt;
-
-&lt;p&gt;MacのFinderから&lt;code&gt;移動&lt;/code&gt; &amp;gt; &lt;code&gt;サーバーへ接続&lt;/code&gt;で、VNCクライアントを起動します。&lt;br /&gt;
-アドレスバーには&lt;code&gt;vnc://[サーバーのIPアドレス]:5901&lt;/code&gt;を入力してください。&lt;br /&gt;
-正確には、ポート番号は5900 + デスクトップ番号となるので、環境によって変えてください。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/22/ubuntu-tightvnc-server//vnc_client.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;パスワードによる認証の後、リモートデスクトップにアクセスできます。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/22/ubuntu-tightvnc-server//vnc_server.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;h3 id=&#34;再度停止&#34;&gt;再度停止&lt;/h3&gt;
-
-&lt;p&gt;自動起動の設定を行うため、再度停止します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vncserver -kill :1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;自動起動の設定&#34;&gt;自動起動の設定&lt;/h3&gt;
-
-&lt;h4 id=&#34;起動ファイルの作成&#34;&gt;起動ファイルの作成&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo vi /etc/systemd/system/vncserver@.service
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;{{USERNAME}}&lt;/code&gt;は環境に合わせて設定してください。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;[Unit]
-Description=Start TightVNC server at startup
-After=syslog.target network.target
-
-[Service]
-Type=forking
-User={{USERNAME}}
-PAMName=login
-PIDFile=/home/{{USERNAME}}/.vnc/%H:%i.pid
-ExecStartPre=-/usr/bin/vncserver -kill :%i &amp;gt; /dev/null 2&amp;gt;&amp;amp;1
-ExecStart=/usr/bin/vncserver -depth 24 -geometry 1280x800 :%i
-ExecStop=/usr/bin/vncserver -kill :%i
-
-[Install]
-WantedBy=multi-user.target
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;自動起動の設定-1&#34;&gt;自動起動の設定&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo systemctl daemon-reload
-$ sudo systemctl enable vncserver@1.service
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;起動&#34;&gt;起動&lt;/h4&gt;
-
-&lt;p&gt;以下のコマンドで手動で起動できるようになります。&lt;br /&gt;
-&lt;code&gt;@&lt;/code&gt;以下がデスクトップ番号です。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo systemctl start vncserver@1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;ステータス確認&#34;&gt;ステータス確認&lt;/h4&gt;
-
-&lt;p&gt;ステータスは以下のコマンドで確認します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo systemctl status vncserver@1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;xfce固有の設定&#34;&gt;Xfce固有の設定&lt;/h2&gt;
-
-&lt;p&gt;デフォルトのままだとキーがうまく効かないので編集します。&lt;br /&gt;
-&lt;code&gt;Applications&lt;/code&gt; &amp;gt; &lt;code&gt;Settings&lt;/code&gt; &amp;gt; &lt;code&gt;Window Manager&lt;/code&gt; &amp;gt; &lt;code&gt;Keyboard&lt;/code&gt;の設定を開きます。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;Switch window for same application&lt;/code&gt;を選択して、&lt;code&gt;Clear&lt;/code&gt;することで、&lt;code&gt;Tab&lt;/code&gt;キーが正常に動作するようになります。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/22/ubuntu-tightvnc-server//tab.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-</description>
+      <description>MacからUbuntu (16.04 LTS) へリモートデスクトップでアクセスする手順をまとめます。 デスクトップ環境のインストール デスクトップ環境には高速な軽量</description>
+    </item>
+    
+    <item>
+      <title>【随時更新】pyenv &#43; Anaconda (Ubuntu 16.04 LTS) で機械学習のPython開発環境をオールインワンで整える</title>
+      <link>http://blog.algolab.jp/post/2016/08/21/pyenv-anaconda-ubuntu/</link>
+      <pubDate>Sun, 21 Aug 2016 17:22:48 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/08/21/pyenv-anaconda-ubuntu/</guid>
+      <description>筆者の機械学習系のPython開発環境は、Vagrant を用いた Ubuntu (16.04 LTS) 上に構築しています。 ここでは、画像認識、音声認識、自然言語処理などに必</description>
+    </item>
+    
+    <item>
+      <title>テレアポ模擬トレーニングBot 〜コミュニケーション教育ツールとしてのチャットボットの活用可能性〜</title>
+      <link>http://blog.algolab.jp/post/2016/08/18/telephone-appointment-simulation-bot/</link>
+      <pubDate>Thu, 18 Aug 2016 15:20:16 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/08/18/telephone-appointment-simulation-bot/</guid>
+      <description>LINEがBOT API、FacebookがMessenger Platformを発表してから数ヶ月たちました。 これまでに数々のチャットボットが</description>
+    </item>
+    
+    <item>
+      <title>iOSで音声認識 〜Speech Frameworkを試す〜</title>
+      <link>http://blog.algolab.jp/post/2016/08/16/speech-framework/</link>
+      <pubDate>Tue, 16 Aug 2016 19:34:57 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/08/16/speech-framework/</guid>
+      <description>2016/08/16現在、まだβ版という位置づけですが、Apple謹製の音声認識エンジン (Speech Framework) が公開されています。今回は、下記のサンプルコード</description>
+    </item>
+    
+    <item>
+      <title>Googleカレンダー解析ツール作りました 〜時間の使い方チェッカー〜</title>
+      <link>http://blog.algolab.jp/post/2016/08/16/calendar-report/</link>
+      <pubDate>Tue, 16 Aug 2016 17:34:11 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/08/16/calendar-report/</guid>
+      <description>タイトルの通りですが、時間の使い方チェッカーというツールを作りました (だいぶ前に作っていました)。 http://tools.algolab.jp/calendar_reports ソースコードはGitHubに公開していま</description>
+    </item>
+    
+    <item>
+      <title>Amazon Echoを6,000円で自作する 〜Raspberry Pi 3 &#43; Alexa Voice Services (AVS)〜</title>
+      <link>http://blog.algolab.jp/post/2016/08/11/raspberry-pi-alexa/</link>
+      <pubDate>Thu, 11 Aug 2016 19:08:44 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/08/11/raspberry-pi-alexa/</guid>
+      <description>音声は新しいパラダイムシフトになる 〜2016年度版メアリー・ミーカー氏レポートまとめ〜 でも触れたように、次世代デバイスとしてAmazon Ec</description>
+    </item>
+    
+    <item>
+      <title>ディープラーニング徹底入門 〜AIトレーニング第1回〜</title>
+      <link>http://blog.algolab.jp/post/2016/08/07/deep-learning-introduction/</link>
+      <pubDate>Sun, 07 Aug 2016 15:46:48 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/08/07/deep-learning-introduction/</guid>
+      <description>今回は、ディープラーニングのイメージを掴んでもらうためにAさんにお話した内容をお届けします。 画像認識とは？ さて、突然ですが、皆さんに問題です</description>
+    </item>
+    
+    <item>
+      <title>TorchをAWSのGPUインスタンス (Ubuntu 14.04) で動かす</title>
+      <link>http://blog.algolab.jp/post/2016/08/03/torch-aws-gpu-ubuntu/</link>
+      <pubDate>Wed, 03 Aug 2016 17:12:34 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/08/03/torch-aws-gpu-ubuntu/</guid>
+      <description>TorchをAWSのGPUインスタンス (Ubuntu 14.04) で動かす手順をまとめます。 環境は以下の通りです。 Ubuntu Server 14.04 LTS CUDA7.5 CuDNN v5 Torch7 インスタンスを起動 Ubuntu Server 14.04 LTS (HVM), SSD Volume Type</description>
+    </item>
+    
+    <item>
+      <title>超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜導入編〜</title>
+      <link>http://blog.algolab.jp/post/2016/08/01/tf-dqn-simple-1/</link>
+      <pubDate>Mon, 01 Aug 2016 22:06:25 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/08/01/tf-dqn-simple-1/</guid>
+      <description>みなさん、DQNしてますか？ DQNについては、下記の記事によくまとめられており、実装してみようとした方も多いのではないでしょうか。 DQNの生</description>
+    </item>
+    
+    <item>
+      <title>AIトレーニングキックオフ 〜ハムケツを認識したい〜</title>
+      <link>http://blog.algolab.jp/post/2016/08/01/ai-training-kick-off/</link>
+      <pubDate>Mon, 01 Aug 2016 12:11:45 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/08/01/ai-training-kick-off/</guid>
+      <description>今回は、Aさんのキックオフの内容についてお届けします。 ハムケツ 「あの・・ですね。その・・・。ハムケツを認識したいんです。」 トレーニングの最初</description>
+    </item>
+    
+    <item>
+      <title>Seq2Seqモデルを用いたチャットボット作成 〜英会話のサンプルをTorchで動かす〜</title>
+      <link>http://blog.algolab.jp/post/2016/07/30/seq2seq-chatbot/</link>
+      <pubDate>Sat, 30 Jul 2016 15:50:23 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/07/30/seq2seq-chatbot/</guid>
+      <description>最近、チャットボットが話題となっていますが、自然な会話を成り立たせること、は大きな課題の一つです。 ここでは、Deep Learningの一種で</description>
+    </item>
+    
+    <item>
+      <title>音声は新しいパラダイムシフトになる 〜2016年度版メアリー・ミーカー氏レポートまとめ〜</title>
+      <link>http://blog.algolab.jp/post/2016/07/29/mary-meeker-2016/</link>
+      <pubDate>Fri, 29 Jul 2016 11:47:41 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/07/29/mary-meeker-2016/</guid>
+      <description>「音声インターフェースは新しいパラダイムシフトになる」 伝説のアナリスト、メアリー・ミーカー氏は、 インターネット・トレンド 2016年度版の中で</description>
+    </item>
+    
+    <item>
+      <title>AIトレーニングはじめました</title>
+      <link>http://blog.algolab.jp/post/2016/07/25/ai-training/</link>
+      <pubDate>Mon, 25 Jul 2016 16:35:26 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/07/25/ai-training/</guid>
+      <description>弊社では、ITエンジニア向けに機械学習スキルの習得をサポートする試み (AIトレーニング) をはじめました。 ここでは、1人目の受講者であるAさん</description>
+    </item>
+    
+    <item>
+      <title>ICML2016読み会まとめ</title>
+      <link>http://blog.algolab.jp/post/2016/07/21/icml-2016-reading/</link>
+      <pubDate>Fri, 22 Jul 2016 10:14:41 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/07/21/icml-2016-reading/</guid>
+      <description>ICML2016読み会 の内容をまとめました。 ニコ生配信URL：http://live.nicovideo.jp/watch/lv268597</description>
+    </item>
+    
+    <item>
+      <title>R-env:連舞® ハンズオンで RoBoHoN（ロボホン）・ Sota（ソータ）と戯れてきた</title>
+      <link>http://blog.algolab.jp/post/2016/07/14/r-env-hands-on/</link>
+      <pubDate>Thu, 14 Jul 2016 17:40:56 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2016/07/14/r-env-hands-on/</guid>
+      <description>[R-env:連舞® Innovation Hub] R-env:連舞®×RoBoHoNでロボットサービス開発体験ハンズオン に参加してきましたので、その模様をレポートしま</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>http://blog.algolab.jp/about/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/about/</guid>
+      <description>運営者情報 株式会社アルゴラボ 〒101-0051 東京都千代田区神田神保町1-19 すずらん通りT&amp;amp;Aビル 4F http://www.algolab.jp/ info@algolab.jp お問い合わせ 読み込んでいま</description>
     </item>
     
   </channel>

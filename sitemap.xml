@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://blog.algolab.jp/</loc>
-    <lastmod>2017-01-23T17:32:10+09:00</lastmod>
+    <loc>http://blog.algolab.jp/post/2017/10/17/open-estimate-overview/</loc>
+    <lastmod>2017-10-17T20:10:51+09:00</lastmod>
   </url>
   
   <url>
@@ -154,6 +155,221 @@
   <url>
     <loc>http://blog.algolab.jp/about/</loc>
     <lastmod>2016-01-01T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/</loc>
+    <lastmod>2017-10-17T20:10:51+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/tags/ai-training/</loc>
+    <lastmod>2016-08-07T15:46:48+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/tags/amazon-echo/</loc>
+    <lastmod>2016-12-07T18:15:27+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/authors/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/tags/aws/</loc>
+    <lastmod>2016-08-03T17:12:34+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/tags/chat-bot/</loc>
+    <lastmod>2016-08-18T15:20:16+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/tags/cnn/</loc>
+    <lastmod>2016-08-07T15:46:48+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/tags/development-environment/</loc>
+    <lastmod>2016-08-24T15:48:58+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/tags/dqn/</loc>
+    <lastmod>2016-12-19T18:33:39+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/tags/icml/</loc>
+    <lastmod>2016-07-22T10:14:41+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/tags/image-recognition/</loc>
+    <lastmod>2016-11-11T18:47:53+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/tags/ios/</loc>
+    <lastmod>2016-09-07T16:52:58+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/tags/kaldi/</loc>
+    <lastmod>2016-08-31T14:39:10+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/authors/kawahito/</loc>
+    <lastmod>2017-10-17T20:10:51+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/tags/mahjong-camera/</loc>
+    <lastmod>2016-08-25T16:28:18+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/tags/mary-meeker/</loc>
+    <lastmod>2016-07-29T11:47:41+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/tags/nlp/</loc>
+    <lastmod>2016-07-30T15:50:23+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/tags/open-estimate/</loc>
+    <lastmod>2017-10-17T20:10:51+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/tags/openfst/</loc>
+    <lastmod>2016-09-13T20:00:03+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/post/</loc>
+    <lastmod>2017-10-17T20:10:51+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/tags/product/</loc>
+    <lastmod>2016-08-18T15:20:16+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/tags/r-env/</loc>
+    <lastmod>2016-07-14T17:40:56+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/tags/raspberry-pi/</loc>
+    <lastmod>2016-09-28T16:26:57+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/tags/reinforcement-learning/</loc>
+    <lastmod>2016-12-19T18:33:39+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/tags/report/</loc>
+    <lastmod>2016-07-29T11:47:41+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/tags/robohon/</loc>
+    <lastmod>2016-07-14T17:40:56+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/tags/robot/</loc>
+    <lastmod>2016-07-14T17:40:56+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/tags/seq2seq/</loc>
+    <lastmod>2016-07-30T15:50:23+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/tags/sota/</loc>
+    <lastmod>2016-07-14T17:40:56+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/tags/speech-recognition/</loc>
+    <lastmod>2016-12-07T18:15:27+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/tags/study-session/</loc>
+    <lastmod>2016-09-08T17:58:07+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/tags/</loc>
+    <lastmod>2016-08-07T15:46:48+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/tags/tensorflow/</loc>
+    <lastmod>2016-12-19T18:33:39+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/tags/tips/</loc>
+    <lastmod>2017-01-23T17:32:10+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/tags/torch/</loc>
+    <lastmod>2016-08-03T17:12:34+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.algolab.jp/tags/ubuntu/</loc>
+    <lastmod>2016-08-31T14:39:10+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
 </urlset>

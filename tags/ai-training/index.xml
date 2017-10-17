@@ -6,8 +6,11 @@
     <description>Recent content in Ai Training on ALGO GEEKS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
+    <copyright>© 2016 Algo Lab Inc.</copyright>
     <lastBuildDate>Sun, 07 Aug 2016 15:46:48 +0900</lastBuildDate>
-    <atom:link href="http://blog.algolab.jp/tags/ai-training/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://blog.algolab.jp/tags/ai-training/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>ディープラーニング徹底入門 〜AIトレーニング第1回〜</title>
@@ -15,103 +18,7 @@
       <pubDate>Sun, 07 Aug 2016 15:46:48 +0900</pubDate>
       
       <guid>http://blog.algolab.jp/post/2016/08/07/deep-learning-introduction/</guid>
-      <description>
-
-&lt;p&gt;今回は、ディープラーニングのイメージを掴んでもらうためにAさんにお話した内容をお届けします。&lt;/p&gt;
-
-&lt;h2 id=&#34;画像認識とは&#34;&gt;画像認識とは？&lt;/h2&gt;
-
-&lt;p&gt;さて、突然ですが、皆さんに問題です。&lt;br /&gt;
-以下のようにグループが分かれているものとします。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/07/deep-learning-introduction//group_1.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;このとき、下の画像はどちらのグループになるでしょうか？&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/07/deep-learning-introduction//square_red.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;正解は「B」です。正解者の皆さんおめでとうございます！&lt;br /&gt;
-ではなぜ「B」なのか。おそらくこう考えたはずです。&lt;/p&gt;
-
-&lt;p&gt;「色がポイントだ。青ければグループA、赤ければグループB。だから、この画像はグループBだろう。」&lt;/p&gt;
-
-&lt;p&gt;図式化すると、下記のような形かと思います。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/07/deep-learning-introduction//image_recognition_1.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;これが画像を見分けるメカニズムで、これを機械に代替させようというのが機械学習における画像認識の分野です。&lt;br /&gt;
-そして、機械学習の文脈では、前半を「特徴抽出」、後半を「分類」と呼びます。&lt;/p&gt;
-
-&lt;h2 id=&#34;画像認識の難しさ&#34;&gt;画像認識の難しさ&lt;/h2&gt;
-
-&lt;p&gt;さて、冒頭に出した問題ですが、以下のようなグループ分けだったらどうでしょう。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/07/deep-learning-introduction//group_2.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;先ほどは「色」に注目しましたが、今度は「形」に注目して判定する必要がありそうです。&lt;br /&gt;
-図を再掲すると以下のようになります。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/07/deep-learning-introduction//image_recognition_2.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;このように、注目するポイントは問題設定によって異なります。&lt;br /&gt;
-そして、この注目する部分を決める「特徴抽出」の設計は、人間が行う必要があり、大変でした。&lt;/p&gt;
-
-&lt;h2 id=&#34;ディープラーニングとは&#34;&gt;ディープラーニングとは？&lt;/h2&gt;
-
-&lt;p&gt;これらの作業を機械が自動的に行ってくれるのがディープラーニングです。&lt;br /&gt;
-具体的には、この画像はグループA、この画像はグループBといったように大量の画像を機械に覚えさせるだけで良い、というイメージです。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/07/deep-learning-introduction//deep_learning.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;つまり、これまでよりも簡単に画像認識ができるようになったということです。しかも、より高い精度が出るようになったということで、ディープラーニングは爆発的に広まりました。&lt;/p&gt;
-
-&lt;h2 id=&#34;畳み込みニューラルネットワーク-cnn&#34;&gt;畳み込みニューラルネットワーク (CNN)&lt;/h2&gt;
-
-&lt;p&gt;画像認識におけるディープラーニングでは、畳み込みニューラルネットワークが用いられるのが一般的です。&lt;br /&gt;
-教科書などでは、よく下記のような図が用いられていると思います。
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/07/deep-learning-introduction//dnn.png&#34;/&gt;
-  
-&lt;/figure&gt;
-&lt;/p&gt;
-
-&lt;p&gt;縦に並んだ丸の列が「層」を表しており、上記の図は4層のニューラルネットワークを表現しています。&lt;br /&gt;
-大雑把にいうと、最後の層の前までで「特徴抽出」を行い、最後の層で「分類」を行っていると考えてください。&lt;br /&gt;
-本当はそれぞれの層に意味がありますが、現段階では上記の理解で十分かと思います。&lt;/p&gt;
-
-&lt;h2 id=&#34;次回予告&#34;&gt;次回予告&lt;/h2&gt;
-
-&lt;p&gt;ディープラーニング（畳み込みニューラルネットワーク）のイメージを掴んでいただいた上で、Aさんに課題を設定しました。&lt;/p&gt;
-
-&lt;p&gt;「学習済みモデルを用いて、画像の特徴抽出を行い、次元削減を行った上で可視化せよ」&lt;/p&gt;
-
-&lt;p&gt;見慣れない用語が幾つか出てきましたが、調べれば理解出来る内容だと考え、上記課題としました。&lt;br /&gt;
-次回はその内容についてお届けします。&lt;/p&gt;
-</description>
+      <description>今回は、ディープラーニングのイメージを掴んでもらうためにAさんにお話した内容をお届けします。 画像認識とは？ さて、突然ですが、皆さんに問題です</description>
     </item>
     
     <item>
@@ -120,57 +27,7 @@
       <pubDate>Mon, 01 Aug 2016 12:11:45 +0900</pubDate>
       
       <guid>http://blog.algolab.jp/post/2016/08/01/ai-training-kick-off/</guid>
-      <description>
-
-&lt;p&gt;今回は、Aさんのキックオフの内容についてお届けします。&lt;/p&gt;
-
-&lt;h2 id=&#34;ハムケツ&#34;&gt;ハムケツ&lt;/h2&gt;
-
-&lt;p&gt;「あの・・ですね。その・・・。ハムケツを認識したいんです。」&lt;/p&gt;
-
-&lt;p&gt;トレーニングの最初にゴールを設定するのですが、その際、Aさんから出たひと言目がこれでした。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/01/ai-training-kick-off//hamuketu.jpg&#34;/&gt;
-  
-  &lt;figcaption&gt;&lt;p&gt;http://hamuketu.blog.jp/archives/51191945.html&lt;/p&gt;&lt;/figcaption&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;ハムケツとは最近ネットや書籍で話題になったハムスターのおしりのことで、
-独特の可愛さで評判となったので目にされた方もいらっしゃるのではないでしょうか。&lt;/p&gt;
-
-&lt;p&gt;Aさんの話を詳しくうかがってみると、妻がハムケツの得も言われぬ可愛さに身もだえていた時に「ハムケツ画像が自動的に送られてくるアプリがあったらな」と思ったとのことです。&lt;/p&gt;
-
-&lt;p&gt;素晴らしい！ではハムケツでいきましょう、と速攻でテーマが決まり、その後は大の男二人で「ハムケツの特徴」や「こっちがハムケツ、こっちはハムケツじゃない」などと熱い議論を交わしつつ成果物のイメージをより具体的に話し合いました。&lt;/p&gt;
-
-&lt;p&gt;実際にアプリを作るとなると様々な工程がありますが、ハムケツ画像を集める段階で人工知能がハムケツを認識してくれれば、ハムケツであるかどうかの判定を人間が行わなくてよくなります。&lt;/p&gt;
-
-&lt;p&gt;この認識して判定するフェーズを今回のトレーニングで取り扱い、出来上がったモデルを誰にでも触ってもらえる形にしようということで、&lt;/p&gt;
-
-&lt;p&gt;「ハムケツ画像を入力すると認識結果のテキストを出力で得られるWebアプリを作る」&lt;/p&gt;
-
-&lt;p&gt;をゴールとすることになりました。&lt;/p&gt;
-
-&lt;h2 id=&#34;現状を把握する&#34;&gt;現状を把握する&lt;/h2&gt;
-
-&lt;p&gt;ゴールが決まったところで、Aさんの現状のスキルをヒアリングしていきます。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Webサービスや業務システムの設計、開発、運用を10年&lt;/li&gt;
-&lt;li&gt;開発言語はJava、Ruby、Python、PHP&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;受講者のトレーニング開始時ベンチマークとしてご参考にしていただければと思います。&lt;/p&gt;
-
-&lt;h2 id=&#34;次回予告&#34;&gt;次回予告&lt;/h2&gt;
-
-&lt;p&gt;Aさんはだいぶ基礎がありそうなので、ディープラーニングのイメージを掴んでいただいた上で、成果物完成までのステップを提示し、それをこなしてもらう、というスタイルでトレーニングを開始することにしました。&lt;br /&gt;
-なお、仕組みを理解いただくため、少し遠回りなステップを提示させていただいています。&lt;/p&gt;
-
-&lt;p&gt;次回は、ディープラーニングのイメージを掴んでもらうためにお話した内容についてお届けします。&lt;/p&gt;
-</description>
+      <description>今回は、Aさんのキックオフの内容についてお届けします。 ハムケツ 「あの・・ですね。その・・・。ハムケツを認識したいんです。」 トレーニングの最初</description>
     </item>
     
     <item>
@@ -179,46 +36,7 @@
       <pubDate>Mon, 25 Jul 2016 16:35:26 +0900</pubDate>
       
       <guid>http://blog.algolab.jp/post/2016/07/25/ai-training/</guid>
-      <description>
-
-&lt;p&gt;弊社では、ITエンジニア向けに機械学習スキルの習得をサポートする試み (AIトレーニング) をはじめました。&lt;br /&gt;
-ここでは、1人目の受講者であるAさんの許可を頂き、実況中継という形で、その内容を随時公開していきたいと思います。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/07/25/ai-training//training.jpg&#34;/&gt;
-  
-  &lt;figcaption&gt;&lt;p&gt;http://www.ashinari.com/2009/07/18-024460.php&lt;/p&gt;&lt;/figcaption&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;h2 id=&#34;なぜやるのか&#34;&gt;なぜやるのか&lt;/h2&gt;
-
-&lt;p&gt;一言で言えば、技術習得までの最短経路が人によって異なるため、です。&lt;/p&gt;
-
-&lt;p&gt;機械学習がカバーする領域はとても広範囲に渡るため、どのようなことを身につけたいか (ゴール)、および、現状のスキルによって、習得経路が一本道ではありません。&lt;/p&gt;
-
-&lt;p&gt;一方で、書籍などの教材は、体系的・網羅的に記述されているものの、個々に最適化されてはいません。&lt;/p&gt;
-
-&lt;p&gt;そのため、機械学習スキルを身につけようとした際、何から手をつけて良いかわからない、入門書から始めてみたがゴールにどう繋がるか見えず挫折してしまった、というようなケースがよく見られます。&lt;/p&gt;
-
-&lt;p&gt;そこで、個々に最適化した道筋を提示することで上記の問題が解決できるのではないか、と考え、AIトレーニングを開始することにしました。&lt;/p&gt;
-
-&lt;h2 id=&#34;どうやってやるのか&#34;&gt;どうやってやるのか&lt;/h2&gt;
-
-&lt;p&gt;基本的には、弊社は道筋を示す役割に徹し、独習という形で進めさせていただいています。&lt;/p&gt;
-
-&lt;p&gt;具体的には、週1回程度オフラインでお打ち合わせをさせていただきながら、現時点での習得状況を踏まえ、道筋を柔軟に提示させていただきます。&lt;/p&gt;
-
-&lt;p&gt;また、理解の助けになると判断した場合には、その場で講習という形を取る場合もあります。&lt;br /&gt;
-そして、随時出てくる疑問点においては、オンラインでの質問を受け付けています。&lt;/p&gt;
-
-&lt;p&gt;期間としては、内容にもよりますが、2ヶ月程度での習得を目指しています。&lt;/p&gt;
-
-&lt;h2 id=&#34;次回予告&#34;&gt;次回予告&lt;/h2&gt;
-
-&lt;p&gt;次回はAさんのキックオフの内容についてお届けします。&lt;/p&gt;
-</description>
+      <description>弊社では、ITエンジニア向けに機械学習スキルの習得をサポートする試み (AIトレーニング) をはじめました。 ここでは、1人目の受講者であるAさん</description>
     </item>
     
   </channel>

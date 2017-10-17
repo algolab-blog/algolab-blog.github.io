@@ -6,8 +6,11 @@
     <description>Recent content in Tensorflow on ALGO GEEKS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
+    <copyright>© 2016 Algo Lab Inc.</copyright>
     <lastBuildDate>Mon, 19 Dec 2016 18:33:39 +0900</lastBuildDate>
-    <atom:link href="http://blog.algolab.jp/tags/tensorflow/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://blog.algolab.jp/tags/tensorflow/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>超シンプルにTensorFlowでDQN (Deep Q Network) を実装してみる 〜解説編②  学習の流れを理解する〜</title>
@@ -15,100 +18,7 @@
       <pubDate>Mon, 19 Dec 2016 18:33:39 +0900</pubDate>
       
       <guid>http://blog.algolab.jp/post/2016/12/19/tf-dqn-simple-3/</guid>
-      <description>
-
-&lt;p&gt;今回は、学習の流れについて解説します。&lt;/p&gt;
-
-&lt;p&gt;対象とするソースコードは下記となります。&lt;br /&gt;
-&lt;a href=&#34;https://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py&#34;&gt;https://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;学習の流れ&#34;&gt;学習の流れ&lt;/h2&gt;
-
-
-
-
-
-
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=25%3a40&#34;&gt;&lt;/script&gt;
-
-
-&lt;p&gt;学習の肝となるのは、上記のコードとなります。&lt;br /&gt;
-フロー図で示したものが下記となります。
-登場人物として、プレイヤーを操作するエージェント と、ゲーム (環境) があります。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/12/19/tf-dqn-simple-3//flow.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;それでは、順を追って見ていきましょう。&lt;/p&gt;
-
-&lt;h2 id=&#34;①-アクションを選択&#34;&gt;① アクションを選択&lt;/h2&gt;
-
-
-
-
-
-
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=29%3a30&#34;&gt;&lt;/script&gt;
-
-
-&lt;p&gt;エージェントは、時刻tにおけるゲームの状態 (&lt;code&gt;state_t&lt;/code&gt;) を受け取って、アクションを選択します。詳細は後述しますが、一定割合 (&lt;code&gt;self.exploration&lt;/code&gt;) ではランダム選択、残りの割合では学習結果から最適なものを選択、という処理をしています。&lt;/p&gt;
-
-&lt;h2 id=&#34;②-アクションを実行&#34;&gt;② アクションを実行&lt;/h2&gt;
-
-
-
-
-
-
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=30%3a31&#34;&gt;&lt;/script&gt;
-
-
-&lt;p&gt;選択されたアクションを、ゲームで実行します。&lt;/p&gt;
-
-&lt;h2 id=&#34;③-観察&#34;&gt;③  観察&lt;/h2&gt;
-
-
-
-
-
-
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=33%3a34&#34;&gt;&lt;/script&gt;
-
-
-&lt;p&gt;アクションが実行された結果を観察します。具体的には、次 (時刻t1) の状態 (&lt;code&gt;state_t_1&lt;/code&gt;)、報酬 (&lt;code&gt;reward_t&lt;/code&gt;)、終了フラグ (&lt;code&gt;terminal&lt;/code&gt;) を受け取ります。&lt;/p&gt;
-
-&lt;h2 id=&#34;④-経験を蓄積&#34;&gt;④  経験を蓄積&lt;/h2&gt;
-
-
-
-
-
-
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=36%3a37&#34;&gt;&lt;/script&gt;
-
-
-&lt;p&gt;エージェントは、学習を行うための経験を蓄積します。具体的には、ある状態 (&lt;code&gt;state_t&lt;/code&gt;) に対して、あるアクション (&lt;code&gt;action_t&lt;/code&gt;) を行なった結果、どのような状態になったか(&lt;code&gt;state_t_1&lt;/code&gt;)、報酬はいくらか (&lt;code&gt;reward_t&lt;/code&gt;)、ゲームの終了フラグ(&lt;code&gt;terminal&lt;/code&gt;) を保持して、学習に活かします。&lt;/p&gt;
-
-&lt;h2 id=&#34;⑤-経験再生&#34;&gt;⑤  経験再生&lt;/h2&gt;
-
-
-
-
-
-
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py?slice=39%3a40&#34;&gt;&lt;/script&gt;
-
-
-&lt;p&gt;これまで蓄積した経験をもとに学習を行います。こちらについても詳細は後述します。&lt;/p&gt;
-
-&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
-
-&lt;p&gt;今回は学習の流れについて解説しました。&lt;br /&gt;
-次回はエージェントの中身について見ていきます。(最終回となる予定です)&lt;/p&gt;
-</description>
+      <description>今回は、学習の流れについて解説します。 対象とするソースコードは下記となります。 https://github.com/algolab-inc/tf-dqn-simple/blob/master/train.py 学習の流れ 学習の肝となるのは、上記のコードとなります。 フロー</description>
     </item>
     
     <item>
@@ -117,141 +27,7 @@
       <pubDate>Sat, 17 Dec 2016 17:02:04 +0900</pubDate>
       
       <guid>http://blog.algolab.jp/post/2016/12/17/tf-dqn-simple-2/</guid>
-      <description>
-
-&lt;p&gt;今回から、実装編についてお届けします。&lt;br /&gt;
-本記事では、学習させるゲーム (環境) の部分について、解説します。&lt;/p&gt;
-
-&lt;p&gt;対象とするソースコードは下記となります。&lt;br /&gt;
-&lt;a href=&#34;https://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py&#34;&gt;https://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;それでは早速いってみましょう。&lt;/p&gt;
-
-&lt;h2 id=&#34;ゲームの概要&#34;&gt;ゲームの概要&lt;/h2&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/12/17/tf-dqn-simple-2//demo-catch_ball.gif&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;おさらいになりますが、ゲームの概要としては、上図のように上から落ちてくるボールをキャッチする、というものになります。キャッチできれば&lt;code&gt;+1点&lt;/code&gt;、キャッチできなければ&lt;code&gt;-1点&lt;/code&gt;というルールで高得点を目指します。&lt;/p&gt;
-
-&lt;h2 id=&#34;データの持ち方&#34;&gt;データの持ち方&lt;/h2&gt;
-
-&lt;p&gt;ゲーム盤は下図のように 8 x 8 の2次元配列で表現しており、「ボール」および「プレイヤー」を&lt;code&gt;1&lt;/code&gt;で、背景を&lt;code&gt;0&lt;/code&gt;の値として格納しています。
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/12/17/tf-dqn-simple-2//catch_ball.png&#34;/&gt;
-  
-&lt;/figure&gt;
-&lt;/p&gt;
-
-&lt;p&gt;上記の状態の場合、各種インスタンス変数の値は下記となります。&lt;/p&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th align=&#34;left&#34;&gt;変数名&lt;/th&gt;
-&lt;th align=&#34;left&#34;&gt;値&lt;/th&gt;
-&lt;th align=&#34;left&#34;&gt;説明&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;screen_n_rows&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;8&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;ゲーム盤の方向の長さ&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;screen_n_cols&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;8&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;ゲーム盤の横方向の長さ&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;ball_row&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;0&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;ボールの縦方向の位置&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;ball_col&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;6&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;ボールの横方向の位置&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;player_row&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;4&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;プレイヤーの左端の横方向の位置&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;player_length&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;3&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;プレイヤーの横方向の長さ&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&#34;ゲームの更新処理&#34;&gt;ゲームの更新処理&lt;/h2&gt;
-
-&lt;p&gt;続いて、ゲームの更新処理を行う&lt;code&gt;update&lt;/code&gt;メソッドを見ていきましょう。&lt;/p&gt;
-
-&lt;h3 id=&#34;引数&#34;&gt;引数&lt;/h3&gt;
-
-&lt;p&gt;
-
-
-
-
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=17%3a24&#34;&gt;&lt;/script&gt;
-
-&lt;code&gt;update&lt;/code&gt;メソッドは引数として&lt;code&gt;action&lt;/code&gt;を受け取ります。&lt;code&gt;action&lt;/code&gt;はプレイヤーの行動を表すもので、&lt;code&gt;0,1,2&lt;/code&gt;のいずれかの数値で表現しており、それぞれ「何もしない」「左に動く」「右に動く」ことを示します。&lt;/p&gt;
-
-&lt;h3 id=&#34;プレイヤーの位置の更新&#34;&gt;プレイヤーの位置の更新&lt;/h3&gt;
-
-
-
-
-
-
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=25%3a35&#34;&gt;&lt;/script&gt;
-
-
-&lt;p&gt;プレイヤーの位置を更新しています。ゲーム盤からはみ出さないように制御しているのがポイントです。&lt;/p&gt;
-
-&lt;h3 id=&#34;ボールの位置の更新&#34;&gt;ボールの位置の更新&lt;/h3&gt;
-
-
-
-
-
-
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=36%3a37&#34;&gt;&lt;/script&gt;
-
-
-&lt;p&gt;こちらは単純に、下に1つずらすという処理をしています。&lt;/p&gt;
-
-&lt;h3 id=&#34;得点判定&#34;&gt;得点判定&lt;/h3&gt;
-
-
-
-
-
-
-&lt;script src=&#34;http://gist-it.appspot.com/http://github.com/algolab-inc/tf-dqn-simple/blob/master/catch_ball.py?slice=41%3a49&#34;&gt;&lt;/script&gt;
-
-
-&lt;p&gt;ボールがゲーム盤の下端に来た時に、ゲーム終了フラグをセット (&lt;code&gt;self.terminal = True&lt;/code&gt;) した上で、得点判定処理を行います。プレイヤーの範囲内にボールがあればキャッチできたとみなし &lt;code&gt;+1点&lt;/code&gt; (&lt;code&gt;self.reward = 1&lt;/code&gt;)、そうでなければキャッチできなかったとして、&lt;code&gt;-1点&lt;/code&gt; (&lt;code&gt;self.reward = -1&lt;/code&gt;)、としています。&lt;/p&gt;
-
-&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
-
-&lt;p&gt;今回は、ゲーム (環境) の部分について、重要な箇所を抜粋して解説しました。&lt;br /&gt;
-次回は、ゲームを学習する流れについて見ていきます。&lt;/p&gt;
-</description>
+      <description>今回から、実装編についてお届けします。 本記事では、学習させるゲーム (環境) の部分について、解説します。 対象とするソースコードは下記となります</description>
     </item>
     
     <item>
@@ -260,69 +36,7 @@
       <pubDate>Fri, 11 Nov 2016 18:47:53 +0900</pubDate>
       
       <guid>http://blog.algolab.jp/post/2016/11/11/neuralart/</guid>
-      <description>
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/11/11/neuralart//animation.gif&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;TensorFlowを用いて画風変換を試してみました。上記画像は学習過程となります。&lt;br /&gt;
-GitHubで「neuralart」と検索すると実装例がいくつか出てきますので、そのうちの一つを動作させてみます。&lt;br /&gt;
-&lt;a href=&#34;https://github.com/ckmarkoh/neuralart_tensorflow&#34;&gt;https://github.com/ckmarkoh/neuralart_tensorflow&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;なお、環境構築については下記の記事をご参照ください。Python2系での動作を確認しています。&lt;br /&gt;
-&lt;a href=&#34;{{ref &amp;quot;post/2016/08/21/pyenv-anaconda-ubuntu.md&amp;quot;}}&#34;&gt;【随時更新】pyenv + Anaconda (Ubuntu 16.04 LTS) で機械学習のPython開発環境をオールインワンで整える&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;ソースコードをダウンロード&#34;&gt;ソースコードをダウンロード&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ git clone https://github.com/ckmarkoh/neuralart_tensorflow.git
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;訓練済み画像認識モデルをダウンロード&#34;&gt;訓練済み画像認識モデルをダウンロード&lt;/h2&gt;
-
-&lt;p&gt;下記URLからVGG-19モデルをダウンロードし、&lt;code&gt;neuralart_tensorflow&lt;/code&gt;直下に配置します。
-&lt;a href=&#34;https://drive.google.com/file/d/0B8QJdgMvQDrVU2cyZjFKU1RrLUU/view&#34;&gt;https://drive.google.com/file/d/0B8QJdgMvQDrVU2cyZjFKU1RrLUU/view&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;画風変換&#34;&gt;画風変換&lt;/h2&gt;
-
-&lt;p&gt;以下で画風変換のイテレーションが始まります。元画像とスタイル画像は下記の通りとなります。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ python main.py
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;元画像
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/11/11/neuralart//Taipei101.jpg&#34;/&gt;
-  
-&lt;/figure&gt;
-&lt;/p&gt;
-
-&lt;p&gt;スタイル画像
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/11/11/neuralart//StarryNight.jpg&#34;/&gt;
-  
-&lt;/figure&gt;
-&lt;/p&gt;
-
-&lt;p&gt;結果は&lt;code&gt;results&lt;/code&gt;フォルダに格納されていきます。&lt;br /&gt;
-なお、筆者の環境では、CPUマシンで100イテレーションあたり1時間弱かかりました。&lt;/p&gt;
-
-&lt;h2 id=&#34;学習過程を可視化&#34;&gt;学習過程を可視化&lt;/h2&gt;
-
-&lt;p&gt;900イテレーションまでの結果画像をImageMagickを用いてアニメーションGIFにしてみます。&lt;br /&gt;
-（冒頭で紹介した画像となります）&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd results
-$ convert -delay 50 -loop 0 0*00.png animation.gif
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;論文&#34;&gt;論文&lt;/h2&gt;
-
-&lt;p&gt;画風変換の元となる論文はこちらです。&lt;br /&gt;
-&lt;a href=&#34;https://arxiv.org/abs/1508.06576&#34;&gt;A Neural Algorithm of Artistic Style&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>TensorFlowを用いて画風変換を試してみました。上記画像は学習過程となります。 GitHubで「neuralart」と検索すると実装例が</description>
     </item>
     
     <item>
@@ -331,95 +45,7 @@ $ convert -delay 50 -loop 0 0*00.png animation.gif
       <pubDate>Mon, 01 Aug 2016 22:06:25 +0900</pubDate>
       
       <guid>http://blog.algolab.jp/post/2016/08/01/tf-dqn-simple-1/</guid>
-      <description>
-
-&lt;p&gt;みなさん、DQNしてますか？&lt;br /&gt;
-DQNについては、下記の記事によくまとめられており、実装してみようとした方も多いのではないでしょうか。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://qiita.com/Ugo-Nama/items/08c6a5f6a571335972d5&#34;&gt;DQNの生い立ち　＋　Deep Q-NetworkをChainerで書いた&lt;/a&gt;&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://qiita.com/icoxfog417/items/242439ecd1a477ece312&#34;&gt;ゼロからDeepまで学ぶ強化学習&lt;/a&gt;&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;しかし、いざ自力で動作させてみようとすると、こんな問題にぶち当たると思います。&lt;/p&gt;
-
-&lt;p&gt;「学習時間なげえ。。。」&lt;/p&gt;
-
-&lt;p&gt;DQNに限らず、ディープラーニングのモデルを学習させようとすると、平気で数日以上かかります。&lt;br /&gt;
-そして、学習させたモデルが期待通りの動作をしなかったとしたら、もう投げ出したくなってしまいます。&lt;br /&gt;
-(よくある話です)&lt;/p&gt;
-
-&lt;p&gt;なので、筆者が新しいモデルを一から実装する際には、なるべく単純なモデル、データから始めるようにしています。&lt;/p&gt;
-
-&lt;p&gt;ここでは、超シンプルなDQNを実装し、動作させてみることにします。&lt;br /&gt;
-早速いってみましょう。CPUで3分もあれば学習が終わります！&lt;/p&gt;
-
-&lt;h2 id=&#34;まずは動かしてみよう&#34;&gt;まずは動かしてみよう&lt;/h2&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/01/tf-dqn-simple-1//demo-catch_ball.gif&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;h3 id=&#34;概要&#34;&gt;概要&lt;/h3&gt;
-
-&lt;p&gt;具体的には、上図のように上から落ちてくるボールをキャッチする、というゲームを学習させます。&lt;br /&gt;
-TensorFlowで実装しており、ソースコードは下記に公開しています。&lt;br /&gt;
-&lt;a href=&#34;https://github.com/algolab-inc/tf-dqn-simple&#34;&gt;https://github.com/algolab-inc/tf-dqn-simple&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;環境構築&#34;&gt;環境構築&lt;/h3&gt;
-
-&lt;p&gt;はじめにソースコードをダウンロードします。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ git clone https://github.com/algolab-inc/tf-dqn-simple.git
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;次に、動作のためにTensorFlowとMatplotlibが必要なので、インストールします。&lt;/p&gt;
-
-&lt;p&gt;Tensorflowについては下記リンクを参照のうえインストールを行ってください。&lt;br /&gt;
-&lt;a href=&#34;https://www.tensorflow.org/versions/master/get_started/os_setup.html&#34;&gt;https://www.tensorflow.org/versions/master/get_started/os_setup.html&lt;/a&gt;&lt;br /&gt;
-(2016/08/01現在、Python3.5.2 + Tensorflow0.9.0での動作を確認しています)&lt;/p&gt;
-
-&lt;p&gt;Matolotlibはpipでインストールします。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pip install matplotlib
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;学習&#34;&gt;学習&lt;/h3&gt;
-
-&lt;p&gt;環境が整ったら、ソースコードのディレクトリに移動して、train.pyを叩くと学習が始まります。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd tf-dqn-simple
-$ python train.py
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;下記のようなログが出ていれば、正しく学習が行われています。&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;EPOCH: 000/999 | WIN: 001 | LOSS: 0.0068 | Q_MAX: 0.0008&lt;br /&gt;
-EPOCH: 001/999 | WIN: 002 | LOSS: 0.0447 | Q_MAX: 0.0013&lt;br /&gt;
-&amp;hellip;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;数分ほどで学習が終わったかと思います。&lt;br /&gt;
-では学習したモデルでテストしてみましょう。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ python test.py
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;WIN: 001/001 (100.0%)&lt;br /&gt;
-WIN: 002/002 (100.0%)&lt;br /&gt;
-&amp;hellip;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;キャッチボールのアニメーションとともに、上記のようなログが出れば成功です。&lt;br /&gt;
-きちんと動作しましたでしょうか？&lt;br /&gt;
-学習がうまくいっていれば、おそらく100%でキャッチできていると思います。&lt;/p&gt;
-
-&lt;p&gt;次回は、解説編についてお届けします。&lt;/p&gt;
-</description>
+      <description>みなさん、DQNしてますか？ DQNについては、下記の記事によくまとめられており、実装してみようとした方も多いのではないでしょうか。 DQNの生</description>
     </item>
     
   </channel>

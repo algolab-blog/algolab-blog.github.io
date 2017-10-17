@@ -6,8 +6,11 @@
     <description>Recent content in Chat Bot on ALGO GEEKS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
+    <copyright>© 2016 Algo Lab Inc.</copyright>
     <lastBuildDate>Thu, 18 Aug 2016 15:20:16 +0900</lastBuildDate>
-    <atom:link href="http://blog.algolab.jp/tags/chat-bot/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://blog.algolab.jp/tags/chat-bot/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>テレアポ模擬トレーニングBot 〜コミュニケーション教育ツールとしてのチャットボットの活用可能性〜</title>
@@ -15,87 +18,7 @@
       <pubDate>Thu, 18 Aug 2016 15:20:16 +0900</pubDate>
       
       <guid>http://blog.algolab.jp/post/2016/08/18/telephone-appointment-simulation-bot/</guid>
-      <description>
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/18/telephone-appointment-simulation-bot//cover.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;LINEがBOT API、FacebookがMessenger Platformを発表してから数ヶ月たちました。&lt;br /&gt;
-これまでに数々のチャットボットがリリースされていますが、まだ活用方法を模索している段階かと思います。&lt;/p&gt;
-
-&lt;p&gt;その中で、コミュニケーション教育ツールとしての活用可能性があるのではないかと考え、実験的に「テレアポ模擬トレーニングBot」を &lt;a href=&#34;http://www.torix-corp.com/&#34;&gt;TORiX&lt;/a&gt; さんと共同開発させていただきました。&lt;/p&gt;
-
-&lt;p&gt;今回は、このBotの概要と、開発に至った経緯について書きたいと思います。&lt;/p&gt;
-
-&lt;h2 id=&#34;テレアポ模擬トレーニングbotとは&#34;&gt;テレアポ模擬トレーニングBotとは&lt;/h2&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/08/18/telephone-appointment-simulation-bot//story.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;ストーリー形式で、テレアポを擬似体験することのできるコンテンツです。下記ボタンから体験できます。&lt;/p&gt;
-
-&lt;script&gt;
-window.fbAsyncInit = function() {
-  FB.init({
-    appId: &#34;131078513971096&#34;,
-    xfbml: true,
-    version: &#34;v2.6&#34;
-  });
-};
-
-(function(d, s, id){
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) { return; }
-  js = d.createElement(s); js.id = id;
-  js.src = &#34;//connect.facebook.net/ja_JP/sdk.js&#34;;
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, &#39;script&#39;, &#39;facebook-jssdk&#39;));
-&lt;/script&gt;
-
-&lt;div class=&#34;fb-messengermessageus&#34;
-  messenger_app_id=&#34;131078513971096&#34;
-  page_id=&#34;1771482106414711&#34;&gt;
-&lt;/div&gt;
-
-
-&lt;p&gt;ボタンが動作しない場合は、下記ページからメッセージを送ってみてください。&lt;br /&gt;
-&lt;a href=&#34;https://www.facebook.com/1771482106414711/&#34;&gt;https://www.facebook.com/1771482106414711/&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;開発の経緯&#34;&gt;開発の経緯&lt;/h2&gt;
-
-&lt;p&gt;コミュニケーション領域の教育においては、擬似的にでも経験を積むことが一番スキルが身につく手段であると考えていますが、
-書籍や動画等のコンテンツではそれを体験することが困難です。&lt;/p&gt;
-
-&lt;p&gt;その中で、チャットボットを用いれば容易に実現できるのではないか、と考えたのが開発のきっかけです。&lt;/p&gt;
-
-&lt;p&gt;実際に、テレアポ模擬トレーニングBotは1日もかからず実装することができました。&lt;br /&gt;
-(ストーリー作成には別途1日かかりました。)&lt;/p&gt;
-
-&lt;h2 id=&#34;コミュニケーション教育ツールとしての可能性&#34;&gt;コミュニケーション教育ツールとしての可能性&lt;/h2&gt;
-
-&lt;p&gt;今回は題材としてテレアポを取り上げましたが、他にも応用可能性はあると考えています。&lt;/p&gt;
-
-&lt;p&gt;例えば、&lt;a href=&#34;https://the-board.jp/&#34;&gt;board&lt;/a&gt; を展開する &lt;a href=&#34;http://www.velc.co.jp/about/&#34;&gt;VELC&lt;/a&gt; さんは、カスタマーサポートの教育にBotを用いていると語っています。&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;そこで重要になってくるのが教育です。それに使っているのが、チャットツールである「Slack（スラック）」のbotです。&lt;br /&gt;
-Slack上で「ok board」と打ち込むと、FAQからSlackに質問だけがランダムに飛んでくるようになっています。スタッフには空き時間にそれを使って回答文を作成する練習をしてもらい、後で僕がレビューをする。&lt;/p&gt;
-
-&lt;p&gt;引用元: &lt;a href=&#34;https://seleck.cc/article/475&#34;&gt;「カスタマーサクセス」を意識したことはない。自然に神対応を実現した、CSの理想形&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&#34;おわりに&#34;&gt;おわりに&lt;/h2&gt;
-
-&lt;p&gt;今回は、チャットボットを「チャットUIを用いたインタラクティブなアプリを簡単に作れるツール」として捉え、コミュニケーション教育ツールとしての活用可能性についてお届けしました。&lt;/p&gt;
-
-&lt;p&gt;チャットボットはまだまだ可能性を秘めていると思いますので、今後も注目していきたいと思います。&lt;/p&gt;
-</description>
+      <description>LINEがBOT API、FacebookがMessenger Platformを発表してから数ヶ月たちました。 これまでに数々のチャットボットが</description>
     </item>
     
     <item>
@@ -104,122 +27,7 @@ Slack上で「ok board」と打ち込むと、FAQからSlackに質問だけが�
       <pubDate>Sat, 30 Jul 2016 15:50:23 +0900</pubDate>
       
       <guid>http://blog.algolab.jp/post/2016/07/30/seq2seq-chatbot/</guid>
-      <description>
-
-&lt;p&gt;最近、チャットボットが話題となっていますが、自然な会話を成り立たせること、は大きな課題の一つです。&lt;br /&gt;
-ここでは、Deep Learningの一種である、Seq2Seqモデルを用いて、チャットボットを動作させてみます。&lt;br /&gt;
-ゴールとして、英語を学習させ、実際に会話を行ってみることを目指します。&lt;/p&gt;
-
-&lt;h2 id=&#34;seq2seq-sequence-to-sequence-モデルとは&#34;&gt;Seq2Seq (Sequence to Sequence) モデルとは&lt;/h2&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/07/30/seq2seq-chatbot//seq2seq.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;平たく言うと、ある文字列から、次の文字列を予測するモデルのことです。&lt;br /&gt;
-上記の図では、「ABC」を入力として、「WXYZ」を出力 (予測) しています。&lt;/p&gt;
-
-&lt;p&gt;Seq2Seqモデルの対話タスクへの応用を試みたのがGoogleで、2015年に下記の論文を発表しています。&lt;/p&gt;
-
-&lt;p&gt;A Neural Conversational Model&lt;br /&gt;
-&lt;a href=&#34;http://arxiv.org/abs/1506.05869&#34;&gt;http://arxiv.org/abs/1506.05869&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;これまでの対話モデルは、ドメインを絞り (飛行機を予約するなど) 、手でルールを記載する必要があったが、Seq2Seqモデルを用いて対話データを学習させることで、自然な応答ができるようになった、と論文内で述べています。&lt;/p&gt;
-
-&lt;h2 id=&#34;実装例&#34;&gt;実装例&lt;/h2&gt;
-
-&lt;p&gt;Seq2Seqモデルを用いたチャットボットの実装は、色々な人が公開しています。&lt;br /&gt;
-&lt;a href=&#34;https://github.com/nicolas-ivanov/seq2seq_chatbot_links&#34;&gt;https://github.com/nicolas-ivanov/seq2seq_chatbot_links&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;今回は、実装例の中で、最も良い結果が出たとされている、以下のリポジトリのコードを動作させてみます。&lt;br /&gt;
-&lt;a href=&#34;https://github.com/macournoyer/neuralconvo&#34;&gt;https://github.com/macournoyer/neuralconvo&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;環境構築&#34;&gt;環境構築&lt;/h2&gt;
-
-&lt;p&gt;基本的には下記の手順で進めます。&lt;br /&gt;
-&lt;a href=&#34;https://github.com/macournoyer/neuralconvo#installing&#34;&gt;https://github.com/macournoyer/neuralconvo#installing&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;筆者は下記の環境をベースに、追加で必要なLuaモジュールをインストール (更新) しました。&lt;br /&gt;
-&lt;a href=&#34;http://blog.algolab.jp/post/2016/08/03/torch-aws-gpu-ubuntu/&#34;&gt;TorchをAWSのGPUインスタンス (Ubuntu 14.04) で動かす&lt;/a&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ luarocks install nn
-$ luarocks install rnn
-$ luarocks install penlight
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;データセットの準備&#34;&gt;データセットの準備&lt;/h3&gt;
-
-&lt;p&gt;データセットは、下記で公開されている映画の台詞コーパスを用います。&lt;br /&gt;
-&lt;a href=&#34;http://www.mpi-sws.org/~cristian/Cornell_Movie-Dialogs_Corpus.html&#34;&gt;http://www.mpi-sws.org/~cristian/Cornell_Movie-Dialogs_Corpus.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ git clone https://github.com/macournoyer/neuralconvo.git
-$ cd neuralconvo/data
-$ wget http://www.mpi-sws.org/~cristian/data/cornell_movie_dialogs_corpus.zip
-$ unzip cornell_movie_dialogs_corpus.zip
-$ mv cornell\ movie-dialogs\ corpus cornell_movie_dialogs
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;学習&#34;&gt;学習&lt;/h2&gt;
-
-&lt;p&gt;準備が整ったら学習をしてみます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ th train.lua --cuda --dataset 50000 --hiddenSize 1000
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;学習時間は4日弱で、エラー率の推移は下記となりました。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2016/07/30/seq2seq-chatbot//error.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;h2 id=&#34;会話してみる&#34;&gt;会話してみる&lt;/h2&gt;
-
-&lt;p&gt;学習したモデルを用いて実際に会話をしてみました。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ th eval.lua
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;you&amp;gt;&lt;/strong&gt; Hello?&lt;br /&gt;
-&lt;strong&gt;neuralconvo&amp;gt;&lt;/strong&gt; Hello, darling.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;you&amp;gt;&lt;/strong&gt; How are you?&lt;br /&gt;
-&lt;strong&gt;neuralconvo&amp;gt;&lt;/strong&gt; I&amp;rsquo;m fine.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;you&amp;gt;&lt;/strong&gt; Are you a machine?&lt;br /&gt;
-&lt;strong&gt;neuralconvo&amp;gt;&lt;/strong&gt; No, i don&amp;rsquo;t.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;you&amp;gt;&lt;/strong&gt; Are you intelligent?&lt;br /&gt;
-&lt;strong&gt;neuralconvo&amp;gt;&lt;/strong&gt; No.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;それっぽい会話は成り立つようです。哲学的な質問をしてみます。&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;you&amp;gt;&lt;/strong&gt; What is the purpose of living?&lt;br /&gt;
-&lt;strong&gt;neuralconvo&amp;gt;&lt;/strong&gt; I&amp;rsquo;ve been watching over the phone thing&amp;hellip;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;うーん。深い&amp;hellip;!?&lt;/p&gt;
-
-&lt;h2 id=&#34;会話が成り立たないケースもある&#34;&gt;会話が成り立たないケースもある&lt;/h2&gt;
-
-&lt;p&gt;上記のように会話として成立するものもあれば、全く成り立たないケースもありました。&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;you&amp;gt;&lt;/strong&gt; What color is the sky?&lt;br /&gt;
-&lt;strong&gt;neuralconvo&amp;gt;&lt;/strong&gt; The other plate is currently in new york, in some kind of a tree in a decent, don&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&#34;おわりに&#34;&gt;おわりに&lt;/h2&gt;
-
-&lt;p&gt;実用的に使える精度か、という点では疑問符が残るものの、End-to-End で学習ができるというのは魅力的です。&lt;br /&gt;
-いかに有用なデータセットを構築するか、が重要なポイントとなってきそうです。&lt;/p&gt;
-</description>
+      <description>最近、チャットボットが話題となっていますが、自然な会話を成り立たせること、は大きな課題の一つです。 ここでは、Deep Learningの一種で</description>
     </item>
     
   </channel>

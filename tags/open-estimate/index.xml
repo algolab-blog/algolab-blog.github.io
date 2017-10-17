@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Open Estimate on ALGO GEEKS</title>
+    <link>http://blog.algolab.jp/tags/open-estimate/</link>
+    <description>Recent content in Open Estimate on ALGO GEEKS</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <copyright>© 2016 Algo Lab Inc.</copyright>
+    <lastBuildDate>Tue, 17 Oct 2017 20:10:51 +0900</lastBuildDate>
+    
+	<atom:link href="http://blog.algolab.jp/tags/open-estimate/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>開発プロセスの一部を公開することでシステム開発受発注を円滑にする試みをはじめます</title>
+      <link>http://blog.algolab.jp/post/2017/10/17/open-estimate-overview/</link>
+      <pubDate>Tue, 17 Oct 2017 20:10:51 +0900</pubDate>
+      
+      <guid>http://blog.algolab.jp/post/2017/10/17/open-estimate-overview/</guid>
+      <description>弊社では、システム開発の受発注における課題を解決するために「システム開発の見積書を公開する」という取り組みをいたします。また同時に「システム</description>
+    </item>
+    
+  </channel>
+</rss>

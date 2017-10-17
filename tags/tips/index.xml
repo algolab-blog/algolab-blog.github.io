@@ -6,8 +6,11 @@
     <description>Recent content in Tips on ALGO GEEKS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
+    <copyright>© 2016 Algo Lab Inc.</copyright>
     <lastBuildDate>Mon, 23 Jan 2017 17:32:10 +0900</lastBuildDate>
-    <atom:link href="http://blog.algolab.jp/tags/tips/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://blog.algolab.jp/tags/tips/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>FetchRSS &#43; Slack で快適な情報収集ライフを送る</title>
@@ -15,94 +18,7 @@
       <pubDate>Mon, 23 Jan 2017 17:32:10 +0900</pubDate>
       
       <guid>http://blog.algolab.jp/post/2017/01/23/fetchrss-slack/</guid>
-      <description>
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-top.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;p&gt;弊社では、Slackの&lt;code&gt;/feed&lt;/code&gt;コマンドを用いて、ニュースなどのRSSを取得し、一元化していますが、媒体によってはRSSが提供されていないものもあります。 今回は、そんな場合に役に立つ &lt;a href=&#34;http://fetchrss.com&#34;&gt;FetchRSS&lt;/a&gt; を紹介します。&lt;/p&gt;
-
-&lt;h2 id=&#34;気になるお値段&#34;&gt;気になるお値段&lt;/h2&gt;
-
-&lt;p&gt;基本的には有料プランでないと恩恵を受けられません (無料版では作成したRSSが7日間で消えてしまうため)。ただ、ほとんどのケースにおいて$9.95内に収まると思いますので、情報収集が楽になることを考えると安いものでしょう。&lt;/p&gt;
-
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-price.png&#34;/&gt;
-  
-&lt;/figure&gt;
-
-
-&lt;h2 id=&#34;使い方&#34;&gt;使い方&lt;/h2&gt;
-
-&lt;h3 id=&#34;会員登録&#34;&gt;会員登録&lt;/h3&gt;
-
-&lt;p&gt;無料プランの場合も会員登録が必要になるので、登録しておきます。&lt;/p&gt;
-
-&lt;h3 id=&#34;url入力&#34;&gt;URL入力&lt;/h3&gt;
-
-&lt;p&gt;以降、当ブログのRSSを生成するとして進めていきます。
-まず、トップページから取得したいページのURLを入力します。 新着記事が一覧で並んでいるページが望ましいです。当ブログの場合は下記URLとなります。
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-1.png&#34;/&gt;
-  
-&lt;/figure&gt;
-&lt;/p&gt;
-
-&lt;p&gt;すると、以下のようなページに遷移すると思います。このページでは取得するコンテンツを指定していきます。最低限「News Item」「Headline」「Content」の3つを指定する必要があります。
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-2.png&#34;/&gt;
-  
-&lt;/figure&gt;
-&lt;/p&gt;
-
-&lt;h3 id=&#34;news-item-選択&#34;&gt;News Item 選択&lt;/h3&gt;
-
-&lt;p&gt;「News Item」では、下図の青色の線のように、記事を構成する要素の一番外側を選択します。
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-3.png&#34;/&gt;
-  
-&lt;/figure&gt;
-&lt;/p&gt;
-
-&lt;h3 id=&#34;headline-選択&#34;&gt;Headline 選択&lt;/h3&gt;
-
-&lt;p&gt;「Headline」ではタイトル部分を選択します(緑色の枠)。
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-4.png&#34;/&gt;
-  
-&lt;/figure&gt;
-&lt;/p&gt;
-
-&lt;h3 id=&#34;content-選択&#34;&gt;Content 選択&lt;/h3&gt;
-
-&lt;p&gt;「Content」では文章部分を選択します（赤色の枠）。文章部分がない場合は、「Headline」と同じ領域で構いません。
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-5.png&#34;/&gt;
-  
-&lt;/figure&gt;
-&lt;/p&gt;
-
-&lt;h2 id=&#34;rss生成&#34;&gt;RSS生成&lt;/h2&gt;
-
-&lt;p&gt;「Content」まで正しく選択できると、画面右側に下図のようなプレビューが生成されると思います。内容が問題なければ、「Generate RSS」を押してRSSを生成します。
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-6.png&#34;/&gt;
-  
-&lt;/figure&gt;
-&lt;/p&gt;
-
-&lt;p&gt;うまくRSSが生成できました。
-&lt;figure&gt;
-  &lt;img src=&#34;http://blog.algolab.jp/images//post/2017/01/23/fetchrss-slack//fetchrss-howto-7.png&#34;/&gt;
-  
-&lt;/figure&gt;
-&lt;/p&gt;
-
-&lt;p&gt;それでは快適な情報収集ライフを！&lt;/p&gt;
-</description>
+      <description>弊社では、Slackの/feedコマンドを用いて、ニュースなどのRSSを取得し、一元化していますが、媒体によってはRSSが提供されていないも</description>
     </item>
     
     <item>
@@ -111,70 +27,7 @@
       <pubDate>Fri, 09 Dec 2016 15:03:23 +0900</pubDate>
       
       <guid>http://blog.algolab.jp/post/2016/12/09/phantomjs-promise/</guid>
-      <description>
-
-&lt;p&gt;Selenium + PhantomJS でDjangoアプリケーションのテストをしていたのですが、なぜか上手く動作しない箇所がありました。&lt;/p&gt;
-
-&lt;p&gt;原因としては、外部ライブラリが &lt;a href=&#34;https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Promise&#34;&gt;Promise&lt;/a&gt; を用いており、PhantomJSがサポートしていないためで、&lt;a href=&#34;https://github.com/stefanpenner/es6-promise&#34;&gt;es6-promise&lt;/a&gt; を明示的に読み込ませることで解決しました。&lt;/p&gt;
-
-&lt;p&gt;以下に再現のためのサンプルコードを書いてみます。&lt;/p&gt;
-
-&lt;h2 id=&#34;サンプルコード&#34;&gt;サンプルコード&lt;/h2&gt;
-
-&lt;p&gt;以下の2つのファイルを用意します。&lt;code&gt;test.html&lt;/code&gt;は&lt;code&gt;http://localhost/test.html&lt;/code&gt;で読み込めることを前提としています。&lt;/p&gt;
-
-&lt;p&gt;test.html&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;!DOCTYPE html&amp;gt;
-&amp;lt;script&amp;gt;
-  var hoge = 1;
-  console.log(Promise);
-  var hoge = 2;
-&amp;lt;/script&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;test.py&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;from selenium import webdriver
-
-driver = webdriver.PhantomJS()
-driver.get(&#39;http://localhost/test.html&#39;)
-hoge = driver.execute_script(&#39;return hoge&#39;)
-print(hoge)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;test.py&lt;/code&gt;を実行します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ python test.py
-1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;hoge&lt;/code&gt;の値が&lt;code&gt;1&lt;/code&gt;であり、&lt;code&gt;console.log(Promise);&lt;/code&gt;以降処理が行われていないことがわかります。&lt;br /&gt;
-&lt;code&gt;ghostdriver.log&lt;/code&gt;にログが出力されるので、みてみると下記のエラーが出力されていました。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[ERROR - 2016-12-09T05:54:22.556Z] Session [eee84f50-bdd3-11e6-87a5-f36dec782eab] - page.onError - msg: ReferenceError: Can&#39;t find variable: Promise
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;続いて、&lt;code&gt;test.html&lt;/code&gt;で&lt;code&gt;es6-promise&lt;/code&gt;を明示的に読み込ませるように修正します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;!DOCTYPE html&amp;gt;
-&amp;lt;script src=&amp;quot;https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.0.5/es6-promise.auto.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-&amp;lt;script&amp;gt;
-  var hoge = 1;
-  console.log(Promise);
-  var hoge = 2;
-&amp;lt;/script&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;$ python test.py
-2
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;きちんと処理が行われるようになりました。&lt;/p&gt;
-
-&lt;p&gt;GitHub上でも下記の議論が行われており、&lt;code&gt;ES6&lt;/code&gt; のサポートが本体に導入されることを待つばかりです。&lt;br /&gt;
-&lt;a href=&#34;https://github.com/ariya/phantomjs/issues/12401&#34;&gt;https://github.com/ariya/phantomjs/issues/12401&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>Selenium + PhantomJS でDjangoアプリケーションのテストをしていたのですが、なぜか上手く動作しない箇所がありました。 原因としては、外部ライブラリが Promise を用</description>
     </item>
     
   </channel>
